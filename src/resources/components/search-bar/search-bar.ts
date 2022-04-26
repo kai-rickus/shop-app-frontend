@@ -24,14 +24,15 @@ export class SearchBar
 
 	async getSuggestions()
 	{
-		const response = await fetch( `${environment.searchBaseUrl}search/suggest?query=${this.inputValue}`, {
-			headers : {
-				"Authorization" : "Bearer admin"
-			}
-		} );
-		const data     = await response.json()
+		this.taskQueue.queueTask( async () =>
+		{
 
-		this.suggestions = data.result
+			const response = await fetch( `${environment.searchBaseUrl}search/suggest?query=${this.inputValue}`, );
+			const data     = await response.json()
+
+			this.suggestions = data.result
+
+		} )
 	}
 
 	dispatchEvent( string )
