@@ -1,0 +1,15 @@
+<template>
+	<div class="verify-view">
+		<template if.bind="verificationSuccess === null">
+			Waiting...
+		</template>
+
+		<template if.bind="verificationSuccess === true">
+			Verifizierung erfolgreich!
+		</template>
+		<template if.bind="verificationSuccess === false">
+			Verifizierung gescheitert
+			<button click.trigger="resendEmail()">Email nochmal verschicken</button>
+		</template>
+	</div>
+</template>

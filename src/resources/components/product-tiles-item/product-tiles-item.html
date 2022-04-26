@@ -1,0 +1,19 @@
+<template class="product-tiles-item card frost default-main-shadow">
+	<require from="./product-tiles-item.css"></require>
+	<require from="layout.css"></require>
+
+	<a class="text-decoration-none text-body" route-href="route: product-detail; params.bind: { uuid : uuid }">
+
+		<div class="ratio ratio-16x9 overflow-hidden card-img-top">
+			<img src.bind="thumbnail" alt="...">
+		</div>
+
+		<div class="card-body product-tiles-item__content">
+			<h5 class="card-title product-tiles-item__title">${title}</h5>
+			<br>
+			<div class="product-tiles-item__bottom-content justify-content-end">
+				<span class="product-tiles-item__price ">${price}</span>
+			</div>
+		</div>
+	</a>
+</template>

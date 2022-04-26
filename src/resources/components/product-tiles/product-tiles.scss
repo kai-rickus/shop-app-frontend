@@ -1,0 +1,22 @@
+$product-tiles-item-gap : 20px;
+
+.product-tiles {
+    display         : flex;
+    flex-wrap       : wrap;
+    gap             : $product-tiles-item-gap;
+    padding         : $product-tiles-item-gap;
+}
+
+.product-tiles-item__price {
+    font-weight : 700;
+    font-size   : 2rem;
+}
+
+.product-tiles-item__title {
+    display       : block;
+    white-space   : nowrap;
+    overflow      : hidden;
+    text-overflow : ellipsis;
+    width         : 100%;
+}
+

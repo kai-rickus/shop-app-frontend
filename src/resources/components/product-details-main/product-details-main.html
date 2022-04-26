@@ -1,0 +1,136 @@
+<template class="product-details-main">
+	<require from="valueConverters/currency-value-converter"></require>
+	<require from="./product-details-main.css"></require>
+	<require from="app.css"></require>
+	<div class="grid mt-5">
+		<div class="row">
+			<!-- Linke Spalte -->
+			<div class="col-lg-6">
+				<!-- Title -->
+				<div class="col-12 mb-4">
+					<div class="card frost default-main-shadow">
+						<div class="card-body rounded-1">
+							<div class="row">
+								<div class="col-12">
+									<h5 class="card-title">${data.title}</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Bild -->
+				<div class="col-12 mb-4">
+					<div class="card frost default-main-shadow overflow-hidden border-0">
+						<img src.bind="data.image"
+							 alt.bind="data.title"
+							 class="product-details-main__image">
+					</div>
+				</div>
+
+			</div>
+			<!-- Linke Spalte Ende -->
+
+			<!-- Rechte Spalte -->
+			<div class="col-lg-6">
+				<!-- Kaufen -->
+				<div class="col-lg-12 mb-4">
+					<div class="card frost default-main-shadow product-details-main__cart-block">
+						<div class="card-body rounded-1">
+							<div class="row">
+								<div class="col-lg-12 mb-2 justify-content-end d-flex">
+									<h1 class="card-title">${data.price | currency:'EUR'}</h1>
+								</div>
+
+								<div class="col-lg-6 mb-4 d-flex flex-column">
+									<small class="mb-1">
+										Versand durch
+									</small>
+									<img class="shipment-logo" src="src/img/${data.shipment}-logo.jpg">
+								</div>
+								<div class="col-lg-6 mb-4 d-flex justify-content-end align-items-center">
+									<div class="h-100 position-relative d-flex justify-content-end align-items-center">
+										<div class="product-details-main__rating-stars-bottom"
+											 data-bs-toggle="tooltip"
+											 data-bs-placement="top"
+											 title="${data.ratingsCount} Kunden haben diesen Artikel bewertet"
+										>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+										</div>
+										<div class="product-details-main__rating-stars w-100"
+											 data-bs-toggle="tooltip"
+											 data-bs-placement="top"
+											 title="${data.ratingsCount} Kunden haben diesen Artikel bewertet"
+										>
+											<i class="fa fa-star-half" show.bind="data.rating === 0.5"></i>
+											<i class="fa fa-star" show.bind="data.rating >= 1"></i>
+											<i class="fa fa-star-half" show.bind="data.rating === 1.5"></i>
+											<i class="fa fa-star" show.bind="data.rating >= 2"></i>
+											<i class="fa fa-star-half" show.bind="data.rating === 2.5"></i>
+											<i class="fa fa-star" show.bind="data.rating >= 3"></i>
+											<i class="fa fa-star-half" show.bind="data.rating === 3.5"></i>
+											<i class="fa fa-star" show.bind="data.rating >= 4"></i>
+											<i class="fa fa-star-half" show.bind="data.rating === 4.5"></i>
+											<i class="fa fa-star" show.bind="data.rating >= 5"></i>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-lg-8 d-flex justify-content-end">
+									<button type="submit"
+											class="btn btn-secondary border-primary w-100"
+											disabled.bind="submitting"
+									>
+										In den Einkaufswagen!
+										<span class="spinner-border spinner-border-sm"
+											  role="status"
+											  aria-hidden="true"
+											  show.bind="submitting"
+										>
+									</span>
+									</button>
+								</div>
+
+								<div class="col-lg-3">
+
+									<select class="form-select" aria-label="Default select example">
+										<option selected>Menge</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+									</select>
+								</div>
+
+								<div class="col-lg-1">
+									<div class="w-100 h-100 d-flex justify-content-center align-items-center product-details-main__favorite product-details-main__favorite--active">
+										<i class="fa fa-heart"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Beschreibung -->
+				<div class="col-12 mb-4">
+					<div class="card frost default-main-shadow">
+						<div class="card-body rounded-1">
+							<div class="row">
+								<div class="col-12">
+									<h5 class="card-title">Produktbeschreibung</h5>
+								</div>
+								<div class="col-12">
+									<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti, ex, non! Aperiam debitis in itaque magnam magni necessitatibus nemo perferendis quas quis quos sapiente sunt tempore ullam, unde velit vitae!</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Rechte Spalte Ende -->
+		</div>
+
+	</div>
+</template>

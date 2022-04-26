@@ -1,0 +1,70 @@
+<template>
+	<require from="./login-view.css"></require>
+	<require from="layout.css"></require>
+
+	<div class="login-view pt-5">
+		<div class="container container-lg container-md container-sm">
+			<div class="row">
+
+				<div class="col-md-4"></div>
+
+				<div class="col-md-4">
+
+					<div class="card-body product-tiles-item__content box-shadow-login rounded-1 frost default-main-shadow">
+						<h5 class="card-title product-tiles-item__title">${loginHeadline}</h5>
+						<div class="row">
+							<div class="col-md-2"></div>
+
+							<div class="col-md-8">
+
+								<form submit.trigger="submit()">
+
+									<input type="email"
+										   class="form-control"
+										   placeholder="E-Mail"
+										   required
+										   value.two-way="formInput.email"
+									>
+
+									<br>
+
+									<input type="password"
+										   class="form-control"
+										   placeholder="Password"
+										   required
+										   value.two-way="formInput.password"
+									>
+									<br>
+
+									<p class="alert-danger border border-danger p-2" show.bind="forbiddenErrorOccured">
+										Email/ Passwort falsch.
+									</p>
+									<p class="alert-danger border border-danger p-2" show.bind="unknownErrorOccured">
+										UPPS! Unerwarteter Fehler. probiere es später erneut.
+									</p>
+
+									<button type="submit" class="btn btn-primary login-btn" disabled.bind="submitting">
+										login
+										<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" show.bind="submitting"></span>
+									</button>
+
+									<br>
+									<br>
+									<a class="link-primary" route-href="route: register">
+										Neu hier? Erstelle ein Konto!
+									</a>
+								</form>
+
+							</div>
+
+						</div>
+
+						<div class="col-md-2"></div>
+					</div>
+
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+		</div>
+	</div>
+</template>

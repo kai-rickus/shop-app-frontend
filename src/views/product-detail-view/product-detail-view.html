@@ -1,0 +1,34 @@
+<template>
+	<require from="layout.css"></require>
+	<require from="components/product-details-main/product-details-main"></require>
+	<require from="components/product-tiles/product-tiles"></require>
+
+	<div class="product-detail-view dafault-main-column">
+		<div class="grid">
+			<div class="row">
+				<div class="col-12">
+					<product-details-main data.bind="data"
+										  if.bind="dataTags !== undefined"
+					></product-details-main>
+				</div>
+
+				<div class="col-12">
+					<div class="card frost default-main-shadow overflow-hidden">
+						<div class="card-body pb-0">
+							<h5 class="card-title">Ähnliche Artikel</h5>
+						</div>
+						<product-tiles limit.bind="4"
+									   search.bind="dataTags"
+									   if.bind="dataTags !== undefined"
+						></product-tiles>
+					</div>
+				</div>
+
+				<!--				<div class="col-12 bg-danger">-->
+				<!--					reviews-->
+				<!--				</div>-->
+
+			</div>
+		</div>
+	</div>
+</template>

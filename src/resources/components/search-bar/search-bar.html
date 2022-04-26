@@ -1,0 +1,37 @@
+<template class="search-bar ${suggestions.length > 0 ? 'search-bar--has-suggestions' : ''}" ref="element">
+	<require from="./search-bar.css"></require>
+	<require from="attributes/custom-focus"></require>
+
+	<form class="search-bar__form"
+		  submit.trigger="dispatchEvent( inputValue )"
+		  keydown.trigger="onKeyDown( $event )"
+		  focusout.trigger="onFocusOut($event)"
+		  ref="formElement"
+	>
+		<input class="form-control search-bar__input bg-primary text-on-primary"
+			   type="search"
+			   placeholder="In Shop App suchen"
+			   aria-label="Suchen"
+			   spellcheck="false"
+			   input.trigger="getSuggestions()"
+			   value.bind="inputValue"
+			   keydown.trigger="onKeyDown( $event)"
+			   custom-focus.bind="selectionCounter === -1"
+			   focus.trigger="selectionCounter = -1"
+
+		>
+		<ul class="search-bar__suggestions" show.bind="suggestions.length > 0">
+			<li class="search-bar__suggestions__item form-control text-on-primary bg-primary"
+				repeat.for="suggestion of suggestions"
+				innerHTML.bind="suggestion.highlighted"
+				click.trigger="dispatchEvent(suggestion.string)"
+				tabindex="1"
+				custom-focus.bind="selectionCounter === $index"
+				data-value.bind="suggestion.string"
+				focus.trigger="selectionCounter = $index"
+			>
+			</li>
+		</ul>
+	</form>
+</template>
+

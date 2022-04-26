@@ -1,0 +1,41 @@
+@import "src/theme";
+
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap/scss/mixins";
+@import "node_modules/bootstrap/scss/variables";
+
+.shop-app-container {
+    //display         : flex;
+    //justify-content : center;
+}
+
+.shop-app-container > router-view {
+    //max-width        : 1600px;
+    //width: 100%;
+}
+
+.backdrop {
+    background-image : url("./img/bg-earth.jpg");
+    //background-image : url("https://img.anime2you.de/2021/02/toloveru-darkness.jpg");
+    background-size  : cover;
+    width            : 100vw;
+    height           : 100vh;
+    position         : fixed;
+    top              : 0;
+    left             : 0;
+    z-index          : -1;
+}
+
+.form-control:focus {
+    border-color       : inherit;
+    -webkit-box-shadow : none;
+    box-shadow         : none;
+}
+
+.shipment-logo {
+    display       : block;
+    width         : 100%;
+    max-width     : 90px;
+    border-radius : 4px;
+
+}

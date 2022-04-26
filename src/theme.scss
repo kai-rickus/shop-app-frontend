@@ -1,0 +1,32 @@
+$theme-colors             : (
+        "primary": rgba(7, 13, 29, 0.7),
+        "secondary": #ffa300,
+        "danger": #ff4136
+);
+
+$text-on-primary          : #e3e3e3;
+$text-on-secondary        : #ccc;
+$highlighted-background   : rgba(lighten(map-get($theme-colors, "primary"), 10%), alpha(map-get($theme-colors, "primary")));
+$highlighted              : lighten($highlighted-background, 50%);
+$default-border-radius    : 4px;
+$default-box-shadow       : 0px 5px 7px 2px;
+$default-box-shadow-color : rgba(0, 0, 0, 0.45);
+$disabled-grey : #909090;
+
+.text-on-primary {
+    color : $text-on-primary;
+}
+
+.text-on-secondary {
+    color : $text-on-secondary;
+}
+
+.bg-primary {
+    --bs-bg-opacity  : #{alpha(map-get($theme-colors, "primary"))};
+    background-color : rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-secondary {
+    --bs-bg-opacity  : #{alpha(map-get($theme-colors, "secondary"))};
+    background-color : rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
+}

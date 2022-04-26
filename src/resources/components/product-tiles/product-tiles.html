@@ -1,0 +1,13 @@
+<template class="product-tiles">
+	<require from="components/product-tiles-item/product-tiles-item"></require>
+	<require from="valueConverters/currency-value-converter"></require>
+	<require from="./product-tiles.css"></require>
+
+	<product-tiles-item
+		repeat.for="product of products"
+		thumbnail.bind="product.imageSmall"
+		price.bind="product.price | currency:'EUR'"
+		title.bind="product.title"
+		uuid.bind="product.uuid"
+	></product-tiles-item>
+</template>

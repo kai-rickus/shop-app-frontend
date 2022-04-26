@@ -1,0 +1,243 @@
+<template>
+
+	<require from="./register-view.css"></require>
+
+	<div class="register-view p-5">
+		<div class="container container-lg container-md container-sm">
+			<div class="row">
+				<div class="col-lg-4 col-md-2 col-sm-1"></div>
+				<div class="col-lg-4 col-md-8 col-sm-10">
+
+					<div class="card-body product-tiles-item__content  box-shadow-register rounded-1">
+						<h5 class="card-title product-tiles-item__title mb-4">Registrieren</h5>
+
+						<div class="row">
+							<div class="col">
+
+								<form submit.trigger="submit()">
+
+									<div class="border-bottom border-2 border-secondary"></div>
+									<label class="form-label mb-4">Personalien</label>
+
+									<div class="row">
+
+										<div class="col-md-6">
+
+											<div class="form-floating mb-3">
+												<input type="text"
+													   id="firstname"
+													   name="firstname"
+													   class="form-control"
+													   placeholder="Vorname"
+													   required
+													   value.two-way="formInput.firstname"
+												>
+												<label for="firstname">Vorname</label>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+
+											<div class="form-floating mb-3">
+												<input type="text"
+													   id="lastname"
+													   class="form-control"
+													   placeholder="Nachname"
+													   required
+													   value.two-way="formInput.lastname"
+												>
+												<label for="lastname">Nachname</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-floating mb-3">
+										<input type="email"
+											   id="email-form-field"
+											   name="email"
+											   class="form-control"
+											   placeholder="E-Mail"
+											   required
+											   value.two-way="formInput.email"
+										>
+										<label for="email-form-field">Email</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="password"
+											   name="password"
+											   id="password-form-field"
+											   class="form-control"
+											   placeholder="Passwort"
+											   required
+											   ref="password"
+											   change.trigger="passwordChanged()"
+										>
+										<label for="password-form-field">Passwort</label>
+									</div>
+									<div class="form-floating mb-4">
+										<input type="password"
+											   id="repeatedPassword-form-field"
+											   class="form-control"
+											   placeholder="Passwort wiederholen"
+											   required
+											   value.two-way="formInput.password"
+											   ref="passwordConfirm"
+											   change.trigger="passwordChanged()"
+										>
+										<label for="repeatedPassword-form-field">Passwort wiederholen</label>
+									</div>
+
+									<div class="border-bottom border-2 border-secondary"></div>
+									<label class="form-label mb-4">Adresse</label>
+
+									<div class="row">
+
+										<div class="col-md-6">
+
+											<div class="form-floating mb-3">
+
+
+												<input class="form-control"
+													   list="country-form-options"
+													   id="country-form-field"
+													   placeholder="Land"
+													   required
+													   value.two-way="formInput.country"
+												>
+												<datalist id="country-form-options">
+													<option value="Deutschland">
+													<option value="Russland">
+													<option value="Polen">
+													<option value="Spanien">
+													<option value="Vereinigtes Könogreich der dummen Affen">
+												</datalist>
+												<label for="country-form-field">Land</label>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+
+											<div class="form-floating mb-3">
+
+												<input class="form-control"
+													   list="state-form-options"
+													   id="state-form-field"
+													   placeholder="Bundesland"
+													   required
+													   value.two-way="formInput.state"
+												>
+												<datalist id="state-form-options">
+													<option value="Bayern">
+													<option value="Nordrhein-Westfalen">
+													<option value="Berlin">
+													<option value="Mecklenburg-Vorpommern">
+													<option value="Bremen">
+												</datalist>
+												<label for="state-form-field">Bundesland</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+
+										<div class="col-md-8">
+
+											<div class="form-floating mb-3">
+
+												<input type="text"
+													   id="city-form-field"
+													   class="form-control"
+													   placeholder="Stadt"
+													   required
+													   value.two-way="formInput.city"
+												>
+												<label for="city-form-field">Stadt</label>
+
+											</div>
+
+										</div>
+
+										<div class="col-md-4">
+
+											<div class="form-floating mb-3">
+												<input type="text"
+													   id="zip-form-field"
+													   class="form-control"
+													   placeholder="PLZ"
+													   required
+													   value.two-way="formInput.zip"
+												>
+												<label for="zip-form-field">PLZ</label>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="row">
+
+										<div class="col-md-9">
+
+											<div class="form-floating mb-3">
+												<input type="text"
+													   id="street-form-field"
+													   class="form-control"
+													   placeholder="Straße"
+													   required
+													   value.two-way="formInput.street"
+												>
+												<label for="street-form-field">Straße</label>
+											</div>
+										</div>
+
+										<div class="col-md-3 mb-4">
+											<div class="form-floating">
+												<input type="text"
+													   id="streetnumber-form-field"
+													   class="form-control"
+													   placeholder="Nr."
+													   required
+													   value.two-way="formInput.streetNumber"
+												>
+												<label for="streetnumber-form-field">Nr.</label>
+											</div>
+										</div>
+
+									</div>
+
+									<p class="alert-danger border border-danger p-2" show.bind="forbiddenErrorOccured">
+										Email/ Passwort falsch.
+									</p>
+									<p class="alert-danger border border-danger p-2" show.bind="unknownErrorOccured">
+										UPPS! Unerwarteter Fehler. probiere es später erneut.
+									</p>
+									<div class="form-check mb-4">
+										<input class="form-check-input"
+											   type="checkbox"
+											   id="newsletter-form-field"
+											   checked.two-way="formInput.newsletter"
+										>
+										<label class="form-check-label"
+											   for="newsletter-form-field">
+											Abonniere unseren Newsletter.
+										</label>
+
+									</div>
+									<div class="mb-2">
+										<label>Indem du auf „Registrieren“ klickst, stimmst du unseren<b> Nutzungsbedingungen </b> zu.</label>
+									</div>
+
+									<button type="submit" class="btn btn-primary login-btn mb-3" disabled.bind="submitting" >
+										Registrieren
+										<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" show.bind="submitting"></span>
+									</button>
+
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-2 col-sm-1"></div>
+			</div>
+		</div>
+	</div>
+</template>
