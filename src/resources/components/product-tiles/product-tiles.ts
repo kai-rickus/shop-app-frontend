@@ -1,4 +1,5 @@
 import { bindable } from "aurelia-framework";
+import { debug }    from "util";
 import environment  from "../../../environment";
 
 export class ProductTiles
@@ -6,7 +7,8 @@ export class ProductTiles
 	products;
 	@bindable search
 	@bindable limit
-	@bindable exclude = []
+	@bindable exclude  = []
+	@bindable noShadow = false
 
 	attached()
 	{
@@ -20,7 +22,6 @@ export class ProductTiles
 
 	async getProducts( searchString )
 	{
-		debugger
 		const response = await fetch( `${environment.searchBaseUrl}search?query=${searchString}&limit=${this.limit}`, {
 			method  : "POST",
 			body    : JSON.stringify( { exclude : this.exclude } ),

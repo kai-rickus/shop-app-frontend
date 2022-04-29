@@ -9,5 +9,6 @@
 		price.bind="product.price | currency:'EUR'"
 		title.bind="product.title"
 		uuid.bind="product.uuid"
+		class="${noShadow === true ? '' : 'default-main-shadow' }"
 	></product-tiles-item>
 </template>
