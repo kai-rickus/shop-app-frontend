@@ -16,15 +16,15 @@
 
 				<div class="col-12">
 					<div class="card frost default-main-shadow overflow-hidden mb-4">
-						<div class="card-body pb-0">
+						<div class="card-body">
 							<h5 class="card-title border-bottom border-1">Ähnliche Artikel</h5>
+							<product-tiles limit.bind="4"
+										   search.bind="dataTags"
+										   if.bind="dataTags !== undefined"
+										   exclude.bind="[uuid]"
+										   no-shadow.bind="true"
+							></product-tiles>
 						</div>
-						<product-tiles limit.bind="4"
-									   search.bind="dataTags"
-									   if.bind="dataTags !== undefined"
-									   exclude.bind="[uuid]"
-									   no-shadow.bind="true"
-						></product-tiles>
 					</div>
 				</div>
 
@@ -32,9 +32,8 @@
 					<div class="card frost default-main-shadow overflow-hidden">
 						<div class="card-body pb-0">
 							<h5 class="card-title border-bottom border-1">Bewertungen</h5>
+							<customer-reviews></customer-reviews>
 						</div>
-						<customer-reviews>
-						</customer-reviews>
 					</div>
 				</div>
 			</div>

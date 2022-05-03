@@ -1,0 +1,14 @@
+@use "src/theme";
+
+.customer-reviews-item {
+    .customer-reviews-item__avatar {
+        border-radius : 50%;
+        transform     : translate(0); /* Necessary to prevent a visual glitch from happening */
+    }
+
+    .customer-reviews-item__date {
+        font-size   : 0.75rem;
+        color       : theme.$disabled-grey;
+        font-weight : bold;
+    }
+}

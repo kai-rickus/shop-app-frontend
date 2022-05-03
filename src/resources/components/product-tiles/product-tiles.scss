@@ -4,7 +4,6 @@ $product-tiles-item-gap : 20px;
     display         : flex;
     flex-wrap       : wrap;
     gap             : $product-tiles-item-gap;
-    padding         : $product-tiles-item-gap;
 }
 
 .product-tiles-item__price {

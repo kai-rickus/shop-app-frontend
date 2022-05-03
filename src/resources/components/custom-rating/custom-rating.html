@@ -1,0 +1,33 @@
+<template class="d-flex justify-content-end custom-rating">
+	<require from="./custom-rating.css"></require>
+
+	<div>
+		<div class="custom-rating__stars-bottom"
+			 data-bs-toggle="tooltip"
+			 data-bs-placement="top"
+			 title="${count} Kunden haben diesen Artikel bewertet"
+		>
+			<i class="fa fa-star"></i>
+			<i class="fa fa-star"></i>
+			<i class="fa fa-star"></i>
+			<i class="fa fa-star"></i>
+			<i class="fa fa-star"></i>
+		</div>
+		<div class="custom-rating__stars-top"
+			 data-bs-toggle="tooltip"
+			 data-bs-placement="top"
+			 title="${count} Kunden haben diesen Artikel bewertet"
+		>
+			<i class="fa fa-star-half" show.bind="rating === 0.5"></i>
+			<i class="fa fa-star" show.bind="rating >= 1"></i>
+			<i class="fa fa-star-half" show.bind="rating === 1.5"></i>
+			<i class="fa fa-star" show.bind="rating >= 2"></i>
+			<i class="fa fa-star-half" show.bind="rating === 2.5"></i>
+			<i class="fa fa-star" show.bind="rating >= 3"></i>
+			<i class="fa fa-star-half" show.bind="rating === 3.5"></i>
+			<i class="fa fa-star" show.bind="rating >= 4"></i>
+			<i class="fa fa-star-half" show.bind="rating === 4.5"></i>
+			<i class="fa fa-star" show.bind="rating >= 5"></i>
+		</div>
+	</div>
+</template>

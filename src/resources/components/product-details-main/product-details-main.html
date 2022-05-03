@@ -2,6 +2,7 @@
 	<require from="valueConverters/currency-value-converter"></require>
 	<require from="./product-details-main.css"></require>
 	<require from="app.css"></require>
+	<require from=".././custom-rating/custom-rating"></require>
 	<div class="grid mt-5">
 		<div class="row">
 			<!-- Linke Spalte -->
@@ -49,33 +50,11 @@
 								</div>
 								<div class="col-lg-6 mb-4 d-flex justify-content-end align-items-center">
 									<div class="h-100 position-relative d-flex justify-content-end align-items-center">
-										<div class="product-details-main__rating-stars-bottom"
-											 data-bs-toggle="tooltip"
-											 data-bs-placement="top"
-											 title="${data.ratingsCount} Kunden haben diesen Artikel bewertet"
+										<custom-rating
+											rating.bind="data.rating"
+											count.bind="data.ratingsCount"
 										>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-										<div class="product-details-main__rating-stars w-100"
-											 data-bs-toggle="tooltip"
-											 data-bs-placement="top"
-											 title="${data.ratingsCount} Kunden haben diesen Artikel bewertet"
-										>
-											<i class="fa fa-star-half" show.bind="data.rating === 0.5"></i>
-											<i class="fa fa-star" show.bind="data.rating >= 1"></i>
-											<i class="fa fa-star-half" show.bind="data.rating === 1.5"></i>
-											<i class="fa fa-star" show.bind="data.rating >= 2"></i>
-											<i class="fa fa-star-half" show.bind="data.rating === 2.5"></i>
-											<i class="fa fa-star" show.bind="data.rating >= 3"></i>
-											<i class="fa fa-star-half" show.bind="data.rating === 3.5"></i>
-											<i class="fa fa-star" show.bind="data.rating >= 4"></i>
-											<i class="fa fa-star-half" show.bind="data.rating === 4.5"></i>
-											<i class="fa fa-star" show.bind="data.rating >= 5"></i>
-										</div>
+										</custom-rating>
 									</div>
 								</div>
 
