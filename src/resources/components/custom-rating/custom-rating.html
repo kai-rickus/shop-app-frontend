@@ -1,23 +1,19 @@
-<template class="d-flex justify-content-end custom-rating">
+<template class="d-flex justify-content-end custom-rating"
+		  data-bs-toggle="${count !== undefined ? 'tooltip' : ''}"
+		  data-bs-placement="top"
+		  title="${count !== undefined ? count + ' Kunden haben diesen Artikel bewertet' : ''}"
+>
 	<require from="./custom-rating.css"></require>
 
 	<div>
-		<div class="custom-rating__stars-bottom"
-			 data-bs-toggle="tooltip"
-			 data-bs-placement="top"
-			 title="${count} Kunden haben diesen Artikel bewertet"
-		>
+		<div class="custom-rating__stars-bottom">
 			<i class="fa fa-star"></i>
 			<i class="fa fa-star"></i>
 			<i class="fa fa-star"></i>
 			<i class="fa fa-star"></i>
 			<i class="fa fa-star"></i>
 		</div>
-		<div class="custom-rating__stars-top"
-			 data-bs-toggle="tooltip"
-			 data-bs-placement="top"
-			 title="${count} Kunden haben diesen Artikel bewertet"
-		>
+		<div class="custom-rating__stars-top">
 			<i class="fa fa-star-half" show.bind="rating === 0.5"></i>
 			<i class="fa fa-star" show.bind="rating >= 1"></i>
 			<i class="fa fa-star-half" show.bind="rating === 1.5"></i>

@@ -18,30 +18,30 @@ interface ProductDataResponse
 
 interface ViewParams
 {
-	uuid: string;
+	id: string;
 }
 
 export class ProductDetailView
 {
-	uuid;
+	id;
 	dataTags;
 
 	activate( params: ViewParams )
 	{
-		this.uuid = params.uuid
+		this.id = params.id
 	}
 
 	data: ProductDataResponse;
 
 	bind()
 	{
-		this.getData( this.uuid )
+		this.getData( this.id )
 
 	}
 
-	async getData( uuid )
+	async getData( id )
 	{
-		const response = await fetch( `${environment.backendBaseUrl}product/single/${uuid}` );
+		const response = await fetch( `${environment.backendBaseUrl}product/single/${id}` );
 		const data     = await response.json()
 		this.data      = data;
 		this.dataTags  = this.data.tags.join( " " )

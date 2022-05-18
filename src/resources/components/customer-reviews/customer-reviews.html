@@ -1,12 +1,13 @@
 <template class="customer-reviews">
 	<require from="components/customer-reviews-item/customer-reviews-item"></require>
 	<customer-reviews-item
-		rating.bind="2"
-		user="Kai Erotschkin"
-		image="https://dl.airtable.com/.attachmentThumbnails/50d79bd302b549bd025d79ccfdcd7e1a/7397c45b"
-		date="29.05.2022"
+		repeat.for="review of reviews"
+		rating.bind="review.rating"
+		user.bind="review.fullName"
+		avatar.bind="review.avatar"
+		created.bind="review.created"
 	>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. A consequatur cupiditate dolor eligendi fugiat impedit incidunt, magnam maxime neque officiis quia sunt tempora temporibus vel veniam veritatis voluptate voluptatum! Quasi.
+		${review.text}
 	</customer-reviews-item>
 
 </template>

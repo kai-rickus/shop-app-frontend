@@ -8,18 +8,13 @@ export class ProductTilesItem
 	@bindable title;
 	@bindable price;
 	@bindable thumbnail;
-	@bindable uuid;
+	@bindable id;
 
 	router;
 
 	constructor( router: Router )
 	{
 		this.router = router;
-	}
-
-	goToDetails( uuid )
-	{
-		this.router.navigateToRoute( "product-detail", { uuid : uuid } )
 	}
 
 }
