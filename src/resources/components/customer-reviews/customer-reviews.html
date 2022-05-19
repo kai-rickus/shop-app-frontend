@@ -10,4 +10,14 @@
 		${review.text}
 	</customer-reviews-item>
 
+	<button type="button"
+			class="btn btn-primary border-primary w-50 position-relative bottom-0 start-50 translate-middle-x"
+			click.trigger="loadReviewsPackage()"
+			if.bind="!allReviewsFetched"
+
+	>
+		<span>Weitere Bewertungen laden</span>
+	</button>
+
 </template>
+

@@ -21,6 +21,7 @@ export class ProductDetailsMain
 {
 	@bindable data: ProductDataResponse;
 
+
 	submitting = false;
 
 	attached()

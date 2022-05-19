@@ -3,21 +3,42 @@ import environment  from "../../../environment";
 
 export class CustomerReviews
 {
-	reviews;
 	@bindable id;
-	@bindable artur
+	reviews           = [];
+	offset            = 0
+	allReviewsFetched = false
 
 	async attached()
 	{
-		this.reviews = await this.getReviewsPackage()
+		await this.loadReviewsPackage()
 	}
 
-	async getReviewsPackage()
+	async loadReviewsPackage()
 	{
-		const response = await fetch( `${environment.backendBaseUrl}product/reviews-package/${this.id}` );
-		const data     = await response.json()
+		const url = `${environment.backendBaseUrl}product/reviews-package/${this.id}?offset=${this.offset}`
 
-		return data.reviews;
+		try
+		{
+			const response = await fetch( url );
+			const data     = await response.json()
+
+			if( response.status === 404 )
+			{
+				this.allReviewsFetched = true
+
+				return
+			}
+
+			for( const element of data.reviews )
+			{
+				this.reviews.push( element )
+			}
+
+			this.offset++
+		}
+		catch( error )
+		{
+			/* TODO: error handling */
+		}
 	}
-
 }
