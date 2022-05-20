@@ -4,6 +4,7 @@ import environment  from "../../../environment";
 export class CustomerReviews
 {
 	@bindable id;
+	loading;
 	reviews           = [];
 	offset            = 0
 	allReviewsFetched = false
@@ -19,12 +20,15 @@ export class CustomerReviews
 
 		try
 		{
+			this.loading = true
+
 			const response = await fetch( url );
 			const data     = await response.json()
 
 			if( response.status === 404 )
 			{
 				this.allReviewsFetched = true
+				this.loading = false
 
 				return
 			}
@@ -40,5 +44,7 @@ export class CustomerReviews
 		{
 			/* TODO: error handling */
 		}
+		this.loading = false
+
 	}
 }

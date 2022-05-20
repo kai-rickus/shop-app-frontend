@@ -1,0 +1,136 @@
+<template class="shop-footer d-block">
+	<require from="components/shop-footer/shop-footer.css"></require>
+
+	<!-- Remove the container if you want to extend the Footer to full width. -->
+	<div class="container p-0">
+
+		<!-- Footer -->
+		<footer
+			class="text-center text-lg-start text-white bg-primary frost-clear">
+			<!-- Section: Social media -->
+			<section
+				class="d-flex justify-content-between p-4 bg-primary"
+			>
+				<!-- Left -->
+				<div class="me-5">
+					<span>*Schmales Logo einfügen*</span>
+				</div>
+				<!-- Left -->
+
+				<!-- Right -->
+				<div>
+					<a href="https://de-de.facebook.com/" class="text-white me-4">
+						<i class="fab fa-facebook-f"></i>
+					</a>
+					<a href="https://twitter.com/?lang=de" class="text-white me-4">
+						<i class="fab fa-twitter"></i>
+					</a>
+					<a href="https://www.google.de/?hl=de" class="text-white me-4">
+						<i class="fab fa-google"></i>
+					</a>
+					<a href="https://www.instagram.com/" class="text-white me-4">
+						<i class="fab fa-instagram"></i>
+					</a>
+					<a href="https://de.linkedin.com/" class="text-white me-4">
+						<i class="fab fa-linkedin"></i>
+					</a>
+				</div>
+				<!-- Right -->
+			</section>
+			<!-- Section: Social media -->
+
+			<!-- Section: Links  -->
+			<section class="">
+				<div class="container text-center text-md-start mt-5 w">
+					<!-- Grid row -->
+					<div class="row mt-3">
+						<!-- Grid column -->
+						<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+							<!-- Content -->
+							<h6 class="text-uppercase fw-bold">Shop App</h6>
+							<hr
+								class="mb-4 mt-0 d-inline-block mx-auto text-on-primary"
+								style="width: 60px; height: 2px"
+							/>
+							<p>
+								${footer.description}
+							</p>
+						</div>
+						<!-- Grid column -->
+
+						<!-- Grid column -->
+						<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+							<!-- Links -->
+							<h6 class="text-uppercase fw-bold">Dein Account</h6>
+							<hr
+								class="mb-4 mt-0 d-inline-block mx-auto text-on-primary"
+								style="width: 60px; height: 2px"
+							/>
+							<p>
+								<a href="#!" class="text-white">Wunschliste</a>
+							</p>
+							<p>
+								<a href="#!" class="text-white">Favorisierte Artikel</a>
+							</p>
+							<p>
+								<a href="#!" class="text-white">Letzte Bestellungen</a>
+							</p>
+						</div>
+						<!-- Grid column -->
+
+						<!-- Grid column -->
+						<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+							<!-- Links -->
+							<h6 class="text-uppercase fw-bold">Hilfreiche Links</h6>
+							<hr
+								class="mb-4 mt-0 d-inline-block mx-auto text-on-primary"
+								style="width: 60px; height: 2px"
+							/>
+							<p>
+								<a href="#!" class="text-white">FAQ</a>
+							</p>
+							<p>
+								<a href="#!" class="text-white">Werde Verkäufer</a>
+							</p>
+							<p>
+								<a href="#!" class="text-white">Kundensupport</a>
+							</p>
+						</div>
+						<!-- Grid column -->
+
+						<!-- Grid column -->
+						<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+							<!-- Links -->
+							<h6 class="text-uppercase fw-bold">Kontakt</h6>
+							<hr
+								class="mb-4 mt-0 d-inline-block mx-auto text-on-primary"
+								style="width: 60px; height: 2px"
+							/>
+							<p><i class="fas fa-home mr-3"></i> ${footer.contact.address}</p>
+							<p><i class="fas fa-envelope mr-3"></i> ${footer.contact.email}</p>
+							<p><i class="fas fa-phone mr-3"></i> ${footer.contact.phone}</p>
+						</div>
+						<!-- Grid column -->
+					</div>
+					<!-- Grid row -->
+				</div>
+			</section>
+			<!-- Section: Links  -->
+
+			<!-- Copyright -->
+			<div
+				class="text-center p-3 bg-primary"
+			>
+				© ${footer.copyrightYear} Copyright:
+				<a class="text-white" href="https://mdbootstrap.com/"
+				>${footer.url}</a
+				>
+			</div>
+			<!-- Copyright -->
+		</footer>
+		<!-- Footer -->
+
+	</div>
+	<!-- End of .container -->
+
+</template>

@@ -1,0 +1,17 @@
+{
+    "description"   : "Entdecke in unseren Newsletter tolle Angebote und Sonderaktionen. Vergiss außerdem nicht uns auf unseren anderen Plattformen zu folgen um nichts zu verpassen.",
+    "contact"       : {
+        "address" : "Goethestraße 14, Köln 50858, DE",
+        "email"   : "shop.app.mail.address@gmail.com",
+        "phone"   : "+49 174 370 2332"
+    },
+    "social"        : {
+        "facebook"  : "https://de-de.facebook.com/",
+        "twitter"   : "https://twitter.com/?lang=de",
+        "google"    : "https://www.google.de/?hl=de",
+        "instagram" : "https://www.instagram.com/",
+        "linkedIn"  : "https://de.linkedin.com/"
+    },
+    "copyrightYear" : "2021",
+    "url"           : "shop-app.de"
+}
