@@ -1,8 +1,9 @@
 @use "src/layout";
 
+$section-height-desktop : 72px;
+
 .shop-footer {
-    margin-top : 5rem;
     .container {
-        max-width : layout.$content-width-desktop;
+        max-width : layout.$content-width-desktop !important;
     }
 }

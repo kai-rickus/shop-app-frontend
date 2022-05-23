@@ -12,6 +12,7 @@ $highlighted-border-width : 1px;
     width     : 45vw;
     height    : 36px;
     position  : relative;
+    display   : block;
 
     &.search-bar--has-suggestions {
         .search-bar__form {

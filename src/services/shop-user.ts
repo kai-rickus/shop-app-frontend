@@ -3,9 +3,9 @@ import { singleton } from "aurelia-framework";
 @singleton()
 export class ShopUser
 {
+	email
 	public refreshToken
 	public accessToken
-	email
 	public firstname
 	public lastname
 }

@@ -1,9 +1,11 @@
-.navigation-bar {
-    .search-bar-container {
-        width : 100%;
-    }
-    .logo-small{
-        height: 40px;
-    }
+$height-desktop : 98px;
 
+.navigation-bar {
+    display : block;
+    width   : 1320px;
+    margin  : auto;
+
+    .search-bar-container { width : 100%; }
+
+    .logo-small { height : 40px; }
 }
