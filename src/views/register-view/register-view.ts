@@ -1,4 +1,5 @@
 import { Redirect, Router } from "aurelia-router";
+import { TaskQueue }        from "aurelia-task-queue";
 import jwt_decode           from "jwt-decode";
 import environment          from "../../environment";
 import { ShopUser }         from "../../services/shop-user";
@@ -8,20 +9,15 @@ import { autoinject }       from "aurelia-framework";
 @autoinject
 export class RegisterView
 {
-	router;
+	constructor( public router: Router, public user: ShopUser, public taskQueue: TaskQueue ){}
 
-	constructor( router: Router )
+	canActivate()
 	{
-		this.router = router;
+		if( this.user.refreshToken )
+		{
+			return new Redirect( '/product-overview' )
+		}
 	}
-
-	// canActivate()
-	// {
-	//   if( this.user.refreshToken )
-	//   {
-	//     return new Redirect( '/product-overview' )
-	//   }
-	// }
 
 	formInput = {
 		firstname    : "",
@@ -86,6 +82,5 @@ export class RegisterView
 		this.submitting = false
 
 	}
-
 }
 

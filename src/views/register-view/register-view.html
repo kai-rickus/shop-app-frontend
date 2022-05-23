@@ -1,6 +1,7 @@
 <template>
 
 	<require from="./register-view.css"></require>
+	<require from="components/autocompletion-textfield/autocompletion-textfield"></require>
 
 	<div class="register-view p-5">
 		<div class="container container-lg container-md container-sm">
@@ -95,23 +96,11 @@
 
 										<div class="col">
 
-											<div class="form-floating mb-3">
+											<div>
 
-												<input class="form-control"
-													   list="country-form-options"
-													   id="country-form-field"
-													   placeholder="Adresse"
-													   required
-													   value.two-way="formInput.address"
-												>
-												<datalist id="country-form-options">
-													<option value="Deutschland">
-													<option value="Russland">
-													<option value="Polen">
-													<option value="Spanien">
-													<option value="Vereinigtes Könogreich der dummen Affen">
-												</datalist>
-												<label for="country-form-field">Adresse</label>
+												<autocompletion-textfield required suggestion.bind="getAddressSuggestions">
+												</autocompletion-textfield>
+
 											</div>
 										</div>
 

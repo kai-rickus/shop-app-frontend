@@ -1,0 +1,40 @@
+<template class="autocompletion-textfield ${suggestions.length > 0 ? 'search-bar--has-suggestions' : ''}" ref="element">
+	<require from="./autocompletion-textfield.css"></require>
+	<require from="attributes/custom-focus"></require>
+
+	<form class="form-floating mb-3"
+		  submit.trigger="dispatchEvent( inputValue )"
+		  keydown.trigger="onKeyDown( $event )"
+		  focusout.trigger="onFocusOut($event)"
+		  ref="formElement"
+	>
+		<input class="form-control autocompletion-textfield__input"
+			   id="adress-field"
+			   required.bind="required"
+			   type="text"
+			   placeholder="Adresse"
+			   aria-label="Suchen"
+			   spellcheck="false"
+			   value.bind="inputValue"
+			   input.trigger="getSuggestions()"
+			   keydown.trigger="onKeyDown($event)"
+			   custom-focus.bind="selectionCounter === -1"
+			   focus.trigger="selectionCounter = -1"
+		>
+		<label for="adress-field">Adresse</label>
+
+		<ul class="autocompletion-textfield__suggestions" show.bind="suggestions.length > 0">
+			<li class="autocompletion-textfield__suggestions__item form-control "
+				repeat.for="suggestion of suggestions"
+				innerHTML.bind="suggestion.highlighted"
+				click.trigger="dispatchEvent(suggestion.string)"
+				tabindex="1"
+				custom-focus.bind="selectionCounter === $index"
+				data-value.bind="suggestion.string"
+				focus.trigger="selectionCounter = $index"
+			>
+			</li>
+		</ul>
+	</form>
+</template>
+
