@@ -1,15 +1,17 @@
-<template class="autocompletion-textfield ${suggestions.length > 0 ? 'search-bar--has-suggestions' : ''}" ref="element">
-	<require from="./autocompletion-textfield.css"></require>
+<template class="address-field ${suggestions.length > 0 ? 'address-field--has-suggestions' : ''}"
+		  ref="element"
+>
+	<require from="./address-field.css"></require>
 	<require from="attributes/custom-focus"></require>
 
-	<form class="form-floating mb-3"
-		  submit.trigger="dispatchEvent( inputValue )"
+	<fieldset class="form-floating"
 		  keydown.trigger="onKeyDown( $event )"
 		  focusout.trigger="onFocusOut($event)"
 		  ref="formElement"
 	>
-		<input class="form-control autocompletion-textfield__input"
+		<input class="form-control address-field__input"
 			   id="adress-field"
+			   autocomplete="off"
 			   required.bind="required"
 			   type="text"
 			   placeholder="Adresse"
@@ -23,18 +25,20 @@
 		>
 		<label for="adress-field">Adresse</label>
 
-		<ul class="autocompletion-textfield__suggestions" show.bind="suggestions.length > 0">
-			<li class="autocompletion-textfield__suggestions__item form-control "
+		<ul class="address-field__suggestions"
+			show.bind="suggestions.length > 0"
+		>
+			<li class="address-field__suggestions__item form-control"
 				repeat.for="suggestion of suggestions"
-				innerHTML.bind="suggestion.highlighted"
-				click.trigger="dispatchEvent(suggestion.string)"
+				click.trigger="dispatchEvent(suggestion.description)"
 				tabindex="1"
 				custom-focus.bind="selectionCounter === $index"
-				data-value.bind="suggestion.string"
+				data-place-id.bind="suggestion.place_id"
 				focus.trigger="selectionCounter = $index"
 			>
+				${suggestion.description}
 			</li>
 		</ul>
-	</form>
+	</fieldset>
 </template>
 

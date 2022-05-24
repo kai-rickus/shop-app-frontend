@@ -1,7 +1,7 @@
 <template>
 
 	<require from="./register-view.css"></require>
-	<require from="components/autocompletion-textfield/autocompletion-textfield"></require>
+	<require from="components/address-field/address-field"></require>
 
 	<div class="register-view p-5">
 		<div class="container container-lg container-md container-sm">
@@ -98,8 +98,10 @@
 
 											<div>
 
-												<autocompletion-textfield required suggestion.bind="getAddressSuggestions">
-												</autocompletion-textfield>
+												<address-field required suggestion.bind="getAddressSuggestions"
+															   class="mb-3"
+												>
+												</address-field>
 
 											</div>
 										</div>

@@ -7,20 +7,21 @@ $primary-rgb              : map-get($theme-colors, "primary");
 $highlighted-border       : $highlighted;
 $highlighted-border-width : 1px;
 
-.autocompletion-textfield {
+.address-field {
+    display : block;
 
-    &.autocompletion-textfield--has-suggestions {
-        .autocompletion-textfield__form {
+    &.address-field--has-suggestions {
+        .address-field__form {
             box-shadow : $default-box-shadow $default-box-shadow-color;
         }
 
-        .autocompletion-textfield__input {
+        .address-field__input {
             border-bottom-left-radius  : 0;
             border-bottom-right-radius : 0;
         }
     }
 
-    .autocompletion-textfield__form {
+    .address-field__form {
         position            : absolute;
         width               : 100%;
         top                 : 0;
@@ -35,7 +36,7 @@ $highlighted-border-width : 1px;
         transition-duration : 100ms;
     }
 
-    .autocompletion-textfield__input {
+    .address-field__input {
         width               : 100%;
         border              : none;
         backdrop-filter     : blur(30px);
@@ -45,14 +46,14 @@ $highlighted-border-width : 1px;
         border-radius       : $default-border-radius;
     }
 
-    .autocompletion-textfield__suggestions {
+    .address-field__suggestions {
         width         : 100%;
         padding-left  : 0;
         list-style    : none;
         margin-top    : 1px;
         margin-bottom : 0;
 
-        .autocompletion-textfield__suggestions__item {
+        .address-field__suggestions__item {
             border-radius : 0;
             border        : none;
             cursor        : pointer;
@@ -68,11 +69,11 @@ $highlighted-border-width : 1px;
             }
         }
 
-        .autocompletion-textfield__suggestions__item:hover {
+        .address-field__suggestions__item:hover {
             background-color : $highlighted-background !important;
         }
 
-        .autocompletion-textfield__suggestions__item:focus {
+        .address-field__suggestions__item:focus {
             background-color : $highlighted-background !important;
             color            : #{$text-on-primary};
             border           : $highlighted-border-width solid #{$highlighted-border};

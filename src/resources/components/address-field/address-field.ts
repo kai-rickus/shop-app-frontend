@@ -2,9 +2,8 @@ import environment              from "../../../environment";
 import { autoinject, bindable } from "aurelia-framework";
 import { TaskQueue }            from "aurelia-task-queue";
 
-/* TODO: ÜBERALL umbenennen in AddressField */
 @autoinject()
-export class AutocompletionTextfield
+export class AddressField
 {
 	@bindable required = false;
 	@bindable url;
@@ -17,6 +16,7 @@ export class AutocompletionTextfield
 	element;
 	taskQueue;
 
+
 	constructor( taskQueue: TaskQueue )
 	{
 		this.taskQueue = taskQueue
@@ -26,18 +26,6 @@ export class AutocompletionTextfield
 	{
 		this.suggestions = []
 	}
-
-	// async getSuggestions()
-	// {
-	// 	this.taskQueue.queueTask( async () =>
-	// 	{
-	//
-	// 		const response = await fetch( this.url );
-	// 		const data     = await response.json()
-	//
-	// 		this.suggestions = data.result
-	// 	} )
-	// }
 
 	dispatchEvent( string )
 	{
@@ -54,9 +42,9 @@ export class AutocompletionTextfield
 
 	onKeyDown( event )
 	{
-		if( event.code === "Enter" && document.activeElement.classList.contains( "autocompletion-textfield__suggestions__item" ) )
+		if( event.code === "Enter" && document.activeElement.classList.contains( "address-field__suggestions__item" ) )
 		{
-			this.dispatchEvent( document.activeElement[ "dataset" ][ "value" ] )
+			this.dispatchEvent( document.activeElement.textContent )
 		}
 		else if( event.code === "Escape" )
 		{
@@ -96,7 +84,7 @@ export class AutocompletionTextfield
 	{
 		const relatedTarget = event.relatedTarget as HTMLElement
 
-		if( relatedTarget?.classList.contains( "autocompletion-textfield__suggestions__item" ) ) return
+		if( relatedTarget?.classList.contains( "address-field__suggestions__item" ) ) return
 
 		this.taskQueue.queueMicroTask( () =>
 		{
@@ -117,12 +105,9 @@ export class AutocompletionTextfield
 		{
 
 			const response = await fetch( `${environment.backendBaseUrl}locations/suggestions/${this.inputValue}/de`, );
-			// const response = await fetch( `${environment.backendBaseUrl}/locations/suggestions/vogelsang/de?`, );
 			const data     = await response.json()
 
-			debugger
-
-			// this.suggestions = data.result
+			this.suggestions = data.suggestions
 		} )
 	}
 }
