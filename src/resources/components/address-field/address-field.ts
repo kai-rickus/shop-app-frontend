@@ -1,6 +1,12 @@
+import { Interface }            from "readline";
 import environment              from "../../../environment";
 import { autoinject, bindable } from "aurelia-framework";
 import { TaskQueue }            from "aurelia-task-queue";
+
+interface SuggestionDataset
+{
+	placeId: string;
+}
 
 @autoinject()
 export class AddressField
@@ -8,6 +14,7 @@ export class AddressField
 	@bindable required = false;
 	@bindable url;
 	@bindable suggestion;
+	@bindable placeId;
 
 	inputValue;
 	suggestions      = [];
@@ -15,7 +22,6 @@ export class AddressField
 	formElement;
 	element;
 	taskQueue;
-
 
 	constructor( taskQueue: TaskQueue )
 	{
@@ -27,24 +33,24 @@ export class AddressField
 		this.suggestions = []
 	}
 
-	dispatchEvent( string )
+	dispatchEvent( suggestionText, placeId )
 	{
 		const event = new CustomEvent( 'found', {
 			detail : {
-				string : string
+				string : suggestionText,
 			}
 		} );
-
 		this.element.dispatchEvent( event );
 		this.clearSuggestions()
-		this.inputValue = string
+		this.inputValue = suggestionText
+		this.placeId    = placeId
 	}
 
 	onKeyDown( event )
 	{
 		if( event.code === "Enter" && document.activeElement.classList.contains( "address-field__suggestions__item" ) )
 		{
-			this.dispatchEvent( document.activeElement.textContent )
+			this.dispatchEvent( document.activeElement.textContent, ( ( document.activeElement as HTMLElement ).dataset as unknown as SuggestionDataset ).placeId )
 		}
 		else if( event.code === "Escape" )
 		{
