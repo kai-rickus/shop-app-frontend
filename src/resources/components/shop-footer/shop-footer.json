@@ -13,5 +13,6 @@
         "linkedIn"  : "https://de.linkedin.com/"
     },
     "copyrightYear" : "2021",
-    "url"           : "shop-app.de"
+    "url"           : "http://localhost:9000/",
+    "urlName"       : "shop-app.de"
 }
