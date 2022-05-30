@@ -2,7 +2,7 @@
 	<require from="./login-view.css"></require>
 	<require from="layout.css"></require>
 
-	<div class="login-view">
+	<div class="login-view p-5 ">
 		<div class="container container-lg container-md container-sm">
 			<div class="row">
 
@@ -10,31 +10,36 @@
 
 				<div class="col-md-4">
 
-					<div class="card-body product-tiles-item__content box-shadow-login rounded-1 frost default-main-shadow">
-						<h5 class="card-title product-tiles-item__title">${loginHeadline}</h5>
+					<div class="card-body product-tiles-item__content box-shadow-login rounded-1 default-main-shadow">
+						<h5 class="card-title product-tiles-item__title border-bottom border-1 mb-4">${loginHeadline}</h5>
 						<div class="row">
 							<div class="col-md-2"></div>
 
-							<div class="col-md-8">
+							<div class="col-md-12">
 
 								<form submit.trigger="submit()">
+									<div class="form-floating mb-3">
 
-									<input type="email"
-										   class="form-control"
-										   placeholder="E-Mail"
-										   required
-										   value.two-way="formInput.email"
-									>
+										<input type="email"
+											   id="E-Mail-Adresse"
+											   class="form-control"
+											   placeholder="E-Mail"
+											   required
+											   value.two-way="formInput.email"
+										>
+										<label for="E-Mail-Adresse">E-Mail-Adresse</label>
+									</div>
 
-									<br>
-
-									<input type="password"
-										   class="form-control"
-										   placeholder="Password"
-										   required
-										   value.two-way="formInput.password"
-									>
-									<br>
+									<div class="form-floating mb-3">
+										<input type="password"
+											   id="Passwort"
+											   class="form-control"
+											   placeholder="Password"
+											   required
+											   value.two-way="formInput.password"
+										>
+										<label for="Passwort">Passwort</label>
+									</div>
 
 									<p class="alert-danger border border-danger p-2" show.bind="forbiddenErrorOccured">
 										Email/ Passwort falsch.
@@ -44,7 +49,7 @@
 									</p>
 
 									<button type="submit"
-											class="btn btn-primary login-btn"
+											class="btn btn-primary login-btn mb-3"
 											disabled.bind="submitting">
 										login
 										<span class="spinner-border spinner-border-sm"
@@ -53,8 +58,6 @@
 											  show.bind="submitting"></span>
 									</button>
 
-									<br>
-									<br>
 									<a class="link-primary text-center w-100 d-block" route-href="route: register">
 										Neu hier? Erstelle ein Konto!
 									</a>
