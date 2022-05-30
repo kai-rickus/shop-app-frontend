@@ -6,6 +6,7 @@ export class ShopUser
 	email
 	public refreshToken
 	public accessToken
-	public firstname
-	public lastname
+	public firstName
+	public lastName
+	public avatar
 }

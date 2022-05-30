@@ -60,6 +60,8 @@ export class App
 {
 	public router: Router;
 
+	constructor( private _user: ShopUser ){}
+
 	public configureRouter( config: RouterConfiguration, router: Router ): Promise<void> | PromiseLike<void> | void
 	{
 		config.title = 'Shop';

@@ -1,4 +1,5 @@
 import { Router, Redirect } from "aurelia-router";
+import { debug }            from "util";
 import environment          from "../../environment";
 import { autoinject }       from "aurelia-framework";
 import { ShopUser }         from "../../services/shop-user";
@@ -14,10 +15,8 @@ export class LoginView
 	unknownErrorOccured   = false
 	forbiddenErrorOccured = false
 	router;
-	user;
+	user: ShopUser;
 	submitting            = false
-	placeholder           = "test"
-	loginHeadline         = "Login"
 	formInput             = {
 		email    : "",
 		password : ""
@@ -32,7 +31,6 @@ export class LoginView
 	async submit()
 	{
 		this.submitting = true
-
 		try
 		{
 			const response = await fetch( `${environment.backendBaseUrl}authentication/login`, {
@@ -53,9 +51,12 @@ export class LoginView
 
 			this.router.navigateToRoute( "product-overview" )
 
+			this.user.email        = decodedRefreshtoken.email
 			this.user.accessToken  = data.accessToken;
 			this.user.refreshToken = data.refreshToken;
-			this.user.email        = decodedRefreshtoken.email
+			this.user.firstName    = data.firstName;
+			this.user.lastName     = data.lastName;
+			this.user.avatar       = data.avatar;
 
 		}
 		catch( error )

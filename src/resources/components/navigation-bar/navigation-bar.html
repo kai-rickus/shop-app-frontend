@@ -29,7 +29,8 @@
 						   role="button"
 						   data-bs-toggle="dropdown"
 						   aria-expanded="false">
-							*Avatar*
+							<img if.bind="_user.avatar" src.bind="_user.avatar" alt="Profilbild">
+							<b>${_user.firstName}</b>
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="#">Profil</a></li>
