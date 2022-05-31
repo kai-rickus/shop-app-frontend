@@ -22,15 +22,16 @@
 					<search-bar found.trigger="search($event)"></search-bar>
 				</div>
 				<ul class="navbar-nav mb-2 mb-lg-0">
-					<li class="nav-item dropdown">
+
+					<li if.bind="_user.refreshToken & signal:'logging-in'" class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle pe-0"
 						   href="#"
 						   id="navbarDropdown"
 						   role="button"
 						   data-bs-toggle="dropdown"
-						   aria-expanded="false">
-							<img if.bind="_user.avatar" src.bind="_user.avatar" alt="Profilbild">
-							<b>${_user.firstName}</b>
+						   aria-expanded="false"
+						>
+							<img src.bind="_user.avatar" alt="Profilbild ${_user.firstName} ${_user.lastName}">
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="#">Profil</a></li>
@@ -40,6 +41,10 @@
 							</li>
 							<li><a class="dropdown-item" href="#">Ausloggen</a></li>
 						</ul>
+					</li>
+					<li else class="nav-item">
+<!--						<img src.bind="_user.avatar" alt="Profilbild ${_user.firstName} ${_user.lastName}">-->
+						<i class="fa fa-sign-in-alt text-on-primary" aria-hidden="true"></i>
 					</li>
 				</ul>
 			</div>
