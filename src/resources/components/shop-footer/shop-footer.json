@@ -6,11 +6,10 @@
         "phone"   : "+49 174 370 2332"
     },
     "social"        : {
-        "facebook"  : "https://de-de.facebook.com/",
-        "twitter"   : "https://twitter.com/?lang=de",
+        "facebook"  : "https://www.facebook.com/profile.php?id=100081864640627",
+        "twitter"   : "https://twitter.com/ShopApp3",
         "google"    : "https://www.google.de/?hl=de",
-        "instagram" : "https://www.instagram.com/",
-        "linkedIn"  : "https://de.linkedin.com/"
+        "instagram" : "https://www.instagram.com/shopappprojekt/"
     },
     "copyrightYear" : "2021",
     "url"           : "shop-app.de"
