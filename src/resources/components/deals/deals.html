@@ -1,0 +1,18 @@
+<template>
+	<require from="layout.css"></require>
+	<require from="components/product-tiles/product-tiles"></require>
+	<div class="deals">
+
+		<div class="card frost default-main-shadow overflow-hidden mb-4">
+			<div class="card-body">
+				<h5 class="card-title border-bottom border-1">Angebote</h5>
+				<product-tiles limit.bind="4"
+							   search.bind="dataTags"
+							   if.bind="dataTags !== undefined"
+							   exclude.bind="[uuid]"
+							   no-shadow.bind="true"
+				></product-tiles>
+			</div>
+		</div>
+	</div>
+</template>
