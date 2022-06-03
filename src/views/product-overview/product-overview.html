@@ -1,10 +1,9 @@
 <template>
-	<require from="components/product-tiles/product-tiles"></require>
+	<require from="components/product-search-results/product-search-results"></require>
 	<require from="./product-overview.css"></require>
 	<require from="layout.css"></require>
 
 	<div class="product-overview container p-0">
-		<product-tiles class="bg-shop"  search.bind="searchString"></product-tiles>
+		<product-search-results class="bg-shop" search.bind="searchString"></product-search-results>
 	</div>
 </template>
-

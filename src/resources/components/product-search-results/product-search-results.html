@@ -1,14 +1,14 @@
-<template class="product-tiles">
-	<require from="components/product-tiles-item/product-tiles-item"></require>
+<template class="product-search-results">
+	<require from="components/product-tile/product-tile"></require>
 	<require from="valueConverters/currency-value-converter"></require>
-	<require from="./product-tiles.css"></require>
+	<require from="./product-search-results.css"></require>
 
-	<product-tiles-item
+	<product-tile
 		repeat.for="product of products"
 		thumbnail.bind="product.imageSmall"
 		price.bind="product.price | currency:'EUR'"
 		title.bind="product.title"
 		id.bind="product.id"
 		class="${noShadow === true ? '' : 'default-main-shadow' }"
-	></product-tiles-item>
+	></product-tile>
 </template>

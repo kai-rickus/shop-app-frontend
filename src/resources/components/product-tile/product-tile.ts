@@ -2,7 +2,7 @@ import { bindable, autoinject } from "aurelia-framework";
 import { Router }               from "aurelia-router";
 
 @autoinject()
-export class ProductTilesItem
+export class ProductTile
 {
 	shoppingCartLabel = "In Warenkorb";
 	@bindable title;

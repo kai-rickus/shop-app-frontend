@@ -2,7 +2,7 @@ import { bindable } from "aurelia-framework";
 import { debug }    from "util";
 import environment  from "../../../environment";
 
-export class ProductTiles
+export class ProductSearchResults
 {
 	products;
 	@bindable search
