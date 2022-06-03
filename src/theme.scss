@@ -21,6 +21,10 @@ $disabled-grey            : #909090;
     color : $text-on-secondary;
 }
 
+.text-secondary-dark{
+    color: darken(map-get($theme-colors, "secondary"), 10%);
+}
+
 .bg-primary {
     --bs-bg-opacity  : #{alpha(map-get($theme-colors, "primary"))};
     background-color : rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;

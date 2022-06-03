@@ -1,0 +1,68 @@
+<template>
+	<require from="../../resources/components/product-tile/product-tile"></require>
+	<require from="app.css"></require>
+
+	<div class="shopping-cart-view container p-0">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="card frost default-main-shadow">
+					Artikelübersicht
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card frost default-main-shadow">
+					<div class="card-body">
+						<div class="row mb-3">
+							<h5 class="border-bottom border-1">Bestellübersicht</h5>
+							<div class="row pe-0">
+								<div class="col-md-7">
+									<span>Artikel-Betrag(Menge):</span>
+								</div>
+								<div class="col-md-5 pe-0">
+									<div class="text-end">
+										<span>299,99€</span>
+									</div>
+								</div>
+							</div>
+							<div class="row pe-0">
+								<div class="col-md-9">
+									<span>Verpackung und Versand:</span>
+								</div>
+								<div class="col-md-3 pe-0">
+									<div class="text-end">
+										<span>0,00€</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="row pe-0">
+								<div class="col-md-7">
+									<h3 class="mb-0 text-secondary-dark">Gesamtbetrag</h3>
+								</div>
+								<div class="col-md-5 text-end text-secondary-dark pe-0">
+									<h3 class="mb-0">299,99</h3>
+								</div>
+								<div class="row pe-0">
+									<p><small>Der Gesamtbetrag enthält die Ust.</small></p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="text-center ">
+								<button type="submit" class="btn btn-secondary border-primary w-100">
+								<span class="h6 text-center">
+									Zur Kasse gehen (*3* Artikel)
+								</span>
+								</button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</template>

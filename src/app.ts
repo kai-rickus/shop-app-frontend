@@ -58,6 +58,13 @@ const ROUTES: RouteConfig[] = [
 		moduleId : './views/home-view/home-view',
 		nav      : true,
 		title    : 'home'
+	},
+	{
+		route    : [ 'shopping-cart' ],
+		name     : 'shopping-cart',
+		moduleId : './views/shopping-cart-view/shopping-cart-view',
+		nav      : true,
+		title    : 'shopping-cart'
 	}
 
 ];

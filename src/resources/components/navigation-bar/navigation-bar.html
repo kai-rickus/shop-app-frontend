@@ -21,6 +21,9 @@
 				<div class="d-flex justify-content-center search-bar-container">
 					<search-bar found.trigger="search($event)"></search-bar>
 				</div>
+				<div class="pe-3">
+					<i class="fa fa-solid fa-shopping-cart text-on-primary"></i>
+				</div>
 				<ul class="navbar-nav mb-2 mb-lg-0">
 
 					<li if.bind="_user.refreshToken & signal:'logging-in'" class="nav-item dropdown">
@@ -43,7 +46,7 @@
 						</ul>
 					</li>
 					<li else class="nav-item">
-<!--						<img src.bind="_user.avatar" alt="Profilbild ${_user.firstName} ${_user.lastName}">-->
+						<!--						<img src.bind="_user.avatar" alt="Profilbild ${_user.firstName} ${_user.lastName}">-->
 						<i class="fa fa-sign-in-alt text-on-primary" aria-hidden="true"></i>
 					</li>
 				</ul>
