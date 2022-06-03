@@ -30,9 +30,10 @@
 		>
 			<li class="address-field__suggestions__item form-control"
 				repeat.for="suggestion of suggestions"
-				click.trigger="dispatchEvent(suggestion.description)"
+				click.trigger="dispatchEvent(suggestion.description, suggestion.place_id)"
 				tabindex="1"
 				custom-focus.bind="selectionCounter === $index"
+				value.two-way="formInput.placeId"
 				data-place-id.bind="suggestion.place_id"
 				focus.trigger="selectionCounter = $index"
 			>

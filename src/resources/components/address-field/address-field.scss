@@ -1,3 +1,5 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
 @import "src/theme";
 
 $grey-highlight-bg        : #e9ecef;
@@ -52,12 +54,13 @@ $highlighted-border-width : 1px;
         list-style    : none;
         margin-top    : 1px;
         margin-bottom : 0;
+        display       : block;
+        position: absolute;
 
         .address-field__suggestions__item {
             border-radius : 0;
             border        : none;
             cursor        : pointer;
-            background    : transparent;
             transition    : none;
 
             box-sizing    : border-box;
@@ -70,14 +73,20 @@ $highlighted-border-width : 1px;
         }
 
         .address-field__suggestions__item:hover {
-            background-color : $highlighted-background !important;
+            background-color : darken(white, 15%);
         }
 
         .address-field__suggestions__item:focus {
-            background-color : $highlighted-background !important;
-            color            : #{$text-on-primary};
-            border           : $highlighted-border-width solid #{$highlighted-border};
-            padding          : #{6px - $highlighted-border-width} #{12px - $highlighted-border-width};
+            $border-size     : 1px;
+
+            background-color : darken(white, 15%);
+            box-sizing       : border-box;
+            border           : $border-size solid black;
+            padding-top      : calc(#{$input-padding-y} - #{$border-size});
+            padding-left     : calc(#{$input-padding-x} - #{$border-size});
+            padding-right    : calc(#{$input-padding-x} - #{$border-size});
+            padding-bottom   : calc(#{$input-padding-y} - #{$border-size});
+
         }
     }
 }

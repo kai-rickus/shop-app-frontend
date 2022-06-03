@@ -1,12 +1,16 @@
-import { Router, Redirect } from "aurelia-router";
-import environment          from "../../environment";
-import { autoinject }       from "aurelia-framework";
-import { ShopUser }         from "../../services/shop-user";
-import jwt_decode           from "jwt-decode";
+import { Router, Redirect }   from "aurelia-router";
+import { debug }              from "util";
+import environment            from "../../environment";
+import { autoinject } from "aurelia-framework";
+import { BindingSignaler }    from 'aurelia-templating-resources';
+import { ShopUser }           from "../../services/shop-user";
+import jwt_decode             from "jwt-decode";
 
 export type JwtPayload = {
 	email: string
 };
+
+const SIGNAL_LOGGING_IN = "logging-in";
 
 @autoinject
 export class LoginView
@@ -14,16 +18,14 @@ export class LoginView
 	unknownErrorOccured   = false
 	forbiddenErrorOccured = false
 	router;
-	user;
+	user: ShopUser;
 	submitting            = false
-	placeholder           = "test"
-	loginHeadline         = "Login"
 	formInput             = {
 		email    : "",
 		password : ""
 	}
 
-	constructor( router: Router, user: ShopUser )
+	constructor( router: Router, user: ShopUser, private _signaler: BindingSignaler )
 	{
 		this.router = router;
 		this.user   = user;
@@ -32,7 +34,6 @@ export class LoginView
 	async submit()
 	{
 		this.submitting = true
-
 		try
 		{
 			const response = await fetch( `${environment.backendBaseUrl}authentication/login`, {
@@ -53,10 +54,14 @@ export class LoginView
 
 			this.router.navigateToRoute( "product-overview" )
 
+			this.user.email        = decodedRefreshtoken.email
 			this.user.accessToken  = data.accessToken;
 			this.user.refreshToken = data.refreshToken;
-			this.user.email        = decodedRefreshtoken.email
+			this.user.firstName    = data.firstName;
+			this.user.lastName     = data.lastName;
+			this.user.avatar       = data.avatar;
 
+			this._signaler.signal( SIGNAL_LOGGING_IN )
 		}
 		catch( error )
 		{

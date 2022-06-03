@@ -5,7 +5,9 @@ import { ShopUser }   from "../../../services/shop-user";
 @autoinject
 export class NavigationBar
 {
-	constructor( private _router: Router, private _user: ShopUser ){}
+	constructor( private _router: Router, private _user: ShopUser ){
+		(window as any).user = _user;
+	}
 
 	search( event )
 	{

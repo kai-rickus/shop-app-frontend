@@ -12,7 +12,7 @@ const ROUTES: RouteConfig[] = [
 		activationStrategy : 'replace'
 	},
 	{
-		route    : [ "", 'login' ],
+		route    : [ 'login' ],
 		name     : 'login',
 		moduleId : './views/login-view/login-view',
 		nav      : true,
@@ -51,6 +51,13 @@ const ROUTES: RouteConfig[] = [
 		nav                : true,
 		title              : 'product-detail',
 		activationStrategy : 'replace'
+	},
+	{
+		route    : [ "", 'home' ],
+		name     : 'home',
+		moduleId : './views/home-view/home-view',
+		nav      : true,
+		title    : 'home'
 	}
 
 ];
@@ -59,6 +66,8 @@ const ROUTES: RouteConfig[] = [
 export class App
 {
 	public router: Router;
+
+	constructor( private _user: ShopUser ){}
 
 	public configureRouter( config: RouterConfiguration, router: Router ): Promise<void> | PromiseLike<void> | void
 	{

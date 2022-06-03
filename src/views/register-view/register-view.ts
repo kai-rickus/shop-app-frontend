@@ -20,29 +20,20 @@ export class RegisterView
 	}
 
 	formInput = {
-		firstname    : "",
-		lastname     : "",
-		email        : "",
-		password     : "",
-		language     : navigator.language,
-		country      : "",
-		state        : "",
-		city         : "",
-		zip          : "",
-		street       : "",
-		streetNumber : "",
-		newsletter   : false
+		firstname  : "",
+		lastname   : "",
+		email      : "",
+		password   : "",
+		language   : navigator.language,
+		placeId    : "",
+		newsletter : false
+
 	}
 
 	password
 	passwordConfirm
 
 	submitting = false
-
-	attached()
-	{
-		( window as any ).formInput = this.formInput
-	}
 
 	passwordChanged()
 	{
@@ -58,7 +49,6 @@ export class RegisterView
 
 	async submit()
 	{
-
 		this.submitting = true
 
 		try
@@ -71,6 +61,10 @@ export class RegisterView
 			}
 			const response = await fetch( url, options );
 
+			if( response.status === 400 )
+			{
+				throw new Error( response.statusText )
+			}
 			this.router.navigateToRoute( "email-sent" )
 		}
 		catch( error )
