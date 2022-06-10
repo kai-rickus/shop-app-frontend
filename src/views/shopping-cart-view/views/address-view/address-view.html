@@ -1,6 +1,66 @@
 <template>
-<div class="address-view">
-	<h1> Adresse </h1>
-</div>
+	<require from="components/shop-dialog/shop-dialog"></require>
 
+	<div class="address-view">
+		<div class="card-body">
+			<h5 class="border-bottom border-1">
+				Liefer- und Rechnungsadresse
+			</h5>
+
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#address-dialog">
+				Neue Adresse hinzufügen
+			</button>
+			<div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+					<label class="form-check-label" for="flexRadioDefault1">
+						<span>Kai Rickus</span>
+						<br>
+						<span>Goethestraße 14</span>
+						<br>
+						<span>Köln, 50858</span>
+						<br>
+						<span>Deutschland</span>
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+					<label class="form-check-label" for="flexRadioDefault2">
+						<span>Artur Erotschkin</span>
+						<br>
+						<span>Subbelrather Str. 590</span>
+						<br>
+						<span>Köln, 50827</span>
+						<br>
+						<span>Deutschland</span>
+					</label>
+				</div>
+			</div>
+			<div class="row pt-3">
+				<div class="text-center">
+					<button type="submit" class="btn btn-primary border-primary w-25 h-auto">
+						<span class="h6 text-center">
+							Weitere Lieferadresse hinzufügen
+						</span>
+					</button>
+				</div>
+			</div>
+			<div class="row pt-3">
+				<div class="text-center">
+					<button type="submit" class="btn btn-secondary border-primary w-25 h-auto">
+						<span class="h6 text-center">
+							Zahlungsart festlegen
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<shop-dialog id="address-dialog" aria-labelledby="address-dialog-label">
+		<div slot="header"><h5 id="address-dialog-label">Header</h5></div>
+		<div slot="body"><span>Body</span></div>
+		<div slot="footer">
+			<span>Footer</span>
+		</div>
+	</shop-dialog>
 </template>
