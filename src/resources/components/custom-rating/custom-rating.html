@@ -6,24 +6,26 @@
 	<require from="./custom-rating.css"></require>
 
 	<div>
-		<div class="custom-rating__stars-bottom">
-			<i class="fa fa-star"></i>
-			<i class="fa fa-star"></i>
-			<i class="fa fa-star"></i>
-			<i class="fa fa-star"></i>
-			<i class="fa fa-star"></i>
-		</div>
-		<div class="custom-rating__stars-top">
-			<i class="fa fa-star-half" show.bind="rating === 0.5"></i>
-			<i class="fa fa-star" show.bind="rating >= 1"></i>
-			<i class="fa fa-star-half" show.bind="rating === 1.5"></i>
-			<i class="fa fa-star" show.bind="rating >= 2"></i>
-			<i class="fa fa-star-half" show.bind="rating === 2.5"></i>
-			<i class="fa fa-star" show.bind="rating >= 3"></i>
-			<i class="fa fa-star-half" show.bind="rating === 3.5"></i>
-			<i class="fa fa-star" show.bind="rating >= 4"></i>
-			<i class="fa fa-star-half" show.bind="rating === 4.5"></i>
-			<i class="fa fa-star" show.bind="rating >= 5"></i>
+		<div class="custom-rating__stars text-primary">
+			<span class="material-icons" show.bind="rating < 0.5">star_border</span>
+			<span class="material-icons" show.bind="rating === 0.5">star_half</span>
+			<span class="material-icons" show.bind="rating >= 1">star</span>
+
+			<span class="material-icons" show.bind="rating < 1.5">star_border</span>
+			<span class="material-icons" show.bind="rating === 1.5">star_half</span>
+			<span class="material-icons" show.bind="rating >= 2">star</span>
+
+			<span class="material-icons" show.bind="rating < 2.5">star_border</span>
+			<span class="material-icons" show.bind="rating === 2.5">star_half</span>
+			<span class="material-icons" show.bind="rating >= 3">star</span>
+
+			<span class="material-icons" show.bind="rating < 3.5">star_border</span>
+			<span class="material-icons" show.bind="rating === 3.5">star_half</span>
+			<span class="material-icons" show.bind="rating >= 4">star</span>
+
+			<span class="material-icons" show.bind="rating < 4.5">star_border</span>
+			<span class="material-icons" show.bind="rating === 4.5">star_half</span>
+			<span class="material-icons" show.bind="rating >= 5">star</span>
 		</div>
 	</div>
 </template>
