@@ -6,6 +6,7 @@ $theme-colors             : (
 
 $text-on-primary          : #e3e3e3;
 $text-on-secondary        : #ccc;
+$text-on-surface          : #313131;
 $highlighted-background   : rgba(lighten(map-get($theme-colors, "primary"), 10%), alpha(map-get($theme-colors, "primary")));
 $highlighted              : lighten($highlighted-background, 50%);
 $default-border-radius    : 4px;
@@ -21,8 +22,12 @@ $disabled-grey            : #909090;
     color : $text-on-secondary;
 }
 
-.text-secondary-dark{
-    color: darken(map-get($theme-colors, "secondary"), 10%);
+.text-secondary-dark {
+    color : darken(map-get($theme-colors, "secondary"), 10%);
+}
+
+.text-on-surface {
+    color : $text-on-surface;
 }
 
 .bg-primary {

@@ -41,12 +41,30 @@
 							<img class="rounded-circle" src.bind="_user.avatar" alt="Profilbild ${_user.firstName} ${_user.lastName}">
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="#">Profil</a></li>
-							<li><a class="dropdown-item" href="#">Einstellungen</a></li>
+							<li><a class="dropdown-item d-flex align-middle" href="#">
+								Profil
+								<span class="material-icons-outlined text-primary end-0">
+								account_circle
+								</span>
+							</a>
+							</li>
+							<li><a class="dropdown-item d-flex align-middle" href="#">
+								Einstellungen
+								<span class="material-icons-outlined text-primary end-0">
+								settings
+								</span>
+							</a>
+							</li>
 							<li>
 								<hr class="dropdown-divider">
 							</li>
-							<li><a class="dropdown-item" href="#">Ausloggen</a></li>
+							<li><a class="dropdown-item d-flex align-middle" href="#">
+								Ausloggen
+								<span class="material-icons-outlined text-primary end-0">
+									logout
+								</span>
+							</a>
+							</li>
 						</ul>
 					</li>
 					<li else class="nav-item">

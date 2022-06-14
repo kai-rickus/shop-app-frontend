@@ -2,48 +2,49 @@
 	<require from="app.css"></require>
 	<require from="./items-view.css"></require>
 
-	<div class="items-view card-body">
-		<h5 class="border-bottom border-1">
+	<div class="items-view">
+		<h5 class="border-bottom border-1 text-on-surface">
 			Deine Artikel
 		</h5>
-		<div class="frost mb-3">
-			<div class="row">
-				<div class="col-md-4 ">
-					<img class="w-100" src="https://v5.airtableusercontent.com/v1/4/4/1655942400000/v-gtL5RgbtDR8CQpZSx3sA/7o20bQrumA4o-Gv-9PlI5vqxD9b3IrHypumsx3MKlmcPNzJp11BRJtolA_3tOJIvhn5mRJ3Zri-TDE5kY5xKFA/c0FqpeI-L-tktYu_psTZEkaOv0pPmRy02G7N1V4ENXQ" alt="produkt-thumbnail">
+		<div class="card frost mb-3 rounded-1 overflow-hidden border-0">
+			<div class="d-flex">
+				<div class="">
+					<img class="img-size " src="https://v5.airtableusercontent.com/v1/4/4/1655942400000/v-gtL5RgbtDR8CQpZSx3sA/7o20bQrumA4o-Gv-9PlI5vqxD9b3IrHypumsx3MKlmcPNzJp11BRJtolA_3tOJIvhn5mRJ3Zri-TDE5kY5xKFA/c0FqpeI-L-tktYu_psTZEkaOv0pPmRy02G7N1V4ENXQ" alt="produkt-thumbnail">
 				</div>
-				<div class="col-md-8">
-					<div class="row pt-2">
-						<h4 class="p-0 w-auto">Xbox Series S 512GB - Fortnite & Rocket League Bundle</h4>
-						<div class="w-auto h-auto position-absolute end-0">
-							<span class="material-icons-outlined text-danger">delete_forever</span></div>
-						<div class="row">
-							<div class="col-md-3 p-0 w-auto">
-								<div class="position-absolute bottom-0 pb-3">
-									<select class="form-select" aria-label="Default select example">
-										<option selected>Menge</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10+</option>
-									</select>
-								</div>
-								<div class="pb-3 position-absolute end-0 p-3 bottom-0">
-									<span class="h3">299,99€</span>
-								</div>
+
+				<div class=" p-0 ">
+					<div class="card-body h-100 d-flex flex-column justify-content-between">
+						<div class="">
+							<div class="">
+								<h4 class="p-0 w-auto text-on-surface">
+									Xbox Series S 512GB - Fortnite & Rocket League Bundle
+								</h4>
 							</div>
+						</div>
+						<div class="d-flex justify-content-between">
+							<div class="w-25 d-flex">
+								<select class="form-select" aria-label="Default select example">
+									<option selected>Menge</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10+</option>
+								</select>
+							</div>
+							<span class="fs-4 fw-bold text-on-surface">299,99€</span>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row pt-3">
-			<div class="d-flex justify-content-center">
+			<div class="d-flex justify-content-end">
 				<button type="submit" class="btn btn-secondary border-primary d-flex">
 					<span class="material-icons-outlined me-2">local_shipping</span>
 					Lieferadresse festlegen
