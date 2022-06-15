@@ -6,24 +6,26 @@
 		<h5 class="border-bottom border-1 text-on-surface">
 			Deine Artikel
 		</h5>
-		<div class="card frost mb-3 rounded-1 overflow-hidden border-0">
+		<div class="card frost mb-3 rounded-1 overflow-hidden border-0"
+			 repeat.for="item of items"
+		>
 			<div class="d-flex">
 				<div class="">
-					<img class="img-size " src="https://v5.airtableusercontent.com/v1/4/4/1655942400000/v-gtL5RgbtDR8CQpZSx3sA/7o20bQrumA4o-Gv-9PlI5vqxD9b3IrHypumsx3MKlmcPNzJp11BRJtolA_3tOJIvhn5mRJ3Zri-TDE5kY5xKFA/c0FqpeI-L-tktYu_psTZEkaOv0pPmRy02G7N1V4ENXQ" alt="produkt-thumbnail">
+					<img class="img-size " src="${item.product.image}" alt="produkt-thumbnail">
 				</div>
 
 				<div class=" p-0 ">
 					<div class="card-body h-100 d-flex flex-column justify-content-between">
 						<div class="">
 							<div class="">
-								<h4 class="p-0 w-auto text-on-surface">
-									Xbox Series S 512GB - Fortnite & Rocket League Bundle
+								<h4 class="p-0 w-auto text-on-surface card-title">
+									${item.product.title}
 								</h4>
 							</div>
 						</div>
 						<div class="d-flex justify-content-between">
 							<div class="w-25 d-flex">
-								<select class="form-select" aria-label="Default select example">
+								<select class="form-select" aria-label="Default select example" value.bind="item.amount">
 									<option selected>Menge</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -37,7 +39,7 @@
 									<option value="10">10+</option>
 								</select>
 							</div>
-							<span class="fs-4 fw-bold text-on-surface">299,99€</span>
+							<span class="fs-4 fw-bold text-on-surface">${item.product.price}</span>
 						</div>
 					</div>
 				</div>
