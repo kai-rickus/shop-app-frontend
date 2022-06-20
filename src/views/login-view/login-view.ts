@@ -1,10 +1,10 @@
-import { Router, Redirect }   from "aurelia-router";
-import { debug }              from "util";
-import environment            from "../../environment";
-import { autoinject } from "aurelia-framework";
-import { BindingSignaler }    from 'aurelia-templating-resources';
-import { ShopUser }           from "../../services/shop-user";
-import jwt_decode             from "jwt-decode";
+import { Router, Redirect } from "aurelia-router";
+import { debug }            from "util";
+import environment          from "../../environment";
+import { autoinject }       from "aurelia-framework";
+import { BindingSignaler }  from 'aurelia-templating-resources';
+import { ShopUser }         from "../../services/shop-user";
+import jwt_decode           from "jwt-decode";
 
 export type JwtPayload = {
 	email: string
@@ -20,6 +20,7 @@ export class LoginView
 	router;
 	user: ShopUser;
 	submitting            = false
+	stayLoggedInSwitch;
 	formInput             = {
 		email    : "",
 		password : ""
@@ -52,7 +53,12 @@ export class LoginView
 			const data                = await response.json()
 			const decodedRefreshtoken = jwt_decode( data.refreshToken ) as JwtPayload
 
-			this.router.navigateToRoute( "product-overview" )
+			if(this.stayLoggedInSwitch.checked === true)
+			{
+			    console.log("Läuft");
+			}
+
+			this.router.navigateToRoute( "home" )
 
 			this.user.email        = decodedRefreshtoken.email
 			this.user.accessToken  = data.accessToken;

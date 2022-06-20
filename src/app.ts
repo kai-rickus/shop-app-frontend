@@ -1,6 +1,7 @@
 import { RouteConfig, Router, RouterConfiguration } from 'aurelia-router';
 import { autoinject }                               from "aurelia-framework";
 import { ShopUser }                                 from "./services/shop-user";
+import { Dexie }                                    from "dexie/dist/dexie";
 
 const ROUTES: RouteConfig[] = [
 	{
@@ -72,6 +73,16 @@ const ROUTES: RouteConfig[] = [
 @autoinject()
 export class App
 {
+
+	async activate()
+	{
+		const db = new Dexie( "ShopAppDatabase" );
+		db.version( 1 )
+		  .stores( {
+			  users : "++id,refreshToken"
+		  } );
+	}
+
 	public router: Router;
 
 	constructor( private _user: ShopUser ){}
