@@ -1,10 +1,16 @@
 import { Router, Redirect } from "aurelia-router";
+import { Dexie, Table }     from "dexie/dist/dexie";
 import { debug }            from "util";
 import environment          from "../../environment";
 import { autoinject }       from "aurelia-framework";
 import { BindingSignaler }  from 'aurelia-templating-resources';
 import { ShopUser }         from "../../services/shop-user";
 import jwt_decode           from "jwt-decode";
+
+interface ShopDb extends Dexie
+{
+	users: Table;
+}
 
 export type JwtPayload = {
 	email: string
@@ -17,8 +23,6 @@ export class LoginView
 {
 	unknownErrorOccured   = false
 	forbiddenErrorOccured = false
-	router;
-	user: ShopUser;
 	submitting            = false
 	stayLoggedInSwitch;
 	formInput             = {
@@ -26,11 +30,7 @@ export class LoginView
 		password : ""
 	}
 
-	constructor( router: Router, user: ShopUser, private _signaler: BindingSignaler )
-	{
-		this.router = router;
-		this.user   = user;
-	}
+	constructor( public router: Router, private _user: ShopUser, private _signaler: BindingSignaler, private _db: Dexie ){}
 
 	async submit()
 	{
@@ -53,19 +53,23 @@ export class LoginView
 			const data                = await response.json()
 			const decodedRefreshtoken = jwt_decode( data.refreshToken ) as JwtPayload
 
-			if(this.stayLoggedInSwitch.checked === true)
+			if( this.stayLoggedInSwitch.checked === true )
 			{
-			    console.log("Läuft");
+				//Wäjlen unsere db und setzen einen neuen Eintrag in _db.users
+				( this._db as ShopDb ).users.add( {
+					//Setze den refreshtoken-value für die db auf data.refreshtoken
+					refreshToken : data.refreshToken
+				} );
 			}
 
 			this.router.navigateToRoute( "home" )
 
-			this.user.email        = decodedRefreshtoken.email
-			this.user.accessToken  = data.accessToken;
-			this.user.refreshToken = data.refreshToken;
-			this.user.firstName    = data.firstName;
-			this.user.lastName     = data.lastName;
-			this.user.avatar       = data.avatar;
+			this._user.email        = decodedRefreshtoken.email
+			this._user.accessToken  = data.accessToken;
+			this._user.refreshToken = data.refreshToken;
+			this._user.firstName    = data.firstName;
+			this._user.lastName     = data.lastName;
+			this._user.avatar       = data.avatar;
 
 			this._signaler.signal( SIGNAL_LOGGING_IN )
 		}
@@ -81,10 +85,11 @@ export class LoginView
 
 	canActivate()
 	{
-		if( this.user.refreshToken )
+		if( this._user.refreshToken )
 		{
-			return new Redirect( '/product-overview' )
+			return new Redirect( '/home' )
 		}
 	}
+
 }
 

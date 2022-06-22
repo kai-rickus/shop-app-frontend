@@ -1,7 +1,7 @@
 import { RouteConfig, Router, RouterConfiguration } from 'aurelia-router';
-import { autoinject }                               from "aurelia-framework";
+import { autoinject, Container }                    from "aurelia-framework";
 import { ShopUser }                                 from "./services/shop-user";
-import { Dexie }                                    from "dexie/dist/dexie";
+import { Dexie, Table }                             from "dexie/dist/dexie";
 
 const ROUTES: RouteConfig[] = [
 	{
@@ -73,19 +73,40 @@ const ROUTES: RouteConfig[] = [
 @autoinject()
 export class App
 {
+	public router: Router;
+
+	constructor( private _user: ShopUser, private _container: Container ){}
 
 	async activate()
 	{
-		const db = new Dexie( "ShopAppDatabase" );
-		db.version( 1 )
-		  .stores( {
-			  users : "++id,refreshToken"
-		  } );
+		this.createDatabaseSchema()
+		this.checkForToken()
 	}
 
-	public router: Router;
+	createDatabaseSchema()
+	{
+		//Speichern Referenz von neuer Dexie Datenbank auf db
+		const db = new Dexie( "ShopAppDatabase" );
 
-	constructor( private _user: ShopUser ){}
+		//Setzen die Version der db und wie diese Aussehen muss (Schema)
+		db.version( 1 )
+		  .stores( {
+			  users : "++id, refreshToken"
+		  } );
+
+		//Wir registrieren eine neue Instanz von Dexie auf db
+		this._container.registerInstance( Dexie, db )
+	}
+
+	//Kriege keine Referenz auf db
+	checkForToken()
+	{
+		const oldDb =  db.users
+
+		db.users
+		  .where( 'refreshToken' ).notEqual( "" );
+		const savedRefreshToken = oldDb
+	}
 
 	public configureRouter( config: RouterConfiguration, router: Router ): Promise<void> | PromiseLike<void> | void
 	{
