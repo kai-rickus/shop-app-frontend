@@ -50,28 +50,18 @@ export class LoginView
 				throw new Error();
 			}
 
-			const data                = await response.json()
-			const decodedRefreshtoken = jwt_decode( data.refreshToken ) as JwtPayload
+			const data = await response.json()
 
 			if( this.stayLoggedInSwitch.checked === true )
 			{
-				//Wäjlen unsere db und setzen einen neuen Eintrag in _db.users
 				( this._db as ShopDb ).users.add( {
-					//Setze den refreshtoken-value für die db auf data.refreshtoken
 					refreshToken : data.refreshToken
 				} );
 			}
 
-			this.router.navigateToRoute( "home" )
-
-			this._user.email        = decodedRefreshtoken.email
-			this._user.accessToken  = data.accessToken;
-			this._user.refreshToken = data.refreshToken;
-			this._user.firstName    = data.firstName;
-			this._user.lastName     = data.lastName;
-			this._user.avatar       = data.avatar;
-
+			this._user.set( data );
 			this._signaler.signal( SIGNAL_LOGGING_IN )
+			this.router.navigateToRoute( "home" )
 		}
 		catch( error )
 		{

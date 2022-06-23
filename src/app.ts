@@ -1,7 +1,11 @@
 import { RouteConfig, Router, RouterConfiguration } from 'aurelia-router';
 import { autoinject, Container }                    from "aurelia-framework";
+import jwt_decode                                   from "jwt-decode";
+import { debug }                                    from "util";
+import environment                                  from "./environment";
 import { ShopUser }                                 from "./services/shop-user";
 import { Dexie, Table }                             from "dexie/dist/dexie";
+import { JwtPayload }                               from "./views/login-view/login-view";
 
 const ROUTES: RouteConfig[] = [
 	{
@@ -73,7 +77,8 @@ const ROUTES: RouteConfig[] = [
 @autoinject()
 export class App
 {
-	public router: Router;
+	private _router: Router;
+	private _db;
 
 	constructor( private _user: ShopUser, private _container: Container ){}
 
@@ -85,27 +90,33 @@ export class App
 
 	createDatabaseSchema()
 	{
-		//Speichern Referenz von neuer Dexie Datenbank auf db
 		const db = new Dexie( "ShopAppDatabase" );
 
-		//Setzen die Version der db und wie diese Aussehen muss (Schema)
 		db.version( 1 )
 		  .stores( {
 			  users : "++id, refreshToken"
 		  } );
 
-		//Wir registrieren eine neue Instanz von Dexie auf db
 		this._container.registerInstance( Dexie, db )
+		this._db = db
 	}
 
-	//Kriege keine Referenz auf db
-	checkForToken()
+	async checkForToken()
 	{
-		const oldDb =  db.users
+		const savedRefreshToken = ( await this._db.users.where( 'refreshToken' ).notEqual( "" ).first() ).refreshToken
 
-		db.users
-		  .where( 'refreshToken' ).notEqual( "" );
-		const savedRefreshToken = oldDb
+		if( savedRefreshToken !== undefined )
+		{
+			const response = await fetch( `${environment.backendBaseUrl}authentication/loginWithToken`, {
+				method  : "post",
+				headers : { "Authorization" : "Bearer " + savedRefreshToken }
+			} )
+			const userData = await response.json()
+
+			userData.refreshToken = savedRefreshToken
+
+			this._user.set( userData )
+		}
 	}
 
 	public configureRouter( config: RouterConfiguration, router: Router ): Promise<void> | PromiseLike<void> | void
@@ -118,6 +129,6 @@ export class App
 
 		config.map( ROUTES );
 
-		this.router = router;
+		this._router = router;
 	}
 }
