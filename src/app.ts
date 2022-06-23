@@ -100,7 +100,8 @@ export class App
 
 	async handleAutoLogin()
 	{
-		const savedRefreshToken = ( await this._db.users.where( 'refreshToken' ).notEqual( "" ).first() ).refreshToken
+		const record            = await this._db.users.where( 'refreshToken' ).notEqual( "" ).first()
+		const savedRefreshToken = record ? record.refreshToken : undefined
 
 		if( savedRefreshToken !== undefined )
 		{
