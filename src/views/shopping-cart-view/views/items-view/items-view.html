@@ -1,6 +1,8 @@
 <template>
 	<require from="app.css"></require>
 	<require from="./items-view.css"></require>
+	<require from="valueConverters/currency-value-converter"></require>
+
 
 	<div class="items-view">
 		<h5 class="border-bottom border-1 text-on-surface">
@@ -39,7 +41,7 @@
 									<option value="10">10+</option>
 								</select>
 							</div>
-							<span class="fs-4 fw-bold text-on-surface">${item.product.price}</span>
+							<span class="fs-4 fw-bold text-on-surface">${item.product.price | currency:'EUR'}</span>
 						</div>
 					</div>
 				</div>
