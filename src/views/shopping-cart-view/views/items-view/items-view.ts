@@ -16,7 +16,6 @@ export class ItemsView
 	async attached()
 	{
 		this.items = await this.getCardItems()
-		debugger
 	}
 
 	async getCardItems()

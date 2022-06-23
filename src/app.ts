@@ -1,11 +1,8 @@
 import { RouteConfig, Router, RouterConfiguration } from 'aurelia-router';
 import { autoinject, Container }                    from "aurelia-framework";
-import jwt_decode                                   from "jwt-decode";
-import { debug }                                    from "util";
 import environment                                  from "./environment";
 import { ShopUser }                                 from "./services/shop-user";
-import { Dexie, Table }                             from "dexie/dist/dexie";
-import { JwtPayload }                               from "./views/login-view/login-view";
+import { Dexie }                                    from "dexie/dist/dexie";
 
 const ROUTES: RouteConfig[] = [
 	{
@@ -85,7 +82,7 @@ export class App
 	async activate()
 	{
 		this.createDatabaseSchema()
-		this.checkForToken()
+		await this.handleAutoLogin()
 	}
 
 	createDatabaseSchema()
@@ -101,7 +98,7 @@ export class App
 		this._db = db
 	}
 
-	async checkForToken()
+	async handleAutoLogin()
 	{
 		const savedRefreshToken = ( await this._db.users.where( 'refreshToken' ).notEqual( "" ).first() ).refreshToken
 
@@ -116,6 +113,7 @@ export class App
 			userData.refreshToken = savedRefreshToken
 
 			this._user.set( userData )
+
 		}
 	}
 
