@@ -39,3 +39,7 @@ $disabled-grey            : #909090;
     --bs-bg-opacity  : #{alpha(map-get($theme-colors, "secondary"))};
     background-color : rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
 }
+
+.cursor-pointer{
+    cursor: pointer;
+}
