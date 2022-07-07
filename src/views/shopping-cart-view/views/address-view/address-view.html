@@ -3,11 +3,14 @@
 	<require from="components/address-field/address-field"></require>
 
 	<div class="address-view">
-		<h5 class="border-bottom border-1">
-			Wohin soll es geschickt werden?
+		<h5 class="text-on-surface">
+			Adresse
 		</h5>
+		<h6 class="mb-3" style="color: #4f4f4f">
+			Wohin soll es geschickt werden?
+		</h6>
 		<div>
-			<div class="card form-check border-1 border-bottom mb-2">
+			<div class="card form-check border-1 border-bottom mb-3">
 				<div class="card-body">
 					<input class="form-check-input position-absolute" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
 					<label class="form-check-label w-100" for="flexRadioDefault1">
@@ -29,7 +32,7 @@
 					</label>
 				</div>
 			</div>
-			<div class="card form-check border-1 border-bottom mb-2">
+			<div class="card form-check border-1 border-bottom mb-3">
 				<div class="card-body">
 					<input class="form-check-input position-absolute" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
 					<label class="form-check-label w-100" for="flexRadioDefault2">
@@ -51,7 +54,7 @@
 					</label>
 				</div>
 			</div>
-			<div class="card form-check border-1 border-bottom mb-2">
+			<div class="card form-check border-1 border-bottom mb-3">
 				<div class="card-body">
 					<input class="form-check-input position-absolute" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
 					<label class="form-check-label w-100" for="flexRadioDefault3">
@@ -73,35 +76,51 @@
 					</label>
 				</div>
 			</div>
-			<div class="d-flex flex-row justify-content-between">
-				<button type="button" class="btn btn-primary d-flex" data-bs-toggle="modal" data-bs-target="#address-dialog">
-						<span class="material-icons-outlined ms-2">
-							home
+			<button type="button" class="btn d-flex btn-sm fw-bold text-on-surface ps-0"
+					data-bs-toggle="modal"
+					data-bs-target="#address-dialog">
+				Adresse hinzufügen
+				<span class="material-icons-outlined ms-2">add</span>
+			</button>
+			<div class="row pt-3">
+				<div class="d-flex flex-row justify-content-between">
+					<div>
+						<div class="d-flex justify-content-start">
+							<a type="submit"
+							   class="btn btn-primary border-primary d-flex"
+							   route-href="route: items"
+							>
+							<span class="material-icons-outlined me-2">
+								shopping_cart
+							</span>
+								Zurück
+							</a>
+						</div>
+					</div>
+					<a type="submit"
+					   class="btn btn-secondary border-primary d-flex"
+					   route-href="route: payment"
+					>
+						<span class="text-center">
+							Weiter
 						</span>
-					Adresse hinzufügen
-				</button>
-				<button type="submit" class="btn btn-secondary border-primary d-flex">
-						<span class="material-icons-outlined me-2">
-							payments
-						</span>
-					<span class="text-center">
-							Zahlungsart festlegen
-						</span>
-				</button>
+						<span class="material-icons-outlined ms-2">payments</span>
+					</a>
+				</div>
 			</div>
 		</div>
-		<shop-dialog id="address-dialog" aria-labelledby="address-dialog-label">
-			<div slot="header"><h5 id="address-dialog-label">Neue Adresse</h5></div>
-			<div slot="body">
-				<address-field class="border border-1"></address-field>
-			</div>
-			<div slot="footer">
+	</div>
+	<shop-dialog id="address-dialog" aria-labelledby="address-dialog-label">
+		<div slot="header"><h5 id="address-dialog-label">Neue Adresse</h5></div>
+		<div slot="body">
+			<address-field class="border border-1"></address-field>
+		</div>
+		<div slot="footer">
 			<span>
-				<button type="submit" class="btn btn-secondary border-primary d-flex">
-				<i class="fa fa-solid fa-plus"></i>
+				<button type="submit" class="btn btn-sm btn-secondary border-primary d-flex">
 				Neue Adresse hinzufügen
 				</button>
 			</span>
-			</div>
-		</shop-dialog>
+		</div>
+	</shop-dialog>
 </template>

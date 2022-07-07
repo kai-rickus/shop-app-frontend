@@ -37,9 +37,11 @@
 									<option value="9">9</option>
 									<option value="10">10+</option>
 								</select>
-								<span class="material-icons-outlined text-danger align-self-center ms-2 cursor-pointer">delete_forever</span >
+								<span class="material-icons-outlined text-danger align-self-center ms-2 cursor-pointer">delete_forever</span>
 							</div>
-							<span class="fs-4 fw-bold text-on-surface">${item.product.price | currency:'EUR'}</span>
+							<span class="fs-4 fw-bold text-on-surface">${item.product.price | currency
+							:
+							'EUR'}</span>
 						</div>
 					</div>
 				</div>
@@ -47,11 +49,14 @@
 		</div>
 		<div class="row pt-3">
 			<div class="d-flex justify-content-end">
-				<button type="submit" class="btn btn-secondary border-primary d-flex">
-					<span class="material-icons-outlined me-2">local_shipping</span>
-					Lieferadresse festlegen
-				</button>
+				<a href="#/shopping-cart/address"
+				   class="btn btn-secondary border-primary d-flex"
+				>
+					Weiter
+					<span class="material-icons-outlined ms-2">local_shipping</span>
+				</a>
 			</div>
 		</div>
 	</div>
 </template>
+
