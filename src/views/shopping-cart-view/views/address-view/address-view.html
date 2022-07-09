@@ -57,7 +57,7 @@
 								</div>
 								<div class="row">
 									<div class="col-4">Stadt:</div>
-									<div class="col-8">Pulhiem</div>
+									<div class="col-8">Pulheim</div>
 								</div>
 								<div class="row">
 									<div class="col-4">PLZ:</div>
@@ -142,14 +142,25 @@
 		</div>
 	</div>
 	<shop-dialog id="address-dialog" aria-labelledby="address-dialog-label">
-		<div slot="header"><h5 id="address-dialog-label">Neue Adresse</h5></div>
+		<div slot="header">
+			<h5 id="address-dialog-label">
+				<div class="row">
+					<h5 class="text-on-surface">
+						Deine Adresse
+					</h5>
+					<h6 class="mb-3 sub-title">
+						Gib eine neue Adresse ein.
+					</h6>
+				</div>
+			</h5>
+		</div>
 		<div slot="body">
 			<address-field class="border border-1"></address-field>
 		</div>
 		<div slot="footer">
 			<span>
 				<button type="submit" class="btn btn-sm btn-secondary border-primary d-flex">
-				Neue Adresse hinzufügen
+					Neue Adresse hinzufügen und auswählen
 				</button>
 			</span>
 		</div>
