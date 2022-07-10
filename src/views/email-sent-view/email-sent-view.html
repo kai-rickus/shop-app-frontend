@@ -1,11 +1,38 @@
 <template>
-  <div class="verification-email-view">
-    <slot>
-      <b>
-        TEST
-      </b>
-      <br>
-      Wir haben zu deiner angegebenen Email-Adresse eine Email gesendet. Bitte nutze den Link um dich zu verifizieren.
-    </slot>
-  </div>
+	<div class="verification-email-view container p-0">
+		<slot>
+			<div class="card frost">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12">
+							<h1 class="text-center">Vielen Danke für deine Registrierung</h1>
+							<div class="text-center">
+								<span class="text-primary">Wir haben dir eine <b>Email</b> gesendet mit der du dich verifizierst.</span>
+								<br>
+								<span class=" text-primary">Solltest du keine erhalten haben klicke <a href="#!"><b>hier</b></a> oder kontaktiere unseren
+									<a href="#!"><b>Kundensupport</b></a></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+
+								<div class="d-flex justify-content-center pt-3">
+									<a href="home" class="btn btn-primary col-4">
+										Zur Startseite
+									</a>
+								</div>
+							</div>
+							<div class="col">
+								<div class="d-flex justify-content-center pt-3">
+									<a href="home" class="btn btn-primary col-4">
+										Erneut senden
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</slot>
+	</div>
 </template>
