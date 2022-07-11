@@ -28,6 +28,13 @@ const ROUTES: RouteConfig[] = [
 		moduleId : './views/overview-view/overview-view',
 		nav      : true,
 		title    : 'Endübersicht'
+	},
+	{
+		route    : [ 'buyed' ],
+		name     : 'buyed',
+		moduleId : './views/buyed-view/buyed-view',
+		nav      : true,
+		title    : 'Gekauft'
 	}
 
 ];

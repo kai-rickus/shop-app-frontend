@@ -4,6 +4,4 @@ export class ShopFooter {
 
 	footer = footerData
 
-
-
 }
