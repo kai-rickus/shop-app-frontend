@@ -1,6 +1,8 @@
 $theme-colors             : (
         "primary": rgba(7, 13, 29, 0.7),
+        //"primary": rgba(50, 71, 85, 0.7),
         "secondary": #ffa300,
+        //"secondary": #ffab16,
         "danger": #ff4136
 );
 
@@ -42,10 +44,6 @@ $disabled-grey            : #909090;
 
 .sub-title{
     color: #4F4F4F;
-}
-
-.buy-now-button{
-    background-color: #ffda00;
 }
 
 .cursor-pointer{

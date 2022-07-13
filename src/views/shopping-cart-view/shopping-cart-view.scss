@@ -1,7 +1,22 @@
+@import "node_modules/progress-tracker/src/styles/progress-tracker";
 @import "src/theme";
 
 
-.shopping-cart-view{
+.shopping-cart-view {
+    .progress-tracker {
 
+        margin : 0;
 
+        .progress-marker:after {
+            z-index : 0 !important;
+        }
+
+        .progress-text {
+            background-color : unset !important;
+        }
+
+        .progress-title {
+            margin : 0;
+        }
     }
+}
