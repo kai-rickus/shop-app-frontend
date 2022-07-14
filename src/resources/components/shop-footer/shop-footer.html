@@ -1,16 +1,13 @@
-<template class="d-block">
+<template class="d-block shop-footer">
 	<require from="components/shop-footer/shop-footer.css"></require>
 
 	<!-- Remove the container if you want to extend the Footer to full width. -->
 	<div class="container p-0">
 
 		<!-- Footer -->
-		<footer
-			class="text-center text-lg-start text-white bg-primary frost-clear">
+		<footer class="text-center text-lg-start text-white frost-clear">
 			<!-- Section: Social media -->
-			<section
-				class="d-flex justify-content-between p-4 bg-primary"
-			>
+			<section class="d-flex justify-content-between p-4 shop-footer__header">
 				<!-- Left -->
 				<div class="me-5">
 					<span>*Logo einfügen*</span>
@@ -115,9 +112,7 @@
 			<!-- Section: Links  -->
 
 			<!-- Copyright -->
-			<div
-				class="text-center p-3 bg-primary"
-			>
+			<div class="text-center p-3 shop-footer__footer">
 				© ${footer.copyrightYear} Copyright:
 				<a class="text-white" href="${footer.url}"
 				>${footer.urlName}</a

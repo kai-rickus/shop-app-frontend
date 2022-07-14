@@ -1,12 +1,12 @@
+@use "src/theme";
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
-@import "src/theme";
 
 $grey-highlight-bg        : #e9ecef;
 $grey-highlight-font      : #212529;
 
-$primary-rgb              : map-get($theme-colors, "primary");
-$highlighted-border       : $highlighted;
+$primary-rgb              : theme.$primary-color;
+$highlighted-border       : theme.$highlighted;
 $highlighted-border-width : 1px;
 
 .address-field {
@@ -14,7 +14,7 @@ $highlighted-border-width : 1px;
 
     &.address-field--has-suggestions {
         .address-field__form {
-            box-shadow : $default-box-shadow $default-box-shadow-color;
+            box-shadow : theme.$default-box-shadow theme.$default-box-shadow-color;
         }
 
         .address-field__input {
@@ -32,7 +32,7 @@ $highlighted-border-width : 1px;
         backdrop-filter     : blur(30px);
         flex-direction      : column;
         display             : flex;
-        border-radius       : $default-border-radius;
+        border-radius       : theme.$default-border-radius;
         overflow            : hidden;
         transition          : box-shadow;
         transition-duration : 100ms;
@@ -45,7 +45,7 @@ $highlighted-border-width : 1px;
         transition          : background-color, color;
         transition-duration : 100ms;
         box-sizing          : border-box;
-        border-radius       : $default-border-radius;
+        border-radius       : theme.$default-border-radius;
     }
 
     .address-field__suggestions {
@@ -67,8 +67,8 @@ $highlighted-border-width : 1px;
 
             &:last-of-type {
                 padding-bottom             : 7px;
-                border-bottom-right-radius : $default-border-radius;
-                border-bottom-left-radius  : $default-border-radius;
+                border-bottom-right-radius : theme.$default-border-radius;
+                border-bottom-left-radius  : theme.$default-border-radius;
             }
         }
 

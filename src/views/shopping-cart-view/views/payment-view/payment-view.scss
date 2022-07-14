@@ -1,4 +1,8 @@
+@use "src/theme";
+$radio-button-button: 50px;
 
-    .payment-view{
-    
+.payment-view {
+    .radio-button-button{
+        height: 50px;
     }
+}

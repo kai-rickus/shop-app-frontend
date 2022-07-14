@@ -1,9 +1,19 @@
 @use "src/layout";
+@use "src/theme";
 
-$section-height-desktop : 72px;
+$section-height-desktop  : 72px;
+$footer-background-color : rgba(theme.$primary-color, 0.7);
 
 .shop-footer {
     .container {
         max-width : layout.$content-width-desktop !important;
+    }
+
+    footer {
+        background : $footer-background-color;
+    }
+
+    .shop-footer__header, .shop-footer__footer {
+        background : $footer-background-color;
     }
 }

@@ -5,82 +5,42 @@
 
 	<div class="shopping-cart-view container p-0">
 		<div class="row">
-<!--			<div class="col-12">-->
-<!--				<div class="card frost default-main-shadow mb-4">-->
-<!--					<div class="card-body">-->
-<!--						<div class="progress-tracker-wrapper">-->
-<!--							<ul class="progress-tracker progress-tracker&#45;&#45;text progress-tracker&#45;&#45;text-inline progress-tracker&#45;&#45;spaced">-->
-<!--								<li class="progress-step is-complete">-->
-<!--									<div class="progress-text">-->
-<!--										<h4 class="progress-title">Artikel</h4>-->
-<!--									</div>-->
-<!--									<div class="progress-marker"></div>-->
-<!--								</li>-->
-
-<!--								<li class="progress-step is-complete">-->
-<!--									<div class="progress-text">-->
-<!--										<h4 class="progress-title">Adresse</h4>-->
-<!--									</div>-->
-<!--									<div class="progress-marker"></div>-->
-<!--								</li>-->
-
-<!--								<li class="progress-step is-active" aria-current="step">-->
-<!--									<div class="progress-text">-->
-<!--										<h4 class="progress-title">Zahlungsart</h4>-->
-<!--									</div>-->
-<!--									<div class="progress-marker"></div>-->
-<!--								</li>-->
-
-<!--								<li class="progress-step">-->
-<!--									<div class="progress-text">-->
-<!--										<h4 class="progress-title">Endübersicht</h4>-->
-<!--									</div>-->
-<!--									<div class="progress-marker"></div>-->
-<!--								</li>-->
-<!--							</ul>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
-
-<!--			</div>-->
 			<div class="col-md-8">
 				<div class="card frost default-main-shadow">
 					<div class="card-body">
 						<div class="row mb-3">
 							<div class="col">
-
 								<ul class="progress-tracker progress-tracker--text progress-tracker--text-top progress-tracker--center">
 									<li class="progress-step is-complete">
 										<div class="progress-text">
 											<h5 class="progress-title">Artikel</h5>
 										</div>
-										<div class="progress-marker"></div>
+										<div class="progress-marker" data-text="1"></div>
 									</li>
 
 									<li class="progress-step is-complete">
 										<div class="progress-text">
 											<h5 class="progress-title">Adresse</h5>
 										</div>
-										<div class="progress-marker"></div>
+										<div class="progress-marker" data-text="2"></div>
 									</li>
 
-									<li class="progress-step is-active" aria-current="step">
+									<li class="progress-step is-active">
 										<div class="progress-text">
 											<h5 class="progress-title">Zahlungsart</h5>
 										</div>
-										<div class="progress-marker"></div>
+										<div class="progress-marker" data-text="3"></div>
 									</li>
 
 									<li class="progress-step">
 										<div class="progress-text">
 											<h5 class="progress-title">Endübersicht</h5>
 										</div>
-										<div class="progress-marker"></div>
+										<div class="progress-marker" data-text="4"></div>
 									</li>
 								</ul>
 							</div>
 						</div>
-
 						<router-view></router-view>
 					</div>
 				</div>
