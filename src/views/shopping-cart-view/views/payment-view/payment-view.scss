@@ -1,9 +1,16 @@
 @use "src/theme";
-$radio-button-button: 50px;
+
+$radio-button-button : 50px;
 
 .payment-view {
-    .radio-button-button{
-        height: 50px;
-        background-color: white;
+    .radio-button-button {
+        height           : $radio-button-button;
+        //background-color : white;
+
+        img {
+            width  : auto;
+            height : 100% !important;
+        }
+
     }
 }
