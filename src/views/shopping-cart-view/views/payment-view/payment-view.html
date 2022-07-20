@@ -8,32 +8,44 @@
 			Wie möchtest du zahlen?
 		</h6>
 
-		<div class="d-flex">
+		<div class="d-flex flex-wrap">
 			<label>
-				<a type="button" class="btn border-primary radio-button-button d-flex align-items-center me-2 frost">
+				<a type="button" class="btn border-primary radio-button-button d-flex align-items-center me-2 mb-2 pt-2 pb-2 frost">
 					<div class="d-flex align-content-between">
 						<div class="form-check align-self-center">
-							<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+							<input
+								change.trigger="changeBackgroundColor($event)"
+								class="form-check-input"
+								type="radio"
+								name="flexRadioDefault">
 						</div>
 					</div>
 					<img src="src/views/shopping-cart-view/img/paypal-logo.svg" alt="PayPal">
 				</a>
 			</label>
 			<label>
-				<a type="button" class="btn border-primary radio-button-button d-flex align-items-center me-2 frost">
+				<a type="button" class="btn border-primary radio-button-button d-flex align-items-center me-2 mb-2 pt-2 pb-2 frost">
 					<div class="d-flex align-content-between">
 						<div class="form-check align-self-center">
-							<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+							<input
+								change.trigger="changeBackgroundColor($event)"
+								class="form-check-input"
+								type="radio"
+								name="flexRadioDefault">
 						</div>
 					</div>
 					<img src="src/views/shopping-cart-view/img/klarna-logo.svg" alt="Klarna">
 				</a>
 			</label>
 			<label>
-				<a type="button" class="btn border-primary radio-button-button d-flex align-items-center me-2 frost">
+				<a type="button" class="btn border-primary radio-button-button d-flex align-items-center me-2 mb-2 pt-2 pb-2 frost">
 					<div class="d-flex align-content-between">
 						<div class="form-check align-self-center">
-							<input class="form-check-input" type="radio" name="flexRadioDefault">
+							<input
+								change.trigger="changeBackgroundColor($event)"
+								class="form-check-input"
+								type="radio"
+								name="flexRadioDefault">
 						</div>
 					</div>
 					<img src="src/views/shopping-cart-view/img/mastercard-logo.svg" alt="MasterCard" class="h-100 w-100">
@@ -41,13 +53,59 @@
 			</label>
 
 			<label>
-				<a type="button" class="btn border-primary radio-button-button d-flex align-items-center me-2 frost">
+				<a type="button" class="btn border-primary radio-button-button d-flex align-items-center me-2 mb-2 pt-2 pb-2 frost">
 					<div class="d-flex align-content-between">
 						<div class="form-check align-self-center">
-							<input class="form-check-input" type="radio" name="flexRadioDefault">
+							<input
+								change.trigger="changeBackgroundColor($event)"
+								class="form-check-input"
+								type="radio"
+								name="flexRadioDefault">
 						</div>
 					</div>
 					<img src="src/views/shopping-cart-view/img/sofortüberweisung-logo.svg" alt="Sofortüberweisung" class="h-100 w-100">
+				</a>
+			</label>
+			<label>
+				<a type="button" class="btn border-primary radio-button-button d-flex align-items-center me-2 mb-2 pt-2 pb-2 frost">
+					<div class="d-flex align-content-between">
+						<div class="form-check align-self-center">
+							<input
+								change.trigger="changeBackgroundColor($event)"
+								class="form-check-input"
+								type="radio"
+								name="flexRadioDefault">
+						</div>
+					</div>
+					<img src="src/views/shopping-cart-view/img/Apple-Pay.svg" alt="ApplePay" class="h-100 w-100">
+				</a>
+			</label>
+			<label>
+				<a type="button" class="btn border-primary radio-button-button d-flex align-items-center me-2 mb-2 pt-2 pb-2 frost">
+					<div class="d-flex align-content-between">
+						<div class="form-check align-self-center">
+							<input
+								change.trigger="changeBackgroundColor($event)"
+								class="form-check-input"
+								type="radio"
+								name="flexRadioDefault">
+						</div>
+					</div>
+					<img src="src/views/shopping-cart-view/img/Visa-logo.svg" alt="VisaCard" class="h-100 w-100">
+				</a>
+			</label>
+			<label>
+				<a type="button" class="btn border-primary radio-button-button d-flex align-items-center me-2 mb-2 pt-2 pb-2 frost">
+					<div class="d-flex align-content-between">
+						<div class="form-check align-self-center">
+							<input
+								change.trigger="changeBackgroundColor($event)"
+								class="form-check-input"
+								type="radio"
+								name="flexRadioDefault">
+						</div>
+					</div>
+					<img src="src/views/shopping-cart-view/img/Google-Pay-Logo.svg" alt="GooglePay" class="h-100 w-100">
 				</a>
 			</label>
 		</div>

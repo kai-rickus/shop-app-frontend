@@ -1,16 +1,25 @@
 @use "src/theme";
 
 $radio-button-button : 50px;
+$payment-logo-height : 82%;
 
 .payment-view {
     .radio-button-button {
-        height           : $radio-button-button;
-        //background-color : white;
+        height     : $radio-button-button;
+        box-sizing : border-box;
+
+        &:hover {
+            background-color : lightgray;
+        }
 
         img {
             width  : auto;
-            height : 100% !important;
+            height : $payment-logo-height !important;
         }
 
+    }
+
+    .checkedPayment {
+        background-color : theme.$highlighted !important;
     }
 }
