@@ -62,6 +62,8 @@
 									<button type="submit"
 											class="btn btn-secondary border-primary w-100"
 											disabled.bind="submitting"
+											click.trigger="addToCart()"
+											id="liveToastBtn"
 									>
 										In den Einkaufswagen!
 										<span class="spinner-border spinner-border-sm"
@@ -69,24 +71,24 @@
 											  aria-hidden="true"
 											  show.bind="submitting"
 										>
-									</span>
+										</span>
 									</button>
 								</div>
 
 								<div class="col-lg-3">
 
-									<select class="form-select" aria-label="Default select example">
-										<option selected>Menge</option>
+									<select class="form-select" aria-label="Default select example" ref="dropdownOption">
+										<option value="1" selected>Menge</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
-										<option value="3">4</option>
-										<option value="3">5</option>
-										<option value="3">6</option>
-										<option value="3">7</option>
-										<option value="3">8</option>
-										<option value="3">9</option>
-										<option value="3">10+</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10+</option>
 									</select>
 								</div>
 
@@ -117,6 +119,17 @@
 			</div>
 			<!-- Rechte Spalte Ende -->
 		</div>
-
+	</div>
+	<div class="toast-container position-fixed bottom-0 end-0 p-3">
+		<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="toast-header">
+				<strong class="me-auto">Bootstrap</strong>
+				<small>11 mins ago</small>
+				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+			</div>
+			<div class="toast-body">
+				Hello, world! This is a toast message.
+			</div>
+		</div>
 	</div>
 </template>
