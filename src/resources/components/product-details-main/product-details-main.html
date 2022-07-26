@@ -39,7 +39,9 @@
 						<div class="card-body rounded-1">
 							<div class="row">
 								<div class="col-lg-12 mb-2 justify-content-end d-flex">
-									<h1 class="card-title">${data.price | currency:'EUR'}</h1>
+									<h1 class="card-title">${data.price | currency
+									:
+									'EUR'}</h1>
 								</div>
 
 								<div class="col-lg-6 mb-4 d-flex flex-column">
@@ -120,15 +122,23 @@
 			<!-- Rechte Spalte Ende -->
 		</div>
 	</div>
-	<div class="toast-container position-fixed bottom-0 end-0 p-3">
-		<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+	<div class="toast-container position-fixed toast-position bottom-0">
+		<div id="liveToast"
+			 class="toast"
+			 role="alert"
+			 aria-live="assertive"
+			 aria-atomic="true">
 			<div class="toast-header">
-				<strong class="me-auto">Bootstrap</strong>
-				<small>11 mins ago</small>
-				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+				<h6 class="mb-0 me-auto text-on-surface">Vielen Dank!</h6>
+				<button type="button"
+						class="btn-close"
+						data-bs-dismiss="toast"
+						aria-label="Close"></button>
 			</div>
 			<div class="toast-body">
-				Hello, world! This is a toast message.
+				<strong class="text-on-surface">
+					Artikel zum Einkaufswagen hinzugefügt.
+				</strong>
 			</div>
 		</div>
 	</div>

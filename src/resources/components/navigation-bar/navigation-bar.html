@@ -21,14 +21,17 @@
 				<div class="d-flex justify-content-center search-bar-container">
 					<search-bar found.trigger="search($event)"></search-bar>
 				</div>
-				<div class="pe-3">
-					<a href="#/shopping-cart">
-						<span class="material-icons-outlined text-on-primary">
+				<a href="#/shopping-cart" class="position-relative text-decoration-none">
+					<div class="shopping-cart-icon rounded-circle d-flex justify-content-center align-items-center">
+						<span class="material-icons-outlined text-on-primary shopping-cart-icon-size">
 							shopping_cart
 						</span>
-					</a>
-				</div>
-				<ul class="navbar-nav mb-2 mb-lg-0">
+						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+							2
+						</span>
+					</div>
+				</a>
+				<ul class="navbar-nav mb-2 mb-lg-0 ms-3">
 
 					<li if.bind="_user.refreshToken & signal:'logging-in'" class="nav-item dropdown">
 						<a class="nav-link pe-0"

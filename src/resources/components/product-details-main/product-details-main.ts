@@ -1,6 +1,6 @@
 import { autoinject, bindable } from "aurelia-framework";
 import { Router }               from "aurelia-router";
-import { Tooltip }              from "bootstrap";
+import { Tooltip, Toast }       from "bootstrap";
 import { debug }                from "util";
 import environment              from "../../../environment";
 import { ShopUser }             from "../../../services/shop-user";
@@ -26,12 +26,16 @@ export class ProductDetailsMain
 	@bindable data: ProductDataResponse;
 	dropdownOption;
 	submitting = false;
+	toast;
 
 	constructor( private _router: Router, private _user: ShopUser ){}
 
 	attached()
 	{
 		this.initializeTooltips()
+
+		const toastLiveExample = document.querySelector( '#liveToast' )
+		this.toast             = new Toast( toastLiveExample )
 	}
 
 	initializeTooltips()
@@ -42,23 +46,25 @@ export class ProductDetailsMain
 
 	async addToCart()
 	{
-		const response = await fetch( `${environment.backendBaseUrl}cart/add/${this.data.id}/${this.dropdownOption.value}`, {
-			method  : "put",
-			headers : { "Authorization" : "Bearer " + this._user.accessToken }
-		} );
-		const status   = await response.text()
+		this.submitting = true
 
-		if( status === "Cart successfully updated." )
+		try
 		{
-			// const toastTrigger = document.getElementById('liveToastBtn')
-			// const toastLiveExample = document.getElementById('liveToast')
-			// if (toastTrigger) {
-			// 	toastTrigger.addEventListener('click', () => {
-			// 		const toast = new bootstrap.Toast(toastLiveExample)
-			//
-			// 		toast.show()
-			// 	})
-			// }
+			const response = await fetch( `${environment.backendBaseUrl}cart/add/${this.data.id}/${this.dropdownOption.value}`, {
+				method  : "put",
+				headers : { "Authorization" : "Bearer " + this._user.accessToken }
+			} );
+
+			if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
+
+			this.toast.show()
 		}
+		catch( error )
+		{
+			/* TODO: Implement User communication */
+			console.log( "Error ", error );
+		}
+
+		this.submitting = false
 	}
 }
