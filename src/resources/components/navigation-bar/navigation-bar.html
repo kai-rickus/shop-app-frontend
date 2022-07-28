@@ -1,6 +1,7 @@
 <template class="navigation-bar">
 	<require from="./navigation-bar.css"></require>
 	<require from="components/search-bar/search-bar"></require>
+	<require from="components/shop-icon-button/shop-icon-button"></require>
 
 	<nav class="navbar navbar-expand-lg pt-4 pb-4">
 		<div class="container-fluid p-0">
@@ -21,18 +22,16 @@
 				<div class="d-flex justify-content-center search-bar-container">
 					<search-bar found.trigger="search($event)"></search-bar>
 				</div>
-				<a href="#/shopping-cart" class="position-relative text-decoration-none">
-					<div class="shopping-cart-icon rounded-circle d-flex justify-content-center align-items-center">
-						<span class="material-icons-outlined text-on-primary shopping-cart-icon-size">
-							shopping_cart
-						</span>
-						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+
+				<a href="#/shopping-cart" class="text-on-secondary">
+					<shop-icon-button icon="shopping_cart" outlined.bind="true" class="bg-secondary position-relative">
+						<span slot="outer" class="shopping-cart-badge badge rounded-pill bg-danger">
 							2
 						</span>
-					</div>
+					</shop-icon-button>
 				</a>
-				<ul class="navbar-nav mb-2 mb-lg-0 ms-3">
 
+				<ul class="navbar-nav mb-2 mb-lg-0 ms-3">
 					<li if.bind="_user.refreshToken & signal:'logging-in'" class="nav-item dropdown">
 						<a class="nav-link pe-0"
 						   href="#"

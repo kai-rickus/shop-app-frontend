@@ -1,0 +1,19 @@
+<template class="shop-icon-button">
+	<require from="./shop-icon-button.css"></require>
+
+	<button
+		ref="iconButtonElement"
+		class="mdc-icon-button
+			${icon ? 'material-icons' : ''}
+			${icon && outlined ? 'material-icons-outlined': ''}
+			${icon && round ? 'material-icons-round': ''}
+			${icon && sharp ? 'material-icons-sharp': ''}
+			${icon && twoTone ? 'material-icons-two-tone': ''}
+		"
+	>
+		<div class="mdc-icon-button__ripple"></div>
+		${icon}
+		<slot></slot>
+	</button>
+	<slot name="outer"></slot>
+</template>

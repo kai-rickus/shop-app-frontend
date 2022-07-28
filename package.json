@@ -8,6 +8,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@material/icon-button": "^14.0.0",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.3.3",
     "aurelia-fetch-client": "^1.8.2",
@@ -18,7 +19,8 @@
     "material-icons": "^1.11.1",
     "popper.js": "^1.16.1",
     "progress-tracker": "^2.0.7",
-    "whatwg-fetch": "^3.6.2"
+    "whatwg-fetch": "^3.6.2",
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@types/bootstrap": "5.1.10",

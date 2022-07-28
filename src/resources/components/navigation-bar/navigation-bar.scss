@@ -1,24 +1,32 @@
 @use "src/theme";
+
 $height-desktop : 98px;
 
 .navigation-bar {
-    display : block;
-    max-width   : 1320px;
-    margin  : auto;
+    display   : block;
+    max-width : 1320px;
+    margin    : auto;
 
     .search-bar-container { width : 100%; }
 
     .logo-small { height : 50px; }
 
-    .shopping-cart-icon{
-        height: 32px;
-        width: 32px;
-        background-color: theme.$highlighted;
+    .shopping-cart-icon {
+        height : 32px;
+        width  : 32px;
     }
-    .shopping-cart-icon-size{
-        font-size: 20px;
+
+    .shopping-cart-icon-size {
+        font-size : 20px;
     }
-    //.shopping-cart-icon-badge{
-    //    background-color: theme.$highlighted;
-    //}
+
+    .shopping-cart-color {
+        background-color : theme.$highlighted !important;
+    }
+
+    .shopping-cart-badge {
+        position : absolute;
+        top      : 0px;
+        right    : 0px;
+    }
 }

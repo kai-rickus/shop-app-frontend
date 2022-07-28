@@ -10,7 +10,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-    "target": "es5",
+    "target": "ESNext",
     "lib": [
       "es2015",
       "dom"
