@@ -25,8 +25,10 @@
 
 				<a href="#/shopping-cart" class="text-on-secondary">
 					<shop-icon-button icon="shopping_cart" outlined.bind="true" class="bg-secondary position-relative">
-						<span slot="outer" class="shopping-cart-badge badge rounded-pill bg-danger">
-							2
+						<span slot="outer" class="shopping-cart-badge badge rounded-pill bg-danger"
+							  textcontent.bind="setItemAmount() & async"
+							  show.bind="showBadge"
+						>
 						</span>
 					</shop-icon-button>
 				</a>

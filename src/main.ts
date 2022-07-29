@@ -13,7 +13,8 @@ export function configure( aurelia: Aurelia ): void
 	aurelia.use
 		   .standardConfiguration()
 		   .feature( 'resources' )
-		   .developmentLogging( environment.debug ? 'debug' : 'warn' );
+		   .developmentLogging( environment.debug ? 'debug' : 'warn' )
+		   .plugin( "aurelia-async-binding" );
 
 	if( environment.testing )
 	{
