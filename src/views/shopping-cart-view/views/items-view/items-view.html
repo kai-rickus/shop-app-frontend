@@ -2,6 +2,7 @@
 	<require from="app.css"></require>
 	<require from="./items-view.css"></require>
 	<require from="valueConverters/currency-value-converter"></require>
+	<require from="../../../../resources/components/shop-icon-button/shop-icon-button"></require>
 
 	<div class="items-view">
 		<h5 class="text-on-surface">
@@ -11,7 +12,7 @@
 			Diese Artikel wirst du kaufen.
 		</h6>
 		<div class="card frost mb-3 rounded-1 overflow-hidden border-0"
-			 repeat.for="item of items"
+			 repeat.for="item of getCardItems() & async & signal:'cart-updated'"
 		>
 			<div class="d-flex">
 				<div class="">
@@ -40,11 +41,15 @@
 									<option value="9">9</option>
 									<option value="10">10+</option>
 								</select>
-								<span class="material-icons-outlined text-danger align-self-center ms-2 cursor-pointer">delete_forever</span>
+								<shop-icon-button icon="delete_forever"
+												  outlined.bind=true
+												  class="position-relative text-danger ms-2"
+												  click.trigger="setCartitems(item.product.id)"
+								>
+
+								</shop-icon-button>
 							</div>
-							<span class="fs-4 fw-bold text-on-surface">${item.product.price | currency
-							:
-							'EUR'}</span>
+							<span class="fs-4 fw-bold text-on-surface">${item.product.price | currency:'EUR'}</span>
 						</div>
 					</div>
 				</div>

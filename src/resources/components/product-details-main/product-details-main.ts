@@ -1,5 +1,6 @@
 import { autoinject, bindable } from "aurelia-framework";
 import { Router }               from "aurelia-router";
+import { BindingSignaler }      from "aurelia-templating-resources";
 import { Tooltip, Toast }       from "bootstrap";
 import { debug }                from "util";
 import environment              from "../../../environment";
@@ -20,6 +21,9 @@ interface ProductDataResponse
 	uuid: string;
 }
 
+export const SIGNAL_CART_UPDATED = "cart-updated";
+export const ttest = 123
+
 @autoinject()
 export class ProductDetailsMain
 {
@@ -28,7 +32,7 @@ export class ProductDetailsMain
 	submitting = false;
 	toast;
 
-	constructor( private _router: Router, private _user: ShopUser ){}
+	constructor( private _router: Router, private _user: ShopUser, private _signaler: BindingSignaler ){}
 
 	attached()
 	{
@@ -57,6 +61,7 @@ export class ProductDetailsMain
 
 			if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
 
+			this._signaler.signal( SIGNAL_CART_UPDATED )
 			this.toast.show()
 		}
 		catch( error )
