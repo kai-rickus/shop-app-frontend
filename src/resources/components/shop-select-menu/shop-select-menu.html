@@ -1,0 +1,104 @@
+<template class="shop-select-menu mdc-select mdc-select--filled"
+		  ref="selectMenuElement"
+>
+	<require from="./shop-select-menu.css"></require>
+	<div class="mdc-select__anchor"
+		 role="button"
+		 aria-haspopup="listbox"
+		 aria-expanded="false"
+		 aria-labelledby="demo-label demo-selected-text">
+		<span class="mdc-select__ripple"></span>
+		<span id="demo-label" class="mdc-floating-label">Anzahl</span>
+		<span class="mdc-select__selected-text-container">
+			<span id="demo-selected-text" class="mdc-select__selected-text"></span>
+		</span>
+		<span class="mdc-select__dropdown-icon">
+			<svg
+				class="mdc-select__dropdown-icon-graphic"
+				viewBox="7 10 10 5" focusable="false">
+				<polygon
+					class="mdc-select__dropdown-icon-inactive"
+					stroke="none"
+					fill-rule="evenodd"
+					points="7 10 12 15 17 10">
+				</polygon>
+				<polygon
+					class="mdc-select__dropdown-icon-active"
+					stroke="none"
+					fill-rule="evenodd"
+					points="7 15 12 10 17 15">
+				</polygon>
+			</svg>
+		</span>
+		<span class="mdc-line-ripple"></span>
+	</div>
+
+	<div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--">
+		<ul class="mdc-list" role="listbox" aria-label="Food picker listbox">
+			<li class="mdc-list-item mdc-list-item--selected" aria-selected="true" data-value="" role="option">
+				<span class="mdc-list-item__ripple"></span>
+			</li>
+			<li class="mdc-list-item" aria-selected="false" data-value="1" role="option">
+				<span class="mdc-list-item__ripple"></span>
+				<span class="mdc-list-item__text">
+					1
+				</span>
+			</li>
+			<li class="mdc-list-item" aria-selected="false" data-value="2" aria-disabled="true" role="option">
+				<span class="mdc-list-item__ripple"></span>
+				<span class="mdc-list-item__text">
+					2
+				</span>
+			</li>
+			<li class="mdc-list-item" aria-selected="false" data-value="3" role="option">
+				<span class="mdc-list-item__ripple"></span>
+				<span class="mdc-list-item__text">
+					3
+				</span>
+			</li>
+			<li class="mdc-list-item" aria-selected="false" data-value="4" role="option">
+				<span class="mdc-list-item__ripple"></span>
+				<span class="mdc-list-item__text">
+					4
+				</span>
+			</li>
+			<li class="mdc-list-item" aria-selected="false" data-value="5" role="option">
+				<span class="mdc-list-item__ripple"></span>
+				<span class="mdc-list-item__text">
+					5
+				</span>
+			</li>
+			<li class="mdc-list-item" aria-selected="false" data-value="6" role="option">
+				<span class="mdc-list-item__ripple"></span>
+				<span class="mdc-list-item__text">
+					6
+				</span>
+			</li>
+			<li class="mdc-list-item" aria-selected="false" data-value="7" role="option">
+				<span class="mdc-list-item__ripple"></span>
+				<span class="mdc-list-item__text">
+					7
+				</span>
+			</li>
+			<li class="mdc-list-item" aria-selected="false" data-value="8" role="option">
+				<span class="mdc-list-item__ripple"></span>
+				<span class="mdc-list-item__text">
+					8
+				</span>
+			</li>
+			<li class="mdc-list-item" aria-selected="false" data-value="9" role="option">
+				<span class="mdc-list-item__ripple"></span>
+				<span class="mdc-list-item__text">
+					9
+				</span>
+			</li>
+			<li class="mdc-list-item" aria-selected="false" data-value="10" role="option">
+				<span class="mdc-list-item__ripple"></span>
+				<span class="mdc-list-item__text">
+					10
+				</span>
+			</li>
+		</ul>
+	</div>
+</template>
+

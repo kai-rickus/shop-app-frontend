@@ -3,6 +3,8 @@
 	<require from="./product-details-main.css"></require>
 	<require from="app.css"></require>
 	<require from=".././custom-rating/custom-rating"></require>
+	<require from="components/shop-select-menu/shop-select-menu"></require>
+
 	<div class="grid mt-5">
 		<div class="row">
 			<!-- Linke Spalte -->
@@ -79,19 +81,23 @@
 
 								<div class="col-lg-3">
 
-									<select class="form-select" aria-label="Default select example" ref="dropdownOption">
-										<option value="1" selected>Menge</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10+</option>
-									</select>
+									<shop-select-menu view-model.ref="selectMenu">
+
+									</shop-select-menu>
+
+<!--									<select class="form-select" aria-label="Default select example" ref="dropdownOption">-->
+<!--										<option value="1" selected>Menge</option>-->
+<!--										<option value="1">1</option>-->
+<!--										<option value="2">2</option>-->
+<!--										<option value="3">3</option>-->
+<!--										<option value="4">4</option>-->
+<!--										<option value="5">5</option>-->
+<!--										<option value="6">6</option>-->
+<!--										<option value="7">7</option>-->
+<!--										<option value="8">8</option>-->
+<!--										<option value="9">9</option>-->
+<!--										<option value="10">10+</option>-->
+<!--									</select>-->
 								</div>
 
 								<div class="col-lg-1">

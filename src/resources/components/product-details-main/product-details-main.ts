@@ -5,6 +5,7 @@ import { Tooltip, Toast }       from "bootstrap";
 import { debug }                from "util";
 import environment              from "../../../environment";
 import { ShopUser }             from "../../../services/shop-user";
+import { ShopSelectMenu }       from "../shop-select-menu/shop-select-menu";
 
 interface ProductDataResponse
 {
@@ -22,13 +23,12 @@ interface ProductDataResponse
 }
 
 export const SIGNAL_CART_UPDATED = "cart-updated";
-export const ttest = 123
 
 @autoinject()
 export class ProductDetailsMain
 {
 	@bindable data: ProductDataResponse;
-	dropdownOption;
+	selectMenu: ShopSelectMenu;
 	submitting = false;
 	toast;
 
@@ -54,7 +54,7 @@ export class ProductDetailsMain
 
 		try
 		{
-			const response = await fetch( `${environment.backendBaseUrl}cart/add/${this.data.id}/${this.dropdownOption.value}`, {
+			const response = await fetch( `${environment.backendBaseUrl}cart/add/${this.data.id}/${this.selectMenu.value}`, {
 				method  : "put",
 				headers : { "Authorization" : "Bearer " + this._user.accessToken }
 			} );
@@ -63,6 +63,7 @@ export class ProductDetailsMain
 
 			this._signaler.signal( SIGNAL_CART_UPDATED )
 			this.toast.show()
+
 		}
 		catch( error )
 		{

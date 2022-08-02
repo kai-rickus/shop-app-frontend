@@ -8,17 +8,12 @@ import { ShopUser }             from "../../../../services/shop-user";
 export class ItemsView
 {
 	user: ShopUser
-	// items = [];
 
 	constructor( user: ShopUser, private _signaler: BindingSignaler )
 	{
 		this.user = user;
 	}
 
-	async attached()
-	{
-		// this.items = await this.getCardItems()
-	}
 
 	async getCardItems()
 	{
