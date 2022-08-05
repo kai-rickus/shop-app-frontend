@@ -9,6 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "@material/icon-button": "^14.0.0",
+    "@material/layout-grid": "^14.0.0",
     "@material/select": "^14.0.0",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-async-binding": "^1.2.0",

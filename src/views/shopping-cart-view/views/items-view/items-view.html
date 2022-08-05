@@ -2,8 +2,9 @@
 	<require from="app.css"></require>
 	<require from="./items-view.css"></require>
 	<require from="valueConverters/currency-value-converter"></require>
-	<require from="../../../../resources/components/shop-icon-button/shop-icon-button"></require>
-	<require from="../../../../resources/components/shop-select-menu/shop-select-menu"></require>
+	<require from="components/shop-icon-button/shop-icon-button"></require>
+	<require from="components/shop-select-menu/shop-select-menu"></require>
+	<require from="components/shop-select-menu-option/shop-select-menu-option"></require>
 
 	<div class="items-view">
 		<h5 class="text-on-surface">
@@ -12,7 +13,7 @@
 		<h6 class="mb-3 sub-title">
 			Diese Artikel wirst du kaufen.
 		</h6>
-		<div class="card frost mb-3 rounded-1 overflow-hidden border-0"
+		<div class="card frost mb-3 rounded-1 overflow-hidden border-0 overflow-visible"
 			 repeat.for="item of getCardItems() & async & signal:'cart-updated'"
 		>
 			<div class="d-flex">
@@ -31,6 +32,11 @@
 						<div class="d-flex justify-content-between">
 							<div class="w-25 d-flex">
 								<shop-select-menu>
+									<shop-select-menu-option value.bind="1" selected.bind="true">1</shop-select-menu-option>
+									<shop-select-menu-option value.bind="2">2</shop-select-menu-option>
+									<shop-select-menu-option value.bind="3">3</shop-select-menu-option>
+									<shop-select-menu-option value.bind="4">4</shop-select-menu-option>
+									<shop-select-menu-option value.bind="5">5</shop-select-menu-option>
 								</shop-select-menu>
 								<shop-icon-button icon="delete_forever"
 												  outlined.bind=true

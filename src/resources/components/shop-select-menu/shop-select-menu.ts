@@ -1,30 +1,27 @@
 import { MDCSelect } from '@material/select';
+import { bindable }  from "aurelia-framework";
 
 export class ShopSelectMenu
 {
+	@bindable disabled = false;
 	selectMenuElement;
 	select;
-	value;
+	labelName = "Anzahl"
 
-	// get value()
-	// {
-	// 	return this.select.value;
-	// }
-	//
-	// set value( value )
-	// {
-	// 	this.select.value = value
-	// }
 
 	attached()
 	{
-
 		this.select = new MDCSelect( this.selectMenuElement );
+	}
 
-		this.select.listen( 'MDCSelect:change', () =>
-		{
-			this.value = this.select.value;
-		} );
+	get value()
+	{
+		return this.select.value;
+	}
+
+	set value( value )
+	{
+		this.select.value = value
 	}
 
 }

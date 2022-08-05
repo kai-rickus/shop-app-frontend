@@ -1,5 +1,6 @@
 @use "resources/components/shop-footer/shop-footer";
 @use "resources/components/navigation-bar/navigation-bar";
+@use "@material/layout-grid/mdc-layout-grid";
 @import "src/theme";
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootstrap/scss/mixins";

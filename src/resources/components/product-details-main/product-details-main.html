@@ -4,17 +4,19 @@
 	<require from="app.css"></require>
 	<require from=".././custom-rating/custom-rating"></require>
 	<require from="components/shop-select-menu/shop-select-menu"></require>
+	<require from="components/shop-select-menu-option/shop-select-menu-option"></require>
+	<require from="components/shop-icon-button/shop-icon-button"></require>
 
-	<div class="grid mt-5">
-		<div class="row">
+	<div class="mdc-layout-grid">
+		<div class="mdc-layout-grid__inner">
 			<!-- Linke Spalte -->
-			<div class="col-lg-6">
+			<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
 				<!-- Title -->
-				<div class="col-12 mb-4">
+				<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mb-4">
 					<div class="card frost default-main-shadow">
 						<div class="card-body rounded-1">
-							<div class="row">
-								<div class="col-12">
+							<div class="mdc-layout-grid__inner">
+								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
 									<h5 class="card-title">${data.title}</h5>
 								</div>
 							</div>
@@ -22,7 +24,7 @@
 					</div>
 				</div>
 				<!-- Bild -->
-				<div class="col-12 mb-4">
+				<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mb-4">
 					<div class="card frost default-main-shadow overflow-hidden border-0">
 						<img src.bind="data.image"
 							 alt.bind="data.title"
@@ -34,25 +36,25 @@
 			<!-- Linke Spalte Ende -->
 
 			<!-- Rechte Spalte -->
-			<div class="col-lg-6">
+			<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
 				<!-- Kaufen -->
-				<div class="col-lg-12 mb-4">
+				<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mb-4">
 					<div class="card frost default-main-shadow product-details-main__cart-block">
 						<div class="card-body rounded-1">
-							<div class="row">
-								<div class="col-lg-12 mb-2 justify-content-end d-flex">
+							<div class="mdc-layout-grid__inner">
+								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mb-2 justify-content-end d-flex">
 									<h1 class="card-title">${data.price | currency
 									:
 									'EUR'}</h1>
 								</div>
 
-								<div class="col-lg-6 mb-4 d-flex flex-column">
+								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mb-4 d-flex flex-column">
 									<small class="mb-1">
 										Versand durch
 									</small>
 									<img class="shipment-logo" src="src/img/${data.shipment}-logo.jpg">
 								</div>
-								<div class="col-lg-6 mb-4 d-flex justify-content-end align-items-center">
+								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mb-4 d-flex justify-content-end align-items-center">
 									<div class="h-100 position-relative d-flex justify-content-end align-items-center">
 										<custom-rating
 											rating.bind="data.rating"
@@ -61,8 +63,7 @@
 										</custom-rating>
 									</div>
 								</div>
-
-								<div class="col-lg-8 d-flex justify-content-end">
+								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 d-flex justify-content-end">
 									<button type="submit"
 											class="btn btn-secondary border-primary w-100"
 											disabled.bind="submitting"
@@ -79,45 +80,35 @@
 									</button>
 								</div>
 
-								<div class="col-lg-3">
+								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
 
 									<shop-select-menu view-model.ref="selectMenu">
-
+										<shop-select-menu-option value.bind="1" selected.bind="true">1</shop-select-menu-option>
+										<shop-select-menu-option value.bind="2">2</shop-select-menu-option>
+										<shop-select-menu-option value.bind="3">3</shop-select-menu-option>
+										<shop-select-menu-option value.bind="4">4</shop-select-menu-option>
+										<shop-select-menu-option value.bind="5">5</shop-select-menu-option>
 									</shop-select-menu>
 
-<!--									<select class="form-select" aria-label="Default select example" ref="dropdownOption">-->
-<!--										<option value="1" selected>Menge</option>-->
-<!--										<option value="1">1</option>-->
-<!--										<option value="2">2</option>-->
-<!--										<option value="3">3</option>-->
-<!--										<option value="4">4</option>-->
-<!--										<option value="5">5</option>-->
-<!--										<option value="6">6</option>-->
-<!--										<option value="7">7</option>-->
-<!--										<option value="8">8</option>-->
-<!--										<option value="9">9</option>-->
-<!--										<option value="10">10+</option>-->
-<!--									</select>-->
 								</div>
 
-								<div class="col-lg-1">
-									<div class="w-100 h-100 d-flex justify-content-center align-items-center product-details-main__favorite product-details-main__favorite--active">
-										<i class="fa fa-heart"></i>
-									</div>
+								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 text-center">
+									<shop-icon-button icon="favorite" outlined.bind="true" class="bg-transparent position-relative text-danger">
+									</shop-icon-button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- Beschreibung -->
-				<div class="col-12 mb-4">
+				<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mb-4">
 					<div class="card frost default-main-shadow">
 						<div class="card-body rounded-1">
-							<div class="row">
-								<div class="col-12">
+							<div class="mdc-layout-grid__inner">
+								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
 									<h5 class="card-title border-bottom border-1">Produktbeschreibung</h5>
 								</div>
-								<div class="col-12">
+								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
 									<p class="card-text">${data.description}</p>
 								</div>
 							</div>
