@@ -8,7 +8,6 @@ export class ShopSelectMenu
 	select;
 	labelName = "Anzahl"
 
-
 	attached()
 	{
 		this.select = new MDCSelect( this.selectMenuElement );

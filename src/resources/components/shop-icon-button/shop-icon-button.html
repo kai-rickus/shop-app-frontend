@@ -5,14 +5,32 @@
 		ref="iconButtonElement"
 		class="mdc-icon-button
 			${icon ? 'material-icons' : ''}
+
+		"
+		aria-label="Add to favorites"
+		aria-pressed="false"
+	>
+		<span class="mdc-icon-button__focus-ring"></span>
+		<div class="mdc-icon-button__ripple"></div>
+		<i class="
+				mdc-icon-button__icon
+				material-icons
+				${icon && outlined ? 'material-icons-outlined': ''}
+				${icon && round ? 'material-icons-round': ''}
+				${icon && sharp ? 'material-icons-sharp': ''}
+				${icon && twoTone ? 'material-icons-two-tone': ''}
+			"
+		>
+			${icon}</i>
+		<i class="
+			mdc-icon-button__icon
+			mdc-icon-button__icon--on
+			material-icons
 			${icon && outlined ? 'material-icons-outlined': ''}
 			${icon && round ? 'material-icons-round': ''}
 			${icon && sharp ? 'material-icons-sharp': ''}
 			${icon && twoTone ? 'material-icons-two-tone': ''}
-		"
-	>
-		<div class="mdc-icon-button__ripple"></div>
-		${icon}
+		" if.bind="iconOn">${iconOn}</i>
 		<slot></slot>
 	</button>
 	<slot name="outer"></slot>

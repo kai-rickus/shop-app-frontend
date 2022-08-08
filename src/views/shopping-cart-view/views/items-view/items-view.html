@@ -7,19 +7,15 @@
 	<require from="components/shop-select-menu-option/shop-select-menu-option"></require>
 
 	<div class="items-view">
-		<h5 class="text-on-surface">
-			Deine Artikel
-		</h5>
-		<h6 class="mb-3 sub-title">
-			Diese Artikel wirst du kaufen.
-		</h6>
+		<h5 class="text-on-surface">Deine Artikel</h5>
+		<h6 class="mb-3 sub-title">Diese Artikel wirst du kaufen.</h6>
 		<div class="card frost mb-3 rounded-1 overflow-hidden border-0 overflow-visible"
 			 repeat.for="item of getCardItems() & async & signal:'cart-updated'"
 		>
 			<div class="d-flex">
-				<div class="">
+				<a href="#/product-detail?id=${item.product.id}">
 					<img class="img-size ratio-16x9 " src="${item.product.image}" alt="produkt-thumbnail">
-				</div>
+				</a>
 
 				<div class=" p-0 ">
 					<div class="card-body h-100 d-flex flex-column justify-content-between">
@@ -43,10 +39,11 @@
 												  class="position-relative text-danger ms-2"
 												  click.trigger="setCartitems(item.product.id)"
 								>
-
 								</shop-icon-button>
 							</div>
-							<span class="fs-4 fw-bold text-on-surface">${item.product.price | currency:'EUR'}</span>
+							<span class="fs-4 fw-bold text-on-surface">${item.product.price | currency
+							:
+							'EUR'}</span>
 						</div>
 					</div>
 				</div>
