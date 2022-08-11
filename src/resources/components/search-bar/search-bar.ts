@@ -1,3 +1,4 @@
+import { Redirect }   from "aurelia-router";
 import environment    from "../../../environment";
 import { autoinject } from "aurelia-framework";
 import { TaskQueue }  from "aurelia-task-queue";
@@ -24,6 +25,7 @@ export class SearchBar
 
 	async getSuggestions()
 	{
+
 		this.taskQueue.queueTask( async () =>
 		{
 
@@ -31,7 +33,6 @@ export class SearchBar
 			const data     = await response.json()
 
 			this.suggestions = data.result
-
 		} )
 	}
 

@@ -1,8 +1,8 @@
-import { autoinject, bindable } from "aurelia-framework";
-import { BindingSignaler }      from "aurelia-templating-resources";
-import environment              from "../../../../environment";
-import { SIGNAL_CART_UPDATED }  from "../../../../resources/components/product-details-main/product-details-main";
-import { ShopUser }             from "../../../../services/shop-user";
+import { autoinject }          from "aurelia-framework";
+import { BindingSignaler }     from "aurelia-templating-resources";
+import environment             from "../../../../environment";
+import { SIGNAL_CART_UPDATED } from "../../../../resources/components/product-details-main/product-details-main";
+import { ShopUser }            from "../../../../services/shop-user";
 
 @autoinject()
 export class ItemsView
@@ -14,19 +14,19 @@ export class ItemsView
 		this.user = user;
 	}
 
-
 	async getCardItems()
 	{
 		const response = await fetch( `${environment.backendBaseUrl}cart/get`, {
 			headers : { "Authorization" : "Bearer " + this.user.accessToken }
 		} );
 		const data     = await response.json()
+
 		return data.items
 	}
 
-	async setCartitems( itemId )
+	async setCartItems( id, amount )
 	{
-		const response = await fetch( `${environment.backendBaseUrl}cart/set/${itemId}/0`, {
+		const response = await fetch( `${environment.backendBaseUrl}cart/set/${id}/${amount}`, {
 			method  : "put",
 			headers : { "Authorization" : "Bearer " + this.user.accessToken }
 		} );

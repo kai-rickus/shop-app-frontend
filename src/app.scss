@@ -1,6 +1,8 @@
 @use "resources/components/shop-footer/shop-footer";
 @use "resources/components/navigation-bar/navigation-bar";
 @use "@material/layout-grid/mdc-layout-grid";
+@use "@material/ripple";
+
 @import "src/theme";
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootstrap/scss/mixins";
@@ -39,5 +41,12 @@ $pb-main-content : 5rem;
     width         : 100%;
     max-width     : 90px;
     border-radius : 4px;
+}
+
+.shop-ripple {
+    @include ripple.surface;
+    @include ripple.radius-bounded;
+    @include ripple.states;
+    overflow: hidden !important;
 }
 

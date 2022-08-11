@@ -15,7 +15,7 @@ export class RegisterView
 	{
 		if( this.user.refreshToken )
 		{
-			return new Redirect( '/product-overview' )
+			return new Redirect( '/home-view' )
 		}
 	}
 

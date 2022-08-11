@@ -13,8 +13,8 @@
 			 repeat.for="item of getCardItems() & async & signal:'cart-updated'"
 		>
 			<div class="d-flex">
-				<a href="#/product-detail?id=${item.product.id}">
-					<img class="img-size ratio-16x9 " src="${item.product.image}" alt="produkt-thumbnail">
+				<a href="#/product-detail?id=${item.product.id}" class="shop-ripple">
+					<img class="img-size ratio-16x9" src="${item.product.image}" alt="produkt-thumbnail">
 				</a>
 
 				<div class=" p-0 ">
@@ -27,23 +27,21 @@
 
 						<div class="d-flex justify-content-between">
 							<div class="w-25 d-flex">
-								<shop-select-menu>
-									<shop-select-menu-option value.bind="1" selected.bind="true">1</shop-select-menu-option>
-									<shop-select-menu-option value.bind="2">2</shop-select-menu-option>
-									<shop-select-menu-option value.bind="3">3</shop-select-menu-option>
-									<shop-select-menu-option value.bind="4">4</shop-select-menu-option>
-									<shop-select-menu-option value.bind="5">5</shop-select-menu-option>
+								<shop-select-menu change.trigger="setCartItems(item.product.id, $event.detail.value)" lable="Anzahl">
+									<shop-select-menu-option value.bind="1" selected.bind="item.amount ===1">1</shop-select-menu-option>
+									<shop-select-menu-option value.bind="2" selected.bind="item.amount ===2">2</shop-select-menu-option>
+									<shop-select-menu-option value.bind="3" selected.bind="item.amount ===3">3</shop-select-menu-option>
+									<shop-select-menu-option value.bind="4" selected.bind="item.amount ===4">4</shop-select-menu-option>
+									<shop-select-menu-option value.bind="5" selected.bind="item.amount ===5">5</shop-select-menu-option>
 								</shop-select-menu>
 								<shop-icon-button icon="delete_forever"
 												  outlined.bind=true
 												  class="position-relative text-danger ms-2"
-												  click.trigger="setCartitems(item.product.id)"
+												  click.trigger="setCartItems(item.product.id, 0)"
 								>
 								</shop-icon-button>
 							</div>
-							<span class="fs-4 fw-bold text-on-surface">${item.product.price | currency
-							:
-							'EUR'}</span>
+							<span class="fs-4 fw-bold text-on-surface">${item.product.price | currency:'EUR'}</span>
 						</div>
 					</div>
 				</div>

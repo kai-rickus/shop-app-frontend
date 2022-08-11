@@ -1,6 +1,4 @@
-<template class="shop-select-menu mdc-select mdc-select--filled ${disabled ? 'mdc-select--disabled': ''} w-100
-<!--	mdc-select&#45;&#45;with-leading-icon-->
-"
+<template class="shop-select-menu mdc-select mdc-select--filled ${disabled ? 'mdc-select--disabled': ''} w-100"
 		  ref="selectMenuElement"
 >
 	<require from="./shop-select-menu.css"></require>
@@ -11,7 +9,7 @@
 		 aria-expanded="false"
 		 aria-labelledby="select-menu-label select-menu-selected-text">
 		<span class="mdc-select__ripple"></span>
-		<span id="select-menu-label" class="mdc-floating-label">${labelName}</span>
+		<span id="select-menu-label" class="mdc-floating-label">${lable}</span>
 		<span class="mdc-select__selected-text-container">
 			<span id="select-menu-selected-text" class="mdc-select__selected-text" aria-disabled="${disabled}"></span>
 		</span>
