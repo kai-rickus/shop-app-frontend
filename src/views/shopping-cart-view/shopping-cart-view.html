@@ -1,5 +1,7 @@
 <template>
-	<require from="../../resources/components/product-tile/product-tile"></require>
+	<require from="resources/components/product-tile/product-tile"></require>
+	<require from="resources/components/shop-progress-tracker/shop-progress-tracker"></require>
+	<require from="resources/components/shop-progress-tracker-step/shop-progress-tracker-step"></require>
 	<require from="app.css"></require>
 	<require from="./shopping-cart-view.css"></require>
 
@@ -10,35 +12,31 @@
 					<div class="card-body">
 						<div class="row mb-3">
 							<div class="col">
-								<ul class="progress-tracker progress-tracker--text progress-tracker--text-top progress-tracker--center">
-									<li class="progress-step is-complete">
-										<div class="progress-text">
-											<h5 class="progress-title">Artikel</h5>
-										</div>
-										<div class="progress-marker" data-text="1"></div>
-									</li>
+								<shop-progress-tracker align="center"
+													   text-position="top"
+													   with-text.bind="true">
 
-									<li class="progress-step is-complete">
-										<div class="progress-text">
-											<h5 class="progress-title">Adresse</h5>
-										</div>
-										<div class="progress-marker" data-text="2"></div>
-									</li>
-
-									<li class="progress-step is-active">
-										<div class="progress-text">
-											<h5 class="progress-title">Zahlungsart</h5>
-										</div>
-										<div class="progress-marker" data-text="3"></div>
-									</li>
-
-									<li class="progress-step">
-										<div class="progress-text">
-											<h5 class="progress-title">Endübersicht</h5>
-										</div>
-										<div class="progress-marker" data-text="4"></div>
-									</li>
-								</ul>
+									<shop-progress-tracker-step title="Artikel"
+																marker-text="1"
+																complete.bind="true"
+																active.bind="false"
+									>Text1</shop-progress-tracker-step>
+									<shop-progress-tracker-step title="Zahlung"
+																marker-text="2"
+																complete.bind="false"
+																active.bind="true"
+									>Text2</shop-progress-tracker-step>
+									<shop-progress-tracker-step title="Adresse"
+																marker-text="3"
+																complete.bind="false"
+																active.bind="false"
+									>Text3</shop-progress-tracker-step>
+									<shop-progress-tracker-step title="Übersicht"
+																marker-text="4"
+																complete.bind="false"
+																active.bind="false"
+									>Text4</shop-progress-tracker-step>
+								</shop-progress-tracker>
 							</div>
 						</div>
 						<router-view></router-view>
