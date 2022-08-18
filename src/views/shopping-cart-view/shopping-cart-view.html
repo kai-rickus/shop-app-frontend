@@ -14,28 +14,37 @@
 							<div class="col">
 								<shop-progress-tracker align="center"
 													   text-position="top"
-													   with-text.bind="true">
+													   with-text.bind="true"
+								>
 
 									<shop-progress-tracker-step title="Artikel"
 																marker-text="1"
-																complete.bind="true"
-																active.bind="false"
-									>Text1</shop-progress-tracker-step>
-									<shop-progress-tracker-step title="Zahlung"
-																marker-text="2"
-																complete.bind="false"
-																active.bind="true"
-									>Text2</shop-progress-tracker-step>
+																complete.bind="
+																navigation[1].isActive ||
+																navigation[2].isActive ||
+																navigation[3].isActive"
+																active.bind="navigation[0].isActive"
+									>Was?
+									</shop-progress-tracker-step>
 									<shop-progress-tracker-step title="Adresse"
+																marker-text="2"
+																complete.bind="
+																navigation[2].isActive ||
+																navigation[3].isActive"
+																active.bind="navigation[1].isActive"
+									>Wohin?
+									</shop-progress-tracker-step>
+									<shop-progress-tracker-step title="Zahlung"
 																marker-text="3"
-																complete.bind="false"
-																active.bind="false"
-									>Text3</shop-progress-tracker-step>
+																complete.bind="navigation[3].isActive"
+																active.bind="navigation[2].isActive"
+									>Wie zahlen?
+									</shop-progress-tracker-step>
 									<shop-progress-tracker-step title="Übersicht"
 																marker-text="4"
-																complete.bind="false"
-																active.bind="false"
-									>Text4</shop-progress-tracker-step>
+																active.bind="navigation[3].isActive"
+									>In Ordnung?
+									</shop-progress-tracker-step>
 								</shop-progress-tracker>
 							</div>
 						</div>

@@ -1,4 +1,4 @@
-import { RouteConfig, Router, RouterConfiguration } from "aurelia-router";
+import { RouteConfig } from "aurelia-router";
 
 const ROUTES: RouteConfig[] = [
 	{
@@ -29,25 +29,24 @@ const ROUTES: RouteConfig[] = [
 		nav      : true,
 		title    : 'Endübersicht'
 	},
-	{
-		route    : [ 'buyed' ],
-		name     : 'buyed',
-		moduleId : './views/buyed-view/buyed-view',
-		nav      : true,
-		title    : 'Gekauft'
-	}
-
+	// {
+	// 	route    : [ 'bought' ],
+	// 	name     : 'bought',
+	// 	moduleId : './views/bought-view/bought-view',
+	// 	nav      : true,
+	// 	title    : 'Gekauft'
+	// }
 ];
 
+export class ShoppingCartView
+{
+	navigation;
 
-export class ShoppingCartView {
-	router;
-
-	public configureRouter( config: RouterConfiguration, router: Router ): Promise<void> | PromiseLike<void> | void
+	public configureRouter( config, router )
 	{
 		config.map( ROUTES );
 
-		this.router = router;
+		this.navigation = router.navigation
 	}
 
 }

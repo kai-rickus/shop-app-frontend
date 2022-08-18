@@ -7,61 +7,52 @@ $marker-hovered-color   : theme.$lightest-primary-color;
 $marker-color           : theme.$disabled-grey;
 
 
-//Wenn z-index  außerhalb gesetzt wird -> funktioniert
-.progress-marker:after {
-    z-index : 0 !important;
-}
+.shop-progress-tracker.progress-tracker {
+    margin : 0;
 
-.shop-progress-tracker {
-    .progress-tracker {
-        margin : 0;
+    .progress-step {
 
-        #marker & .progress-marker {
-            z-index : 0 !important;
-        }
-
-        .progress-step {
-            &.is-complete {
-                .progress-marker {
-                    &::before {
-                        background-color : $completed-marker-color;
-                    }
-
-                    &::after {
-                        background-color : $completed-marker-color;
-                        z-index          : 0 !important
-                    }
-                }
-            }
-
-            &.is-active .progress-marker::before {
-                background-color : $active-marker-color;
-            }
-
+        &.is-complete {
             .progress-marker {
                 &::before {
-                    background-color : $marker-color;
+                    background-color : $completed-marker-color;
                 }
-                //Wenn z-index hier gesetzt wird -> funktioniert nicht -> Klasse wird nicht gesetzt
+
                 &::after {
-                    //z-index          : 0 !important;
-                    background-color : $marker-color;
+                    background-color : $completed-marker-color;
+                    z-index          : 0 !important
                 }
             }
-
         }
 
-        .progress-text {
-            background-color : unset !important;
+        &.is-active .progress-marker::before {
+            background-color : $active-marker-color;
         }
 
-        .progress-title {
-            margin : 0;
+        .progress-marker {
+
+            &::before {
+                background-color : $marker-color;
+            }
+
+            &::after {
+                z-index          : 0 !important;
+                background-color : $marker-color;
+            }
         }
 
-        .progress-marker:hover::before {
-            background-color : $marker-hovered-color !important;
-            cursor           : pointer;
-        }
+    }
+
+    .progress-text {
+        background-color : unset !important;
+    }
+
+    .progress-title {
+        margin : 0;
+    }
+
+    .progress-marker:hover::before {
+        background-color : $marker-hovered-color !important;
+        cursor           : pointer;
     }
 }
