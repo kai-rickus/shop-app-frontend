@@ -96,6 +96,9 @@
 										icon="favorite_border"
 										icon-on="favorite"
 										class="bg-transparent position-relative text-danger favorize-ripple-color"
+										active.bind="favorized"
+										disabled.bind="favorizePending"
+										change.trigger="setFavorite($event)"
 									>
 									</shop-icon-button>
 								</div>
@@ -123,7 +126,7 @@
 		</div>
 	</div>
 	<div class="toast-container position-fixed toast-position bottom-0">
-		<div id="liveToast"
+		<div ref="addedToCartToast"
 			 class="toast"
 			 role="alert"
 			 aria-live="assertive"

@@ -30,16 +30,34 @@ export class ProductDetailsMain
 	@bindable data: ProductDataResponse;
 	selectMenu: ShopSelectMenu;
 	submitting = false;
+	addedToCartToast;
 	toast;
+	favorized;
+	favorizePending = false;
 
 	constructor( private _router: Router, private _user: ShopUser, private _signaler: BindingSignaler ){}
 
 	attached()
 	{
+		this.initializeFavorite()
 		this.initializeTooltips()
+		this.initializedToast()
+	}
 
-		const toastLiveExample = document.querySelector( '#liveToast' )
-		this.toast             = new Toast( toastLiveExample )
+	initializedToast()
+	{
+		this.toast = new Toast( this.addedToCartToast )
+	}
+
+	async initializeFavorite()
+	{
+		const url      = `${environment.backendBaseUrl}product/getFavorite/${this.data.id}`
+		const response = await fetch( url, {
+			headers : { "Authorization" : "Bearer " + this._user.accessToken }
+		} );
+		const data     = await response.json()
+
+		this.favorized = data.favorized;
 	}
 
 	initializeTooltips()
@@ -72,5 +90,20 @@ export class ProductDetailsMain
 		}
 
 		this.submitting = false
+	}
+
+	async setFavorite( event )
+	{
+		this.favorizePending = true
+
+		const url      = `${environment.backendBaseUrl}product/setFavorite/${this.data.id}/${event.detail.isOn}`
+		const response = await fetch( url, {
+			method  : "post",
+			headers : { "Authorization" : "Bearer " + this._user.accessToken }
+		} );
+
+		if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
+
+		this.favorizePending = false
 	}
 }

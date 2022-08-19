@@ -48,5 +48,4 @@ export class ShoppingCartView
 
 		this.navigation = router.navigation
 	}
-
 }

@@ -6,19 +6,23 @@ export class ShopIconButton
 {
 	@bindable icon;
 	@bindable iconOn;
+	@bindable active   = false;
 	@bindable outlined = false;
 	@bindable round    = false;
 	@bindable sharp    = false;
 	@bindable twoTone  = false;
+	@bindable disabled = false;
 
 	iconButton;
 	iconButtonElement;
+	element;
 
 	attached()
 	{
 		if( this.iconOn )
 		{
 			this.iconButton = new MDCIconButtonToggle( this.iconButtonElement );
+			this.setListener()
 		}
 		else
 		{
@@ -26,5 +30,17 @@ export class ShopIconButton
 			this.iconButton.unbounded = true;
 		}
 
+	}
+
+	setListener()
+	{
+		this.iconButton.listen( "MDCIconButtonToggle:change", ( event ) =>
+		{
+			const customEvent = new CustomEvent( "change", { detail : event.detail } )
+
+			this.active = event.detail.isOn
+
+			this.element.dispatchEvent( customEvent )
+		} )
 	}
 }

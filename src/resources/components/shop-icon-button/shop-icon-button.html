@@ -1,14 +1,16 @@
-<template class="shop-icon-button">
+<template class="shop-icon-button" ref="element">
 	<require from="./shop-icon-button.css"></require>
 
 	<button
 		ref="iconButtonElement"
 		class="mdc-icon-button
 			${icon ? 'material-icons' : ''}
+			${active ? 'mdc-icon-button--on' : ''}
 
 		"
 		aria-label="Add to favorites"
 		aria-pressed="false"
+		disabled.bind="disabled"
 	>
 		<span class="mdc-icon-button__focus-ring"></span>
 		<div class="mdc-icon-button__ripple"></div>
