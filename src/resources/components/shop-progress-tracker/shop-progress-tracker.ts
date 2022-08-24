@@ -1,8 +1,8 @@
-import { bindable } from "aurelia-framework";
+import { bindable } from 'aurelia-typed-observable-plugin';
 
 export class ShopProgressTracker
 {
-	@bindable align;
-	@bindable textPosition;
-	@bindable withText = false;
+	@bindable align: string;
+	@bindable textPosition: string;
+	@bindable withText: boolean;
 }

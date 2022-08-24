@@ -11,7 +11,7 @@ interface SuggestionDataset
 @autoinject()
 export class AddressField
 {
-	@bindable required = false;
+	@bindable required: boolean = false;
 	@bindable url;
 	@bindable suggestion;
 	@bindable placeId;

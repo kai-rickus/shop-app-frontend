@@ -1,6 +1,11 @@
 import 'bootstrap';
 import { Aurelia } from 'aurelia-framework';
 import environment from './environment';
+import {
+	usePropertyTypeForBindable,
+	usePropertyTypeForObservable,
+	coerceFunctions
+}                  from 'aurelia-typed-observable-plugin';
 
 ( window as any ).process = {
 	env : {
@@ -14,7 +19,14 @@ export function configure( aurelia: Aurelia ): void
 		   .standardConfiguration()
 		   .feature( 'resources' )
 		   .developmentLogging( environment.debug ? 'debug' : 'warn' )
-		   .plugin( "aurelia-async-binding" );
+		   .plugin( "aurelia-async-binding" )
+		   .plugin( "aurelia-typed-observable-plugin" )
+		   .plugin( '@aurelia-mdc-web/all' );
+	;
+
+	aurelia.use.plugin( '@aurelia-mdc-web/card' );
+
+	typedBindablesSetup()
 
 	if( environment.testing )
 	{
@@ -29,4 +41,12 @@ export function configure( aurelia: Aurelia ): void
 	// aurelia.use.plugin('aurelia-html-import-template-loader');
 
 	aurelia.start().then( () => aurelia.setRoot() );
+}
+
+function typedBindablesSetup()
+{
+	usePropertyTypeForBindable( true );
+	usePropertyTypeForObservable( true );
+
+	coerceFunctions.boolean = value => value || value === ''
 }

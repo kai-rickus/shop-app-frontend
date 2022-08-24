@@ -1,7 +1,9 @@
 @use "resources/components/shop-footer/shop-footer";
 @use "resources/components/navigation-bar/navigation-bar";
-@use "@material/layout-grid/mdc-layout-grid";
 @use "@material/ripple";
+
+@use "@material/layout-grid/mdc-layout-grid";
+@use "@aurelia-mdc-web/layout-grid";
 
 @import "src/theme";
 @import "node_modules/bootstrap/scss/bootstrap";

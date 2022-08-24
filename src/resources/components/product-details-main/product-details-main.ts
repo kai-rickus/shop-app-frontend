@@ -29,7 +29,7 @@ export class ProductDetailsMain
 {
 	@bindable data: ProductDataResponse;
 	selectMenu: ShopSelectMenu;
-	submitting = false;
+	submitting      = false;
 	addedToCartToast;
 	toast;
 	favorized;
