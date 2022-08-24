@@ -1,4 +1,4 @@
-@use "src/theme";
+@use "../../../../variables";
 
 $radio-button-button : 50px;
 $payment-logo-height : 82%;
@@ -20,6 +20,6 @@ $payment-logo-height : 82%;
     }
 
     .checkedPayment {
-        background-color : theme.$highlighted !important;
+        background-color : variables.$highlighted !important;
     }
 }

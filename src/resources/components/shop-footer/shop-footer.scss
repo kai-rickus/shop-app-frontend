@@ -1,8 +1,8 @@
-@use "src/layout";
-@use "src/theme";
+@use "../../../layout";
+@use "../../../variables";
 
 $section-height-desktop  : 72px;
-$footer-background-color : rgba(theme.$primary-color, 0.7);
+$footer-background-color : rgba(variables.$primary-color, 0.7);
 
 .shop-footer {
     .container {

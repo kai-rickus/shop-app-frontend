@@ -1,4 +1,4 @@
-@use "src/theme";
+@use "../../../variables";
 
 $height-desktop : 98px;
 
@@ -21,7 +21,7 @@ $height-desktop : 98px;
     }
 
     .shopping-cart-color {
-        background-color : theme.$highlighted !important;
+        background-color : variables.$highlighted !important;
     }
 
     .shopping-cart-badge {

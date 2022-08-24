@@ -1,4 +1,4 @@
-@use "src/theme";
+@use "../../../variables";
 
 .customer-reviews-item {
     .customer-reviews-item__avatar {
@@ -8,7 +8,7 @@
 
     .customer-reviews-item__date {
         font-size   : 0.75rem;
-        color       : theme.$disabled-grey;
+        color       : variables.$disabled-grey;
         font-weight : bold;
     }
 }

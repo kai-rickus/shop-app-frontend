@@ -1,12 +1,12 @@
-@use "src/theme";
+@use "../../../variables";
 
 $grey-highlight-bg        : #e9ecef;
 $grey-highlight-font      : #212529;
 
-$primary-rgb              : theme.$primary-color;
-$highlighted-border       : theme.$highlighted;
+$primary-rgb              : variables.$primary-color;
+$highlighted-border       : variables.$highlighted;
 $highlighted-border-width : 1px;
-$input-background-color   : rgba(theme.$primary-color, 0.7);
+$input-background-color   : rgba(variables.$primary-color, 0.7);
 
 .search-bar {
     min-width : 300px;
@@ -17,7 +17,7 @@ $input-background-color   : rgba(theme.$primary-color, 0.7);
 
     &.search-bar--has-suggestions {
         .search-bar__form {
-            box-shadow : theme.$default-box-shadow theme.$default-box-shadow-color;
+            box-shadow : variables.$default-box-shadow variables.$default-box-shadow-color;
         }
 
         .search-bar__input {
@@ -35,7 +35,7 @@ $input-background-color   : rgba(theme.$primary-color, 0.7);
         backdrop-filter     : blur(30px);
         flex-direction      : column;
         display             : flex;
-        border-radius       : theme.$default-border-radius;
+        border-radius       : variables.$default-border-radius;
         overflow            : hidden;
         transition          : box-shadow;
         transition-duration : 100ms;
@@ -44,23 +44,23 @@ $input-background-color   : rgba(theme.$primary-color, 0.7);
     .search-bar__input {
         width               : 100%;
         border              : none;
-        color               : darken(theme.$text-on-primary, 20%);
+        color               : darken(variables.$text-on-primary, 20%);
         backdrop-filter     : blur(30px);
         transition          : background-color, color;
         transition-duration : 100ms;
         box-sizing          : border-box;
-        border-radius       : theme.$default-border-radius;
+        border-radius       : variables.$default-border-radius;
         background-color    : $input-background-color;
 
         &:focus {
-            color            : theme.$text-on-primary;
-            background-color : theme.$highlighted-background !important;
+            color            : variables.$text-on-primary;
+            background-color : variables.$highlighted-background !important;
             border           : $highlighted-border-width solid #{$highlighted-border};
             padding          : #{6px - $highlighted-border-width} #{12px - $highlighted-border-width};
         }
 
         &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-            color : darken(theme.$text-on-primary, 30%);
+            color : darken(variables.$text-on-primary, 30%);
         }
     }
 
@@ -82,18 +82,18 @@ $input-background-color   : rgba(theme.$primary-color, 0.7);
 
             &:last-of-type {
                 padding-bottom             : 7px;
-                border-bottom-right-radius : theme.$default-border-radius;
-                border-bottom-left-radius  : theme.$default-border-radius;
+                border-bottom-right-radius : variables.$default-border-radius;
+                border-bottom-left-radius  : variables.$default-border-radius;
             }
         }
 
         .search-bar__suggestions__item:hover {
-            background-color : theme.$highlighted-background !important;
+            background-color : variables.$highlighted-background !important;
         }
 
         .search-bar__suggestions__item:focus {
-            background-color : theme.$highlighted-background !important;
-            color            : #{theme.$text-on-primary};
+            background-color : variables.$highlighted-background !important;
+            color            : #{variables.$text-on-primary};
             border           : $highlighted-border-width solid #{$highlighted-border};
             padding          : #{6px - $highlighted-border-width} #{12px - $highlighted-border-width};
         }

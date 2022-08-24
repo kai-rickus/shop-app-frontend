@@ -1,12 +1,12 @@
-@use "src/theme";
+@use "../../../variables";
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
 
 $grey-highlight-bg        : #e9ecef;
 $grey-highlight-font      : #212529;
 
-$primary-rgb              : theme.$primary-color;
-$highlighted-border       : theme.$highlighted;
+$primary-rgb              : variables.$primary-color;
+$highlighted-border       : variables.$highlighted;
 $highlighted-border-width : 1px;
 
 .address-field {
@@ -14,7 +14,7 @@ $highlighted-border-width : 1px;
 
     &.address-field--has-suggestions {
         .address-field__form {
-            box-shadow : theme.$default-box-shadow theme.$default-box-shadow-color;
+            box-shadow : variables.$default-box-shadow variables.$default-box-shadow-color;
         }
 
         .address-field__input {
@@ -32,7 +32,7 @@ $highlighted-border-width : 1px;
         backdrop-filter     : blur(30px);
         flex-direction      : column;
         display             : flex;
-        border-radius       : theme.$default-border-radius;
+        border-radius       : variables.$default-border-radius;
         overflow            : hidden;
         transition          : box-shadow;
         transition-duration : 100ms;
@@ -45,7 +45,7 @@ $highlighted-border-width : 1px;
         transition          : background-color, color;
         transition-duration : 100ms;
         box-sizing          : border-box;
-        border-radius       : theme.$default-border-radius;
+        border-radius       : variables.$default-border-radius;
     }
 
     .address-field__suggestions {
@@ -67,8 +67,8 @@ $highlighted-border-width : 1px;
 
             &:last-of-type {
                 padding-bottom             : 7px;
-                border-bottom-right-radius : theme.$default-border-radius;
-                border-bottom-left-radius  : theme.$default-border-radius;
+                border-bottom-right-radius : variables.$default-border-radius;
+                border-bottom-left-radius  : variables.$default-border-radius;
             }
         }
 

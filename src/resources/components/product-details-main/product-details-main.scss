@@ -1,4 +1,4 @@
-@use "src/theme";
+@use "../../../variables";
 @use "@material/icon-button/mixins";
 
 .product-details-main {
@@ -19,6 +19,6 @@
     }
 
     .favorize-ripple-color {
-        @include mixins.ink-color(theme.$primary-danger)
+        @include mixins.ink-color(variables.$primary-danger)
     }
 }

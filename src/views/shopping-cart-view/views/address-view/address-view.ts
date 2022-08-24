@@ -1,3 +1,5 @@
+import { MdcRadio } from "@aurelia-mdc-web/radio";
+
 export class AddressView
 {
 	addresses = [

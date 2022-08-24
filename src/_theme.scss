@@ -1,0 +1,48 @@
+@use "./variables";
+
+@use '@material/theme' with (
+  $primary: variables.$primary-color,
+  $secondary: variables.$primary-secondary,
+  $background: variables.$primary-danger,
+);
+
+$theme-colors : (
+        "primary": variables.$primary-color,
+        "secondary": variables.$primary-secondary,
+        "danger": variables.$primary-danger
+);
+
+.text-on-primary {
+    color : variables.$text-on-primary;
+}
+
+.text-on-secondary {
+    color : variables.$text-on-secondary;
+}
+
+.text-secondary-dark {
+    color : darken(map-get($theme-colors, "secondary"), 10%);
+}
+
+.text-on-surface {
+    color : variables.$text-on-surface;
+}
+
+.bg-primary {
+    --bs-bg-opacity  : #{alpha(variables.$primary-color)};
+    background-color : rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-secondary {
+    --bs-bg-opacity  : #{alpha(map-get($theme-colors, "secondary"))};
+    background-color : rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.sub-title {
+    color : #4F4F4F;
+}
+
+.cursor-pointer {
+    cursor : pointer;
+}
+

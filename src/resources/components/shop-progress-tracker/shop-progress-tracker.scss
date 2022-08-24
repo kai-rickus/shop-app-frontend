@@ -1,10 +1,10 @@
-@use "src/theme";
+@use "../../../variables";
 @import "node_modules/progress-tracker/src/styles/progress-tracker";
 
-$completed-marker-color : theme.$lighter-primary-color;
-$active-marker-color    : theme.$light-primary-color;
-$marker-hovered-color   : theme.$lightest-primary-color;
-$marker-color           : theme.$disabled-grey;
+$completed-marker-color : variables.$lighter-primary-color;
+$active-marker-color    : variables.$light-primary-color;
+$marker-hovered-color   : variables.$lightest-primary-color;
+$marker-color           : variables.$disabled-grey;
 
 
 .shop-progress-tracker.progress-tracker {
