@@ -2,14 +2,15 @@
 
 @use '@material/theme' with (
   $primary: variables.$primary-color,
-  $secondary: variables.$primary-secondary,
-  $background: variables.$primary-danger,
+  $secondary: variables.$secondary-color,
+  $background: variables.$background,
+  $on-secondary: variables.$text-on-secondary
 );
 
 $theme-colors : (
         "primary": variables.$primary-color,
-        "secondary": variables.$primary-secondary,
-        "danger": variables.$primary-danger
+        "secondary": variables.$secondary-color,
+        "danger": variables.$danger-color
 );
 
 .text-on-primary {

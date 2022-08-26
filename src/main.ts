@@ -45,8 +45,8 @@ export function configure( aurelia: Aurelia ): void
 
 function typedBindablesSetup()
 {
-	usePropertyTypeForBindable( true );
-	usePropertyTypeForObservable( true );
+	// usePropertyTypeForBindable( true );
+	// usePropertyTypeForObservable( true );
 
 	coerceFunctions.boolean = value => value || value === ''
 }

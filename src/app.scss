@@ -6,9 +6,13 @@
 @use '@material/ripple/mdc-ripple';
 @use "@material/ripple";
 
+@use '@material/typography/mdc-typography';
+@use '@material/typography';
 
 @use "@material/layout-grid/mdc-layout-grid";
 @use "@aurelia-mdc-web/layout-grid";
+
+@use '@material/button/mdc-button';
 
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootstrap/scss/mixins";

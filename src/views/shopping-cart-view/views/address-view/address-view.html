@@ -4,7 +4,7 @@
 	<require from="./address-view.css"></require>
 
 	<div class="address-view">
-		<mdc-layout-grid>
+		<mdc-layout-grid no-padding>
 			<mdc-layout-grid-inner class="mb-3">
 				<mdc-layout-grid-cell span="12">
 					<h5 class="text-on-surface">
@@ -15,105 +15,43 @@
 					</h6>
 				</mdc-layout-grid-cell>
 			</mdc-layout-grid-inner>
-			<mdc-layout-grid-inner class="mb-3">
-				<mdc-layout-grid-cell span="6" repeat.for="address of addresses">
-					<mdc-card>
-						<mdc-card-primary-action class="pt-2 pb-2" mdc-ripple surface>
-							<mdc-form-field>
-								<mdc-radio view-model.ref="radio1" model.bind="address" checked.two-way="selectedAddress"></mdc-radio>
-								<label class="w-100 ms-2">
-									<mdc-layout-grid-inner>
-										<mdc-layout-grid-cell span="4">Name:</mdc-layout-grid-cell>
-										<mdc-layout-grid-cell span="8">${address.name}</mdc-layout-grid-cell>
-									</mdc-layout-grid-inner>
-									<mdc-layout-grid-inner>
-										<mdc-layout-grid-cell span="4">Straße:</mdc-layout-grid-cell>
-										<mdc-layout-grid-cell span="8">${address.street}</mdc-layout-grid-cell>
-									</mdc-layout-grid-inner>
-									<mdc-layout-grid-inner>
-										<mdc-layout-grid-cell span="4">Stadt:</mdc-layout-grid-cell>
-										<mdc-layout-grid-cell span="8">${address.city}</mdc-layout-grid-cell>
-									</mdc-layout-grid-inner>
-									<mdc-layout-grid-inner>
-										<mdc-layout-grid-cell span="4">PLZ:</mdc-layout-grid-cell>
-										<mdc-layout-grid-cell span="8">${address.zip}</mdc-layout-grid-cell>
-									</mdc-layout-grid-inner>
-									<mdc-layout-grid-inner>
-										<mdc-layout-grid-cell span="4">Land:</mdc-layout-grid-cell>
-										<mdc-layout-grid-cell span="8">${address.country}</mdc-layout-grid-cell>
-									</mdc-layout-grid-inner>
-								</label>
-							</mdc-form-field>
-						</mdc-card-primary-action>
-					</mdc-card>
+			<mdc-layout-grid-inner>
+				<mdc-layout-grid-cell span="12">
+					<mdc-layout-grid-inner>
+						<mdc-layout-grid-cell span="6" repeat.for="address of addresses">
+							<mdc-card>
+								<mdc-card-primary-action class="pt-2 pb-2" mdc-ripple surface>
+									<mdc-form-field>
+										<mdc-radio view-model.ref="radio1" model.bind="address" checked.two-way="selectedAddress"></mdc-radio>
+										<label class="w-100 ms-2">
+											<mdc-layout-grid-inner>
+												<mdc-layout-grid-cell span="4"><span mdc-body2>Name:</span>
+												</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="8">${address.name}</mdc-layout-grid-cell>
+											</mdc-layout-grid-inner>
+											<mdc-layout-grid-inner>
+												<mdc-layout-grid-cell span="4">Straße:</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="8">${address.street}</mdc-layout-grid-cell>
+											</mdc-layout-grid-inner>
+											<mdc-layout-grid-inner>
+												<mdc-layout-grid-cell span="4">Stadt:</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="8">${address.city}</mdc-layout-grid-cell>
+											</mdc-layout-grid-inner>
+											<mdc-layout-grid-inner>
+												<mdc-layout-grid-cell span="4">PLZ:</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="8">${address.zip}</mdc-layout-grid-cell>
+											</mdc-layout-grid-inner>
+											<mdc-layout-grid-inner>
+												<mdc-layout-grid-cell span="4">Land:</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="8">${address.country}</mdc-layout-grid-cell>
+											</mdc-layout-grid-inner>
+										</label>
+									</mdc-form-field>
+								</mdc-card-primary-action>
+							</mdc-card>
+						</mdc-layout-grid-cell>
+					</mdc-layout-grid-inner>
 				</mdc-layout-grid-cell>
-
-				<!--				<mdc-layout-grid-cell span="6">-->
-				<!--					<mdc-card class="form-check frost rounded">-->
-				<!--						<mdc-card-primary-action>-->
-				<!--							<mdc-form-field>-->
-				<!--								<mdc-radio type="radio" name="addressRadioButton"></mdc-radio>-->
-				<!--								<label class="form-check-label w-100 ms-2">-->
-				<!--									<mdc-layout-grid-inner>-->
-				<!--										<mdc-layout-grid-cell span="4">Name:</mdc-layout-grid-cell>-->
-				<!--										<mdc-layout-grid-cell span="8">Björn Rickus</mdc-layout-grid-cell>-->
-				<!--									</mdc-layout-grid-inner>-->
-				<!--									<mdc-layout-grid-inner>-->
-				<!--										<mdc-layout-grid-cell span="4">Straße:</mdc-layout-grid-cell>-->
-				<!--										<mdc-layout-grid-cell span="8">Jahnstraße 3</mdc-layout-grid-cell>-->
-				<!--									</mdc-layout-grid-inner>-->
-				<!--									<mdc-layout-grid-inner>-->
-				<!--										<mdc-layout-grid-cell span="4">Stadt:</mdc-layout-grid-cell>-->
-				<!--										<mdc-layout-grid-cell span="8">Pulheim</mdc-layout-grid-cell>-->
-				<!--									</mdc-layout-grid-inner>-->
-				<!--									<mdc-layout-grid-inner>-->
-				<!--										<mdc-layout-grid-cell span="4">PLZ:</mdc-layout-grid-cell>-->
-				<!--										<mdc-layout-grid-cell span="8">50259</mdc-layout-grid-cell>-->
-				<!--									</mdc-layout-grid-inner>-->
-				<!--									<mdc-layout-grid-inner>-->
-				<!--										<mdc-layout-grid-cell span="4">Land:</mdc-layout-grid-cell>-->
-				<!--										<mdc-layout-grid-cell span="8">Deutschland</mdc-layout-grid-cell>-->
-				<!--									</mdc-layout-grid-inner>-->
-				<!--								</label>-->
-				<!--							</mdc-form-field>-->
-				<!--						</mdc-card-primary-action>-->
-				<!--					</mdc-card>-->
-				<!--				</mdc-layout-grid-cell>-->
-
-				<!--				<mdc-layout-grid-cell span="6">-->
-				<!--					<mdc-card class="form-check frost rounded">-->
-				<!--						<mdc-card-primary-action>-->
-				<!--							<mdc-form-field>-->
-				<!--								<mdc-radio type="radio" name="addressRadioButton"></mdc-radio>-->
-				<!--								<label class="form-check-label w-100 ms-2">-->
-				<!--									<mdc-layout-grid-inner>-->
-				<!--										<mdc-layout-grid-cell span="4">Name:</mdc-layout-grid-cell>-->
-				<!--										<mdc-layout-grid-cell span="8">Artur Erotschkin</mdc-layout-grid-cell>-->
-				<!--									</mdc-layout-grid-inner>-->
-				<!--									<mdc-layout-grid-inner>-->
-				<!--										<mdc-layout-grid-cell span="4">Straße:</mdc-layout-grid-cell>-->
-				<!--										<mdc-layout-grid-cell span="8">Subbelratherstr. 590</mdc-layout-grid-cell>-->
-				<!--									</mdc-layout-grid-inner>-->
-				<!--									<mdc-layout-grid-inner>-->
-				<!--										<mdc-layout-grid-cell span="4">Stadt:</mdc-layout-grid-cell>-->
-				<!--										<mdc-layout-grid-cell span="8">Köln</mdc-layout-grid-cell>-->
-				<!--									</mdc-layout-grid-inner>-->
-				<!--									<mdc-layout-grid-inner>-->
-				<!--										<mdc-layout-grid-cell span="4">PLZ:</mdc-layout-grid-cell>-->
-				<!--										<mdc-layout-grid-cell span="8">50827</mdc-layout-grid-cell>-->
-				<!--									</mdc-layout-grid-inner>-->
-				<!--									<mdc-layout-grid-inner>-->
-				<!--										<mdc-layout-grid-cell span="4">Land:</mdc-layout-grid-cell>-->
-				<!--										<mdc-layout-grid-cell span="8">Deutschland</mdc-layout-grid-cell>-->
-				<!--									</mdc-layout-grid-inner>-->
-				<!--								</label>-->
-				<!--							</mdc-form-field>-->
-				<!--						</mdc-card-primary-action>-->
-				<!--					</mdc-card>-->
-				<!--				</mdc-layout-grid-cell>-->
-
-			</mdc-layout-grid-inner>
-			<mdc-layout-grid-inner class="mb-3">
 				<mdc-layout-grid-cell>
 					<button type="button" class="btn d-flex btn-sm fw-bold text-on-surface ps-0"
 							data-bs-toggle="modal"
@@ -122,29 +60,29 @@
 						<span class="material-icons-outlined ms-2">add</span>
 					</button>
 				</mdc-layout-grid-cell>
-			</mdc-layout-grid-inner>
-			<mdc-layout-grid-inner class="mb-3">
 				<mdc-layout-grid-cell span="12">
 					<div class="d-flex flex-row justify-content-between">
 						<div class="d-flex justify-content-start">
 							<a type="submit"
-							   class="btn btn-primary border-primary d-flex"
+							   mdc-button
+							   outlined
+							   class="mdc-button--thick-outlined"
 							   route-href="route: items"
 							>
-								<span class="material-icons-outlined me-2">
-									shopping_cart
-								</span>
+								<mdc-icon>shopping_cart</mdc-icon>
 								Zurück
+								<!--								Wenn Label="", dann nicht undefined und Icon kann davor stehen-->
 							</a>
 						</div>
 						<a type="submit"
-						   class="btn btn-secondary border-primary d-flex"
+						   mdc-button
+						   unelevated
 						   route-href="route: payment"
+						   class="mdc-button--secondary"
 						>
-							<span class="text-center">
-								Weiter
-							</span>
-							<span class="material-icons-outlined ms-2">payments</span>
+
+							<span mdc-button-label>Weiter</span>
+							<mdc-icon>payments</mdc-icon>
 						</a>
 					</div>
 				</mdc-layout-grid-cell>

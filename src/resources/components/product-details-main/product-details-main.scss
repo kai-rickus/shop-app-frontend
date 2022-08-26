@@ -1,5 +1,7 @@
 @use "../../../variables";
 @use "@material/icon-button/mixins";
+@use "@material/theme/color-palette";
+
 
 .product-details-main {
     .product-details-main__image {
@@ -11,14 +13,12 @@
     }
 
     .toast-position {
-        //left: 50%;
-        //transform: translate(-50%, -20%);
         right   : 1rem;
         top     : 1rem;
         z-index : 10000;
     }
 
-    .favorize-ripple-color {
-        @include mixins.ink-color(variables.$primary-danger)
+    .favorize-icon-button {
+        @include mixins.ink-color(color-palette.$red-700)
     }
 }
