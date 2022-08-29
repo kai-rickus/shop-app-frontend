@@ -51,61 +51,55 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="col-md-4">
 				<div class="card frost default-main-shadow">
 					<div class="card-body">
-						<div class="row mb-3">
-							<div class="row">
-								<h5 class="text-on-surface">
-									Bestellübersicht
-								</h5>
-								<h6 class="mb-3 sub-title">
-									Alle Kosten im Überblick.
-								</h6>
-							</div>
-							<div class="row pe-0">
-								<div class="col-md-7">
-									<span>Artikel-Kosten (2):</span>
-								</div>
-								<div class="col-md-5 pe-0">
+						<mdc-layout-grid no-padding>
+							<mdc-layout-grid-inner>
+								<mdc-layout-grid-cell span="12">
+									<h5 mdc-headline6 class="text-on-surface">
+										Bestellübersicht
+									</h5>
+									<h6 mdc-subtitle2 class="mb-3 sub-title">
+										Alle Kosten im Überblick.
+									</h6>
+								</mdc-layout-grid-cell>
+								<mdc-layout-grid-cell span="7">
+									<span mdc-body1>Artikel-Kosten (2):</span>
+									<br>
+									<span mdc-body1>Verpackung und Versand:</span>
+								</mdc-layout-grid-cell>
+								<mdc-layout-grid-cell span="5">
 									<div class="text-end">
-										<span>584,98€</span>
+										<span mdc-body1>584,98€</span>
+										<br>
+										<span mdc-body1>0,00€</span>
 									</div>
-								</div>
-							</div>
-							<div class="row pe-0">
-								<div class="col-md-9">
-									<span>Verpackung und Versand:</span>
-								</div>
-								<div class="col-md-3 pe-0">
-									<div class="text-end">
-										<span>0,00€</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row mb-3">
-							<div class="row pe-0">
-								<div class="col-md-7">
-									<h3 class="mb-0 text-secondary-dark">Gesamtbetrag</h3>
-								</div>
-								<div class="col-md-5 text-end text-secondary-dark pe-0">
-									<h3 class="mb-0">299,99</h3>
-								</div>
-								<div class="row pe-0">
-									<p><small>Der Gesamtbetrag enthält die Mwst.</small></p>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="text-center ">
-								<button type="submit" class="btn btn-secondary border-primary w-100">
-									<span class="h6 text-center">
-										Sofort kaufen
-									</span>
-								</button>
-							</div>
-						</div>
+								</mdc-layout-grid-cell>
+								<mdc-layout-grid-cell span="7">
+									<h3 mdc-headline5>Gesamtbetrag</h3>
+									<small mdc-subtitle2>Mwst. inklusive</small>
+								</mdc-layout-grid-cell>
+								<mdc-layout-grid-cell span="5" class="text-end text-secondary-dark pe-0">
+									<span mdc-headline5>299,99</span>
+								</mdc-layout-grid-cell>
+								<mdc-layout-grid-cell span="12">
+								</mdc-layout-grid-cell>
+
+								<mdc-layout-grid-cell span="12">
+									<a type="submit"
+									   mdc-button
+									   unelevated
+									   class="mdc-button--secondary w-100"
+									>
+
+										<span mdc-button-label>Sofort kaufen</span>
+										<mdc-icon>shopping_bag</mdc-icon>
+									</a>
+								</mdc-layout-grid-cell>
+							</mdc-layout-grid-inner>
+						</mdc-layout-grid>
 					</div>
 				</div>
 			</div>

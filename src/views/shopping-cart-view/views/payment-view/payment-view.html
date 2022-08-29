@@ -115,23 +115,27 @@
 		<div class="col-6">
 			<div class="d-flex justify-content-start">
 				<a type="submit"
-				   class="btn btn-primary border-primary d-flex"
-				   href="#/shopping-cart/address"
+				   mdc-button
+				   outlined
+				   class="mdc-button--thick-outlined"
+				   route-href="route: address"
 				>
-					<span class="material-icons-outlined me-2">local_shipping</span>
+					<mdc-icon>local_shipping</mdc-icon>
 					Zurück
+					<!--								Wenn Label="", dann nicht undefined und Icon kann davor stehen-->
 				</a>
 			</div>
 		</div>
 		<div class="d-flex col-6 justify-content-end">
 			<a type="submit"
-			   class="btn btn-secondary border-primary d-flex"
-			   href="#/shopping-cart/overview"
+			   mdc-button
+			   unelevated
+			   route-href="route: overview"
+			   class="mdc-button--secondary"
 			>
-				<span class="text-center">
-					Weiter
-				</span>
-				<span class="material-icons-outlined ms-2">shopping_cart_checkout</span>
+
+				<span mdc-button-label>Weiter</span>
+				<mdc-icon>shopping_cart_checkout</mdc-icon>
 			</a>
 		</div>
 	</div>

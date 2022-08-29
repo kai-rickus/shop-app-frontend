@@ -14,11 +14,11 @@ $theme-colors : (
 );
 
 .text-on-primary {
-    color : variables.$text-on-primary;
+    color : variables.$text-on-primary !important;
 }
 
 .text-on-secondary {
-    color : variables.$text-on-secondary;
+    color : variables.$text-on-secondary !important;
 }
 
 .text-secondary-dark {

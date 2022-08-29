@@ -23,8 +23,8 @@
 					<search-bar found.trigger="search($event)"></search-bar>
 				</div>
 
-				<a href="#/shopping-cart" class="text-on-secondary">
-					<shop-icon-button icon="shopping_cart" outlined.bind="true" class="bg-secondary position-relative ">
+				<a route-href="shopping-cart" class="text-on-secondary">
+					<shop-icon-button icon="shopping_cart" outlined.bind="true" class="position-relative shopping-cart-icon">
 						<span slot="outer" class="shopping-cart-badge badge rounded-pill bg-danger"
 							  textcontent.bind="setItemAmount() & async & signal:'cart-updated'"
 							  show.bind="showBadge"

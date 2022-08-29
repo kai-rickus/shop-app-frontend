@@ -1,4 +1,5 @@
-@use "../../../variables";
+@use "src/variables";
+@use "src/theme";
 
 $height-desktop : 98px;
 
@@ -12,16 +13,7 @@ $height-desktop : 98px;
     .logo-small { height : 50px; }
 
     .shopping-cart-icon {
-        height : 32px;
-        width  : 32px;
-    }
-
-    .shopping-cart-icon-size {
-        font-size : 20px;
-    }
-
-    .shopping-cart-color {
-        background-color : variables.$highlighted !important;
+        background-color : variables.$secondary-color !important;
     }
 
     .shopping-cart-badge {

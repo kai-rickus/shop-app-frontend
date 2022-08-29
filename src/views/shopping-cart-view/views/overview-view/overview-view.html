@@ -141,25 +141,24 @@
 		<div class="row pt-3">
 			<div class="col-6 d-flex justify-content-start">
 				<a type="submit"
-				   class="btn btn-primary border-primary d-flex"
-				   href="#/shopping-cart/payment"
+				   mdc-button
+				   outlined
+				   class="mdc-button--thick-outlined"
+				   route-href="route: payment"
 				>
-				<span class="material-icons-outlined me-2">
-					payments
-				</span>
-
+					<mdc-icon>payments</mdc-icon>
 					Zurück
 				</a>
 			</div>
 			<div class="d-flex col-6 justify-content-end">
 				<a type="submit"
-				   class="btn btn-secondary border-primary d-flex"
-				   href="#/shopping-cart/overview"
+				   mdc-button
+				   unelevated
+				   class="mdc-button--secondary"
 				>
-					<span class="text-center">
-						Kauf abschließen
-					</span>
-					<span class="material-icons-outlined ms-2">shopping_bag</span>
+
+					<span mdc-button-label>Kauf abschließen</span>
+					<mdc-icon>shopping_bag</mdc-icon>
 				</a>
 			</div>
 		</div>

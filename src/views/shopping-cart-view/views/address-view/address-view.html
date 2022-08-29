@@ -20,10 +20,10 @@
 					<mdc-layout-grid-inner>
 						<mdc-layout-grid-cell span="6" repeat.for="address of addresses">
 							<mdc-card>
-								<mdc-card-primary-action class="pt-2 pb-2" mdc-ripple surface>
-									<mdc-form-field>
-										<mdc-radio view-model.ref="radio1" model.bind="address" checked.two-way="selectedAddress"></mdc-radio>
-										<label class="w-100 ms-2">
+								<mdc-card-primary-action mdc-ripple surface>
+									<mdc-form-field class="ps-2">
+										<mdc-radio class="address-radio-button" view-model.ref="radio1" model.bind="address" checked.two-way="selectedAddress"></mdc-radio>
+										<label class="w-100 p-2">
 											<mdc-layout-grid-inner>
 												<mdc-layout-grid-cell span="4"><span mdc-body2>Name:</span>
 												</mdc-layout-grid-cell>
@@ -71,7 +71,6 @@
 							>
 								<mdc-icon>shopping_cart</mdc-icon>
 								Zurück
-								<!--								Wenn Label="", dann nicht undefined und Icon kann davor stehen-->
 							</a>
 						</div>
 						<a type="submit"

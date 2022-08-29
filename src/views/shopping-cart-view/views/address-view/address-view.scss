@@ -1,13 +1,27 @@
 @use "src/theme";
+@use "src/variables";
 
 @use '@material/card/mdc-card';
 @use '@material/card';
+@use '@material/radio/mixins' as radio-mixins;
+@use '@material/ripple/mixins' as ripple-mixins;
 
 @use '@material/radio/mdc-radio';
 @use '@material/radio';
 @use '@material/form-field/mdc-form-field';
+@use "@material/theme/color-palette";
 
 .address-view {
+
+    .address-radio-button {
+        @include radio-mixins.ink-color(variables.$primary-color);
+        @include radio-mixins.checked-stroke-color(variables.$primary-color);
+            @include radio-mixins.focus-indicator-color(variables.$primary-color);
+
+        .mdc-radio__ripple {
+            @include ripple-mixins.states(variables.$primary-color) ;
+        }
+    }
 
 }
 
