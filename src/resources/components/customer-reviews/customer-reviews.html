@@ -10,12 +10,13 @@
 		${review.text}
 	</customer-reviews-item>
 
-	<button type="button"
-			class="btn btn-primary border-primary position-relative bottom-0 start-50 translate-middle-x"
+	<button mdc-button
+			raised
+			type="button"
+			class="position-relative bottom-0 start-50 translate-middle-x"
 			click.trigger="loadReviewsPackage()"
 			if.bind="!allReviewsFetched"
 			disabled.bind="loading">
-
 		Weitere Bewertungen laden
 		<span class="spinner-border spinner-border-sm"
 			  role="status"

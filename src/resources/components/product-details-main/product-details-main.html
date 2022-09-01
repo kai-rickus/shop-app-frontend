@@ -64,13 +64,14 @@
 									</div>
 								</div>
 								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 d-flex justify-content-end">
-									<button type="submit"
-											class="btn btn-secondary border-primary w-100"
+
+									<button mdc-button
+											raised
+											class="product-detail-main-button"
 											disabled.bind="submitting"
 											click.trigger="addToCart()"
 											id="liveToastBtn"
-									>
-										In den Einkaufswagen!
+									>In den Einkaufswagen!
 										<span class="spinner-border spinner-border-sm"
 											  role="status"
 											  aria-hidden="true"
@@ -78,6 +79,7 @@
 										>
 										</span>
 									</button>
+
 								</div>
 
 								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
