@@ -3,7 +3,7 @@
 .custom-rating {
     .custom-rating__stars {
         .material-icons {
-            color : inherit;
+            color : variables.$primary-color;
         }
     }
 }
