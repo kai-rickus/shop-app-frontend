@@ -16,8 +16,10 @@
 													   text-position="top"
 													   with-text="erdtkl"
 								>
+
 									<shop-progress-tracker-step title="Artikel"
 																marker-text="1"
+																route="items"
 																complete.bind="
 																navigation[1].isActive ||
 																navigation[2].isActive ||
@@ -27,6 +29,7 @@
 									</shop-progress-tracker-step>
 									<shop-progress-tracker-step title="Adresse"
 																marker-text="2"
+																route="address"
 																complete.bind="
 																navigation[2].isActive ||
 																navigation[3].isActive"
@@ -35,12 +38,14 @@
 									</shop-progress-tracker-step>
 									<shop-progress-tracker-step title="Zahlung"
 																marker-text="3"
+																route="payment"
 																complete.bind="navigation[3].isActive"
 																active.bind="navigation[2].isActive"
 									>Wie zahlen?
 									</shop-progress-tracker-step>
 									<shop-progress-tracker-step title="Übersicht"
 																marker-text="4"
+																route="overview"
 																active.bind="navigation[3].isActive"
 									>In Ordnung?
 									</shop-progress-tracker-step>

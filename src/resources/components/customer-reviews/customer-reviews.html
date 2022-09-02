@@ -11,25 +11,30 @@
 	</customer-reviews-item>
 
 	<button mdc-button
-			raised
 			type="button"
 			class="position-relative bottom-0 start-50 translate-middle-x"
 			click.trigger="loadReviewsPackage()"
 			if.bind="!allReviewsFetched"
 			disabled.bind="loading">
-		Weitere Bewertungen laden
-		<span class="spinner-border spinner-border-sm"
-			  role="status"
-			  aria-hidden="true"
-			  show.bind="loading">
-		</span>
+		<span mdc-button-label>Weitere Bewertungen laden</span>
+		<mdc-circular-progress
+			style="margin-left: 8px"
+			if.bind="loading"
+			size="18"
+			stroke-width="2"
+		></mdc-circular-progress>
+		<mdc-icon else>refresh</mdc-icon>
+<!--		<span class="spinner-border spinner-border-sm"-->
+<!--			  role="status"-->
+<!--			  aria-hidden="true"-->
+<!--			  show.bind="loading">-->
+<!--		</span>-->
 	</button>
-
 	<span
 		class="text-center d-inline-block w-100"
-		else>
+		else
+	>
 		Keine ${reviews.length === 0 ? '' : 'weiteren ' }Bewertungen gefunden.
 	</span>
-
 </template>
 

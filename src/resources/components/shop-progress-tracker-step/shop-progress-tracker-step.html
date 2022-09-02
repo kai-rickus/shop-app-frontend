@@ -2,9 +2,14 @@
   	${complete ? 'is-complete' : ''}
   	${active ? 'is-active' : ''}
 ">
+	<require from="components/shop-icon-button/shop-icon-button"></require>
+
 	<div class="progress-text">
 		<h5 class="progress-title">${title}</h5>
 		<slot></slot>
 	</div>
-	<div class="progress-marker" data-text="${markerText}"></div>
+	<a route-href.bind="route" class="text-decoration-none">
+		<div class="progress-marker" data-text.bind="markerText">
+		</div>
+	</a>
 </template>

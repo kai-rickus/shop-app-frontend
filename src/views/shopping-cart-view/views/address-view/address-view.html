@@ -18,16 +18,20 @@
 			<mdc-layout-grid-inner>
 				<mdc-layout-grid-cell span="12">
 					<mdc-layout-grid-inner>
-						<mdc-layout-grid-cell span="6" repeat.for="address of addresses">
+						<mdc-layout-grid-cell
+							if.bind="addresses && addresses.length > 0"
+							repeat.for="address of addresses & signal:'addresses-updated'"
+							span="6"
+						>
 							<mdc-card>
-								<mdc-card-primary-action mdc-ripple surface>
+								<mdc-card-primary-action surface disable-ripple="true" class="cursor-pointer">
 									<mdc-form-field class="ps-2">
-										<mdc-radio class="address-radio-button" view-model.ref="radio1" model.bind="address" checked.two-way="selectedAddress"></mdc-radio>
-										<label class="w-100 p-2">
+										<mdc-radio class="address-radio-button" disabled.bind="loading" view-model.ref="radio1" model.bind="address" checked.two-way="selectedAddress" change.trigger="radioChanged()"></mdc-radio>
+										<label class="w-100 p-2 cursor-pointer">
 											<mdc-layout-grid-inner>
 												<mdc-layout-grid-cell span="4"><span mdc-body2>Name:</span>
 												</mdc-layout-grid-cell>
-												<mdc-layout-grid-cell span="8">${address.name}</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="8">${address.firstname} ${address.lastname}</mdc-layout-grid-cell>
 											</mdc-layout-grid-inner>
 											<mdc-layout-grid-inner>
 												<mdc-layout-grid-cell span="4">Straße:</mdc-layout-grid-cell>
@@ -49,6 +53,9 @@
 									</mdc-form-field>
 								</mdc-card-primary-action>
 							</mdc-card>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell else span="12" class="d-flex justify-content-center mt-4">
+							<mdc-circular-progress size="50" stroke-width="5"></mdc-circular-progress>
 						</mdc-layout-grid-cell>
 					</mdc-layout-grid-inner>
 				</mdc-layout-grid-cell>

@@ -16,7 +16,7 @@
     .address-radio-button {
         @include radio-mixins.ink-color(variables.$primary-color);
         @include radio-mixins.checked-stroke-color(variables.$primary-color);
-            @include radio-mixins.focus-indicator-color(variables.$primary-color);
+        @include radio-mixins.focus-indicator-color(variables.$primary-color);
 
         .mdc-radio__ripple {
             @include ripple-mixins.states(variables.$primary-color) ;
