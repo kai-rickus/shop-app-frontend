@@ -16,6 +16,9 @@
 
 @use '@material/circular-progress/mdc-circular-progress';
 
+@use '@material/dialog/mdc-dialog';
+@use '@material/dialog';
+
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootstrap/scss/mixins";
 @import "node_modules/bootstrap/scss/variables";

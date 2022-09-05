@@ -19,44 +19,62 @@
 				<mdc-layout-grid-cell span="12">
 					<mdc-layout-grid-inner>
 						<mdc-layout-grid-cell
-							if.bind="addresses && addresses.length > 0"
+							if.bind="addresses.length > 0"
 							repeat.for="address of addresses & signal:'addresses-updated'"
 							span="6"
 						>
 							<mdc-card>
-								<mdc-card-primary-action surface disable-ripple="true" class="cursor-pointer">
+								<mdc-card-primary-action surface disable-ripple class="cursor-pointer">
 									<mdc-form-field class="ps-2">
-										<mdc-radio class="address-radio-button" disabled.bind="loading" view-model.ref="radio1" model.bind="address" checked.two-way="selectedAddress" change.trigger="radioChanged()"></mdc-radio>
+										<mdc-radio
+											class="address-radio-button"
+											disabled.bind="loading"
+											model.bind="address"
+											checked.two-way="selectedAddress"
+											change.trigger="radioChanged(address.id)"
+										></mdc-radio>
 										<label class="w-100 p-2 cursor-pointer">
 											<mdc-layout-grid-inner>
 												<mdc-layout-grid-cell span="4"><span mdc-body2>Name:</span>
 												</mdc-layout-grid-cell>
-												<mdc-layout-grid-cell span="8">${address.firstname} ${address.lastname}</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="8">
+													<span mdc-body2>${address.firstname} ${address.lastname}</span>
+												</mdc-layout-grid-cell>
 											</mdc-layout-grid-inner>
 											<mdc-layout-grid-inner>
-												<mdc-layout-grid-cell span="4">Straße:</mdc-layout-grid-cell>
-												<mdc-layout-grid-cell span="8">${address.street}</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="4"><span mdc-body2>Straße:</span>
+												</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="8"><span mdc-body2>${address.street}</span>
+												</mdc-layout-grid-cell>
 											</mdc-layout-grid-inner>
 											<mdc-layout-grid-inner>
-												<mdc-layout-grid-cell span="4">Stadt:</mdc-layout-grid-cell>
-												<mdc-layout-grid-cell span="8">${address.city}</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="4"><span mdc-body2>Stadt:</span>
+												</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="8"><span mdc-body2>${address.city}</span>
+												</mdc-layout-grid-cell>
 											</mdc-layout-grid-inner>
 											<mdc-layout-grid-inner>
-												<mdc-layout-grid-cell span="4">PLZ:</mdc-layout-grid-cell>
-												<mdc-layout-grid-cell span="8">${address.zip}</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="4"><span mdc-body2>PLZ:</span>
+												</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="8"><span mdc-body2>${address.zip}</span>
+												</mdc-layout-grid-cell>
 											</mdc-layout-grid-inner>
 											<mdc-layout-grid-inner>
-												<mdc-layout-grid-cell span="4">Land:</mdc-layout-grid-cell>
-												<mdc-layout-grid-cell span="8">${address.country}</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="4"><span mdc-body2>Land:</span>
+												</mdc-layout-grid-cell>
+												<mdc-layout-grid-cell span="8"><span mdc-body2>${address.country}</span>
+												</mdc-layout-grid-cell>
 											</mdc-layout-grid-inner>
 										</label>
 									</mdc-form-field>
 								</mdc-card-primary-action>
 							</mdc-card>
 						</mdc-layout-grid-cell>
+
 						<mdc-layout-grid-cell else span="12" class="d-flex justify-content-center mt-4">
 							<mdc-circular-progress size="50" stroke-width="5"></mdc-circular-progress>
 						</mdc-layout-grid-cell>
+
 					</mdc-layout-grid-inner>
 				</mdc-layout-grid-cell>
 				<mdc-layout-grid-cell>
@@ -119,4 +137,20 @@
 			</span>
 		</div>
 	</shop-dialog>
+
+	<mdc-dialog view-model.ref="errorDialog">
+		<mdc-dialog-title>
+			Unbekannter Fehler
+		</mdc-dialog-title>
+		<mdc-dialog-content>
+			Versuchen Sie es später nochmal!
+		</mdc-dialog-content>
+		<mdc-dialog-actions>
+			<button
+				mdc-button data-mdc-dialog-action="ok"
+				data-mdc-dialog-button-default
+				data-mdc-dialog-initial-focus
+			>Ok</button>
+		</mdc-dialog-actions>
+	</mdc-dialog>
 </template>

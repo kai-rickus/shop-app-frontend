@@ -21,10 +21,11 @@ const SIGNAL_ADDRESSES_UPDATED = "addresses-updated"
 @autoinject
 export class AddressView
 {
-	@observable selectedAddress = null
+	@observable selectedAddress = null;
 
-	addresses = []
-	loading   = false
+	errorDialog;
+	addresses = [];
+	loading   = false;
 
 	constructor( public user: ShopUser, public signaler: BindingSignaler ){}
 
@@ -35,7 +36,7 @@ export class AddressView
 
 	async load()
 	{
-		this.loading = true
+		this.loading = true;
 
 		try
 		{
@@ -43,35 +44,51 @@ export class AddressView
 				headers : { "Authorization" : "Bearer " + this.user.accessToken }
 			} );
 
-			if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
+			if( !response.ok ) throw new Error( `Server returned status ${response.status}` );
 
-			const json = await response.json()
+			const json           = await response.json();
+			this.addresses       = json.addresses;
+			this.selectedAddress = this.addresses.find( item => item.selected );
 
-			this.addresses       = json.addresses as UserAddress[]
-			this.selectedAddress = this.addresses.find( item => item.selected )
-
-			console.log( "reloading..." );
-
-			this.signaler.signal( SIGNAL_ADDRESSES_UPDATED )
+			this.signaler.signal( SIGNAL_ADDRESSES_UPDATED );
 		}
 		catch( error )
 		{
-			console.error( error );
-
-			/* TODO: handling */
+			this.errorDialog.open()
 		}
 
-		this.loading = false
+		this.loading = false;
 	}
 
-	async radioChanged()
+	async radioChanged( id: string )
 	{
-		await this.setSelectedAddress()
-		await this.load()
+		this.loading = true;
+
+		await this.setSelectedAddress( id );
+
+		this.loading = false;
 	}
 
-	async setSelectedAddress()
+	async setSelectedAddress( id: string )
 	{
-		/* TODO: fetch() */
+		try
+		{
+			const response = await fetch( `${environment.backendBaseUrl}user/addresses/setSelected/${id}`, {
+				method  : "post",
+				headers : { "Authorization" : "Bearer " + this.user.accessToken }
+			} );
+
+			if( !response.ok )
+			{
+				const json    = await response.json();
+				const message = json?.error || response.status;
+
+				throw new Error( `Server returned: ${message}` );
+			}
+		}
+		catch( error )
+		{
+			this.errorDialog.open()
+		}
 	}
 }
