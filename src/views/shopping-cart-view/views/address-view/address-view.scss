@@ -1,6 +1,8 @@
 @use "src/theme";
 @use "src/variables";
 
+@use '@material/button/mdc-button';
+
 @use '@material/card/mdc-card';
 @use '@material/card';
 @use '@material/radio/mixins' as radio-mixins;
@@ -19,10 +21,13 @@
         @include radio-mixins.focus-indicator-color(variables.$primary-color);
 
         .mdc-radio__ripple {
-            @include ripple-mixins.states(variables.$primary-color) ;
+            @include ripple-mixins.states(variables.$primary-color);
+            border: none !important;
         }
     }
-
+    .delete-border{
+        border: none !important;
+    }
 }
 
 

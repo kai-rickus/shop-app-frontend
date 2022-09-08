@@ -78,11 +78,14 @@
 					</mdc-layout-grid-inner>
 				</mdc-layout-grid-cell>
 				<mdc-layout-grid-cell>
-					<button type="button" class="btn d-flex btn-sm fw-bold text-on-surface ps-0"
-							data-bs-toggle="modal"
-							data-bs-target="#address-dialog">
+					<button type="submit"
+							click.trigger="createNewAddress()"
+							mdc-button
+							outlined
+							class="mdc-button--thick-outlined"
+					>
 						Adresse hinzufügen
-						<span class="material-icons-outlined ms-2">add</span>
+						<mdc-icon class="ps-2">add</mdc-icon>
 					</button>
 				</mdc-layout-grid-cell>
 				<mdc-layout-grid-cell span="12">
@@ -104,7 +107,6 @@
 						   route-href="route: payment"
 						   class="mdc-button--secondary"
 						>
-
 							<span mdc-button-label>Weiter</span>
 							<mdc-icon>payments</mdc-icon>
 						</a>
@@ -113,30 +115,23 @@
 			</mdc-layout-grid-inner>
 		</mdc-layout-grid>
 	</div>
-	<shop-dialog id="address-dialog" aria-labelledby="address-dialog-label">
-		<div slot="header">
-			<h5 id="address-dialog-label">
-				<mdc-layout-grid-inner class="mb-3">
-					<h5 class="text-on-surface">
-						Deine Adresse
-					</h5>
-					<h6 class="sub-title">
-						Gib eine neue Adresse ein.
-					</h6>
-				</mdc-layout-grid-inner>
-			</h5>
-		</div>
-		<div slot="body">
-			<address-field class="border border-1"></address-field>
-		</div>
-		<div slot="footer">
-			<span>
-				<button type="submit" class="btn btn-sm btn-secondary border-primary d-flex">
-					Neue Adresse hinzufügen und auswählen
-				</button>
-			</span>
-		</div>
-	</shop-dialog>
+
+	<mdc-dialog view-model.ref="addresssDialog">
+		<mdc-dialog-title>
+			Lieferadresse
+		</mdc-dialog-title>
+		<mdc-dialog-content>
+			Hier kannst du eine neue Lieferadresse eingeben.
+		</mdc-dialog-content>
+		<mdc-text-field label="Lieferadresse" class="align-self-center"></mdc-text-field>
+		<mdc-dialog-actions class="justify-content-around">
+			<button mdc-button data-mdc-dialog-action="cancel">Abbrechen</button>
+			<button mdc-button data-mdc-dialog-action="ok" data-mdc-dialog-button-default
+					data-mdc-dialog-initial-focus>
+				Speichern
+			</button>
+		</mdc-dialog-actions>
+	</mdc-dialog>
 
 	<mdc-dialog view-model.ref="errorDialog">
 		<mdc-dialog-title>
@@ -150,7 +145,8 @@
 				mdc-button data-mdc-dialog-action="ok"
 				data-mdc-dialog-button-default
 				data-mdc-dialog-initial-focus
-			>Ok</button>
+			>Ok
+			</button>
 		</mdc-dialog-actions>
 	</mdc-dialog>
 </template>

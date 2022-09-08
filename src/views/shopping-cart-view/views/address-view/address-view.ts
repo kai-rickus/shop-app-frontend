@@ -23,6 +23,7 @@ export class AddressView
 {
 	@observable selectedAddress = null;
 
+	addresssDialog;
 	errorDialog;
 	addresses = [];
 	loading   = false;
@@ -67,6 +68,11 @@ export class AddressView
 		await this.setSelectedAddress( id );
 
 		this.loading = false;
+	}
+
+	createNewAddress()
+	{
+		this.addresssDialog.open()
 	}
 
 	async setSelectedAddress( id: string )
