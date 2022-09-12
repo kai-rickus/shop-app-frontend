@@ -1,4 +1,5 @@
 @use "../../../variables";
+@use "@material/textfield/variables" as textfield-variables;
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
 
@@ -10,11 +11,18 @@ $highlighted-border       : variables.$highlighted;
 $highlighted-border-width : 1px;
 
 .address-field {
-    display : block;
+    display  : block;
+    position : relative;
 
     &.address-field--has-suggestions {
-        .address-field__form {
-            box-shadow : variables.$default-box-shadow variables.$default-box-shadow-color;
+        .mdc-text-field {
+            .mdc-notched-outline__leading {
+                border-bottom-left-radius : 0;
+            }
+
+            .mdc-notched-outline__trailing {
+                border-bottom-right-radius : 0;
+            }
         }
 
         .address-field__input {
@@ -23,20 +31,24 @@ $highlighted-border-width : 1px;
         }
     }
 
-    .address-field__form {
-        position            : absolute;
-        width               : 100%;
-        top                 : 0;
-        left                : 0;
-        z-index             : 100;
-        backdrop-filter     : blur(30px);
-        flex-direction      : column;
-        display             : flex;
-        border-radius       : variables.$default-border-radius;
-        overflow            : hidden;
-        transition          : box-shadow;
-        transition-duration : 100ms;
+    .mdc-text-field {
+        width : 100%;
     }
+
+    //.address-field__form {
+    //    position            : absolute;
+    //    width               : 100%;
+    //    top                 : 0;
+    //    left                : 0;
+    //    z-index             : 100;
+    //    backdrop-filter     : blur(30px);
+    //    flex-direction      : column;
+    //    display             : flex;
+    //    border-radius       : variables.$default-border-radius;
+    //    overflow            : hidden;
+    //    transition          : box-shadow;
+    //    transition-duration : 100ms;
+    //}
 
     .address-field__input {
         width               : 100%;
@@ -55,7 +67,9 @@ $highlighted-border-width : 1px;
         margin-top    : 1px;
         margin-bottom : 0;
         display       : block;
-        position: absolute;
+        position      : absolute;
+        top           : textfield-variables.$height;
+        z-index       : 200;
 
         .address-field__suggestions__item {
             border-radius : 0;
@@ -77,7 +91,7 @@ $highlighted-border-width : 1px;
         }
 
         .address-field__suggestions__item:focus {
-            $border-size     : 1px;
+            $border-size     : 0px;
 
             background-color : darken(white, 15%);
             box-sizing       : border-box;
@@ -86,7 +100,6 @@ $highlighted-border-width : 1px;
             padding-left     : calc(#{$input-padding-x} - #{$border-size});
             padding-right    : calc(#{$input-padding-x} - #{$border-size});
             padding-bottom   : calc(#{$input-padding-y} - #{$border-size});
-
         }
     }
 }

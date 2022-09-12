@@ -11,15 +11,19 @@ interface SuggestionDataset
 @autoinject()
 export class AddressField
 {
-	@bindable required: boolean = false;
-	@bindable url;
-	@bindable suggestion;
-	@bindable placeId;
+	THROTTLE_DURATION = 250;
+
+	@bindable url: string;
+	@bindable suggestion: string;
+	@bindable placeId: string;
+	@bindable required    = false;
+	@bindable label       = "";
+	@bindable placeholder = "";
 
 	inputValue;
 	suggestions      = [];
 	selectionCounter = -1
-	formElement;
+	// formElement;
 	element;
 	taskQueue;
 
@@ -33,7 +37,7 @@ export class AddressField
 		this.suggestions = []
 	}
 
-	dispatchEvent( suggestionText, placeId )
+	dispatchEvent( suggestionText: string, placeId: string )
 	{
 		const event = new CustomEvent( 'found', {
 			detail : {
@@ -98,7 +102,7 @@ export class AddressField
 			const directParent = focused?.parentElement
 			const grandParent  = focused?.parentElement?.parentElement
 
-			if( directParent !== this.formElement && grandParent !== this.formElement )
+			if( directParent !== this.element && grandParent !== this.element )
 			{
 				this.clearSuggestions()
 			}
@@ -117,4 +121,6 @@ export class AddressField
 		} )
 	}
 }
+
+/* TODO: error handling */
 

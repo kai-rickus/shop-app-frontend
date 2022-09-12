@@ -21,10 +21,7 @@ export function configure( aurelia: Aurelia ): void
 		   .developmentLogging( environment.debug ? 'debug' : 'warn' )
 		   .plugin( "aurelia-async-binding" )
 		   .plugin( "aurelia-typed-observable-plugin" )
-		   .plugin( '@aurelia-mdc-web/all' );
-	;
-
-	aurelia.use.plugin( '@aurelia-mdc-web/card' );
+		   .plugin( '@aurelia-mdc-web/all' )
 
 	typedBindablesSetup()
 

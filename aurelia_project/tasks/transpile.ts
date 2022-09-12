@@ -8,6 +8,8 @@ import * as fs from 'fs';
 import { Transform } from 'stream';
 import { CLIOptions, build, Configuration } from 'aurelia-cli';
 
+const duration   = require( 'gulp-duration' )
+
 function configureEnvironment() {
   let env = CLIOptions.getEnvironment();
 
@@ -36,6 +38,7 @@ function buildTypeScript() {
     }))
     .pipe(gulpIf(CLIOptions.hasFlag('watch'), plumber()))
     .pipe(typescriptCompiler())
+    .pipe( duration( '[buildTypeScript] time passed' ) )
     .pipe(build.bundle());
 }
 

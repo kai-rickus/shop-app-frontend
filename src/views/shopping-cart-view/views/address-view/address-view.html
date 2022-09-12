@@ -81,7 +81,6 @@
 					<button type="submit"
 							click.trigger="createNewAddress()"
 							mdc-button
-							outlined
 							class="mdc-button--thick-outlined"
 					>
 						Adresse hinzufügen
@@ -123,8 +122,14 @@
 		<mdc-dialog-content>
 			Hier kannst du eine neue Lieferadresse eingeben.
 		</mdc-dialog-content>
-		<mdc-text-field label="Lieferadresse" class="align-self-center"></mdc-text-field>
-		<mdc-dialog-actions class="justify-content-around">
+		<!--		<mdc-text-field label="Lieferadresse" class="align-self-center"></mdc-text-field>-->
+
+		<address-field
+			label="Adresse"
+			placeholder="Tippe zum Suchen"
+		></address-field>
+
+		<mdc-dialog-actions>
 			<button mdc-button data-mdc-dialog-action="cancel">Abbrechen</button>
 			<button mdc-button data-mdc-dialog-action="ok" data-mdc-dialog-button-default
 					data-mdc-dialog-initial-focus>

@@ -89,21 +89,17 @@
 										</div>
 									</div>
 									<div class="row">
-
 										<div class="col">
-
 											<div>
-
-												<address-field required suggestion.bind="getAddressSuggestions"
-															   class="mb-3"
-															   place-id.two-way="formInput.placeId"
-
-												>
-												</address-field>
-
+												<address-field
+													required
+													suggestion.bind="getAddressSuggestions"
+													place-id.two-way="formInput.placeId"
+													label="Adresse"
+													placeholder="Tippe zum Suchen"
+												></address-field>
 											</div>
 										</div>
-
 									</div>
 
 									<p class="alert-danger border border-danger p-2" show.bind="forbiddenErrorOccured">

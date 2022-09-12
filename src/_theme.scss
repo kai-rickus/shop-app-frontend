@@ -1,6 +1,6 @@
 @use "./variables";
 
-@use '@material/theme' with (
+@use '../node_modules/@material/theme' with (
   $primary: variables.$primary-color,
   $secondary: variables.$secondary-color,
   $background: variables.$background,

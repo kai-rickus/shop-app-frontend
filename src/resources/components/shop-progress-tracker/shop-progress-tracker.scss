@@ -1,5 +1,5 @@
 @use "../../../variables";
-@import "node_modules/progress-tracker/src/styles/progress-tracker";
+@import "progress-tracker/src/styles/progress-tracker";
 
 $completed-marker-color : variables.$lighter-primary-color;
 $active-marker-color    : variables.$light-primary-color;
@@ -33,6 +33,7 @@ $marker-color           : variables.$disabled-grey;
 
             &::before {
                 background-color : $marker-color;
+                z-index          : 8 !important;
             }
 
             &::after {

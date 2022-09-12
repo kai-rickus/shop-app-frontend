@@ -5,6 +5,8 @@ import * as htmlmin from 'gulp-htmlmin';
 import * as gulpIf from 'gulp-if';
 import * as plumber from 'gulp-plumber';
 
+const duration   = require( 'gulp-duration' )
+
 export default function processMarkup() {
   return gulp.src(project.markupProcessor.source, {sourcemaps: true, since: gulp.lastRun(processMarkup)})
     .pipe(gulpIf(CLIOptions.hasFlag('watch'), plumber()))
@@ -20,6 +22,7 @@ export default function processMarkup() {
         minifyJS: true,
         ignoreCustomFragments: [/\${.*?}/g] // ignore interpolation expressions
     }))
+    .pipe( duration( '[processMarkup] time passed' ) )
     .pipe(build.bundle());
 }
 
