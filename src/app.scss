@@ -36,6 +36,9 @@
 @use '@material/card/mdc-card';
 @use '@material/card';
 
+@use '@material/checkbox/mdc-checkbox';
+@use '@material/checkbox';
+
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootstrap/scss/mixins";
 @import "node_modules/bootstrap/scss/variables";
