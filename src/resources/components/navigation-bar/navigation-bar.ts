@@ -24,29 +24,38 @@ export class NavigationBar
 
 	async setItemAmount()
 	{
-		let itemAmount = 0;
 
-		const response = await fetch( `${environment.backendBaseUrl}cart/get`, {
-			headers : { "Authorization" : "Bearer " + this._user.accessToken }
-		} );
-		const data     = await response.json()
-		data.items
+		if( !this._user.refreshToken ) return
 
-		for( const item of data.items )
+		try
 		{
-			itemAmount = itemAmount + item.amount
-		}
+			let itemAmount = 0;
 
-		if( itemAmount > 0 )
+			const response = await fetch( `${environment.backendBaseUrl}cart/get`, {
+				headers : { "Authorization" : "Bearer " + this._user.accessToken }
+			} );
+			const data     = await response.json()
+			data.items
+
+			for( const item of data.items )
+			{
+				itemAmount = itemAmount + item.amount
+			}
+
+			if( itemAmount > 0 )
+			{
+				this.showBadge = true
+			}
+			else
+			{
+				this.showBadge = false
+			}
+
+			return itemAmount
+		}
+		catch( error )
 		{
-			this.showBadge = true
+			console.error( error );
 		}
-		else
-		{
-			this.showBadge = false
-		}
-
-		return itemAmount
-
 	}
 }

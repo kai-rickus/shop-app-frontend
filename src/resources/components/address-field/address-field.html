@@ -7,6 +7,7 @@
 	<require from="attributes/custom-focus"></require>
 
 	<mdc-text-field
+		view-model.ref="input"
 		label.bind="label"
 		outlined
 		required.bind="required"
@@ -16,6 +17,7 @@
 		keydown.trigger="onKeyDown($event)"
 		custom-focus.bind="selectionCounter === -1"
 		focus.trigger="selectionCounter = -1"
+		valid.two-way="valid"
 	></mdc-text-field>
 	<mdc-text-field-helper-line>
 		<mdc-text-field-helper-text validation>Darf nicht leer sein</mdc-text-field-helper-text>

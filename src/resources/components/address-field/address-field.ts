@@ -19,7 +19,9 @@ export class AddressField
 	@bindable required    = false;
 	@bindable label       = "";
 	@bindable placeholder = "";
+	@bindable valid: boolean;
 
+	input;
 	inputValue;
 	suggestions      = [];
 	selectionCounter = -1
@@ -119,6 +121,14 @@ export class AddressField
 
 			this.suggestions = data.suggestions
 		} )
+	}
+
+	validate()
+	{
+		// @ts-ignore
+		this.input.foundation.styleValidity()
+
+		return this.input.valid
 	}
 }
 

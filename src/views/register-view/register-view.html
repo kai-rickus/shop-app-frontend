@@ -5,67 +5,46 @@
 	<div class="register-view">
 		<mdc-card class="p-3 default-form-card box-shadow-register">
 			<div mdc-headline6>Registrieren</div>
-			<form submit.trigger="submit()">
+			<form>
 				<mdc-layout-grid-inner>
 					<mdc-layout-grid-cell span="6">
 						<div class="au-text-field">
 							<mdc-text-field
-								ref="standard"
 								label="Vorname"
 								outlined
-								required>
+								required
+								value.two-way="formInput.firstname"
+								view-model.ref="inputs.firstname"
+							>
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
 								<mdc-text-field-helper-text validation>Darf nicht leer sein</mdc-text-field-helper-text>
 							</mdc-text-field-helper-line>
 						</div>
-
-						<!--<div class="form-floating mb-3">-->
-						<!--	<input type="text"-->
-						<!--		   id="firstname"-->
-						<!--		   name="firstname"-->
-						<!--		   class="form-control"-->
-						<!--		   placeholder="Vorname"-->
-						<!--		   required-->
-						<!--		   value.two-way="formInput.firstname"-->
-						<!--	>-->
-						<!--	<label for="firstname">Vorname</label>-->
-						<!--</div>-->
 					</mdc-layout-grid-cell>
 					<mdc-layout-grid-cell span="6">
 						<div class="au-text-field">
 							<mdc-text-field
-								ref="standard"
 								label="Nachname"
 								outlined
 								required
 								value.two-way="formInput.lastname"
+								view-model.ref="inputs.lastname"
 							>
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
 								<mdc-text-field-helper-text validation>Darf nicht leer sein</mdc-text-field-helper-text>
 							</mdc-text-field-helper-line>
 						</div>
-
-						<!--<div class="form-floating mb-3">-->
-						<!--	<input type="text"-->
-						<!--		   id="lastname"-->
-						<!--		   class="form-control"-->
-						<!--		   placeholder="Nachname"-->
-						<!--		   required-->
-						<!--		   value.two-way="formInput.lastname"-->
-						<!--	>-->
-						<!--	<label for="lastname">Nachname</label>-->
-						<!--</div>-->
 					</mdc-layout-grid-cell>
 					<mdc-layout-grid-cell span="12">
 						<div class="au-text-field">
 							<mdc-text-field
-								ref="standard"
 								label="Email-Adresse"
 								outlined
 								required
 								value.two-way="formInput.email"
+								view-model.ref="inputs.email"
 							>
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
@@ -73,77 +52,37 @@
 							</mdc-text-field-helper-line>
 						</div>
 					</mdc-layout-grid-cell>
-
-					<!--									<div class="form-floating mb-3">-->
-					<!--										<input type="email"-->
-					<!--											   id="email-form-field"-->
-					<!--											   name="email"-->
-					<!--											   class="form-control"-->
-					<!--											   placeholder="E-Mail"-->
-					<!--											   required-->
-					<!--											   value.two-way="formInput.email"-->
-					<!--										>-->
-					<!--										<label for="email-form-field">Email</label>-->
-					<!--									</div>-->
 					<mdc-layout-grid-cell span="6">
 						<div class="au-text-field">
 							<mdc-text-field
 								type="password"
-								ref="passwort"
+								view-model.ref="inputs.password"
 								label="Passwort"
 								outlined
 								required
-								ref="password"
-								change.trigger="passwordChanged()"
 							>
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
 								<mdc-text-field-helper-text validation>Darf nicht leer sein</mdc-text-field-helper-text>
 							</mdc-text-field-helper-line>
 						</div>
-
-						<!--<div class="form-floating mb-3">-->
-						<!--	<input type="password"-->
-						<!--		   name="password"-->
-						<!--		   id="password-form-field"-->
-						<!--		   class="form-control"-->
-						<!--		   placeholder="Passwort"-->
-						<!--		   required-->
-						<!--		   ref="password"-->
-						<!--		   change.trigger="passwordChanged()"-->
-						<!--	>-->
-						<!--	<label for="password-form-field">Passwort</label>-->
-						<!--</div>-->
 					</mdc-layout-grid-cell>
 					<mdc-layout-grid-cell span="6">
 						<div class="au-text-field">
 							<mdc-text-field
 								type="password"
-								ref="standard"
+								view-model.ref="inputs.passwordConfirm"
 								label="Passwort wiederholen"
+								required
 								outlined
-								required value.two-way="formInput.password"
-								ref="passwordConfirm"
-								change.trigger="passwordChanged()"
+								value.two-way="formInput.password"
+								valid.bind="password.value === passwordConfirm.value"
 							>
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
 								<mdc-text-field-helper-text validation>Muss übereinstimmen</mdc-text-field-helper-text>
 							</mdc-text-field-helper-line>
 						</div>
-
-						<!--<div class="form-floating mb-3">-->
-						<!--	<input type="password"-->
-						<!--		   id="repeatedPassword-form-field"-->
-						<!--		   class="form-control"-->
-						<!--		   placeholder="Passwort wiederholen"-->
-						<!--		   required-->
-						<!--		   value.two-way="formInput.password"-->
-						<!--		   ref="passwordConfirm"-->
-						<!--		   change.trigger="passwordChanged()"-->
-						<!--	>-->
-						<!--	<label for="repeatedPassword-form-field">Passwort wiederholen</label>-->
-						<!--</div>-->
 					</mdc-layout-grid-cell>
 					<mdc-layout-grid-cell span="12">
 						<address-field
@@ -152,15 +91,9 @@
 							place-id.two-way="formInput.placeId"
 							label="Adresse"
 							placeholder="Tippe zum Suchen"
+							view-model.ref="inputs.address"
 						></address-field>
 					</mdc-layout-grid-cell>
-
-					<!--									<p class="alert-danger border border-danger p-2" show.bind="forbiddenErrorOccured">-->
-					<!--										Email/ Passwort falsch.-->
-					<!--									</p>-->
-					<!--									<p class="alert-danger border border-danger p-2" show.bind="unknownErrorOccured">-->
-					<!--										UPPS! Unerwarteter Fehler. probiere es später erneut.-->
-					<!--									</p>-->
 					<mdc-layout-grid-cell span="12">
 						<mdc-layout-grid-cell span="12">
 							<mdc-form-field>
@@ -171,20 +104,37 @@
 
 						<mdc-layout-grid-cell span="12">
 							<mdc-form-field>
-								<mdc-checkbox required></mdc-checkbox>
+								<mdc-checkbox
+									checked.two-way="conditionsAccepted"
+									view-model.ref="inputs.conditions"
+								></mdc-checkbox>
 								<label>Du hast unsere
 									<a href="https://www.ihk-muenchen.de/de/Service/Recht-und-Steuern/Vertragsrecht/mustervertraege/agb-webshop.html">AGB's</a>
 									und
 									<a href="https://muster-vorlage.ch/wp-content/uploads/2018/09/Muster-Datenschutzerklaerung-Schweiz.jpg">Datenschutzbestimmung</a>
 									gelesen und akzeptierst diese.</label>
 							</mdc-form-field>
+							<mdc-text-field-helper-line class="conditions-error-line ${conditionsAccepted === false ? 'conditions-error-line--show' : ''}">
+								<mdc-text-field-helper-text>AGB muss sein, Brudi</mdc-text-field-helper-text>
+							</mdc-text-field-helper-line>
 						</mdc-layout-grid-cell>
 					</mdc-layout-grid-cell>
 
 					<mdc-layout-grid-cell span="12">
-						<button class="mt-2" mdc-button unelevated type="submit" disabled.bind="submitting">
+						<button
+							mdc-button
+							unelevated
+							type="button"
+							disabled.bind="submitting"
+							click.trigger="submit()"
+						>
 							Registrieren
-							<span class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true" show.bind="submitting"></span>
+							<span
+								class="spinner-border spinner-border-sm ms-2"
+								role="status"
+								aria-hidden="true"
+								show.bind="submitting"
+							></span>
 						</button>
 					</mdc-layout-grid-cell>
 				</mdc-layout-grid-inner>
