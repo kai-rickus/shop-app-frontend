@@ -1,6 +1,7 @@
 <template>
 	<require from="./register-view.css"></require>
 	<require from="components/address-field/address-field"></require>
+	<require from="attributes/mdc-textfield-pattern"></require>
 
 	<div class="register-view">
 		<mdc-card class="p-3 default-form-card box-shadow-register">
@@ -60,10 +61,11 @@
 								label="Passwort"
 								outlined
 								required
+								mdc-textfield-pattern.bind="passwordRegex"
 							>
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
-								<mdc-text-field-helper-text validation>Darf nicht leer sein</mdc-text-field-helper-text>
+								<mdc-text-field-helper-text validation>Muss einen Klein- und Großbuchstaben, eine Zahl, ein Sonderzeichen enthalten</mdc-text-field-helper-text>
 							</mdc-text-field-helper-line>
 						</div>
 					</mdc-layout-grid-cell>
@@ -112,10 +114,10 @@
 									<a href="https://www.ihk-muenchen.de/de/Service/Recht-und-Steuern/Vertragsrecht/mustervertraege/agb-webshop.html">AGB's</a>
 									und
 									<a href="https://muster-vorlage.ch/wp-content/uploads/2018/09/Muster-Datenschutzerklaerung-Schweiz.jpg">Datenschutzbestimmung</a>
-									gelesen und akzeptierst diese.</label>
+									gelesen und akzeptierst diese.*</label>
 							</mdc-form-field>
 							<mdc-text-field-helper-line class="conditions-error-line ${conditionsAccepted === false ? 'conditions-error-line--show' : ''}">
-								<mdc-text-field-helper-text>AGB muss sein, Brudi</mdc-text-field-helper-text>
+								<mdc-text-field-helper-text>Es müssen unsere AGB's und Datenschutzbestimmung akzeptiert werden.</mdc-text-field-helper-text>
 							</mdc-text-field-helper-line>
 						</mdc-layout-grid-cell>
 					</mdc-layout-grid-cell>

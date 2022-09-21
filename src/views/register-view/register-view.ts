@@ -1,13 +1,13 @@
-import { Redirect, Router } from "aurelia-router";
-import { TaskQueue }        from "aurelia-task-queue";
-import jwt_decode           from "jwt-decode";
-import environment          from "../../environment";
-import { AddressField }     from "../../resources/components/address-field/address-field";
-import { ShopUser }         from "../../services/shop-user";
-import { JwtPayload }       from "../login-view/login-view";
-import { autoinject }       from "aurelia-framework";
-import { MdcTextField }     from "@aurelia-mdc-web/text-field";
-import { MdcCheckbox }      from "@aurelia-mdc-web/checkbox";
+import { Redirect, Router }     from "aurelia-router";
+import { TaskQueue }            from "aurelia-task-queue";
+import jwt_decode               from "jwt-decode";
+import environment              from "../../environment";
+import { AddressField }         from "../../resources/components/address-field/address-field";
+import { ShopUser }             from "../../services/shop-user";
+import { JwtPayload }           from "../login-view/login-view";
+import { autoinject, bindable } from "aurelia-framework";
+import { MdcTextField }         from "@aurelia-mdc-web/text-field";
+import { MdcCheckbox }          from "@aurelia-mdc-web/checkbox";
 
 interface Inputs
 {
@@ -44,6 +44,11 @@ export class RegisterView
 	};
 	submitting         = false;
 	conditionsAccepted = null;
+	passwordRules      = {
+		minlength : 3,
+		maxlength : 50
+	};
+	passwordRegex      = `^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{${this.passwordRules.minlength},${this.passwordRules.maxlength}}$`;
 
 	constructor( public router: Router, public user: ShopUser, public taskQueue: TaskQueue ){}
 
@@ -139,6 +144,5 @@ export class RegisterView
 		this.submitting = false
 
 	}
-
 }
 
