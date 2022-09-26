@@ -13,6 +13,11 @@
             @include ripple-mixins.states(variables.$primary-color);
         }
     }
+
+}
+
+.address-field {
+    padding : 0 24px !important;
 }
 
 

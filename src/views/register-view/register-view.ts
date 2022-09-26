@@ -1,13 +1,11 @@
-import { Redirect, Router }     from "aurelia-router";
-import { TaskQueue }            from "aurelia-task-queue";
-import jwt_decode               from "jwt-decode";
-import environment              from "../../environment";
-import { AddressField }         from "../../resources/components/address-field/address-field";
-import { ShopUser }             from "../../services/shop-user";
-import { JwtPayload }           from "../login-view/login-view";
-import { autoinject, bindable } from "aurelia-framework";
-import { MdcTextField }         from "@aurelia-mdc-web/text-field";
-import { MdcCheckbox }          from "@aurelia-mdc-web/checkbox";
+import { MdcCheckbox }      from "@aurelia-mdc-web/checkbox";
+import { MdcTextField }     from "@aurelia-mdc-web/text-field";
+import { autoinject }       from "aurelia-framework";
+import { Redirect, Router } from "aurelia-router";
+import { TaskQueue }        from "aurelia-task-queue";
+import environment          from "../../environment";
+import { AddressField }     from "../../resources/components/address-field/address-field";
+import { ShopUser }         from "../../services/shop-user";
 
 interface Inputs
 {
@@ -48,6 +46,7 @@ export class RegisterView
 		minlength : 3,
 		maxlength : 50
 	};
+	emailRegex         = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
 	passwordRegex      = `^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{${this.passwordRules.minlength},${this.passwordRules.maxlength}}$`;
 
 	constructor( public router: Router, public user: ShopUser, public taskQueue: TaskQueue ){}
@@ -107,42 +106,30 @@ export class RegisterView
 
 	async submit()
 	{
-		if( !this.isValid() ) return console.log( "not valid" );
-
-		console.log( "is valid" )
-
-		return
+		if( !this.isValid() ) return
 
 		this.submitting = true
 
 		try
 		{
-			const url     = `${environment.backendBaseUrl}authentication/register`
-			const options = {
+			const url      = `${environment.backendBaseUrl}authentication/register`
+			const options  = {
 				method  : "put",
 				body    : JSON.stringify( this.formInput ),
 				headers : { "Content-Type" : "application/json" },
 			}
-			debugger
 			const response = await fetch( url, options );
-			debugger
 
-			if( response.status === 400 )
-			{
-				debugger
-				throw new Error( response.statusText )
-			}
+			if( response.status === 400 || response.status === 403 ) throw new Error( response.statusText )
+
 			this.router.navigateToRoute( "email-sent" )
 		}
 		catch( error )
 		{
-			console.log( "fehler" );
-			// this.forbiddenErrorOccured = error.message === "Forbidden"
-			// this.unknownErrorOccured   = error.message !== "Forbidden"
+			/* TODO: Error Dialog */
 		}
 
 		this.submitting = false
-
 	}
 }
 

@@ -46,10 +46,11 @@
 								required
 								value.two-way="formInput.email"
 								view-model.ref="inputs.email"
+								mdc-textfield-pattern.bind="emailRegex"
 							>
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
-								<mdc-text-field-helper-text validation>Darf nicht leer sein</mdc-text-field-helper-text>
+								<mdc-text-field-helper-text validation>Muss eine valide Email-Adresse sein</mdc-text-field-helper-text>
 							</mdc-text-field-helper-line>
 						</div>
 					</mdc-layout-grid-cell>

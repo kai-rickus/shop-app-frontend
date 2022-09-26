@@ -33,7 +33,7 @@ $marker-color           : variables.$disabled-grey;
 
             &::before {
                 background-color : $marker-color;
-                z-index          : 8 !important;
+                z-index          : 5 !important;
             }
 
             &::after {
