@@ -5,9 +5,12 @@
 
 	<div class="register-view">
 		<mdc-card class="p-3 default-form-card box-shadow-register">
-			<div mdc-headline6>Registrieren</div>
+
 			<form>
 				<mdc-layout-grid-inner>
+					<mdc-layout-grid-cell span="12">
+						<div mdc-headline6>Registrieren</div>
+					</mdc-layout-grid-cell>
 					<mdc-layout-grid-cell span="6">
 						<div class="au-text-field">
 							<mdc-text-field
@@ -42,15 +45,28 @@
 						<div class="au-text-field">
 							<mdc-text-field
 								label="Email-Adresse"
+								type="email"
 								outlined
 								required
 								value.two-way="formInput.email"
 								view-model.ref="inputs.email"
 								mdc-textfield-pattern.bind="emailRegex"
+								focusout.trigger="showEmailUsedErrorText = inputs.email.input_.validity.patternMismatch"
 							>
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
-								<mdc-text-field-helper-text validation>Muss eine valide Email-Adresse sein</mdc-text-field-helper-text>
+								<mdc-text-field-helper-text
+									show.bind="!showEmailUsedErrorText"
+									validation
+								>
+									Muss eine valide Email-Adresse sein
+								</mdc-text-field-helper-text>
+								<mdc-text-field-helper-text
+									validation
+									show.bind="showEmailUsedErrorText"
+								>
+									Email-Adresse bereits registriert
+								</mdc-text-field-helper-text>
 							</mdc-text-field-helper-line>
 						</div>
 					</mdc-layout-grid-cell>
@@ -144,4 +160,20 @@
 			</form>
 		</mdc-card>
 	</div>
+	<mdc-dialog view-model.ref="unknownErrorDialog">
+		<mdc-dialog-title>
+			Unbekannter Fehler
+		</mdc-dialog-title>
+		<mdc-dialog-content>
+			Versuchen Sie es später nochmal!
+		</mdc-dialog-content>
+		<mdc-dialog-actions>
+			<button
+				mdc-button data-mdc-dialog-action="ok"
+				data-mdc-dialog-button-default
+				data-mdc-dialog-initial-focus
+			>Ok
+			</button>
+		</mdc-dialog-actions>
+	</mdc-dialog>
 </template>

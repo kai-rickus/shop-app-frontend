@@ -1,8 +1,10 @@
 import { MdcCheckbox }      from "@aurelia-mdc-web/checkbox";
 import { MdcTextField }     from "@aurelia-mdc-web/text-field";
+import { ok }               from "assert";
 import { autoinject }       from "aurelia-framework";
 import { Redirect, Router } from "aurelia-router";
 import { TaskQueue }        from "aurelia-task-queue";
+import { Debugger }         from "inspector";
 import environment          from "../../environment";
 import { AddressField }     from "../../resources/components/address-field/address-field";
 import { ShopUser }         from "../../services/shop-user";
@@ -21,7 +23,7 @@ interface Inputs
 @autoinject
 export class RegisterView
 {
-	formInput          = {
+	formInput              = {
 		firstname  : "",
 		lastname   : "",
 		email      : "",
@@ -31,7 +33,7 @@ export class RegisterView
 		newsletter : false
 
 	};
-	inputs: Inputs     = {
+	inputs: Inputs         = {
 		firstname       : null,
 		lastname        : null,
 		email           : null,
@@ -40,14 +42,16 @@ export class RegisterView
 		address         : null,
 		conditions      : null
 	};
-	submitting         = false;
-	conditionsAccepted = null;
-	passwordRules      = {
-		minlength : 3,
+	submitting             = false;
+	conditionsAccepted     = null;
+	passwordRules          = {
+		minlength : 10,
 		maxlength : 50
 	};
-	emailRegex         = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
-	passwordRegex      = `^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{${this.passwordRules.minlength},${this.passwordRules.maxlength}}$`;
+	emailRegex             = ".*"
+	passwordRegex          = `^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{${this.passwordRules.minlength},${this.passwordRules.maxlength}}$`;
+	showEmailUsedErrorText = false;
+	unknownErrorDialog;
 
 	constructor( public router: Router, public user: ShopUser, public taskQueue: TaskQueue ){}
 
@@ -119,17 +123,32 @@ export class RegisterView
 				headers : { "Content-Type" : "application/json" },
 			}
 			const response = await fetch( url, options );
+			const json     = await response.json();
 
-			if( response.status === 400 || response.status === 403 ) throw new Error( response.statusText )
+			if( !response.ok ) throw new Error( json.error )
 
 			this.router.navigateToRoute( "email-sent" )
 		}
 		catch( error )
 		{
-			/* TODO: Error Dialog */
+			if( error.message === "Email already in use." )
+			{
+				this.emailRegex = `^((?!${this.formInput.email}).)*$`
+
+				this.taskQueue.queueTask( () =>
+				{
+					// @ts-ignore
+					this.inputs.email.foundation.styleValidity()
+
+					this.showEmailUsedErrorText = this.inputs.email.input_.validity.patternMismatch
+				} )
+			}
+			else
+			{
+				this.unknownErrorDialog.open()
+			}
 		}
 
 		this.submitting = false
 	}
 }
-
