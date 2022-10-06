@@ -68,7 +68,6 @@ const ROUTES: RouteConfig[] = [
 		nav      : true,
 		title    : 'shopping-cart'
 	}
-
 ];
 
 @autoinject()

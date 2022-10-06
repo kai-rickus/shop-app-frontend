@@ -1,8 +1,9 @@
-import { BindingSignaler } from "aurelia-templating-resources";
-import environment         from "../../../../environment";
-import { ShopUser }        from "../../../../services/shop-user";
-import { autoinject }      from "aurelia-framework";
-import { observable }      from "aurelia-typed-observable-plugin";
+import { RouteConfig, Router } from "aurelia-router";
+import { BindingSignaler }     from "aurelia-templating-resources";
+import environment             from "../../../../environment";
+import { ShopUser }            from "../../../../services/shop-user";
+import { autoinject }          from "aurelia-framework";
+import { observable }          from "aurelia-typed-observable-plugin";
 
 export interface UserAddress
 {
@@ -16,19 +17,41 @@ export interface UserAddress
 	selected: boolean;
 }
 
-const SIGNAL_ADDRESSES_UPDATED = "addresses-updated"
-
 @autoinject
 export class AddressView
 {
 	@observable selectedAddress = null;
 
-	addresssDialog;
-	errorDialog;
-	addresses = [];
-	loading   = false;
+	addresssDialog
+	errorDialog
+	router: Router
+	addresses = []
+	loading   = false
+
+	static ROUTES: RouteConfig[]    = [
+		{
+			route    : [ "" ],
+			name     : 'default',
+			moduleId : './views/default-view/default-view',
+			title    : ''
+		},
+		{
+			route    : [ 'add' ],
+			name     : 'add',
+			moduleId : './views/add-address-view/add-address-view',
+			title    : 'Adresse hinzufügen'
+		}
+	]
+	static SIGNAL_ADDRESSES_UPDATED = "addresses-updated"
 
 	constructor( public user: ShopUser, public signaler: BindingSignaler ){}
+
+	public configureRouter( config, router )
+	{
+		config.map( AddressView.ROUTES );
+
+		this.router = router
+	}
 
 	created()
 	{
@@ -51,7 +74,7 @@ export class AddressView
 			this.addresses       = json.addresses;
 			this.selectedAddress = this.addresses.find( item => item.selected );
 
-			this.signaler.signal( SIGNAL_ADDRESSES_UPDATED );
+			this.signaler.signal( AddressView.SIGNAL_ADDRESSES_UPDATED );
 		}
 		catch( error )
 		{

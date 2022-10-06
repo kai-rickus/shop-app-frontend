@@ -3,7 +3,6 @@
 @use '@material/ripple/mixins' as ripple-mixins;
 
 .address-view {
-
     .address-radio-button {
         @include radio-mixins.ink-color(variables.$primary-color);
         @include radio-mixins.checked-stroke-color(variables.$primary-color);
@@ -14,10 +13,8 @@
         }
     }
 
+    .address-field {
+        padding : 0 24px !important;
+    }
 }
-
-.address-field {
-    padding : 0 24px !important;
-}
-
 

@@ -8,5 +8,4 @@
     .mdc-button--secondary {
         @include button.filled-accessible(variables.$secondary-color);
     }
-
 }

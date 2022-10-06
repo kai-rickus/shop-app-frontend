@@ -78,14 +78,15 @@
 					</mdc-layout-grid-inner>
 				</mdc-layout-grid-cell>
 				<mdc-layout-grid-cell>
-					<button type="submit"
-							click.trigger="createNewAddress()"
-							mdc-button
-							class="mdc-button--thick-outlined"
+					<!--						click.trigger="createNewAddress()"-->
+					<a
+						route-href="route: add"
+						mdc-button
+						class="mdc-button--thick-outlined"
 					>
 						Adresse hinzufügen
 						<mdc-icon class="ps-2">add</mdc-icon>
-					</button>
+					</a>
 				</mdc-layout-grid-cell>
 				<mdc-layout-grid-cell span="12">
 					<div class="d-flex flex-row justify-content-between">
@@ -120,14 +121,21 @@
 			Lieferadresse
 		</mdc-dialog-title>
 		<mdc-dialog-content>
-			Hier kannst du eine neue Lieferadresse eingeben.
+			<mdc-layout-grid no-padding>
+				<mdc-layout-grid-inner>
+					<mdc-layout-grid-cell span="12">
+						Hier kannst du eine neue Lieferadresse eingeben.
+					</mdc-layout-grid-cell>
+					<mdc-layout-grid-cell span="12">
+						<address-field
+							label="Adresse"
+							placeholder="Tippe zum Suchen"
+						></address-field>
+					</mdc-layout-grid-cell>
+				</mdc-layout-grid-inner>
+			</mdc-layout-grid>
+
 		</mdc-dialog-content>
-
-		<address-field
-			label="Adresse"
-			placeholder="Tippe zum Suchen"
-		></address-field>
-
 		<mdc-dialog-actions>
 			<button mdc-button data-mdc-dialog-action="cancel">Abbrechen</button>
 			<button mdc-button data-mdc-dialog-action="ok" data-mdc-dialog-button-default
@@ -153,4 +161,6 @@
 			</button>
 		</mdc-dialog-actions>
 	</mdc-dialog>
+
+	<router-view></router-view>
 </template>

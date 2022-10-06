@@ -1,0 +1,30 @@
+$height : 50vh;
+
+.shop-bottom-sheet-menu {
+    width      : 100vw;
+    height     : $height;
+    display    : block;
+    background : white;
+    position   : sticky;
+    z-index    : 200;
+    bottom     : 0;
+    left       : 0;
+
+    &.au-enter {
+        bottom : -$height;
+    }
+
+    &.au-enter-active {
+        animation : RiseFromBelow 1s;
+    }
+}
+
+@keyframes RiseFromBelow {
+    from {
+        bottom : -$height;
+    }
+
+    to {
+        bottom : 0;
+    }
+}

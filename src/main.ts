@@ -20,7 +20,9 @@ export function configure( aurelia: Aurelia ): void
 		   .feature( 'resources' )
 		   .developmentLogging( environment.debug ? 'debug' : 'warn' )
 		   .plugin( "aurelia-async-binding" )
+		   .plugin( "aurelia-animator-css", config => config.useAnimationDoneClasses = true )
 		   .plugin( "aurelia-typed-observable-plugin" )
+		   .plugin( 'aurelia-portal-attribute' )
 		   .plugin( '@aurelia-mdc-web/all' )
 
 	typedBindablesSetup()
