@@ -73,6 +73,8 @@ const ROUTES: RouteConfig[] = [
 @autoinject()
 export class App
 {
+	private static _NO_SCROLL_CLASS = "shop--no-scroll"
+
 	private _router: Router;
 	private _db;
 
@@ -128,5 +130,10 @@ export class App
 		config.map( ROUTES );
 
 		this._router = router;
+	}
+
+	public toggleScroll( enable: boolean = true )
+	{
+		document.body.classList.add( App._NO_SCROLL_CLASS )
 	}
 }

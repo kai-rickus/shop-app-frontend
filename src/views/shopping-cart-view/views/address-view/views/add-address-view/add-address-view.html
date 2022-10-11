@@ -1,12 +1,64 @@
 <template>
 	<require from="./add-address-view.css"></require>
 	<require from="components/shop-bottom-sheet-menu/shop-bottom-sheet-menu"></require>
+	<require from="resources/components/address-field/address-field"></require>
 
 	<div class="add-address-view">
 		<shop-bottom-sheet-menu portal>
-			<h1><b>Bubatz</b></h1>
-			<!--				<add-address></add-address>-->
+			<div class="add-address-view-content">
+				<mdc-layout-grid>
+					<mdc-layout-grid-inner>
+						<mdc-layout-grid-cell span="12">
+							<div mdc-headline5>Lieferadresse</div>
+							<div mdc-subtitle2>Hier kannst du eine neue Lieferadresse auswählen und speichern.</div>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="6">
+							<div class="au-text-field">
+								<mdc-text-field
+									label="Vorname"
+									outlined
+									required
+									value.two-way="formInput.firstname"
+									view-model.ref="inputs.firstname"
+								>
+								</mdc-text-field>
+								<mdc-text-field-helper-line>
+									<mdc-text-field-helper-text validation>Darf nicht leer sein</mdc-text-field-helper-text>
+								</mdc-text-field-helper-line>
+							</div>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="6">
+							<div class="au-text-field">
+								<mdc-text-field
+									label="Nachname"
+									outlined
+									required
+									value.two-way="formInput.lastname"
+									view-model.ref="inputs.lastname"
+								>
+								</mdc-text-field>
+								<mdc-text-field-helper-line>
+									<mdc-text-field-helper-text validation>Darf nicht leer sein</mdc-text-field-helper-text>
+								</mdc-text-field-helper-line>
+							</div>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="12">
+							<address-field
+								required
+								suggestion.bind="getAddressSuggestions"
+								place-id.two-way="formInput.placeId"
+								label="Adresse"
+								placeholder="Tippe zum Suchen"
+								view-model.ref="inputs.address"
+							></address-field>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="12">
+							<button mdc-button>Abbrechen</button>
+							<button mdc-button>Speichern</button>
+						</mdc-layout-grid-cell>
+					</mdc-layout-grid-inner>
+				</mdc-layout-grid>
+			</div>
 		</shop-bottom-sheet-menu>
-
 	</div>
 </template>

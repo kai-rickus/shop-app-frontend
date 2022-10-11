@@ -1,21 +1,41 @@
-$height : 50vh;
+$height : 69vh;
 
 .shop-bottom-sheet-menu {
-    width      : 100vw;
-    height     : $height;
-    display    : block;
-    background : white;
-    position   : sticky;
-    z-index    : 200;
-    bottom     : 0;
-    left       : 0;
+    width    : 100vw;
+    height   : 100vh;
+    display  : block;
+    position : fixed;
+    z-index  : 200;
+    top      : 0;
+    left     : 0;
 
-    &.au-enter {
-        bottom : -$height;
+    .shop-bottom-sheet-menu__scrim {
+        background-color : rgba(0, 0, 0, 0.70);
+        position         : absolute;
+        height           : 100vh;
+        top              : 0;
+        left             : 0;
+        width            : 100%;
     }
 
-    &.au-enter-active {
-        animation : RiseFromBelow 1s;
+    .shop-bottom-sheet-menu__content {
+        width      : 100vw;
+        height     : $height;
+        display    : block;
+        background : white;
+        position   : absolute;
+        bottom     : 0;
+        left       : 0;
+    }
+
+    &.animate--rise{
+        &.au-enter {
+            bottom : -$height;
+        }
+
+        &.au-enter-active {
+            animation : RiseFromBelow 1s;
+        }
     }
 }
 
@@ -28,3 +48,4 @@ $height : 50vh;
         bottom : 0;
     }
 }
+

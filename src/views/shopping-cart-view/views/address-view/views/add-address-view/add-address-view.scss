@@ -1,3 +1,20 @@
-.add-address-view {
+@use "src/layout";
+@use "@material/dialog/variables" as dialog-variables;
 
+.add-address-view {}
+
+.add-address-view-content {
+    max-width : #{layout.$content-width-desktop / 2};
+    margin    : 0 auto;
+
+
+    .mdc-text-field {
+        width : 100%;
+    }
+
+    .mdc-button {
+        position : relative;
+        float    : right;
+        margin-left: dialog-variables.$actions-padding;
+    }
 }

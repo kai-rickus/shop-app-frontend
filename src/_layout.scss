@@ -1,6 +1,12 @@
 $content-width-desktop   : 1200px;
 $default-frost-blur-rate : 30px;
 
+body {
+    &.shop--no-scroll {
+        overflow : hidden;
+    }
+}
+
 .dafault-main-column {
     max-width : $content-width-desktop;
     margin    : 0 auto;
