@@ -1,17 +1,18 @@
-$height : 69vh;
+$height             : 69vh;
+$animation-duration : 250ms;
 
 .shop-bottom-sheet-menu {
     width    : 100vw;
-    height   : 100vh;
+    height   : $height;
     display  : block;
     position : fixed;
     z-index  : 200;
-    top      : 0;
+    bottom   : 0;
     left     : 0;
 
     .shop-bottom-sheet-menu__scrim {
         background-color : rgba(0, 0, 0, 0.70);
-        position         : absolute;
+        position         : fixed;
         height           : 100vh;
         top              : 0;
         left             : 0;
@@ -19,7 +20,7 @@ $height : 69vh;
     }
 
     .shop-bottom-sheet-menu__content {
-        width      : 100vw;
+        width      : 100%;
         height     : $height;
         display    : block;
         background : white;
@@ -28,24 +29,77 @@ $height : 69vh;
         left       : 0;
     }
 
-    &.animate--rise{
+    &.animate--rise {
         &.au-enter {
             bottom : -$height;
+
+            .shop-bottom-sheet-menu__scrim {
+                opacity : 0;
+            }
         }
 
         &.au-enter-active {
-            animation : RiseFromBelow 1s;
+            animation : rise $animation-duration;
+
+            .shop-bottom-sheet-menu__scrim {
+                animation : fadeIn $animation-duration;
+            }
+        }
+
+        &.au-leave {
+            bottom : 0;
+
+            .shop-bottom-sheet-menu__scrim {
+                opacity : 1;
+            }
+        }
+
+        &.au-leave-active {
+            animation : sink $animation-duration;
+
+            .shop-bottom-sheet-menu__scrim {
+                animation : fadeOut $animation-duration;
+            }
+        }
+    }
+
+    @keyframes rise {
+        from {
+            bottom : -$height;
+        }
+
+        to {
+            bottom : 0;
+        }
+    }
+
+    @keyframes sink {
+        from {
+            bottom : 0;
+        }
+
+        to {
+            bottom : -$height;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity : 0;
+        }
+
+        to {
+            opacity : 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity : 1;
+        }
+
+        to {
+            opacity : 0;
         }
     }
 }
-
-@keyframes RiseFromBelow {
-    from {
-        bottom : -$height;
-    }
-
-    to {
-        bottom : 0;
-    }
-}
-

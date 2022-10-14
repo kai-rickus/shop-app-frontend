@@ -1,11 +1,56 @@
 @use "src/variables";
 @use '@material/button';
 
+$animation-duration : 1000ms;
+
 .shopping-cart-view {
     .mdc-button--thick-outlined {
         @include button.outline-width(2px);
     }
+
     .mdc-button--secondary {
         @include button.filled-accessible(variables.$secondary-color);
+    }
+
+    .animate--slide-in {
+        &.au-enter {
+            transform : translateX(-100%);
+            position  : absolute;
+        }
+
+        &.au-enter-active {
+            animation : enterFromLeft $animation-duration;
+        }
+    }
+
+    .animate--slide-out {
+        &.au-leave {
+            transform : translateX(0);
+            position  : absolute;
+        }
+
+        &.au-leave-active {
+            animation : leaveToRight $animation-duration;
+        }
+    }
+
+    @keyframes enterFromLeft {
+        from {
+            transform : translateX(-100%);
+        }
+
+        to {
+            transform : translateX(0);
+        }
+    }
+
+    @keyframes leaveToRight {
+        from {
+            transform : translateX(0);
+        }
+
+        to {
+            transform : translateX(100%);
+        }
     }
 }

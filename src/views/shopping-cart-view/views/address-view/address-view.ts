@@ -22,7 +22,6 @@ export class AddressView
 {
 	@observable selectedAddress = null;
 
-	addresssDialog
 	errorDialog
 	router: Router
 	addresses = []
@@ -91,11 +90,6 @@ export class AddressView
 		await this.setSelectedAddress( id );
 
 		this.loading = false;
-	}
-
-	createNewAddress()
-	{
-		this.addresssDialog.open()
 	}
 
 	async setSelectedAddress( id: string )
