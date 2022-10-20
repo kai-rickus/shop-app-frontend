@@ -1,29 +1,34 @@
 <template>
-	<div class="not-found-view container p-0">
-		<div class="card frost">
-			<div class="card-body">
-				<div class="row">
-					<div class="col-12">
-						<h1 class="display-1 text-center">404</h1>
-						<h1 class="text-center">Seite nicht erreichbar</h1>
-						<div class="text-center">
-							<span class="text-primary">
-								Womöglich existiert die von dir gesuchte Seite nicht oder wird gewartet.
-								Gehe zurück zur
-								<a route-href="route: home"><b>Startseite</b></a>
-								oder melde dich bei unserem
-<!--								<a route-href="route: support"><b>Kundensupport</b></a>.-->
-							</span>
-						</div>
-					</div>
-					<div class="d-flex justify-content-center pt-3">
-						<a route-href="route: home"
-						   class="btn btn-primary col-2">
-							Zur Startseite
+	<require from="./not-found-view.css"></require>
+
+	<div class="not-found-view container">
+		<mdc-grid>
+			<mdc-card class="p-2">
+				<mdc-layout-grid-grid__cell span="12" class="pt-3">
+					<div mdc-headline1>404</div>
+				</mdc-layout-grid-grid__cell>
+				<mdc-layout-grid-grid__cell span="12">
+					<div mdc-headline2>Seite nicht erreichbar</div>
+				</mdc-layout-grid-grid__cell>
+				<mdc-layout-grid-grid__cell span="12" class="pt-3">
+					<div mdc-body1>
+						Womöglich existiert die von dir gesuchte Seite nicht oder wird gewartet. Gehe zurück zur
+						<a route-href="route: home">
+							<b>Startseite</b>
+						</a>
+						oder melde dich bei unserem
+						<a href="https://de.wikipedia.org/wiki/Support_(Dienstleistung)">
+							<b>Kundensupport.</b>
 						</a>
 					</div>
-				</div>
-			</div>
-		</div>
+				</mdc-layout-grid-grid__cell>
+				<mdc-layout-grid-grid__cell span="12" class="pt-3">
+					<a mdc-button href="#">
+						<b>Zur Startseite</b>
+					</a>
+				</mdc-layout-grid-grid__cell>
+			</mdc-card>
+			</mdc-layout-grid-grid__cell>
+		</mdc-grid>
 	</div>
 </template>
