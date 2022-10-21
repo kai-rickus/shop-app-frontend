@@ -1,34 +1,36 @@
 <template>
 	<require from="./not-found-view.css"></require>
 
-	<div class="not-found-view container">
-		<mdc-grid>
-			<mdc-card class="p-2">
-				<mdc-layout-grid-grid__cell span="12" class="pt-3">
-					<div mdc-headline1>404</div>
-				</mdc-layout-grid-grid__cell>
-				<mdc-layout-grid-grid__cell span="12">
-					<div mdc-headline2>Seite nicht erreichbar</div>
-				</mdc-layout-grid-grid__cell>
-				<mdc-layout-grid-grid__cell span="12" class="pt-3">
-					<div mdc-body1>
-						Womöglich existiert die von dir gesuchte Seite nicht oder wird gewartet. Gehe zurück zur
-						<a route-href="route: home">
-							<b>Startseite</b>
+	<div class="not-found-view container p-0">
+		<mdc-card>
+			<mdc-layout-grid>
+				<mdc-layout-grid-inner>
+					<mdc-layout-grid-cell span="12">
+						<div mdc-headline1>404</div>
+					</mdc-layout-grid-cell>
+					<mdc-layout-grid-cell span="12">
+						<div mdc-headline2>Seite nicht erreichbar</div>
+					</mdc-layout-grid-cell>
+					<mdc-layout-grid-cell></mdc-layout-grid-cell>
+					<mdc-layout-grid-cell span="12">
+						<div mdc-body1>
+							Womöglich existiert die von dir gesuchte Seite nicht oder wird gewartet. Gehe zurück zur
+							<a route-href="route: home">
+								<b>Startseite</b>
+							</a>
+							oder melde dich bei unserem
+							<a href="https://de.wikipedia.org/wiki/Support_(Dienstleistung)">
+								<b>Kundensupport.</b>
+							</a>
+						</div>
+					</mdc-layout-grid-cell>
+					<mdc-layout-grid-cell span="12">
+						<a mdc-button href="#">
+							<b>Zur Startseite</b>
 						</a>
-						oder melde dich bei unserem
-						<a href="https://de.wikipedia.org/wiki/Support_(Dienstleistung)">
-							<b>Kundensupport.</b>
-						</a>
-					</div>
-				</mdc-layout-grid-grid__cell>
-				<mdc-layout-grid-grid__cell span="12" class="pt-3">
-					<a mdc-button href="#">
-						<b>Zur Startseite</b>
-					</a>
-				</mdc-layout-grid-grid__cell>
-			</mdc-card>
-			</mdc-layout-grid-grid__cell>
-		</mdc-grid>
+					</mdc-layout-grid-cell>
+				</mdc-layout-grid-inner>
+			</mdc-layout-grid>
+		</mdc-card>
 	</div>
 </template>

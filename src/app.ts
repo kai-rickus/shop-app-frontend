@@ -66,7 +66,10 @@ const ROUTES: RouteConfig[] = [
 		name     : 'shopping-cart',
 		moduleId : './views/shopping-cart-view/shopping-cart-view',
 		nav      : true,
-		title    : 'shopping-cart'
+		title    : 'shopping-cart',
+		settings : {
+			auth : true
+		}
 	}
 ];
 
@@ -132,8 +135,12 @@ export class App
 		this._router = router;
 	}
 
-	public toggleScroll( enable: boolean = true )
+	public toggleScroll( enable: boolean )
 	{
-		document.body.classList.add( App._NO_SCROLL_CLASS )
+		const { classList } = document.body
+
+		if( enable ) return classList.remove( App._NO_SCROLL_CLASS )
+
+		classList.add( App._NO_SCROLL_CLASS )
 	}
 }

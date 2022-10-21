@@ -1,9 +1,12 @@
-import { MdcTextField } from "@aurelia-mdc-web/text-field";
-import { throws }       from "assert";
-import { autoinject }   from "aurelia-framework";
-import { AddressField } from "resources/components/address-field/address-field";
-import environment      from "../../../../../../environment"
-import { ShopUser }     from "../../../../../../services/shop-user"
+import { MdcTextField }       from "@aurelia-mdc-web/text-field";
+import { throws }             from "assert";
+import { autoinject }         from "aurelia-framework";
+import { Router }             from "aurelia-router";
+import { AddressField }       from "resources/components/address-field/address-field";
+import { brotliCompress }     from "zlib";
+import environment            from "../../../../../../environment"
+import { ShopUser }           from "../../../../../../services/shop-user"
+import { MdcSnackbarService } from '@aurelia-mdc-web/snackbar';
 
 interface Inputs
 {
@@ -27,7 +30,11 @@ export class AddAddressView
 		placeId   : "",
 	}
 
-	constructor( private _user: ShopUser ){}
+	pending    = false;
+	disabled   = false;
+	submitting = false;
+
+	constructor( private _user: ShopUser, private snackbar: MdcSnackbarService, private _router: Router ){}
 
 	validate()
 	{
@@ -59,33 +66,51 @@ export class AddAddressView
 
 	async createNewAddress()
 	{
+		if( !this.isValid() ) return
+
+		this.pending = true
+
 		try
 		{
-
-			if( !this.isValid() ) return
-
 			const response = await fetch( `${environment.backendBaseUrl}user/addresses/addAddress`,
 				{
 					method  : "put",
-					headers : { "Authorization" : this._user.accessToken },
-					body    : JSON.stringify( this.data )
+					headers : {
+						"Authorization" : `Bearer ${this._user.accessToken}`,
+						"Content-Type"  : "application/json"
+					},
+					body    : JSON.stringify( this.data ),
 				}
 			)
-			console.log( "alles bueno" );
 
 			if( !response.ok )
 			{
 				const data = await response.json()
 				throw new Error( data.error )
 			}
+			this.back()
 		}
 		catch( error )
 		{
-			console.log( "Fehler:", error );
-			/* TODO: errorhandling */
+			await this.snackbar.open( 'Fehler! Bitte versuche es erneut.', 'Okay', {
+				timeout : -1,
+				leading : true
+			} );
 		}
+
+		this.pending = false
+
+		await this.snackbar.open( 'Neue Adresse hinzugefügt!', 'Okay', {
+			timeout : 10000,
+			leading : true
+		} );
+	}
+
+	back()
+	{
+		this._router.navigateBack()
 	}
 }
 
-/* TODO: snackbar */
+/* TODO: snackbar anzeigen lassen -> Z. 87 */
 

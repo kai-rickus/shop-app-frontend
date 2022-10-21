@@ -1,5 +1,6 @@
 @use "src/layout";
 @use "@material/dialog/variables" as dialog-variables;
+@use "@material/snackbar/mixins" as snackbar-mixins;
 
 .add-address-view {}
 

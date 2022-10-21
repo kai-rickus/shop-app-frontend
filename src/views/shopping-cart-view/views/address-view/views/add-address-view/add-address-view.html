@@ -4,7 +4,7 @@
 	<require from="resources/components/address-field/address-field"></require>
 
 	<div class="add-address-view">
-		<shop-bottom-sheet-menu portal>
+		<shop-bottom-sheet-menu portal scrim-interaction.trigger="!pending && back()">
 			<div class="add-address-view-content">
 				<mdc-layout-grid>
 					<mdc-layout-grid-inner>
@@ -52,10 +52,25 @@
 							></address-field>
 						</mdc-layout-grid-cell>
 						<mdc-layout-grid-cell span="12">
-							<button mdc-button click.trigger="createNewAddress()">Speichern</button>
-							<button mdc-button>Abbrechen</button>
+							<button
+								mdc-button
+								disabled.bind="pending"
+								click.trigger="createNewAddress()"
+							>Speichern
+								<span class="spinner-border spinner-border-sm ms-2"
+									  role="status"
+									  aria-hidden="true"
+									  show.bind="pending"
+								></span>
+							</button>
+							<button
+								mdc-button
+								disabled.bind="pending"
+							>Abbrechen
+							</button>
 						</mdc-layout-grid-cell>
 					</mdc-layout-grid-inner>
+
 				</mdc-layout-grid>
 			</div>
 		</shop-bottom-sheet-menu>

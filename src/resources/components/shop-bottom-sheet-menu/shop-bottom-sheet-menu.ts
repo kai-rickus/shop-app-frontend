@@ -5,7 +5,11 @@ import { App }                  from "../../../app";
 @autoinject
 export class ShopBottomSheetMenu
 {
-	@bindable route
+	static SCRIM_INTERACTION_EVENT_TYPE = "scrim-interaction"
+
+	@bindable disableRouting = false
+
+	element;
 
 	constructor( public app: App, public router: Router ){}
 
@@ -19,10 +23,10 @@ export class ShopBottomSheetMenu
 		this.app.toggleScroll( true )
 	}
 
-	close()
+	private _close()
 	{
-		if( !this.route ) return this.router.navigateBack()
+		const event = new CustomEvent( ShopBottomSheetMenu.SCRIM_INTERACTION_EVENT_TYPE )
 
-		this.router.navigateToRoute( this.route )
+		this.element.dispatchEvent( event )
 	}
 }

@@ -1,6 +1,9 @@
-<template class="shop-bottom-sheet-menu au-animate animate--rise">
+<template
+	class="shop-bottom-sheet-menu au-animate animate--rise"
+	ref="element"
+>
 	<require from="./shop-bottom-sheet-menu.css"></require>
-	<div class="shop-bottom-sheet-menu__scrim cursor-pointer" click.trigger="close()"></div>
+	<div class="shop-bottom-sheet-menu__scrim cursor-pointer" click.trigger="_close()"></div>
 	<div class="shop-bottom-sheet-menu__content">
 		<slot></slot>
 	</div>
