@@ -30,9 +30,13 @@ export class AddAddressView
 		placeId   : "",
 	}
 
-	pending    = false;
-	disabled   = false;
-	submitting = false;
+	pending                        = false;
+	disabled                       = false;
+	submitting                     = false;
+	snackbarSuccessMessage         = "Neue Adresse hinzugefügt!";
+	snackbarSuccessMessageDuration = 10000;
+	snackbarErrorMessage           = "Fehler! Bitte versuche es erneut.";
+	snackbarErrorMessageDuration   = -1;
 
 	constructor( private _user: ShopUser, private snackbar: MdcSnackbarService, private _router: Router ){}
 
@@ -92,16 +96,16 @@ export class AddAddressView
 		}
 		catch( error )
 		{
-			await this.snackbar.open( 'Fehler! Bitte versuche es erneut.', 'Okay', {
-				timeout : -1,
+			await this.snackbar.open( this.snackbarErrorMessage, 'Okay', {
+				timeout : this.snackbarErrorMessageDuration,
 				leading : true
 			} );
 		}
 
 		this.pending = false
 
-		await this.snackbar.open( 'Neue Adresse hinzugefügt!', 'Okay', {
-			timeout : 10000,
+		await this.snackbar.open( this.snackbarSuccessMessage, 'Okay', {
+			timeout : this.snackbarSuccessMessageDuration,
 			leading : true
 		} );
 	}
@@ -111,6 +115,3 @@ export class AddAddressView
 		this._router.navigateBack()
 	}
 }
-
-/* TODO: snackbar anzeigen lassen -> Z. 87 */
-
