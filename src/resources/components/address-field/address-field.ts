@@ -1,4 +1,3 @@
-import { Interface }            from "readline";
 import environment              from "../../../environment";
 import { autoinject, bindable } from "aurelia-framework";
 import { TaskQueue }            from "aurelia-task-queue";
@@ -11,6 +10,9 @@ interface SuggestionDataset
 @autoinject()
 export class AddressField
 {
+	static AURELIA_HIDE_CLASS             = "aurelia-hide"
+	static SUGGESTIONS_ELEMENT_BOTTOM_GAP = 10
+
 	THROTTLE_DURATION = 250;
 
 	@bindable url: string;
@@ -25,9 +27,9 @@ export class AddressField
 	inputValue;
 	suggestions      = [];
 	selectionCounter = -1
-	// formElement;
 	element;
 	taskQueue;
+	suggestionsElement: HTMLUListElement;
 
 	constructor( taskQueue: TaskQueue )
 	{
@@ -113,14 +115,61 @@ export class AddressField
 
 	async getSuggestions()
 	{
+		if( !this.inputValue )
+		{
+			this.suggestions = []
+
+			return
+		}
+
 		this.taskQueue.queueTask( async () =>
 		{
-
 			const response = await fetch( `${environment.backendBaseUrl}locations/suggestions/${this.inputValue}/de`, );
 			const data     = await response.json()
 
+			/* TODO: error handling */
+
 			this.suggestions = data.suggestions
+
+			this.taskQueue.queueTask( async () => this.handleTooMuchHeight() )
+
+			this.handleTooMuchHeight()
 		} )
+	}
+
+	setHeight()
+	{
+		const viewport      = document.documentElement.clientHeight
+		const { height, y } = this.suggestionsElement.getBoundingClientRect()
+		const isToLarge     = viewport < ( y + height + AddressField.SUGGESTIONS_ELEMENT_BOTTOM_GAP )
+
+		if( isToLarge )
+		{
+			const newHeight = `${viewport - y - AddressField.SUGGESTIONS_ELEMENT_BOTTOM_GAP}px`
+
+			this.suggestionsElement.style.setProperty( "height", newHeight )
+		}
+	}
+
+	handleTooMuchHeight()
+	{
+		const { display } = getComputedStyle( this.suggestionsElement )
+
+		if( display !== "none" ) return this.setHeight()
+
+		const observer = new MutationObserver( () =>
+		{
+			if( this.suggestionsElement.classList.contains( AddressField.AURELIA_HIDE_CLASS ) ) return
+
+			this.setHeight()
+
+			observer.disconnect()
+		} );
+
+		observer.observe( this.suggestionsElement, {
+			attributes      : true,
+			attributeFilter : [ 'class' ]
+		} );
 	}
 
 	validate()

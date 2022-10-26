@@ -23,10 +23,13 @@
 		<mdc-text-field-helper-text validation>Darf nicht leer sein</mdc-text-field-helper-text>
 	</mdc-text-field-helper-line>
 
-	<ul class="address-field__suggestions"
+	<ul
+		class="address-field__suggestions"
 		show.bind="suggestions.length > 0"
+		ref="suggestionsElement"
 	>
-		<li class="address-field__suggestions__item form-control"
+		<li
+			class="address-field__suggestions__item form-control"
 			repeat.for="suggestion of suggestions"
 			click.trigger="dispatchEvent(suggestion.description, suggestion.place_id)"
 			tabindex="1"

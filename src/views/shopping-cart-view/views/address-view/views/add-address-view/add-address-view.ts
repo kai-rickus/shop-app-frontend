@@ -40,6 +40,7 @@ export class AddAddressView
 
 	constructor( private _user: ShopUser, private snackbar: MdcSnackbarService, private _router: Router ){}
 
+
 	validate()
 	{
 		// @ts-ignore
