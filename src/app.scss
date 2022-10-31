@@ -1,3 +1,4 @@
+@use "variables";
 @use "theme";
 @use "layout";
 
@@ -5,6 +6,7 @@
 @use "resources/components/navigation-bar/navigation-bar";
 @use '@material/ripple/mdc-ripple';
 @use "@material/ripple";
+@use '@material/ripple/mixins' as ripple-mixins;
 
 @use '@material/snackbar/mdc-snackbar';
 @use '@material/snackbar';
@@ -34,6 +36,7 @@
 
 @use '@material/radio/mdc-radio';
 @use '@material/radio';
+@use '@material/radio/mixins' as radio-mixins;
 @use '@material/form-field/mdc-form-field';
 
 @use '@material/card/mdc-card';
@@ -108,6 +111,16 @@ $pb-main-content : 5rem;
     }
     to {
         transform : rotate(360deg);
+    }
+}
+
+.address-radio-button {
+    @include radio-mixins.ink-color(variables.$primary-color);
+    @include radio-mixins.checked-stroke-color(variables.$primary-color);
+    @include radio-mixins.focus-indicator-color(variables.$primary-color);
+
+    .mdc-radio__ripple {
+        @include ripple-mixins.states(variables.$primary-color);
     }
 }
 
