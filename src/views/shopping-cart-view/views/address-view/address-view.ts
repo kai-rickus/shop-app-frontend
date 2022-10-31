@@ -3,7 +3,6 @@ import { BindingSignaler }     from "aurelia-templating-resources";
 import environment             from "../../../../environment";
 import { ShopUser }            from "../../../../services/shop-user";
 import { autoinject }          from "aurelia-framework";
-import { observable }          from "aurelia-typed-observable-plugin";
 
 export interface UserAddress
 {
@@ -20,12 +19,11 @@ export interface UserAddress
 @autoinject
 export class AddressView
 {
-	@observable selectedAddress = null;
-
+	selectedAddress = null;
 	errorDialog
 	router: Router
-	addresses = []
-	loading   = false
+	addresses       = []
+	loading         = false
 
 	static ROUTES: RouteConfig[]    = [
 		{

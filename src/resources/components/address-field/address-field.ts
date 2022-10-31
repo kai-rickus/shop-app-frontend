@@ -15,13 +15,13 @@ export class AddressField
 
 	THROTTLE_DURATION = 250;
 
-	@bindable url: string;
-	@bindable suggestion: string;
-	@bindable placeId: string;
-	@bindable required    = false;
 	@bindable label       = "";
 	@bindable placeholder = "";
+	@bindable required    = false;
+	@bindable suggestion: string;
+	@bindable placeId: string;
 	@bindable valid: boolean;
+	@bindable url: string;
 
 	input;
 	inputValue;

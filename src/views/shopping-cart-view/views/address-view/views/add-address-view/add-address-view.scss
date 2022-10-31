@@ -1,6 +1,7 @@
 @use "src/layout";
 @use "@material/dialog/variables" as dialog-variables;
 @use "@material/snackbar/mixins" as snackbar-mixins;
+@use "@material/theme/color-palette" as color-palette;
 
 .add-address-view {}
 
@@ -8,15 +9,26 @@
     max-width : #{layout.$content-width-desktop / 2};
     margin    : 0 auto;
 
-
     .mdc-text-field {
         width : 100%;
     }
 
     .mdc-button {
-        position : relative;
-        float    : right;
-        margin-left: dialog-variables.$actions-padding;
+        position    : relative;
+        float       : right;
+        margin-left : dialog-variables.$actions-padding;
+    }
+
+    .address-field__suggestions {
+        overflow : auto;
+    }
+
+    .address-field__suggestions__item {
+        background-color : color-palette.$grey-50;
+    }
+
+    .suggestions-max-height {
+        max-height : 50px !important;
     }
 
 }

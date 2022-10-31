@@ -23,15 +23,17 @@
 							repeat.for="address of addresses & signal:'addresses-updated'"
 							span="6"
 						>
-							<mdc-card>
+							<mdc-card class="${address === selectedAddress ? 'mdc-card--selected' : ''}">
 								<mdc-card-primary-action surface disable-ripple class="cursor-pointer">
 									<mdc-form-field class="ps-2">
 										<mdc-radio
-											class="address-radio-button"
+											class="address-radio-button
+										"
 											disabled.bind="loading"
 											model.bind="address"
 											checked.two-way="selectedAddress"
 											change.trigger="radioChanged(address.id)"
+
 										></mdc-radio>
 										<label class="w-100 p-2 cursor-pointer">
 											<mdc-layout-grid-inner>
