@@ -1,6 +1,17 @@
+@use "src/variables";
+@use "@material/radio/radio-theme";
 
 $radio-button-button : 50px;
 $payment-logo-height : 82%;
+$payment-icons       : (
+        "american-express": "src/views/shopping-cart-view/img/payments/american-express-logo.svg",
+        "apple-pay": "src/views/shopping-cart-view/img/payments/apple-pay-logo.svg",
+        "google-pay": "src/views/shopping-cart-view/img/payments/google-pay-logo.svg",
+        "maestro": "src/views/shopping-cart-view/img/payments/maestro-logo.svg",
+        "mastercard": "src/views/shopping-cart-view/img/payments/mastercard-logo.svg",
+        "paypal": "src/views/shopping-cart-view/img/payments/paypal-logo.svg",
+        "visa": "src/views/shopping-cart-view/img/payments/visa-logo.svg",
+);
 
 .payment-view {
     .radio-button-button {
@@ -10,6 +21,71 @@ $payment-logo-height : 82%;
         &:hover {
             background-color : lightgray;
         }
+    }
 
+    .payment-icon {
+        $size               : 30px;
+
+        background-color    : black;
+        width               : $size;
+        height              : $size;
+        -webkit-mask-repeat : no-repeat;
+        mask-repeat         : no-repeat;
+
+        transition          : background-color 250ms;
+
+        @each $payment-name, $icon-url in $payment-icons {
+            &.payment-icon--#{$payment-name} {
+                -webkit-mask-image : url($icon-url);
+                mask-image         : url($icon-url);
+            }
+        }
+
+        .payment-icon--american-express {
+            -webkit-mask-image : url(src/views/shopping-cart-view/img/payments/american-express-logo.svg);
+            mask-image         : url(src/views/shopping-cart-view/img/payments/american-express-logo.svg);
+        }
+
+        .apple-pay-svg {
+            -webkit-mask-image : url(src/views/shopping-cart-view/img/payments/apple-pay-logo.svg);
+            mask-image         : url(src/views/shopping-cart-view/img/payments/apple-pay-logo.svg);
+        }
+
+        .google-pay-svg {
+            -webkit-mask-image : url(src/views/shopping-cart-view/img/payments/google-pay-logo.svg);
+            mask-image         : url(src/views/shopping-cart-view/img/payments/google-pay-logo.svg);
+        }
+
+        .maestro-svg {
+            -webkit-mask-image : url(src/views/shopping-cart-view/img/payments/maestro-logo.svg);
+            mask-image         : url(src/views/shopping-cart-view/img/payments/maestro-logo.svg);
+        }
+
+        .mastercard-svg {
+            -webkit-mask-image : url(src/views/shopping-cart-view/img/payments/mastercard-logo.svg);
+            mask-image         : url(src/views/shopping-cart-view/img/payments/mastercard-logo.svg);
+        }
+
+        .paypal-svg {
+            -webkit-mask-image : url(src/views/shopping-cart-view/img/payments/paypal-logo.svg);
+            mask-image         : url(src/views/shopping-cart-view/img/payments/paypal-logo.svg);
+        }
+
+        .visa-svg {
+            -webkit-mask-image : url(src/views/shopping-cart-view/img/payments/visa-logo.svg);
+            mask-image         : url(src/views/shopping-cart-view/img/payments/visa-logo.svg);
+        }
+
+        &.payment-icon--selected {
+            background-color : variables.$primary-color;
+        }
+    }
+
+    .mdc-card__primary-action:has(input[disabled]) {
+        &.mdc-card--selected {
+            box-shadow : inset 0px 0px 0px 2px radio-theme.$disabled-circle-color;
+        }
     }
 }
+
+

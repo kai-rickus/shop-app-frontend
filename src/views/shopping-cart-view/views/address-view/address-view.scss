@@ -1,6 +1,14 @@
+@use "@material/radio/radio-theme";
+
 .address-view {
     .address-field {
         padding : 0 24px !important;
+    }
+
+    .mdc-card__primary-action:has(input[disabled]) {
+        &.mdc-card--selected {
+            box-shadow : inset 0px 0px 0px 2px radio-theme.$disabled-circle-color;
+        }
     }
 }
 

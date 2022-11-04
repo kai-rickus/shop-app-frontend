@@ -1,7 +1,8 @@
 @use "src/variables";
 
-$content-width-desktop   : 1200px;
-$default-frost-blur-rate : 30px;
+$content-width-desktop              : 1200px;
+$default-frost-blur-rate            : 30px;
+$view-transition-animation-duration : 125ms;
 
 body {
     &.shop--no-scroll {
@@ -60,7 +61,50 @@ body {
     margin-right : auto;
 }
 
-.mdc-card--selected{
-    //background-color: color-palette.$grey-100 ;
-    box-shadow: inset 0px 0px 0px 3px variables.$primary-color;
+.mdc-card, .mdc-card__primary-action {
+    transition : box-shadow 250ms !important;
+
+    &.mdc-card--selected {
+        box-shadow : inset 0px 0px 0px 2px variables.$primary-color;
+    }
+}
+
+.animate--fade-in {
+    &.au-enter {
+        opacity : 0;
+    }
+
+    &.au-enter-active {
+        animation : fadeIn $view-transition-animation-duration;
+    }
+}
+
+.animate--fade-out {
+    &.au-leave {
+        opacity : 1;
+    }
+
+    &.au-leave-active {
+        animation : fadeOut $view-transition-animation-duration;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity : 0;
+    }
+
+    to {
+        opacity : 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity : 1;
+    }
+
+    to {
+        opacity : 0;
+    }
 }

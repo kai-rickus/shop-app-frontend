@@ -52,7 +52,7 @@
 								</shop-progress-tracker>
 							</div>
 						</div>
-						<router-view swap-order="with"></router-view>
+						<router-view ref="routerElement" swap-order="after"></router-view>
 					</div>
 				</div>
 			</div>
@@ -98,7 +98,6 @@
 									   unelevated
 									   class="mdc-button--secondary w-100"
 									>
-
 										<span mdc-button-label>Sofort kaufen</span>
 										<mdc-icon>shopping_bag</mdc-icon>
 									</a>

@@ -1,9 +1,23 @@
 @use "src/variables";
 @use '@material/button';
-
-$animation-duration : 1000ms;
+@use "src/layout";
 
 .shopping-cart-view {
+
+    router-view {
+        transition : height 1000ms;
+        overflow   : hidden;
+        //transition : height layout.$view-transition-animation-duration;
+    }
+
+    .items-view,
+    .payment-view,
+    .address-view,
+    .overview-view {}
+
+    .card-body {
+    }
+
     .mdc-button--thick-outlined {
         @include button.outline-width(2px);
     }
@@ -12,45 +26,4 @@ $animation-duration : 1000ms;
         @include button.filled-accessible(variables.$secondary-color);
     }
 
-    .animate--slide-in {
-        &.au-enter {
-            transform : translateX(-100%);
-            position  : absolute;
-        }
-
-        &.au-enter-active {
-            animation : enterFromLeft $animation-duration;
-        }
-    }
-
-    .animate--slide-out {
-        &.au-leave {
-            transform : translateX(0);
-            position  : absolute;
-        }
-
-        &.au-leave-active {
-            animation : leaveToRight $animation-duration;
-        }
-    }
-
-    @keyframes enterFromLeft {
-        from {
-            transform : translateX(-100%);
-        }
-
-        to {
-            transform : translateX(0);
-        }
-    }
-
-    @keyframes leaveToRight {
-        from {
-            transform : translateX(0);
-        }
-
-        to {
-            transform : translateX(100%);
-        }
-    }
 }

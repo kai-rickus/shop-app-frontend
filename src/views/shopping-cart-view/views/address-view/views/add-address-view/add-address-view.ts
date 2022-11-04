@@ -2,11 +2,13 @@ import { MdcTextField }       from "@aurelia-mdc-web/text-field";
 import { throws }             from "assert";
 import { autoinject }         from "aurelia-framework";
 import { Router }             from "aurelia-router";
+import { BindingSignaler }    from "aurelia-templating-resources";
 import { AddressField }       from "resources/components/address-field/address-field";
 import { brotliCompress }     from "zlib";
 import environment            from "../../../../../../environment"
 import { ShopUser }           from "../../../../../../services/shop-user"
 import { MdcSnackbarService } from '@aurelia-mdc-web/snackbar';
+import { AddressView }        from "../../address-view";
 
 interface Inputs
 {
@@ -38,7 +40,9 @@ export class AddAddressView
 	snackbarErrorMessage           = "Fehler! Bitte versuche es erneut.";
 	snackbarErrorMessageDuration   = -1;
 
-	constructor( private _user: ShopUser, private snackbar: MdcSnackbarService, private _router: Router ){}
+	static SIGNAL_ADDRESSES_UPDATED = "addresses-updated"
+
+	constructor( private _user: ShopUser, private snackbar: MdcSnackbarService, private _router: Router, public signaler: BindingSignaler ){}
 
 
 	validate()
@@ -91,9 +95,15 @@ export class AddAddressView
 			if( !response.ok )
 			{
 				const data = await response.json()
+
 				throw new Error( data.error )
 			}
+
+			this.signaler.signal( AddressView.SIGNAL_ADDRESSES_UPDATED );
+
 			this.back()
+
+			// Address-view zeichen geben, dass neu laden muss
 		}
 		catch( error )
 		{

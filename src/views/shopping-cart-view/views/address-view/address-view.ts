@@ -20,12 +20,12 @@ export interface UserAddress
 export class AddressView
 {
 	selectedAddress = null;
-	errorDialog
-	router: Router
 	addresses       = []
 	loading         = false
+	errorDialog
+	router: Router
 
-	static ROUTES: RouteConfig[]    = [
+	static ROUTES: RouteConfig[]            = [
 		{
 			route    : [ "" ],
 			name     : 'default',
@@ -39,7 +39,8 @@ export class AddressView
 			title    : 'Adresse hinzufügen'
 		}
 	]
-	static SIGNAL_ADDRESSES_UPDATED = "addresses-updated"
+	static SIGNAL_ADDRESSES_UPDATED         = "addresses-updated"
+	static SIGNAL_ADDRESSES_LOCALLY_CHANGED = "addresses-locally-changed"
 
 	constructor( public user: ShopUser, public signaler: BindingSignaler ){}
 
@@ -50,14 +51,13 @@ export class AddressView
 		this.router = router
 	}
 
-	created()
-	{
-		this.load()
-	}
-
 	async load()
 	{
-		this.loading = true;
+		this.addresses = []
+
+		this.signaler.signal( AddressView.SIGNAL_ADDRESSES_LOCALLY_CHANGED )
+
+		this.loading   = true;
 
 		try
 		{
@@ -67,11 +67,12 @@ export class AddressView
 
 			if( !response.ok ) throw new Error( `Server returned status ${response.status}` );
 
-			const json           = await response.json();
+			const json = await response.json();
+
 			this.addresses       = json.addresses;
 			this.selectedAddress = this.addresses.find( item => item.selected );
 
-			this.signaler.signal( AddressView.SIGNAL_ADDRESSES_UPDATED );
+			this.signaler.signal( AddressView.SIGNAL_ADDRESSES_LOCALLY_CHANGED )
 		}
 		catch( error )
 		{

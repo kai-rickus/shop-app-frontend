@@ -1,4 +1,6 @@
-import { RouteConfig } from "aurelia-router";
+import { RouteConfig, Router, RouterEvent } from "aurelia-router";
+import { EventAggregator }                  from 'aurelia-event-aggregator';
+import { autoinject }                       from "aurelia-framework";
 
 const ROUTES: RouteConfig[] = [
 	{
@@ -38,14 +40,35 @@ const ROUTES: RouteConfig[] = [
 	// }
 ];
 
+@autoinject
 export class ShoppingCartView
 {
 	navigation;
+	routerElement: HTMLElement
 
-	public configureRouter( config, router )
+	constructor( private _eventAggregator: EventAggregator ){}
+
+	public configureRouter( config, router: Router )
 	{
 		config.map( ROUTES );
 
 		this.navigation = router.navigation
+
+		this._eventAggregator.subscribe( RouterEvent.Complete, event =>
+		{
+			this.setHeightAfterRouting()
+
+			console.log( router );
+			console.log( event );
+
+			debugger
+		} )
+	}
+
+	setHeightAfterRouting()
+	{
+		const [ view ] = Array.from( this.routerElement.children )
+
+		this.routerElement.style.height = `${view.getBoundingClientRect().height}px`
 	}
 }

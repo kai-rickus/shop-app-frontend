@@ -3,7 +3,7 @@
 	<require from="components/address-field/address-field"></require>
 	<require from="./address-view.css"></require>
 
-	<div class="address-view au-animate animate--slide-in animate--slide-out">
+	<div class="address-view au-animate animate--fade-in animate--fade-out">
 		<mdc-layout-grid no-padding>
 			<mdc-layout-grid-inner class="mb-3">
 				<mdc-layout-grid-cell span="12">
@@ -17,18 +17,20 @@
 			</mdc-layout-grid-inner>
 			<mdc-layout-grid-inner>
 				<mdc-layout-grid-cell span="12">
-					<mdc-layout-grid-inner>
+					<mdc-layout-grid-inner data-dummy.bind="load() & async & signal:'addresses-updated'">
 						<mdc-layout-grid-cell
 							if.bind="addresses.length > 0"
-							repeat.for="address of addresses & signal:'addresses-updated'"
+							repeat.for="address of addresses & signal:'addresses-locally-changed'"
 							span="6"
 						>
-							<mdc-card class="${address === selectedAddress ? 'mdc-card--selected' : ''}">
-								<mdc-card-primary-action surface disable-ripple class="cursor-pointer">
+							<mdc-card>
+								<mdc-card-primary-action
+									surface
+									disable-ripple
+									class="cursor-pointer ${address === selectedAddress ? 'mdc-card--selected' : ''}">
 									<mdc-form-field class="ps-2">
 										<mdc-radio
-											class="address-radio-button
-										"
+											class="address-radio-button"
 											disabled.bind="loading"
 											model.bind="address"
 											checked.two-way="selectedAddress"
@@ -79,7 +81,6 @@
 					</mdc-layout-grid-inner>
 				</mdc-layout-grid-cell>
 				<mdc-layout-grid-cell>
-					<!--						click.trigger="createNewAddress()"-->
 					<a
 						route-href="route: add"
 						mdc-button
