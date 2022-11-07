@@ -1,8 +1,10 @@
 import { RouteConfig, Router } from "aurelia-router";
+import { TaskQueue }           from "aurelia-task-queue";
 import { BindingSignaler }     from "aurelia-templating-resources";
 import environment             from "../../../../environment";
 import { ShopUser }            from "../../../../services/shop-user";
 import { autoinject }          from "aurelia-framework";
+import { ShoppingCartView }    from "../../shopping-cart-view";
 
 export interface UserAddress
 {
@@ -42,13 +44,18 @@ export class AddressView
 	static SIGNAL_ADDRESSES_UPDATED         = "addresses-updated"
 	static SIGNAL_ADDRESSES_LOCALLY_CHANGED = "addresses-locally-changed"
 
-	constructor( public user: ShopUser, public signaler: BindingSignaler ){}
+	constructor( public user: ShopUser, public signaler: BindingSignaler, private _shoppingCartView: ShoppingCartView, private _taskqueue: TaskQueue ){}
 
 	public configureRouter( config, router )
 	{
 		config.map( AddressView.ROUTES );
 
 		this.router = router
+	}
+
+	attached()
+	{
+		this._shoppingCartView.setHeightAfterRouting()
 	}
 
 	async load()
@@ -78,10 +85,16 @@ export class AddressView
 		{
 			this.errorDialog.open()
 		}
-
 		this.loading = false;
-	}
 
+		this._taskqueue.queueTask( async () =>
+		{
+			this._shoppingCartView.setHeightAfterRouting()
+		} )
+
+		this._shoppingCartView.setHeightAfterRouting()
+
+	}
 	async radioChanged( id: string )
 	{
 		this.loading = true;

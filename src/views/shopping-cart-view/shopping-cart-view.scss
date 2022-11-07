@@ -5,8 +5,9 @@
 .shopping-cart-view {
 
     router-view {
-        transition : height 1000ms;
+        transition : height 125ms;
         overflow   : hidden;
+        display: block;
         //transition : height layout.$view-transition-animation-duration;
     }
 

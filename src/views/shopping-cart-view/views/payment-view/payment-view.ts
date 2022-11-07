@@ -1,3 +1,8 @@
+import { autoinject }       from "aurelia-framework";
+import { TaskQueue }        from "aurelia-task-queue";
+import { ShoppingCartView } from "../../shopping-cart-view";
+
+@autoinject()
 export class PaymentView
 {
 	loading         = false;
@@ -40,6 +45,22 @@ export class PaymentView
 			},
 		]
 	selectedPayment = this.payments.find( item => item.selected );
+
+	constructor( private _shoppingCartView: ShoppingCartView, private _taskqueue: TaskQueue )
+	{}
+
+	attached()
+	{
+		this._shoppingCartView.setHeightAfterRouting()
+	}
+
+	dummyMethod()
+	{
+		this._taskqueue.queueTask( async () =>
+		{
+			this._shoppingCartView.setHeightAfterRouting()
+		} )
+	}
 
 	async radioChanged( id: string )
 	{
