@@ -10,6 +10,7 @@ import { ShoppingCartView }    from "../../shopping-cart-view";
 export class ItemsView
 {
 	user: ShopUser
+	basicOptions = Array.from( { length : 5 }, ( x, i ) => ( `${1 + i}` ) );
 
 	constructor( user: ShopUser, private _signaler: BindingSignaler, private _shoppingCart: ShoppingCartView, private _taskqueue: TaskQueue )
 	{
@@ -19,6 +20,7 @@ export class ItemsView
 	attached()
 	{
 		this._shoppingCart.setHeightAfterRouting()
+		console.log( "1 - attached wurde ausgeführt" );
 	}
 
 	async getCardItems()
@@ -31,6 +33,8 @@ export class ItemsView
 		this._taskqueue.queueTask( async () =>
 		{
 			this._shoppingCart.setHeightAfterRouting()
+			console.log( "2 - getCartItems wurde ausgeführt" );
+
 		} )
 
 		return data.items
@@ -44,6 +48,12 @@ export class ItemsView
 		} );
 
 		if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
+
+		this._taskqueue.queueTask( async () =>
+		{
+			this._shoppingCart.setHeightAfterRouting()
+
+		} )
 
 		this._signaler.signal( SIGNAL_CART_UPDATED )
 

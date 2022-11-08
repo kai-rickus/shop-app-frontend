@@ -1,7 +1,22 @@
+@use "@material/menu/mixins" as menu-mixins;
+
+$lookup-width : 100px;
+
 .items-view {
     .img-size {
         max-height : 177px;
         width      : auto;
         display    : flex;
     }
+
+    //.item-card-height {
+    //    height : 155px;
+    //}
+
+    .mdc-menu-surface--anchor {
+        width : 100%;
+    }
+    //.mdc-menu{
+    //    @include menu-mixins.width($lookup-width)
+    //}
 }
