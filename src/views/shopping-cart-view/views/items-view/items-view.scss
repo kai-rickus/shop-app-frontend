@@ -9,14 +9,22 @@ $lookup-width : 100px;
         display    : flex;
     }
 
-    //.item-card-height {
-    //    height : 155px;
-    //}
+    .item-card-height {
+        height : 155px;
+    }
 
     .mdc-menu-surface--anchor {
-        width : 100%;
+        //width : $lookup-width;
+        width : 100px;
     }
-    //.mdc-menu{
-    //    @include menu-mixins.width($lookup-width)
-    //}
+
+    .mdc-menu {
+        //@include menu-mixins.width($lookup-width)
+        width : 100px;
+    }
+
+    .mdc-lookup {
+        width : 100px;
+
+    }
 }

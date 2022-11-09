@@ -12,6 +12,7 @@ export class ItemsView
 	user: ShopUser
 	basicOptions = Array.from( { length : 5 }, ( x, i ) => ( `${1 + i}` ) );
 
+
 	constructor( user: ShopUser, private _signaler: BindingSignaler, private _shoppingCart: ShoppingCartView, private _taskqueue: TaskQueue )
 	{
 		this.user = user;

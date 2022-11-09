@@ -43,28 +43,22 @@
 										<mdc-layout-grid-inner
 											class="d-flex justify-content-between align-items-center pt-2 pb-2 pe-2"
 										>
-											<mdc-layout-grid-cell
-												span="4"
-											>
-												<div mdc-menu-surface-anchor>
-													<mdc-text-field label="Anzahl" ref="basicInput"></mdc-text-field>
-													<mdc-text-field-helper-line></mdc-text-field-helper-line>
-													<mdc-lookup options.bind="basicOptions" input.bind="basicInput" preload-options value.bind="basicValue" autoselect-single-on-blur>
-													</mdc-lookup>
-												</div>
+											<mdc-layout-grid-cell span="8" class="d-flex justify-content-start">
+													<div mdc-menu-surface-anchor>
+														<mdc-text-field label="Anzahl" ref="basicInput"></mdc-text-field>
+														<mdc-text-field-helper-line></mdc-text-field-helper-line>
+														<mdc-lookup options.bind="basicOptions" input.bind="basicInput" preload-options value.bind="basicValue" autoselect-single-on-blur>
+														</mdc-lookup>
+													</div>
+													<shop-icon-button icon="delete_forever"
+																	  outlined.bind=true
+																	  class="position-relative text-danger ms-2"
+																	  click.trigger="setCartItems(item.product.id, 0)"
+													>
+													</shop-icon-button>
 											</mdc-layout-grid-cell>
 											<mdc-layout-grid-cell
-												span="1"
-											>
-												<shop-icon-button icon="delete_forever"
-																  outlined.bind=true
-																  class="position-relative text-danger ms-2"
-																  click.trigger="setCartItems(item.product.id, 0)"
-												>
-												</shop-icon-button>
-											</mdc-layout-grid-cell>
-											<mdc-layout-grid-cell
-												span="7"
+												span="12"
 											>
 												<span class="fs-4 fw-bold text-on-surface">${item.product.price | currency
 												:
