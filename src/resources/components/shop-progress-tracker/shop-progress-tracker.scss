@@ -20,7 +20,7 @@ $marker-color           : variables.$disabled-grey;
 
                 &::after {
                     background-color : $completed-marker-color;
-                    z-index          : 0 !important
+                    z-index          : 25 !important
                 }
             }
         }
@@ -33,11 +33,11 @@ $marker-color           : variables.$disabled-grey;
 
             &::before {
                 background-color : $marker-color;
-                z-index          : 5 !important;
+                z-index          : 50 !important;
             }
 
             &::after {
-                z-index          : 0 !important;
+                z-index          :25 !important;
                 background-color : $marker-color;
             }
         }
