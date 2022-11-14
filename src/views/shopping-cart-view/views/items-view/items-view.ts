@@ -5,23 +5,27 @@ import environment             from "../../../../environment";
 import { SIGNAL_CART_UPDATED } from "../../../../resources/components/product-details-main/product-details-main";
 import { ShopUser }            from "../../../../services/shop-user";
 import { ShoppingCartView }    from "../../shopping-cart-view";
+import { MDCSelect }           from '@material/select';
 
 @autoinject()
 export class ItemsView
 {
 	user: ShopUser
-	basicOptions = Array.from( { length : 5 }, ( x, i ) => ( `${1 + i}` ) );
-
+	select = new MDCSelect( document.querySelector( '.mdc-select' ) );
 
 	constructor( user: ShopUser, private _signaler: BindingSignaler, private _shoppingCart: ShoppingCartView, private _taskqueue: TaskQueue )
 	{
 		this.user = user;
+
+		this.select.listen( 'MDCSelect:change', () =>
+		{
+			alert( `Selected option at index ${this.select.selectedIndex} with value "${this.select.value}"` );
+		} );
 	}
 
 	attached()
 	{
 		this._shoppingCart.setHeightAfterRouting()
-		console.log( "1 - attached wurde ausgeführt" );
 	}
 
 	async getCardItems()
@@ -34,10 +38,8 @@ export class ItemsView
 		this._taskqueue.queueTask( async () =>
 		{
 			this._shoppingCart.setHeightAfterRouting()
-			console.log( "2 - getCartItems wurde ausgeführt" );
 
 		} )
-
 		return data.items
 	}
 

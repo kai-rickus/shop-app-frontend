@@ -1,8 +1,8 @@
-@use "@material/menu/mixins" as menu-mixins;
-
-$lookup-width : 100px;
+@use "@material/select/variables" as select-variables;
 
 .items-view {
+    $menu-max-width : 120px;
+
     .img-size {
         max-height : 177px;
         width      : auto;
@@ -13,18 +13,22 @@ $lookup-width : 100px;
         height : 155px;
     }
 
-    .mdc-menu-surface--anchor {
-        //width : $lookup-width;
-        width : 100px;
-    }
-
     .mdc-menu {
-        //@include menu-mixins.width($lookup-width)
-        width : 100px;
+        z-index : 1000;
     }
 
-    .mdc-lookup {
-        width : 100px;
-
+    .mdc-select {
+        //width : $menu-max-width;
     }
+
+    //.select-width{
+    //    @include select-variables.variable-width($menu-max-width)
+    //
+    //}
+
+
+}
+
+router-view {
+    overflow : visible !important;
 }

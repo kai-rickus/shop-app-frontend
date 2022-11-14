@@ -34,6 +34,12 @@
 @use "@material/menu/mdc-menu";
 @use "@material/select/styles";
 
+@use '@material/select/mdc-select';
+@use '@material/select/_index' as select;
+@use '@material/list/mdc-list';
+@use '@material/menu-surface/mdc-menu-surface';
+@use '@material/menu/mdc-menu';
+
 @use '@material/radio/mdc-radio';
 @use '@material/radio';
 @use '@material/radio/mixins' as radio-mixins;
