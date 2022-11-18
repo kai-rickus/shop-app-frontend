@@ -49,30 +49,17 @@
 
 												<div class="au-select">
 													<mdc-select
-														class="select-width"
-														ref="standardSelect"
 														label="Anzahl"
 														required.bind="true"
-														change.delegate="onSelectionChange($event)"
+														change.delegate="setCartItems( item.product.id, $event.detail.value )"
 														anchor-margin.bind="{top: 10}"
-														outlined.bind="standardSelectOutlined"
-														disabled.bind="standardSelectDisabled"
+														value.bind="item.amount"
 													>
 														<mdc-list>
-															<mdc-list-item value="0">0</mdc-list-item>
-															<mdc-list-item value="1">1</mdc-list-item>
-															<mdc-list-item value="2">2</mdc-list-item>
-															<mdc-list-item value="3">3</mdc-list-item>
-															<mdc-list-item value="4">4</mdc-list-item>
-															<mdc-list-item value="5">5</mdc-list-item>
-															<mdc-list-item value="6">6</mdc-list-item>
-															<mdc-list-item value="7">7</mdc-list-item>
-															<mdc-list-item value="8">8</mdc-list-item>
-															<mdc-list-item value="9">9</mdc-list-item>
-															<mdc-list-item value="10">10</mdc-list-item>
+															<mdc-list-item repeat.for="i of 10" value.bind="i">${i}</mdc-list-item>
 														</mdc-list>
 													</mdc-select>
-<!--													<mdc-select-helper-text if.bind="standardSelect.valid">Helper text</mdc-select-helper-text>-->
+													<!--													<mdc-select-helper-text if.bind="standardSelect.valid">Helper text</mdc-select-helper-text>-->
 													<mdc-select-helper-text validation>Anzahl muss festgelegt werden</mdc-select-helper-text>
 												</div>
 
