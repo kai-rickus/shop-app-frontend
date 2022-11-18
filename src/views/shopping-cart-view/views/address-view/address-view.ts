@@ -64,7 +64,7 @@ export class AddressView
 
 		this.signaler.signal( AddressView.SIGNAL_ADDRESSES_LOCALLY_CHANGED )
 
-		this.loading   = true;
+		this.loading = true;
 
 		try
 		{
@@ -91,10 +91,8 @@ export class AddressView
 		{
 			this._shoppingCartView.setHeightAfterRouting()
 		} )
-
-		this._shoppingCartView.setHeightAfterRouting()
-
 	}
+
 	async radioChanged( id: string )
 	{
 		this.loading = true;

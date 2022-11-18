@@ -1,7 +1,34 @@
+@use "@material/select/variables" as select-variables;
+
 .items-view {
+    $menu-max-width : 120px;
+
     .img-size {
         max-height : 177px;
         width      : auto;
         display    : flex;
     }
+
+    .item-card-height {
+        height : 155px;
+    }
+
+    .mdc-menu {
+        z-index : 1000;
+    }
+
+    .mdc-select {
+        //width : $menu-max-width;
+    }
+
+    //.select-width{
+    //    @include select-variables.variable-width($menu-max-width)
+    //
+    //}
+
+
+}
+
+router-view {
+    overflow : visible !important;
 }
