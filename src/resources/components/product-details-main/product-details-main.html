@@ -82,13 +82,26 @@
 
 								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
 
-									<shop-select-menu view-model.ref="selectMenu" lable="Anzahl">
-										<shop-select-menu-option value.bind="1" selected.bind="true">1</shop-select-menu-option>
-										<shop-select-menu-option value.bind="2">2</shop-select-menu-option>
-										<shop-select-menu-option value.bind="3">3</shop-select-menu-option>
-										<shop-select-menu-option value.bind="4">4</shop-select-menu-option>
-										<shop-select-menu-option value.bind="5">5</shop-select-menu-option>
-									</shop-select-menu>
+<!--									<shop-select-menu view-model.ref="selectMenu" lable="Anzahl">-->
+<!--										<shop-select-menu-option value.bind="1" selected.bind="true">1</shop-select-menu-option>-->
+<!--										<shop-select-menu-option value.bind="2">2</shop-select-menu-option>-->
+<!--										<shop-select-menu-option value.bind="3">3</shop-select-menu-option>-->
+<!--										<shop-select-menu-option value.bind="4">4</shop-select-menu-option>-->
+<!--										<shop-select-menu-option value.bind="5">5</shop-select-menu-option>-->
+<!--									</shop-select-menu>-->
+
+									<div class="au-select">
+										<mdc-select
+											label="Anzahl"
+											change.delegate="setCartItems( item.product.id, $event.detail.value )"
+											anchor-margin.bind="{top: 10}"
+											value.bind="item.amount"
+										>
+											<mdc-list>
+												<mdc-list-item repeat.for="i of 10" value.bind="i">${i}</mdc-list-item>
+											</mdc-list>
+										</mdc-select>
+									</div>
 
 								</div>
 								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 text-center">

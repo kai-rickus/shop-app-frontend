@@ -50,7 +50,6 @@
 												<div class="au-select">
 													<mdc-select
 														label="Anzahl"
-														required.bind="true"
 														change.delegate="setCartItems( item.product.id, $event.detail.value )"
 														anchor-margin.bind="{top: 10}"
 														value.bind="item.amount"
@@ -59,8 +58,6 @@
 															<mdc-list-item repeat.for="i of 10" value.bind="i">${i}</mdc-list-item>
 														</mdc-list>
 													</mdc-select>
-													<!--													<mdc-select-helper-text if.bind="standardSelect.valid">Helper text</mdc-select-helper-text>-->
-													<mdc-select-helper-text validation>Anzahl muss festgelegt werden</mdc-select-helper-text>
 												</div>
 
 												<shop-icon-button

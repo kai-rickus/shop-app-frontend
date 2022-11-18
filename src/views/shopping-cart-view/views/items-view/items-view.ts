@@ -45,7 +45,6 @@ export class ItemsView
 
 	async setCartItems( id, amount )
 	{
-		debugger
 		const response = await fetch( `${environment.backendBaseUrl}cart/set/${id}/${amount}`, {
 			method  : "put",
 			headers : { "Authorization" : "Bearer " + this.user.accessToken }
