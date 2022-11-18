@@ -58,5 +58,8 @@ export class ShoppingCartView
 		const [ view ] = Array.from( this.routerElement.children )
 
 		this.routerElement.style.height = `${view.getBoundingClientRect().height}px`
+
+		console.log(this.routerElement);
+		console.log(this.routerElement.children);
 	}
 }
