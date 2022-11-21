@@ -14,7 +14,9 @@
 					</h6>
 				</mdc-layout-grid-cell>
 			</mdc-layout-grid-inner>
-			<mdc-layout-grid-inner>
+			<mdc-layout-grid-inner
+				data-dummy.bind="load() & async & signal:'addresses-updated'"
+			>
 				<mdc-layout-grid-cell
 					span="4"
 					repeat.for="payment of payments"
@@ -26,13 +28,18 @@
 							class="cursor-pointer ${payment === selectedPayment ? 'mdc-card--selected' : ''}"
 						>
 							<mdc-form-field>
-								<label class="w-100 cursor-pointer p-2 pe-3 d-flex justify-content-between align-items-center">
-									<div class="d-flex align-items-center">
+								<label
+									class="w-100 cursor-pointer p-2 pe-3 d-flex justify-content-between align-items-center"
+								>
+									<div
+										class="d-flex align-items-center"
+									>
 										<mdc-radio
 											class="address-radio-button"
 											model.bind="payment"
 											checked.two-way="selectedPayment"
-											change.trigger="radioChanged(payment.name)"
+											disabled.bind="loading"
+											change.trigger="radioChanged(payment.id)"
 										>
 										</mdc-radio>
 										${payment.displayName}
@@ -41,7 +48,7 @@
 										model.bind="payment"
 										class="
 											payment-icon
-											payment-icon--${payment.name}
+											payment-icon--${payment.id}
 											${payment === selectedPayment ? 'payment-icon--selected' : ''}
 										"
 									></div>
@@ -53,23 +60,27 @@
 				<mdc-layout-grid-cell span="12">
 					<div class="d-flex flex-row justify-content-between">
 						<div class="d-flex justify-content-start">
-							<a type="submit"
-							   mdc-button
-							   outlined
-							   class="mdc-button--thick-outlined"
-							   route-href="route: address"
+							<a
+								type="submit"
+								mdc-button
+								outlined
+								class="mdc-button--thick-outlined"
+								route-href="route: address"
 							>
 								<mdc-icon>local_shipping</mdc-icon>
 								Zurück
 							</a>
 						</div>
-						<a type="submit"
-						   mdc-button
-						   unelevated
-						   route-href="route: overview"
-						   class="mdc-button--secondary"
+						<a
+							type="submit"
+							mdc-button
+							unelevated
+							route-href="route: overview"
+							class="mdc-button--secondary"
 						>
-							<span mdc-button-label>Weiter</span>
+							<span
+								mdc-button-label
+							>Weiter</span>
 							<mdc-icon>shopping_cart_checkout</mdc-icon>
 						</a>
 					</div>

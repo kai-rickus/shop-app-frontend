@@ -44,7 +44,14 @@ export class AddressView
 	static SIGNAL_ADDRESSES_UPDATED         = "addresses-updated"
 	static SIGNAL_ADDRESSES_LOCALLY_CHANGED = "addresses-locally-changed"
 
-	constructor( public user: ShopUser, public signaler: BindingSignaler, private _shoppingCartView: ShoppingCartView, private _taskqueue: TaskQueue ){}
+
+	constructor(
+		private _shoppingCartView: ShoppingCartView,
+		public signaler: BindingSignaler,
+		private _taskqueue: TaskQueue,
+		public user: ShopUser,
+	)
+	{}
 
 	public configureRouter( config, router )
 	{
