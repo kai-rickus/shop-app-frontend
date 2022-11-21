@@ -69,39 +69,41 @@ export class PaymentView
 
 	async load()
 	{
-		// this.payments = []
-		//
-		// this._signaler.signal( PaymentView.SIGNAL_PAYMNETS_LOCALLY_CHANGED )
-		//
-		// this.loading = true;
-		//
-		// try
-		// {
-		// 	/* TODO: richtige Backendanbindung */
-		// 	const response = await fetch( `${environment.backendBaseUrl}user/addresses`, {
-		//
-		// 		headers : { "Authorization" : "Bearer " + this.user.accessToken }
-		// 	} );
-		//
-		// 	if( !response.ok ) throw new Error( `Server returned status ${response.status}` );
-		//
-		// 	const json = await response.json();
-		//
-		// 	this.payments        = json.addresses;
-		// 	this.selectedPayment = this.payments.find( item => item.selected );
-		//
-		// 	this._signaler.signal( PaymentView.SIGNAL_PAYMNETS_LOCALLY_CHANGED )
-		// }
-		// catch( error )
-		// {
-		// 	this.errorDialog.open()
-		// }
-		// this.loading = false;
-		//
-		// this._taskqueue.queueTask( async () =>
-		// {
-		// 	this._shoppingCartView.setHeightAfterRouting()
-		// } )
+		return
+
+		this.payments = []
+
+		this._signaler.signal( PaymentView.SIGNAL_PAYMNETS_LOCALLY_CHANGED )
+
+		this.loading = true;
+
+		try
+		{
+			/* TODO: richtige Backendrequest */
+			const response = await fetch( `${environment.backendBaseUrl}user/addresses`, {
+
+				headers : { "Authorization" : "Bearer " + this.user.accessToken }
+			} );
+
+			if( !response.ok ) throw new Error( `Server returned status ${response.status}` );
+
+			const json = await response.json();
+
+			this.payments        = json.addresses;
+			this.selectedPayment = this.payments.find( item => item.selected );
+
+			this._signaler.signal( PaymentView.SIGNAL_PAYMNETS_LOCALLY_CHANGED )
+		}
+		catch( error )
+		{
+			this.errorDialog.open()
+		}
+		this.loading = false;
+
+		this._taskqueue.queueTask( async () =>
+		{
+			this._shoppingCartView.setHeightAfterRouting()
+		} )
 	}
 
 	async radioChanged( id: string )
@@ -113,27 +115,27 @@ export class PaymentView
 		this.loading = false;
 	}
 
-	// async setSelectedPayment( id: string )
-	// {
-	// 	try
-	// 	{
-	// 		/* TODO: richtige Backendanbindung */
-	// 		const response = await fetch( `${environment.backendBaseUrl}user/addresses/setSelected/${id}`, {
-	// 			method  : "post",
-	// 			headers : { "Authorization" : "Bearer " + this.user.accessToken }
-	// 		} );
-	//
-	// 		if( !response.ok )
-	// 		{
-	// 			const json    = await response.json();
-	// 			const message = json?.error || response.status;
-	//
-	// 			throw new Error( `Server returned: ${message}` );
-	// 		}
-	// 	}
-	// 	catch( error )
-	// 	{
-	// 		this.errorDialog.open()
-	// 	}
-	// }
+	async setSelectedPayment( id: string )
+	{
+		try
+		{
+			/* TODO: richtige Backendrequest */
+			const response = await fetch( `${environment.backendBaseUrl}user/payments/setSelected/${id}`, {
+				method  : "post",
+				headers : { "Authorization" : "Bearer " + this.user.accessToken }
+			} );
+
+			if( !response.ok )
+			{
+				const json    = await response.json();
+				const message = json?.error || response.status;
+
+				throw new Error( `Server returned: ${message}` );
+			}
+		}
+		catch( error )
+		{
+			this.errorDialog.open()
+		}
+	}
 }
