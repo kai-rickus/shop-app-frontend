@@ -11,8 +11,14 @@ export class ItemsView
 {
 	user: ShopUser
 	value;
+	disabled = false;
 
-	constructor( user: ShopUser, private _signaler: BindingSignaler, private _shoppingCart: ShoppingCartView, private _taskqueue: TaskQueue )
+	constructor(
+		user: ShopUser,
+		private _signaler: BindingSignaler,
+		private _shoppingCart: ShoppingCartView,
+		private _taskqueue: TaskQueue
+	)
 	{
 		this.user = user;
 	}
@@ -45,6 +51,7 @@ export class ItemsView
 
 	async setCartItems( id, amount )
 	{
+		this.disabled  = true
 		const response = await fetch( `${environment.backendBaseUrl}cart/set/${id}/${amount}`, {
 			method  : "put",
 			headers : { "Authorization" : "Bearer " + this.user.accessToken }
@@ -58,6 +65,7 @@ export class ItemsView
 
 		} )
 
+		this.disabled = false
 		this._signaler.signal( SIGNAL_CART_UPDATED )
 
 	}

@@ -53,9 +53,13 @@
 														change.delegate="setCartItems( item.product.id, $event.detail.value )"
 														anchor-margin.bind="{top: 10}"
 														value.bind="item.amount"
+														disabled.bind="disabled"
 													>
 														<mdc-list>
-															<mdc-list-item repeat.for="i of 10" value.bind="i">${i}</mdc-list-item>
+															<mdc-list-item
+																repeat.for="i of 10"
+																value.bind="i">${i}
+															</mdc-list-item>
 														</mdc-list>
 													</mdc-select>
 												</div>
