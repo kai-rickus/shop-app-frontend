@@ -1,11 +1,12 @@
 import { autoinject, bindable } from "aurelia-framework";
 import { Router }               from "aurelia-router";
+import { TaskQueue }            from "aurelia-task-queue";
 import { BindingSignaler }      from "aurelia-templating-resources";
 import { Tooltip, Toast }       from "bootstrap";
 import { debug }                from "util";
 import environment              from "../../../environment";
 import { ShopUser }             from "../../../services/shop-user";
-import { ShopSelectMenu }       from "../shop-select-menu/shop-select-menu";
+import { ShoppingCartView }     from "../../../views/shopping-cart-view/shopping-cart-view";
 
 interface ProductDataResponse
 {
@@ -28,14 +29,21 @@ export const SIGNAL_CART_UPDATED = "cart-updated";
 export class ProductDetailsMain
 {
 	@bindable data: ProductDataResponse;
-	selectMenu: ShopSelectMenu;
 	submitting      = false;
 	addedToCartToast;
 	toast;
 	favorized;
+	amount          = 1;
 	favorizePending = false;
 
-	constructor( private _router: Router, private _user: ShopUser, private _signaler: BindingSignaler ){}
+	constructor(
+		private _shoppingCart: ShoppingCartView,
+		private _signaler: BindingSignaler,
+		private _taskqueue: TaskQueue,
+		private _router: Router,
+		private _user: ShopUser,
+	)
+	{}
 
 	attached()
 	{
@@ -72,7 +80,7 @@ export class ProductDetailsMain
 
 		try
 		{
-			const response = await fetch( `${environment.backendBaseUrl}cart/add/${this.data.id}/${this.selectMenu.value}`, {
+			const response = await fetch( `${environment.backendBaseUrl}cart/add/${this.data.id}/${this.amount}`, {
 				method  : "put",
 				headers : { "Authorization" : "Bearer " + this._user.accessToken }
 			} );
@@ -92,11 +100,11 @@ export class ProductDetailsMain
 		this.submitting = false
 	}
 
-	async setFavorite( event )
+	async setFavorite( id, amount )
 	{
 		this.favorizePending = true
 
-		const url      = `${environment.backendBaseUrl}product/setFavorite/${this.data.id}/${event.detail.isOn}`
+		const url      = `${environment.backendBaseUrl}product/setFavorite/${id}/${amount}`
 		const response = await fetch( url, {
 			method  : "post",
 			headers : { "Authorization" : "Bearer " + this._user.accessToken }
@@ -106,4 +114,5 @@ export class ProductDetailsMain
 
 		this.favorizePending = false
 	}
+
 }

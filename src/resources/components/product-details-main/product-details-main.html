@@ -43,7 +43,9 @@
 						<div class="card-body rounded-1">
 							<div class="mdc-layout-grid__inner">
 								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mb-2 justify-content-end d-flex">
-									<h1 class="card-title">${data.price | currency:'EUR'}</h1>
+									<h1 class="card-title">${data.price | currency
+									:
+									'EUR'}</h1>
 								</div>
 
 								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mb-4 d-flex flex-column">
@@ -67,7 +69,7 @@
 											raised
 											class="product-detail-main-button"
 											disabled.bind="submitting"
-											click.trigger="addToCart()"
+											click.trigger="addToCart( item.product.id, $event.detail.value )"
 											id="liveToastBtn"
 									>In den Einkaufswagen!
 										<span class="spinner-border spinner-border-sm"
@@ -81,28 +83,18 @@
 								</div>
 
 								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-
-<!--									<shop-select-menu view-model.ref="selectMenu" lable="Anzahl">-->
-<!--										<shop-select-menu-option value.bind="1" selected.bind="true">1</shop-select-menu-option>-->
-<!--										<shop-select-menu-option value.bind="2">2</shop-select-menu-option>-->
-<!--										<shop-select-menu-option value.bind="3">3</shop-select-menu-option>-->
-<!--										<shop-select-menu-option value.bind="4">4</shop-select-menu-option>-->
-<!--										<shop-select-menu-option value.bind="5">5</shop-select-menu-option>-->
-<!--									</shop-select-menu>-->
-
 									<div class="au-select">
 										<mdc-select
 											label="Anzahl"
-											change.delegate="setCartItems( item.product.id, $event.detail.value )"
 											anchor-margin.bind="{top: 10}"
-											value.bind="item.amount"
+											value.bind="amount"
+											disabled.bind="submitting"
 										>
 											<mdc-list>
 												<mdc-list-item repeat.for="i of 10" value.bind="i">${i}</mdc-list-item>
 											</mdc-list>
 										</mdc-select>
 									</div>
-
 								</div>
 								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 text-center">
 									<shop-icon-button

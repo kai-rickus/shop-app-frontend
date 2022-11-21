@@ -26,5 +26,8 @@
         background-color: variables.$secondary-color;
         color: variables.$text-on-secondary;
     }
+    .mdc-menu {
+        z-index : 1000;
+    }
 
 }
