@@ -1,4 +1,3 @@
-@use "@material/select/variables" as select-variables;
 
 .items-view {
     $menu-max-width : 120px;
@@ -12,12 +11,6 @@
     .item-card-height {
         height : 155px;
     }
-
-    .mdc-menu {
-        z-index : 1000;
-    }
-
-
 }
 
 router-view {

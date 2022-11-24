@@ -3,8 +3,7 @@
 	<require from="./items-view.css"></require>
 	<require from="valueConverters/currency-value-converter"></require>
 	<require from="components/shop-icon-button/shop-icon-button"></require>
-	<require from="components/shop-select-menu/shop-select-menu"></require>
-	<require from="components/shop-select-menu-option/shop-select-menu-option"></require>
+	<require from="components/shop-item-amount/shop-item-amount"></require>
 
 	<div class="items-view au-animate animate--fade-in animate--fade-out">
 		<mdc-layout-grid no-padding>
@@ -23,7 +22,6 @@
 					<div repeat.for="item of getCardItems() & async & signal:'cart-updated'"
 						 class="card frost mb-3 rounded-1 border-0 overflow-visible"
 					>
-
 						<mdc-card
 							surface
 							disable-ripple
@@ -31,7 +29,11 @@
 						>
 							<mdc-form-field>
 								<a href="#/product-detail?id=${item.product.id}" class="shop-ripple">
-									<img class="img-size ratio-16x9" src="${item.product.image}" alt="produkt-thumbnail">
+									<img
+										class="img-size ratio-16x9"
+										src="${item.product.image}"
+										alt="produkt-thumbnail"
+									>
 								</a>
 								<div class="item-card-height ps-2 d-flex flex-column justify-content-between">
 									<mdc-layout-grid-cell class="w-auto p-0">
@@ -44,25 +46,32 @@
 											class="d-flex justify-content-between align-items-center pt-2 pb-2 pe-2"
 										>
 											<mdc-layout-grid-cell
-												span="8"
+												span="4"
 												class="d-flex justify-content-start">
 
-												<div class="au-select">
-													<mdc-select
-														label="Anzahl"
-														change.delegate="setCartItems( item.product.id, $event.detail.value )"
-														anchor-margin.bind="{top: 10}"
-														value.bind="item.amount"
-														disabled.bind="disabled"
-													>
-														<mdc-list>
-															<mdc-list-item
-																repeat.for="i of 10"
-																value.bind="i">${i}
-															</mdc-list-item>
-														</mdc-list>
-													</mdc-select>
-												</div>
+												<shop-item-amount
+													product-id.bind="item.product.id"
+													product-amount.bind="item.amount"
+												>
+
+													<!--													<div class="au-select">-->
+													<!--														<mdc-select-->
+													<!--															label="Anzahl"-->
+													<!--															change.delegate="setCartItems( item.product.id, $event.detail.value )"-->
+													<!--															anchor-margin.bind="{top: 10}"-->
+													<!--															value.bind="item.amount"-->
+													<!--															disabled.bind="disabled"-->
+													<!--														>-->
+													<!--															<mdc-list>-->
+													<!--																<mdc-list-item-->
+													<!--																	repeat.for="i of 10"-->
+													<!--																	value.bind="i">${i}-->
+													<!--																</mdc-list-item>-->
+													<!--															</mdc-list>-->
+													<!--														</mdc-select>-->
+													<!--													</div>-->
+
+												</shop-item-amount>
 
 												<shop-icon-button
 													icon="delete_forever"

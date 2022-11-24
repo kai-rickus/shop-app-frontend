@@ -10,7 +10,7 @@ import { ShoppingCartView }    from "../../shopping-cart-view";
 export class ItemsView
 {
 	user: ShopUser
-	value;
+	// value;
 	disabled = false;
 
 	constructor(
@@ -26,7 +26,6 @@ export class ItemsView
 	attached()
 	{
 		this._shoppingCart.setHeightAfterRouting()
-
 	}
 
 	// onSelectionChange()
@@ -51,6 +50,8 @@ export class ItemsView
 
 	async setCartItems( id, amount )
 	{
+
+
 		this.disabled  = true
 		const response = await fetch( `${environment.backendBaseUrl}cart/set/${id}/${amount}`, {
 			method  : "put",
