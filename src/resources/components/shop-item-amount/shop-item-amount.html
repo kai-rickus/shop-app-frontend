@@ -1,0 +1,37 @@
+<template class="shop-item-amount">
+	<require from="./shop-item-amount.css"></require>
+
+	<div
+		if.bind="false"
+		class="au-select"
+	>
+		<mdc-select
+			label="Anzahl"
+			change.delegate="setCartItems( productId, $event.detail.value )"
+			anchor-margin.bind="{top: 10}"
+			value.bind="productAmount"
+			disabled.bind="disabled"
+		>
+			<mdc-list>
+				<mdc-list-item
+					type="number"
+					repeat.for="i of 10"
+					value.bind="i">${i}
+				</mdc-list-item>
+			</mdc-list>
+		</mdc-select>
+	</div>
+	<div
+		else
+		class="au-text-field"
+	>
+		<mdc-text-field
+			type="number"
+			ref="standard"
+			label="Anzahl"
+			disabled.bind="disabled"
+			value="10"
+		>
+		</mdc-text-field>
+	</div>
+</template>
