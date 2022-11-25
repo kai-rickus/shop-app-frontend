@@ -11,7 +11,8 @@ export class ItemsView
 {
 	user: ShopUser
 	// value;
-	disabled = false;
+	disabled                     = false;
+	private _SIGNAL_CART_UPDATED = SIGNAL_CART_UPDATED;
 
 	constructor(
 		user: ShopUser,
@@ -50,7 +51,6 @@ export class ItemsView
 
 	async setCartItems( id, amount )
 	{
-
 
 		this.disabled  = true
 		const response = await fetch( `${environment.backendBaseUrl}cart/set/${id}/${amount}`, {

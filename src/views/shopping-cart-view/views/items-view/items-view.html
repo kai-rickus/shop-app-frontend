@@ -19,7 +19,7 @@
 			</mdc-layout-grid-inner>
 			<mdc-layout-grid-inner>
 				<mdc-layout-grid-cell span="12">
-					<div repeat.for="item of getCardItems() & async & signal:'cart-updated'"
+					<div repeat.for="item of getCardItems() & async & signal:_SIGNAL_CART_UPDATED"
 						 class="card frost mb-3 rounded-1 border-0 overflow-visible"
 					>
 						<mdc-card
@@ -53,24 +53,6 @@
 													product-id.bind="item.product.id"
 													product-amount.bind="item.amount"
 												>
-
-													<!--													<div class="au-select">-->
-													<!--														<mdc-select-->
-													<!--															label="Anzahl"-->
-													<!--															change.delegate="setCartItems( item.product.id, $event.detail.value )"-->
-													<!--															anchor-margin.bind="{top: 10}"-->
-													<!--															value.bind="item.amount"-->
-													<!--															disabled.bind="disabled"-->
-													<!--														>-->
-													<!--															<mdc-list>-->
-													<!--																<mdc-list-item-->
-													<!--																	repeat.for="i of 10"-->
-													<!--																	value.bind="i">${i}-->
-													<!--																</mdc-list-item>-->
-													<!--															</mdc-list>-->
-													<!--														</mdc-select>-->
-													<!--													</div>-->
-
 												</shop-item-amount>
 
 												<shop-icon-button

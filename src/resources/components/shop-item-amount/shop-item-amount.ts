@@ -1,27 +1,33 @@
 import { autoinject, bindable } from "aurelia-framework";
 import { TaskQueue }            from "aurelia-task-queue";
 import { BindingSignaler }      from "aurelia-templating-resources";
+import { debug }                from "util";
 import environment              from "../../../environment";
 import { ShopUser }             from "../../../services/shop-user";
 import { ShoppingCartView }     from "../../../views/shopping-cart-view/shopping-cart-view";
 import { SIGNAL_CART_UPDATED }  from "../product-details-main/product-details-main";
+import { MdcTextField }         from "@aurelia-mdc-web/text-field";
 
 @autoinject()
 export class ShopItemAmount
 {
-
-	@bindable productId;
+	@bindable menuSelectAmount = 10;
 	@bindable productAmount;
+	@bindable productId;
 
 	user: ShopUser
-	value;
-	disabled = false;
+	previousProductAmount;
+	textfield;
+	disabled  = false;
+	transform = false;
+
+	private _mdcTextField: MdcTextField;
 
 	constructor(
 		user: ShopUser,
 		private _signaler: BindingSignaler,
 		private _shoppingCart: ShoppingCartView,
-		private _taskqueue: TaskQueue
+		private _taskqueue: TaskQueue,
 	)
 	{
 		this.user = user;
@@ -29,29 +35,34 @@ export class ShopItemAmount
 
 	attached()
 	{
-		console.log( this.productAmount );
-	}
+		if( this.productAmount >= this.menuSelectAmount )
+		{
+			this.transform = true;
+		}
 
-	// async getCardItems()
-	// {
-	// 	const response = await fetch( `${environment.backendBaseUrl}cart/get`, {
-	// 		headers : { "Authorization" : "Bearer " + this.user.accessToken }
-	// 	} );
-	// 	const data     = await response.json()
-	//
-	// 	this._taskqueue.queueTask( async () =>
-	// 	{
-	// 		this._shoppingCart.setHeightAfterRouting()
-	//
-	// 	} )
-	// 	return data.items
-	// }
+		console.log( this.textfield );
+
+		this.previousProductAmount = this.productAmount
+	}
 
 	async setCartItems( id, amount )
 	{
-		this.disabled = true
+		if( amount === "" )
+		{
+			this.productAmount = this.previousProductAmount
+			return
+		}
 
-		console.log( this.productAmount );
+		if( this.productAmount === this.menuSelectAmount )
+		{
+			console.log( this.textfield )
+
+			this.transform = true;
+			this.textfield.focus()
+			return
+		}
+
+		this.disabled = true
 
 		const response = await fetch( `${environment.backendBaseUrl}cart/set/${id}/${amount}`, {
 			method  : "put",
@@ -60,14 +71,8 @@ export class ShopItemAmount
 
 		if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
 
-		// this._taskqueue.queueTask( async () =>
-		// {
-		// 	this._shoppingCart.setHeightAfterRouting()
-		//
-		// } )
-
 		this.disabled = false
-		this._signaler.signal( SIGNAL_CART_UPDATED )
 
+		this._signaler.signal( SIGNAL_CART_UPDATED )
 	}
 }

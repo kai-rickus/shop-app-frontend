@@ -1,37 +1,31 @@
 <template class="shop-item-amount">
 	<require from="./shop-item-amount.css"></require>
 
-	<div
-		if.bind="false"
-		class="au-select"
+	<mdc-select
+		if.bind="!transform"
+		label="Anzahl"
+		change.delegate="setCartItems( productId, $event.detail.value )"
+		anchor-margin.bind="{top: 10}"
+		value.bind="productAmount"
+		disabled.bind="disabled"
 	>
-		<mdc-select
-			label="Anzahl"
-			change.delegate="setCartItems( productId, $event.detail.value )"
-			anchor-margin.bind="{top: 10}"
-			value.bind="productAmount"
-			disabled.bind="disabled"
-		>
-			<mdc-list>
-				<mdc-list-item
-					type="number"
-					repeat.for="i of 10"
-					value.bind="i">${i}
-				</mdc-list-item>
-			</mdc-list>
-		</mdc-select>
-	</div>
-	<div
+		<mdc-list>
+			<mdc-list-item
+				type="number"
+				repeat.for="i of menuSelectAmount"
+				value.bind="i + 1">${i + 1}
+				<span if.bind="i + 1 === menuSelectAmount">+</span>
+			</mdc-list-item>
+		</mdc-list>
+	</mdc-select>
+	<mdc-text-field
 		else
-		class="au-text-field"
+		type="number"
+		view-model.ref="textfield"
+		label="Anzahl"
+		change.delegate="setCartItems( productId, productAmount )"
+		disabled.bind="disabled"
+		value.bind="productAmount"
 	>
-		<mdc-text-field
-			type="number"
-			ref="standard"
-			label="Anzahl"
-			disabled.bind="disabled"
-			value="10"
-		>
-		</mdc-text-field>
-	</div>
+	</mdc-text-field>
 </template>
