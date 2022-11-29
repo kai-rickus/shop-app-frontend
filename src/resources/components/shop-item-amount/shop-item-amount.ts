@@ -39,9 +39,6 @@ export class ShopItemAmount
 		{
 			this.transform = true;
 		}
-
-		console.log( this.textfield );
-
 		this.previousProductAmount = this.productAmount
 	}
 
@@ -55,10 +52,13 @@ export class ShopItemAmount
 
 		if( this.productAmount === this.menuSelectAmount )
 		{
-			console.log( this.textfield )
-
 			this.transform = true;
-			this.textfield.focus()
+
+			this._taskqueue.queueMicroTask( () =>
+			{
+				this.productAmount = ""
+				this.textfield.focus()
+			} )
 			return
 		}
 
