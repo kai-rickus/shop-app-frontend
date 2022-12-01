@@ -4,6 +4,7 @@
 	<require from="app.css"></require>
 	<require from=".././custom-rating/custom-rating"></require>
 	<require from="components/shop-icon-button/shop-icon-button"></require>
+	<require from="components/shop-item-amount/shop-item-amount"></require>
 
 	<div class="mdc-layout-grid">
 		<div class="mdc-layout-grid__inner">
@@ -81,18 +82,25 @@
 								</div>
 
 								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-									<div class="au-select">
-										<mdc-select
-											label="Anzahl"
-											anchor-margin.bind="{top: 10}"
-											value.bind="amount"
-											disabled.bind="submitting"
-										>
-											<mdc-list>
-												<mdc-list-item repeat.for="i of 9" value.bind="i + 1">${i + 1}</mdc-list-item>
-											</mdc-list>
-										</mdc-select>
-									</div>
+																		<div class="au-select">
+																			<mdc-select
+																				label="Anzahl"
+																				anchor-margin.bind="{top: 10}"
+																				value.bind="amount"
+																				disabled.bind="submitting"
+																			>
+																				<mdc-list>
+																					<mdc-list-item repeat.for="i of 9" value.bind="i + 1">${i + 1}</mdc-list-item>
+																				</mdc-list>
+																			</mdc-select>
+																		</div>
+
+<!--									<shop-item-amount-->
+<!--										product-id.bind="item.product.id"-->
+<!--										product-amount.bind="item.amount"-->
+<!--									>-->
+<!--									</shop-item-amount>-->
+
 								</div>
 								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 text-center">
 									<shop-icon-button

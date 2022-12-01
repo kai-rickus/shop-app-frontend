@@ -50,8 +50,8 @@
 												class="d-flex justify-content-start">
 
 												<shop-item-amount
-													product-id.bind="item.product.id"
-													product-amount.bind="item.amount"
+													value.bind="item.product.id"
+													id.bind="item.amount"
 												>
 												</shop-item-amount>
 
@@ -86,7 +86,6 @@
 						   route-href="route: address"
 						   class="mdc-button--secondary"
 						>
-
 							<span mdc-button-label>Weiter</span>
 							<mdc-icon>local_shipping</mdc-icon>
 						</a>

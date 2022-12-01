@@ -6,59 +6,57 @@ import environment              from "../../../environment";
 import { ShopUser }             from "../../../services/shop-user";
 import { ShoppingCartView }     from "../../../views/shopping-cart-view/shopping-cart-view";
 import { SIGNAL_CART_UPDATED }  from "../product-details-main/product-details-main";
-import { MdcTextField }         from "@aurelia-mdc-web/text-field";
 
 @autoinject()
 export class ShopItemAmount
 {
-	@bindable menuSelectAmount = 10;
-	@bindable productAmount;
-	@bindable productId;
+	@bindable maxValue = 10;
+	@bindable value;
+	@bindable id;
 
-	user: ShopUser
-	previousProductAmount;
+	previousValue;
 	textfield;
 	disabled  = false;
 	transform = false;
 
-	private _mdcTextField: MdcTextField;
-
 	constructor(
-		user: ShopUser,
+		private _user: ShopUser,
 		private _signaler: BindingSignaler,
 		private _shoppingCart: ShoppingCartView,
 		private _taskqueue: TaskQueue,
 	)
-	{
-		this.user = user;
-	}
+	{}
 
 	attached()
 	{
-		if( this.productAmount >= this.menuSelectAmount )
+		if( this.value >= this.maxValue )
 		{
 			this.transform = true;
 		}
-		this.previousProductAmount = this.productAmount
+
+		this.previousValue = this.value
 	}
 
 	async setCartItems( id, amount )
 	{
 		if( amount === "" )
 		{
-			this.productAmount = this.previousProductAmount
+			this.value = this.previousValue
+
 			return
 		}
 
-		if( this.productAmount === this.menuSelectAmount )
+		if( this.value === this.maxValue )
 		{
 			this.transform = true;
 
 			this._taskqueue.queueMicroTask( () =>
 			{
-				this.productAmount = ""
+				this.value = ""
+
 				this.textfield.focus()
 			} )
+
 			return
 		}
 
@@ -66,7 +64,7 @@ export class ShopItemAmount
 
 		const response = await fetch( `${environment.backendBaseUrl}cart/set/${id}/${amount}`, {
 			method  : "put",
-			headers : { "Authorization" : "Bearer " + this.user.accessToken }
+			headers : { "Authorization" : "Bearer " + this._user.accessToken }
 		} );
 
 		if( !response.ok ) throw new Error( `Server returned status ${response.status}` )

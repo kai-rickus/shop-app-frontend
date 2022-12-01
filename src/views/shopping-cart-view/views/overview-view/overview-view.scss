@@ -1,4 +1,8 @@
+@use "@material/theme/color-palette";
 
-    .overview-view{
-    
+.overview-view {
+
+    .products:nth-child(even) {
+        background-color : color-palette.$grey-100;
     }
+}

@@ -29,11 +29,6 @@ export class ItemsView
 		this._shoppingCart.setHeightAfterRouting()
 	}
 
-	// onSelectionChange()
-	// {
-	// 	console.log( event );
-	// }
-
 	async getCardItems()
 	{
 		const response = await fetch( `${environment.backendBaseUrl}cart/get`, {
@@ -68,6 +63,5 @@ export class ItemsView
 
 		this.disabled = false
 		this._signaler.signal( SIGNAL_CART_UPDATED )
-
 	}
 }
