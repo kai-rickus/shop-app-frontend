@@ -13,5 +13,6 @@
     },
     "copyrightYear" : "2021",
     "url"           : "http://localhost:9000/",
-    "urlName"       : "shop-app.de"
+    "urlName"       : "shop-app.de",
+    "name"          : "Shop App"
 }
