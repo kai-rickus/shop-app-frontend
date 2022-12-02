@@ -10,14 +10,16 @@ import { SIGNAL_CART_UPDATED }  from "../product-details-main/product-details-ma
 @autoinject()
 export class ShopItemAmount
 {
-	@bindable maxValue = 10;
+	@bindable to;
 	@bindable value;
 	@bindable id;
+	@bindable disabled = false;
+	@bindable callback;
+	@bindable from;
+	@bindable transform = false;
 
 	previousValue;
 	textfield;
-	disabled  = false;
-	transform = false;
 
 	constructor(
 		private _user: ShopUser,
@@ -29,7 +31,7 @@ export class ShopItemAmount
 
 	attached()
 	{
-		if( this.value >= this.maxValue )
+		if( this.value >= this.to )
 		{
 			this.transform = true;
 		}
@@ -37,40 +39,33 @@ export class ShopItemAmount
 		this.previousValue = this.value
 	}
 
-	async setCartItems( id, value )
-	{
-		if( value === "" )
-		{
-			this.value = this.previousValue
-
-			return
-		}
-
-		if( this.value === this.maxValue )
-		{
-			this.transform = true;
-
-			this._taskqueue.queueMicroTask( () =>
-			{
-				this.value = ""
-
-				this.textfield.focus()
-			} )
-
-			return
-		}
-
-		this.disabled = true
-
-		const response = await fetch( `${environment.backendBaseUrl}cart/set/${id}/${value}`, {
-			method  : "put",
-			headers : { "Authorization" : "Bearer " + this._user.accessToken }
-		} );
-
-		if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
-
-		this.disabled = false
-
-		this._signaler.signal( SIGNAL_CART_UPDATED )
-	}
+	// async setCartItems( id, value )
+	// {
+	// console.log("to:",this.to);
+	// console.log("value:",this.value);
+	// console.log("from:",this.from);
+	// 	debugger
+	//
+	// if( value === "" )
+	// {
+	// 	this.value = this.previousValue
+	//
+	// 	return
+	// }
+	//
+	// if( this.value === this.to )
+	// {
+	// 	this.transform = true;
+	//
+	// 	this._taskqueue.queueMicroTask( () =>
+	// 	{
+	// 		this.value = ""
+	//
+	// 		this.textfield.focus()
+	// 	} )
+	//
+	// 	return
+	// }
+	// if( this.callback === undefined ) return
+	// }
 }

@@ -29,12 +29,21 @@ export const SIGNAL_CART_UPDATED = "cart-updated";
 export class ProductDetailsMain
 {
 	@bindable data: ProductDataResponse;
+
 	submitting      = false;
+	amount          = 1;
+	favorizePending = false;
+
 	addedToCartToast;
 	toast;
 	favorized;
-	amount          = 1;
-	favorizePending = false;
+
+	textfield;
+	transform = false;
+	previousValue;
+	value;
+	to        = 10;
+	from      = 1;
 
 	constructor(
 		private _shoppingCart: ShoppingCartView,
@@ -50,6 +59,8 @@ export class ProductDetailsMain
 		this.initializeFavorite()
 		this.initializeTooltips()
 		this.initializedToast()
+
+		this.previousValue = this.value
 	}
 
 	initializedToast()
@@ -74,8 +85,38 @@ export class ProductDetailsMain
 		tooltipTriggerList.map( element => new Tooltip( element ) )
 	}
 
+	validate()
+	{
+		console.log( "to:", this.to );
+		console.log( "amount:", this.amount );
+		console.log( "from:", this.from );
+		debugger
+
+		if( this.value === "" )
+		{
+			this.value = this.previousValue
+
+			return
+		}
+
+		if( this.amount === this.to )
+		{
+			this.transform = true;
+
+			this._taskqueue.queueMicroTask( () =>
+			{
+				this.value = ""
+
+				// this.textfield.focus()
+			} )
+
+			return
+		}
+	}
+
 	async addToCart()
 	{
+
 		this.submitting = true
 
 		try

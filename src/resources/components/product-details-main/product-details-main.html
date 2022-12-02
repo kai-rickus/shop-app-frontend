@@ -82,24 +82,29 @@
 								</div>
 
 								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-																		<div class="au-select">
-																			<mdc-select
-																				label="Anzahl"
-																				anchor-margin.bind="{top: 10}"
-																				value.bind="amount"
-																				disabled.bind="submitting"
-																			>
-																				<mdc-list>
-																					<mdc-list-item repeat.for="i of 9" value.bind="i + 1">${i + 1}</mdc-list-item>
-																				</mdc-list>
-																			</mdc-select>
-																		</div>
-
-<!--									<shop-item-amount-->
-<!--										product-id.bind="item.product.id"-->
-<!--										product-amount.bind="item.amount"-->
-<!--									>-->
-<!--									</shop-item-amount>-->
+									<!--									<div class="au-select">-->
+									<!--										<mdc-select-->
+									<!--											label="Anzahl"-->
+									<!--											anchor-margin.bind="{top: 10}"-->
+									<!--											value.bind="amount"-->
+									<!--											disabled.bind="submitting"-->
+									<!--										>-->
+									<!--											<mdc-list>-->
+									<!--												<mdc-list-item repeat.for="i of 9" value.bind="i + 1">${i + 1}</mdc-list-item>-->
+									<!--											</mdc-list>-->
+									<!--										</mdc-select>-->
+									<!--									</div>-->
+									<shop-item-amount
+										id.bind="item.product.id"
+										value.two-way="amount"
+										disabled.bind="disabled"
+										callback.call="console.log"
+										change.delegate="validate()"
+										from.bind="from"
+										to.bind="to"
+										transform.bind="transform"
+									>
+									</shop-item-amount>
 
 								</div>
 								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 text-center">

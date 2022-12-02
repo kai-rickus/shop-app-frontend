@@ -51,7 +51,11 @@
 
 												<shop-item-amount
 													id.bind="item.product.id"
-													value.bind="item.amount"
+													value.two-way="item.amount"
+													disabled.bind="disabled"
+													callback.call="setCartItems(item.product.id, item.amount)"
+													from.bind="0"
+													to.bind="10"
 												>
 												</shop-item-amount>
 
@@ -67,9 +71,9 @@
 											<mdc-layout-grid-cell
 												span="12"
 											>
-												<span class="fs-4 fw-bold text-on-surface">${item.product.price | currency
-												:
-												'EUR'}</span>
+												<span class="fs-4 fw-bold text-on-surface">
+													${item.product.price | currency:'EUR'}
+												</span>
 											</mdc-layout-grid-cell>
 										</mdc-layout-grid-inner>
 									</mdc-layout-grid-cell>

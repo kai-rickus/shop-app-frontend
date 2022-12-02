@@ -4,7 +4,7 @@
 	<mdc-select
 		if.bind="!transform"
 		label="Anzahl"
-		change.delegate="setCartItems( id, $event.detail.value )"
+		change.delegate="callback()"
 		anchor-margin.bind="{top: 10}"
 		value.bind="value"
 		disabled.bind="disabled"
@@ -12,9 +12,11 @@
 		<mdc-list>
 			<mdc-list-item
 				type="number"
-				repeat.for="i of maxValue"
-				value.bind="i + 1">${i + 1}
-				<span if.bind="i + 1 === maxValue">+</span>
+				repeat.for="i of (to - from + 1)"
+				value.bind="i + from"
+			>
+				${i + from}
+				<span if.bind="to === i + from">+</span>
 			</mdc-list-item>
 		</mdc-list>
 	</mdc-select>
@@ -23,7 +25,7 @@
 		type="number"
 		view-model.ref="textfield"
 		label="Anzahl"
-		change.delegate="setCartItems( id, value )"
+		change.delegate="callback()"
 		disabled.bind="disabled"
 		value.bind="value"
 	>
