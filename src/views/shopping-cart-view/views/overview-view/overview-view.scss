@@ -1,8 +1,14 @@
 @use "@material/theme/color-palette";
 
+$shipment-location-width : 200px;
+
 .overview-view {
 
-    .products:nth-child(even) {
+    .article-list, .products:nth-child(even) {
         background-color : color-palette.$grey-100;
+    }
+
+    .shipment-location {
+        width : $shipment-location-width;
     }
 }

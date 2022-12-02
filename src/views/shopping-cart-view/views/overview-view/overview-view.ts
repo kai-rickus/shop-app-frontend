@@ -39,7 +39,7 @@ export class OverviewView
 	city               = "Köln";
 	ZIP                = "50858";
 	country            = "Deutschland";
-	totalCost          = "222";
+	totalCost          = "222.78";
 	paymentDisplayName = "PayPal";
 
 	constructor(
