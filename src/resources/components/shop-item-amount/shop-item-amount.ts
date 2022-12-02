@@ -37,9 +37,9 @@ export class ShopItemAmount
 		this.previousValue = this.value
 	}
 
-	async setCartItems( id, amount )
+	async setCartItems( id, value )
 	{
-		if( amount === "" )
+		if( value === "" )
 		{
 			this.value = this.previousValue
 
@@ -62,7 +62,7 @@ export class ShopItemAmount
 
 		this.disabled = true
 
-		const response = await fetch( `${environment.backendBaseUrl}cart/set/${id}/${amount}`, {
+		const response = await fetch( `${environment.backendBaseUrl}cart/set/${id}/${value}`, {
 			method  : "put",
 			headers : { "Authorization" : "Bearer " + this._user.accessToken }
 		} );
