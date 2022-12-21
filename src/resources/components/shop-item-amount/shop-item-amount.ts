@@ -13,7 +13,7 @@ export class ShopItemAmount
 	@bindable to;
 	@bindable value;
 	@bindable id;
-	@bindable disabled = false;
+	@bindable disabled  = false;
 	@bindable callback;
 	@bindable from;
 	@bindable transform = false;
@@ -39,33 +39,23 @@ export class ShopItemAmount
 		this.previousValue = this.value
 	}
 
-	// async setCartItems( id, value )
-	// {
-	// console.log("to:",this.to);
-	// console.log("value:",this.value);
-	// console.log("from:",this.from);
-	// 	debugger
-	//
-	// if( value === "" )
-	// {
-	// 	this.value = this.previousValue
-	//
-	// 	return
-	// }
-	//
-	// if( this.value === this.to )
-	// {
-	// 	this.transform = true;
-	//
-	// 	this._taskqueue.queueMicroTask( () =>
-	// 	{
-	// 		this.value = ""
-	//
-	// 		this.textfield.focus()
-	// 	} )
-	//
-	// 	return
-	// }
-	// if( this.callback === undefined ) return
-	// }
+	onChange()
+	{
+
+		if( this.value === this.to )
+		{
+			this.transform = true;
+
+			this._taskqueue.queueMicroTask( () =>
+			{
+				this.value = ""
+
+				this.textfield.focus()
+			} )
+		}
+		else
+		{
+			this.callback()
+		}
+	}
 }

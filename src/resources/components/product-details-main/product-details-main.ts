@@ -85,38 +85,8 @@ export class ProductDetailsMain
 		tooltipTriggerList.map( element => new Tooltip( element ) )
 	}
 
-	validate()
-	{
-		console.log( "to:", this.to );
-		console.log( "amount:", this.amount );
-		console.log( "from:", this.from );
-		debugger
-
-		if( this.value === "" )
-		{
-			this.value = this.previousValue
-
-			return
-		}
-
-		if( this.amount === this.to )
-		{
-			this.transform = true;
-
-			this._taskqueue.queueMicroTask( () =>
-			{
-				this.value = ""
-
-				// this.textfield.focus()
-			} )
-
-			return
-		}
-	}
-
 	async addToCart()
 	{
-
 		this.submitting = true
 
 		try

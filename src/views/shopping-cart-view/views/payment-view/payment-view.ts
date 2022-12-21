@@ -10,44 +10,6 @@ export class PaymentView
 {
 	loading  = false;
 	payments = [];
-	// payments =
-	// 	[
-	// 		{
-	// 			id          : "paypal",
-	// 			displayName : "PayPal",
-	// 			selected    : false
-	// 		},
-	// 		{
-	// 			id          : "apple-pay",
-	// 			displayName : "Apple Pay",
-	// 			selected    : false
-	// 		},
-	// 		{
-	// 			id          : "american-express",
-	// 			displayName : "American Express",
-	// 			selected    : true
-	// 		},
-	// 		{
-	// 			id          : "google-pay",
-	// 			displayName : "Google Pay",
-	// 			selected    : false
-	// 		},
-	// 		{
-	// 			id          : "maestro",
-	// 			displayName : "Maestro",
-	// 			selected    : false
-	// 		},
-	// 		{
-	// 			id          : "mastercard",
-	// 			displayName : "Mastercard",
-	// 			selected    : false
-	// 		},
-	// 		{
-	// 			id          : "visa",
-	// 			displayName : "Visacard",
-	// 			selected    : false
-	// 		},
-	// 	]
 	errorDialog;
 
 	static SIGNAL_PAYMNETS_UPDATED         = "payments-updated"
@@ -79,18 +41,15 @@ export class PaymentView
 
 		try
 		{
-
-			/* TODO: richtige Backendrequest */
 			const response = await fetch( `${environment.backendBaseUrl}user/payments`, {
-
 				headers : { "Authorization" : "Bearer " + this.user.accessToken }
 			} );
 			if( !response.ok ) throw new Error( `Server returned status ${response.status}` );
 
 			const json = await response.json();
 
-			this.payments        = json.payments;
-			console.log(this.payments);
+			this.payments = json.payments;
+			console.log( this.payments );
 			this.selectedPayment = this.payments.find( item => item.selected );
 
 			this._signaler.signal( PaymentView.SIGNAL_PAYMNETS_LOCALLY_CHANGED )

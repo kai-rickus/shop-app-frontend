@@ -49,28 +49,6 @@ export class ItemsView
 
 	async setCartItems( id, amount )
 	{
-
-		if( amount === "" )
-		{
-			this.value = this.previousValue
-
-			return
-		}
-
-		if( amount === this.to )
-		{
-			this.transform = true;
-
-			this._taskqueue.queueMicroTask( () =>
-			{
-				this.value = ""
-
-				this.textfield.focus()
-			} )
-
-			return
-		}
-
 		this.disabled = true
 
 		const response = await fetch( `${environment.backendBaseUrl}cart/set/${id}/${amount}`, {

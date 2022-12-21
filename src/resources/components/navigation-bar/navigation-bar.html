@@ -2,6 +2,7 @@
 	<require from="./navigation-bar.css"></require>
 	<require from="components/search-bar/search-bar"></require>
 	<require from="components/shop-icon-button/shop-icon-button"></require>
+	<require from="components/shop-account-menu/shop-account-menu"></require>
 
 	<nav class="navbar navbar-expand-lg pt-4 pb-4">
 		<div class="container-fluid p-0">
@@ -33,47 +34,87 @@
 					</shop-icon-button>
 				</a>
 
-				<ul class="navbar-nav mb-2 mb-lg-0 ms-3">
-					<li if.bind="_user.refreshToken & signal:'logging-in'" class="nav-item dropdown">
-						<a class="nav-link pe-0"
-						   href="#"
-						   id="navbarDropdown"
-						   role="button"
-						   data-bs-toggle="dropdown"
-						   aria-expanded="false"
+				<button
+					mdc-icon-button
+					icon="manage_accounts"
+					mdc-button
+					raised
+					click.trigger="demo.open = !demo.open"
+					class="ms-2"
+				>
+				</button>
+				<mdc-menu
+					view-model.ref="demo"
+					mdcmenu:selected.trigger="onMenuSelect($event.detail)"
+					anchor.bind="demoAnchor"
+					anchor-corner.bind="BOTTOM_LEFT"
+					quick-open.bind="quickOpen"
+					default-focus-state.bind="defaultFocusState"
+					fixed.bind="fixed"
+					stay-open-on-selection.bind="stayOpenOnSelection"
+					anchor-margin.bind="anchorMargin"
+				>
+					<mdc-list
+						wrap-focus.bind="wrapFocus"
+						tabindex="-1"
+					>
+						<template
+							repeat.for="fruit of fruits"
 						>
-							<img class="rounded-circle" src.bind="_user.avatar" alt="Profilbild ${_user.firstName} ${_user.lastName}">
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li>
-								<a class="dropdown-item d-flex align-middle" href="">
-									<span>Mein konto</span>
-									<span class="material-icons-outlined text-primary end-0">account_circle</span>
-								</a>
-							</li>
-							<li>
-								<a class="dropdown-item d-flex align-middle" href="#">
-									<span>Einstellungen</span>
-									<span class="material-icons-outlined text-primary end-0">settings</span>
-								</a>
-							</li>
-							<li>
-								<hr class="dropdown-divider">
-							</li>
-							<li>
-								<a class="dropdown-item d-flex align-middle" href="#">
-									<span>Ausloggen</span>
-									<span class="material-icons-outlined text-primary end-0">logout</span>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li else class="nav-item">
-						<a route-href="login">
-							<span class="material-icons-outlined text-on-primary">face_unlock</span>
-						</a>
-					</li>
-				</ul>
+							<mdc-list-item
+								if.bind="fruit.label"
+								value.bind="fruit.label">
+								${fruit.label}
+							</mdc-list-item>
+							<mdc-list-divider
+								else>
+							</mdc-list-divider>
+						</template>
+					</mdc-list>
+
+				</mdc-menu>
+
+				<!--				<ul class="navbar-nav mb-2 mb-lg-0 ms-3">-->
+				<!--					<li if.bind="_user.refreshToken & signal:'logging-in'" class="nav-item dropdown">-->
+				<!--						<a class="nav-link pe-0"-->
+				<!--						   href="#"-->
+				<!--						   id="navbarDropdown"-->
+				<!--						   role="button"-->
+				<!--						   data-bs-toggle="dropdown"-->
+				<!--						   aria-expanded="false"-->
+				<!--						>-->
+				<!--							<img class="rounded-circle" src.bind="_user.avatar" alt="Profilbild ${_user.firstName} ${_user.lastName}">-->
+				<!--						</a>-->
+				<!--						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+				<!--							<li>-->
+				<!--								<a class="dropdown-item d-flex align-middle" href="">-->
+				<!--									<span>Mein konto</span>-->
+				<!--									<span class="material-icons-outlined text-primary end-0">account_circle</span>-->
+				<!--								</a>-->
+				<!--							</li>-->
+				<!--							<li>-->
+				<!--								<a class="dropdown-item d-flex align-middle" href="#">-->
+				<!--									<span>Einstellungen</span>-->
+				<!--									<span class="material-icons-outlined text-primary end-0">settings</span>-->
+				<!--								</a>-->
+				<!--							</li>-->
+				<!--							<li>-->
+				<!--								<hr class="dropdown-divider">-->
+				<!--							</li>-->
+				<!--							<li>-->
+				<!--								<a class="dropdown-item d-flex align-middle" href="#">-->
+				<!--									<span>Ausloggen</span>-->
+				<!--									<span class="material-icons-outlined text-primary end-0">logout</span>-->
+				<!--								</a>-->
+				<!--							</li>-->
+				<!--						</ul>-->
+				<!--					</li>-->
+				<!--					<li else class="nav-item">-->
+				<!--						<a route-href="login">-->
+				<!--							<span class="material-icons-outlined text-on-primary">face_unlock</span>-->
+				<!--						</a>-->
+				<!--					</li>-->
+				<!--				</ul>-->
 			</div>
 		</div>
 	</nav>

@@ -4,7 +4,7 @@
 	<mdc-select
 		if.bind="!transform"
 		label="Anzahl"
-		change.delegate="callback()"
+		change.delegate="onChange()"
 		anchor-margin.bind="{top: 10}"
 		value.bind="value"
 		disabled.bind="disabled"
@@ -25,7 +25,7 @@
 		type="number"
 		view-model.ref="textfield"
 		label="Anzahl"
-		change.delegate="callback()"
+		change.delegate="onChange()"
 		disabled.bind="disabled"
 		value.bind="value"
 	>
