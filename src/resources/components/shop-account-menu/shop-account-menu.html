@@ -1,0 +1,42 @@
+<template class="shop-account-menu">
+	<require from="./shop-account-menu.css"></require>
+
+	<button
+		mdc-button
+		raised
+		click.trigger="demo.open = !demo.open"
+	>
+		*AVATAR*
+	</button>
+	<mdc-menu
+		view-model.ref="demo"
+		mdcmenu:selected.trigger="onMenuSelect($event.detail)"
+		anchor.bind="demoAnchor"
+		anchor-corner.bind="BOTTOM_LEFT"
+		quick-open.bind="quickOpen"
+		default-focus-state.bind="defaultFocusState"
+		fixed.bind="fixed"
+		stay-open-on-selection.bind="stayOpenOnSelection"
+		anchor-margin.bind="anchorMargin"
+	>
+		<mdc-list
+			wrap-focus.bind="wrapFocus"
+			tabindex="-1"
+		>
+			<template
+				repeat.for="fruit of fruits"
+			>
+				<mdc-list-item
+					if.bind="fruit.label"
+					value.bind="fruit.label">
+					${fruit.label}
+				</mdc-list-item>
+				<mdc-list-divider
+					else>
+				</mdc-list-divider>
+			</template>
+		</mdc-list>
+
+	</mdc-menu>
+
+</template>
