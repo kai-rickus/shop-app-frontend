@@ -42,13 +42,13 @@
 											change.trigger="radioChanged(payment.id)"
 										>
 										</mdc-radio>
-										${payment.displayName}
+										${payment.name}
 									</div>
 									<div
 										model.bind="payment"
 										class="
 											payment-icon
-											payment-icon--${payment.id}
+											payment-icon--${payment.name}
 											${payment === selectedPayment ? 'payment-icon--selected' : ''}
 										"
 									></div>
