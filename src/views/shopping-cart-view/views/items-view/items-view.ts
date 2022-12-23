@@ -44,6 +44,7 @@ export class ItemsView
 			this._shoppingCart.setHeightAfterRouting()
 
 		} )
+		debugger
 		return data.items
 	}
 
@@ -55,7 +56,6 @@ export class ItemsView
 			method  : "put",
 			headers : { "Authorization" : "Bearer " + this._user.accessToken }
 		} );
-
 		if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
 
 		this._taskqueue.queueTask( async () =>

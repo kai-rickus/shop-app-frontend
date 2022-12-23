@@ -1,56 +1,40 @@
 import { autoinject }       from "aurelia-framework";
 import { TaskQueue }        from "aurelia-task-queue";
+import environment          from "../../../../environment";
 import { ShopUser }         from "../../../../services/shop-user";
 import { ShoppingCartView } from "../../shopping-cart-view";
 
+interface data
+{
+	address: []
+	payment: []
+	items: []
+}
+
 @autoinject()
 export class OverviewView
-{
-	products = [
-		{
-			name   : "Xbox Series S 512GB - Fortnite & Rocket League Bundle ",
-			amount : 1,
-			price  : "299.99"
-		},
-		{
-			name   : "Nintendo Joy-Con 2er-Set, neon-lila/neon-orange",
-			amount : 3,
-			price  : "86.99"
-		},
-		{
-			name   : "Playstation 5",
-			amount : 4,
-			price  : "499.99"
-		},
-		{
-			name   : "Playstation 3",
-			amount : 4,
-			price  : "149.99"
-		},
-		{
-			name   : "Playstation X",
-			amount : 4,
-			price  : "1099.99"
-		}
-	]
 
-	fullName           = "Kai Rickus";
-	street             = "Goethestr. 14";
-	city               = "Köln";
-	ZIP                = "50858";
-	country            = "Deutschland";
-	totalCost          = "222.78";
-	paymentDisplayName = "PayPal";
+{
+	checkoutInformation;
+	items;
+	totalCost = 0;
+	id;
 
 	constructor(
 		private _shoppingCartView: ShoppingCartView,
 		private _taskqueue: TaskQueue,
-		public user: ShopUser
+		private _user: ShopUser
 	)
 	{}
 
-	attached()
+	async attached()
 	{
+		this.checkoutInformation = await this.load( 65 )
+
+		this.items = this.checkoutInformation.items
+
+		this.totalCost = this.calcTotalCost()
+
 		this._shoppingCartView.setHeightAfterRouting()
 	}
 
@@ -60,6 +44,35 @@ export class OverviewView
 		{
 			this._shoppingCartView.setHeightAfterRouting()
 		} )
+	}
+
+	async load( id )
+	{
+		const response            = await fetch( `${environment.backendBaseUrl}cart/get/information/${id}`, {
+			headers : { "Authorization" : "Bearer " + this._user.accessToken }
+		} );
+		const checkoutInformation = await response.json()
+
+		this._taskqueue.queueTask( async () =>
+		{
+			this._shoppingCartView.setHeightAfterRouting()
+		} )
+
+		return checkoutInformation
+	}
+
+	calcTotalCost()
+	{
+		let totalCost = 0;
+
+		for( const item of this.items )
+		{
+			let sum = item.amount * item.product.price
+
+			totalCost += sum
+		}
+
+		return totalCost;
 	}
 
 }

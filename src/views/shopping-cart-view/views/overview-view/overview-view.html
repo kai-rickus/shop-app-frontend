@@ -20,7 +20,10 @@
 					<mdc-card class="mb-3">
 
 						<div class="card-body">
-							<div mdc-headline6 class="pb-2">
+							<div
+								mdc-headline6
+								class="pb-2"
+							>
 								Ausgewählte Lieferadresse
 							</div>
 							<div
@@ -32,31 +35,31 @@
 										span="2"
 										class="d-flex justify-content-between">
 										<div>Name:</div>
-										<div>${fullName}</div>
+										<div>${checkoutInformation.address.firstname} ${checkoutInformation.address.lastname}</div>
 									</mdc-layout-grid-cell>
 									<mdc-layout-grid-cell
 										span="2"
 										class="d-flex justify-content-between">
 										<div>Straße:</div>
-										<div>${street}</div>
+										<div>${checkoutInformation.address.street}</div>
 									</mdc-layout-grid-cell>
 									<mdc-layout-grid-cell
 										span="2"
 										class="d-flex justify-content-between">
 										<div>Stadt:</div>
-										<div>${city}</div>
+										<div>${checkoutInformation.address.city}</div>
 									</mdc-layout-grid-cell>
 									<mdc-layout-grid-cell
 										span="2"
 										class="d-flex justify-content-between">
 										<div>PLZ:</div>
-										<div>${ZIP}</div>
+										<div>${checkoutInformation.address.zip}</div>
 									</mdc-layout-grid-cell>
 									<mdc-layout-grid-cell
 										span="2"
 										class="d-flex justify-content-between">
 										<div>Land:</div>
-										<div>${country}</div>
+										<div>${checkoutInformation.address.country}</div>
 									</mdc-layout-grid-cell>
 								</mdc-layout-grid-cell>
 							</div>
@@ -74,9 +77,9 @@
 								</div>
 								<mdc-layout-grid-cell span="12">
 									<i class="material-icons pe-2">
-										<img src="src/views/shopping-cart-view/img/payments/paypal-logo.svg" alt="PayPal">
+										<img src="src/views/shopping-cart-view/img/payments/${checkoutInformation.payment.name}-logo.svg" alt="PayPal">
 									</i>
-									<span>${paymentDisplayName}</span>
+									<span>${checkoutInformation.payment.displayName}</span>
 								</mdc-layout-grid-cell>
 							</div>
 						</div>
@@ -86,7 +89,8 @@
 			<mdc-layout-grid-inner>
 				<mdc-layout-grid-cell span="12">
 					<mdc-card class="mb-3">
-						<div class="card-body">
+						<div class="card-body"
+						>
 							<div mdc-headline6 class="pb-2">
 								Alle Artikel
 							</div>
@@ -108,18 +112,16 @@
 							<mdc-layout-grid-cell
 								span="12"
 								class="d-flex justify-content-between products"
-								repeat.for="product of products"
+								repeat.for="item of items"
 							>
 								<mdc-layout-grid-cell span="7" class="w-50">
-									<span>${product.name}</span>
+									<span>${item.product.title}</span>
 								</mdc-layout-grid-cell>
 								<mdc-layout-grid-cell span="2" class="25">
-									<span>${product.amount}</span>
+									<span>${item.amount}</span>
 								</mdc-layout-grid-cell>
 								<mdc-layout-grid-cell span="3" class="w-25">
-									<span>${product.price | currency
-									:
-									'EUR'}</span>
+									<span>${item.product.price | currency:'EUR'}</span>
 								</mdc-layout-grid-cell>
 							</mdc-layout-grid-cell>
 							<div class="col pt-1 pb-1">
