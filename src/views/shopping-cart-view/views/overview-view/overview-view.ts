@@ -48,7 +48,7 @@ export class OverviewView
 
 	async load( id )
 	{
-		const response            = await fetch( `${environment.backendBaseUrl}cart/get/information/${id}`, {
+		const response            = await fetch( `${environment.backendBaseUrl}cart/get/overview/${id}`, {
 			headers : { "Authorization" : "Bearer " + this._user.accessToken }
 		} );
 		const checkoutInformation = await response.json()
