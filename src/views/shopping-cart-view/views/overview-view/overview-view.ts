@@ -1,5 +1,7 @@
 import { autoinject }       from "aurelia-framework";
+import { Redirect }         from "aurelia-router";
 import { TaskQueue }        from "aurelia-task-queue";
+import { error }            from "jquery";
 import environment          from "../../../../environment";
 import { ShopUser }         from "../../../../services/shop-user";
 import { ShoppingCartView } from "../../shopping-cart-view";
@@ -19,6 +21,8 @@ export class OverviewView
 	items;
 	totalCost = 0;
 	id;
+	disabled  = false;
+	errorDialog;
 
 	constructor(
 		private _shoppingCartView: ShoppingCartView,
@@ -67,7 +71,7 @@ export class OverviewView
 
 		for( const item of this.items )
 		{
-			let sum = item.amount * item.product.price
+			const sum = item.amount * item.product.price
 
 			totalCost += sum
 		}
@@ -75,4 +79,30 @@ export class OverviewView
 		return totalCost;
 	}
 
+	async checkout()
+	{
+		this.disabled = true
+		try
+		{
+
+			const response            = await fetch( `${environment.backendBaseUrl}cart/checkout`, {
+				headers : { "Authorization" : "Bearer " + this._user.accessToken },
+				method  : "POST",
+			} );
+			const checkoutInformation = await response.json()
+			debugger
+			this.disabled = false
+			// this._taskqueue.queueTask( async () =>
+			// {
+			// 	this._shoppingCartView.setHeightAfterRouting()
+			// } )
+			const message = checkoutInformation.message
+			throw new Error( `Server returned: ${message}` );
+		}
+
+		catch( error )
+		{
+			// this.errorDialog.open()
+		}
+	}
 }

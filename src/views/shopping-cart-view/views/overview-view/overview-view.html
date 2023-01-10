@@ -151,14 +151,16 @@
 						</a>
 					</mdc-layout-grid-cell>
 					<mdc-layout-grid-cell span="6">
-						<a type="submit"
+						<button type="submit"
 						   mdc-button
 						   unelevated
 						   class="mdc-button--secondary"
+						   click.trigger="checkout()"
+						   disabled.bind="disabled"
 						>
 							<span mdc-button-label>Kauf abschließen</span>
 							<mdc-icon>shopping_bag</mdc-icon>
-						</a>
+						</button>
 					</mdc-layout-grid-cell>
 				</mdc-layout-grid-cell>
 			</mdc-layout-grid-inner>

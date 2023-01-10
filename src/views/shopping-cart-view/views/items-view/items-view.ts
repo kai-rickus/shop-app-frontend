@@ -44,7 +44,6 @@ export class ItemsView
 			this._shoppingCart.setHeightAfterRouting()
 
 		} )
-		debugger
 		return data.items
 	}
 
