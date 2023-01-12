@@ -22,6 +22,7 @@ export class OverviewView
 	totalCost = 0;
 	id;
 	disabled  = false;
+	pending = false;
 	errorDialog;
 
 	constructor(
@@ -82,9 +83,11 @@ export class OverviewView
 	async checkout()
 	{
 		this.disabled = true
+		this.pending = true
+
 		try
 		{
-
+debugger
 			const response            = await fetch( `${environment.backendBaseUrl}cart/checkout`, {
 				headers : { "Authorization" : "Bearer " + this._user.accessToken },
 				method  : "POST",
@@ -92,6 +95,7 @@ export class OverviewView
 			const checkoutInformation = await response.json()
 			debugger
 			this.disabled = false
+			this.pending = false
 			// this._taskqueue.queueTask( async () =>
 			// {
 			// 	this._shoppingCartView.setHeightAfterRouting()

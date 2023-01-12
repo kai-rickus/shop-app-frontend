@@ -1,4 +1,5 @@
 @use "@material/theme/color-palette";
+@use "src/variables";
 
 $shipment-location-width : 200px;
 
@@ -10,5 +11,10 @@ $shipment-location-width : 200px;
 
     .shipment-location {
         width : $shipment-location-width;
+    }
+
+    .disabled {
+        background-color : color-palette.$grey-300;
+        color            : variables.$disabled-grey;
     }
 }
