@@ -28,9 +28,9 @@ const ROUTES: RouteConfig[] = [
 	{
 		route    : [ 'bought' ],
 		name     : 'bought',
-		moduleId : './views/bought-view/bought-view'
+		moduleId : './views/bought-view/bought-view',
+		title    : 'bought'
 	},
-	//bought-view wird nicht gerendert. Refused to execute script ... MIME type
 	{
 		route    : [ 'register' ],
 		name     : 'register',

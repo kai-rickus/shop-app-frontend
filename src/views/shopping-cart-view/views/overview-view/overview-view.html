@@ -76,10 +76,17 @@
 									Ausgewählte Zahlart
 								</div>
 								<mdc-layout-grid-cell span="12">
-									<i class="material-icons pe-2">
-										<img src="src/views/shopping-cart-view/img/payments/${checkoutInformation.payment.name}-logo.svg" alt="PayPal">
-									</i>
-									<span>${checkoutInformation.payment.displayName}</span>
+									<template if.bind="checkoutInformation.payment">
+										<i class="material-icons pe-2">
+											<img src="src/views/shopping-cart-view/img/payments/${checkoutInformation.payment.name}-logo.svg"
+												 alt="${checkoutInformation.payment.displayName}"
+											>
+										</i>
+										<span mdc-body2>${checkoutInformation.payment.displayName}</span>
+									</template>
+									<span else mdc-body2>
+										Keine zahlung ausgewählt.
+									</span>
 								</mdc-layout-grid-cell>
 							</div>
 						</div>
@@ -149,7 +156,7 @@
 						   class="mdc-button--thick-outlined
 							${disabled === true ? 'pe-none' : '' }
 							${disabled === true ? 'disabled' : '' }
-"
+							"
 						>
 							<mdc-icon>payments</mdc-icon>
 							Zurück
@@ -162,6 +169,7 @@
 								class="mdc-button--secondary"
 								click.trigger="checkout()"
 								disabled.bind="disabled"
+
 						>
 							<span
 								mdc-button-label
@@ -183,5 +191,57 @@
 				</mdc-layout-grid-cell>
 			</mdc-layout-grid-inner>
 		</mdc-layout-grid>
+
+		<mdc-dialog view-model.ref="errorDialog" portal>
+			<mdc-dialog-title>
+				Unbekannter Fehler
+			</mdc-dialog-title>
+			<mdc-dialog-content>
+				Der Checkout war nicht erfolgreich.
+			</mdc-dialog-content>
+			<mdc-dialog-actions>
+				<button
+					mdc-button
+					data-mdc-dialog-action="ok"
+					data-mdc-dialog-button-default
+					data-mdc-dialog-initial-focus
+				>Ok
+				</button>
+			</mdc-dialog-actions>
+		</mdc-dialog>
+		<mdc-dialog view-model.ref="itemErrorDialog" portal>
+			<mdc-dialog-title>
+				Fehlende Artikel
+			</mdc-dialog-title>
+			<mdc-dialog-content>
+				Es befinden sich keine Artikel in Ihrem Warenkorb.
+			</mdc-dialog-content>
+			<mdc-dialog-actions>
+				<a
+					mdc-button
+					data-mdc-dialog-action="items"
+					data-mdc-dialog-button-default
+					route-href="route: items"
+				>Zu den Artikeln
+				</a>
+			</mdc-dialog-actions>
+		</mdc-dialog>
+		<mdc-dialog view-model.ref="paymentErrorDialog" portal>
+			<mdc-dialog-title>
+				Fehlende Information
+			</mdc-dialog-title>
+			<mdc-dialog-content>
+				Es ist keine Zahlungsart ausgewählt.
+			</mdc-dialog-content>
+			<mdc-dialog-actions>
+				<a
+					mdc-button
+					data-mdc-dialog-action="payments"
+					data-mdc-dialog-button-default
+					route-href="route: payment"
+				>Zu den Zahlungenarten
+				</a>
+			</mdc-dialog-actions>
+		</mdc-dialog>
 	</div>
 </template>

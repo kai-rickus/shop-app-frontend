@@ -49,14 +49,15 @@ export class PaymentView
 			const json = await response.json();
 
 			this.payments = json.payments;
-			console.log( this.payments );
+			debugger
 			this.selectedPayment = this.payments.find( item => item.selected );
 
 			this._signaler.signal( PaymentView.SIGNAL_PAYMNETS_LOCALLY_CHANGED )
 		}
 		catch( error )
 		{
-			this.errorDialog.open()
+			console.log( "Fehler" );
+			// this.errorDialog.open()
 		}
 		this.loading = false;
 
