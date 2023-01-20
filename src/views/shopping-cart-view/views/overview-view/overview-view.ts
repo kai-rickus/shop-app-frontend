@@ -1,12 +1,12 @@
-import { autoinject }          from "aurelia-framework";
-import { Router }              from "aurelia-router";
-import { TaskQueue }           from "aurelia-task-queue";
-import { BindingSignaler }     from "aurelia-templating-resources";
-import { error }               from "jquery";
-import environment             from "../../../../environment";
-import { SIGNAL_CART_UPDATED } from "../../../../resources/components/product-details-main/product-details-main";
-import { ShopUser }            from "../../../../services/shop-user";
-import { ShoppingCartView }    from "../../shopping-cart-view";
+import { autoinject }                                        from "aurelia-framework";
+import { Router }                                            from "aurelia-router";
+import { TaskQueue }                                         from "aurelia-task-queue";
+import { BindingSignaler }                                   from "aurelia-templating-resources";
+import { error }                                             from "jquery";
+import environment                                           from "../../../../environment";
+import { SIGNAL_CART_UPDATED }                               from "../../../../resources/components/product-details-main/product-details-main";
+import { ShopUser }                                          from "../../../../services/shop-user";
+import { ShoppingCartView, SIGNAL_CART_INFORMATION_UPDATED } from "../../shopping-cart-view";
 
 interface data
 {
@@ -21,13 +21,11 @@ export class OverviewView
 {
 	checkoutInformation;
 	items;
-	totalCost = 0;
-	id = 95;
-	disabled  = false;
-	pending   = false;
+	totalCost        = 0;
+	checkoutDisabled = false;
+	disabled         = false;
+	pending          = false;
 	errorDialog;
-	itemErrorDialog
-	paymentErrorDialog;
 
 	constructor(
 		private _shoppingCartView: ShoppingCartView,
@@ -40,9 +38,7 @@ export class OverviewView
 
 	async attached()
 	{
-		console.log(this.id);
-
-		this.checkoutInformation = await this.load( this.id )
+		this.checkoutInformation = await this.load()
 
 		this.items = this.checkoutInformation.items
 
@@ -60,9 +56,9 @@ export class OverviewView
 		} )
 	}
 
-	async load( id )
+	async load()
 	{
-		const response            = await fetch( `${environment.backendBaseUrl}cart/get/overview/${id}`, {
+		const response = await fetch( `${environment.backendBaseUrl}cart/getOverview`, {
 			headers : { "Authorization" : "Bearer " + this._user.accessToken }
 		} );
 
@@ -72,6 +68,15 @@ export class OverviewView
 		{
 			this._shoppingCartView.setHeightAfterRouting()
 		} )
+
+		if(
+			checkoutInformation.items.length === 0 ||
+			!checkoutInformation.address ||
+			!checkoutInformation.payment
+		)
+		{
+			this.checkoutDisabled = true
+		}
 
 		return checkoutInformation
 	}
@@ -92,8 +97,9 @@ export class OverviewView
 
 	async checkout()
 	{
-		this.disabled = true
-		this.pending  = true
+		this.disabled         = true
+		this.checkoutDisabled = true
+		this.pending          = true
 
 		try
 		{
@@ -107,13 +113,15 @@ export class OverviewView
 
 			this._router.navigateToRoute( "bought" );
 			this._signaler.signal( SIGNAL_CART_UPDATED )
+			this._signaler.signal( SIGNAL_CART_INFORMATION_UPDATED )
 		}
 		catch( error )
 		{
 			this.errorDialog.open( error )
 		}
 
-		this.disabled = false
-		this.pending  = false
+		this.disabled         = false
+		this.checkoutDisabled = false
+		this.pending          = false
 	}
 }

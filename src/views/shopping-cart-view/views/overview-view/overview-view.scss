@@ -17,4 +17,8 @@ $shipment-location-width : 200px;
         background-color : color-palette.$grey-300;
         color            : variables.$disabled-grey;
     }
+
+    .no-iformartion{
+        color: color-palette.$purple-800;
+    }
 }

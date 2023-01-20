@@ -1,10 +1,11 @@
-import { RouteConfig, Router } from "aurelia-router";
-import { TaskQueue }           from "aurelia-task-queue";
-import { BindingSignaler }     from "aurelia-templating-resources";
-import environment             from "../../../../environment";
-import { ShopUser }            from "../../../../services/shop-user";
-import { autoinject }          from "aurelia-framework";
-import { ShoppingCartView }    from "../../shopping-cart-view";
+import { RouteConfig, Router }             from "aurelia-router";
+import { TaskQueue }                       from "aurelia-task-queue";
+import { BindingSignaler }                 from "aurelia-templating-resources";
+import environment                         from "../../../../environment";
+import { ShopUser }                        from "../../../../services/shop-user";
+import { autoinject }                      from "aurelia-framework";
+import { ShoppingCartView }                from "../../shopping-cart-view";
+import { SIGNAL_CART_INFORMATION_UPDATED } from "../../shopping-cart-view";
 
 export interface UserAddress
 {
@@ -21,13 +22,7 @@ export interface UserAddress
 @autoinject
 export class AddressView
 {
-	selectedAddress = null;
-	addresses       = []
-	loading         = false
-	errorDialog
-	router: Router
-
-	static ROUTES: RouteConfig[]            = [
+	static ROUTES: RouteConfig[] = [
 		{
 			route    : [ "" ],
 			name     : 'default',
@@ -41,8 +36,15 @@ export class AddressView
 			title    : 'Adresse hinzufügen'
 		}
 	]
+
 	static SIGNAL_ADDRESSES_UPDATED         = "addresses-updated"
 	static SIGNAL_ADDRESSES_LOCALLY_CHANGED = "addresses-locally-changed"
+
+	selectedAddress = null;
+	addresses       = []
+	loading         = false
+	errorDialog
+	router: Router
 
 
 	constructor(
@@ -125,6 +127,8 @@ export class AddressView
 
 				throw new Error( `Server returned: ${message}` );
 			}
+
+			this.signaler.signal( SIGNAL_CART_INFORMATION_UPDATED )
 		}
 		catch( error )
 		{

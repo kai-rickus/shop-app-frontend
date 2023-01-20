@@ -1,20 +1,21 @@
-import { autoinject }       from "aurelia-framework";
-import { TaskQueue }        from "aurelia-task-queue";
-import { BindingSignaler }  from "aurelia-templating-resources";
-import environment          from "../../../../environment";
-import { ShopUser }         from "../../../../services/shop-user";
-import { ShoppingCartView } from "../../shopping-cart-view";
+import { autoinject }                      from "aurelia-framework";
+import { TaskQueue }                       from "aurelia-task-queue";
+import { BindingSignaler }                 from "aurelia-templating-resources";
+import environment                         from "../../../../environment";
+import { ShopUser }                        from "../../../../services/shop-user";
+import { ShoppingCartView }                from "../../shopping-cart-view";
+import { SIGNAL_CART_INFORMATION_UPDATED } from "../../shopping-cart-view";
 
 @autoinject()
 export class PaymentView
 {
-	loading  = false;
-	payments = [];
+
+	private _SIGNAL_PAYMENTS_UPDATED         = "payments-updated"
+	private _SIGNAL_PAYMENTS_LOCALLY_CHANGED = "payments-locally-changed"
+
+	loading         = false;
+	payments        = [];
 	errorDialog;
-
-	static SIGNAL_PAYMNETS_UPDATED         = "payments-updated"
-	static SIGNAL_PAYMNETS_LOCALLY_CHANGED = "payments-locally-changed"
-
 	selectedPayment = this.payments.find( item => item.selected );
 
 	constructor(
@@ -35,7 +36,7 @@ export class PaymentView
 
 		this.payments = []
 
-		this._signaler.signal( PaymentView.SIGNAL_PAYMNETS_LOCALLY_CHANGED )
+		this._signaler.signal( this._SIGNAL_PAYMENTS_LOCALLY_CHANGED )
 
 		this.loading = true;
 
@@ -48,11 +49,10 @@ export class PaymentView
 
 			const json = await response.json();
 
-			this.payments = json.payments;
-			debugger
+			this.payments        = json.payments;
 			this.selectedPayment = this.payments.find( item => item.selected );
 
-			this._signaler.signal( PaymentView.SIGNAL_PAYMNETS_LOCALLY_CHANGED )
+			this._signaler.signal( this._SIGNAL_PAYMENTS_LOCALLY_CHANGED )
 		}
 		catch( error )
 		{
@@ -91,6 +91,8 @@ export class PaymentView
 
 				throw new Error( `Server returned: ${message}` );
 			}
+
+			this._signaler.signal( SIGNAL_CART_INFORMATION_UPDATED )
 		}
 		catch( error )
 		{

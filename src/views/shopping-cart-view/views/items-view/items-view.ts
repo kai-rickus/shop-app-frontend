@@ -1,22 +1,23 @@
-import { autoinject }          from "aurelia-framework";
-import { TaskQueue }           from "aurelia-task-queue";
-import { BindingSignaler }     from "aurelia-templating-resources";
-import environment             from "../../../../environment";
-import { SIGNAL_CART_UPDATED } from "../../../../resources/components/product-details-main/product-details-main";
-import { ShopUser }            from "../../../../services/shop-user";
-import { ShoppingCartView }    from "../../shopping-cart-view";
+import { autoinject }                      from "aurelia-framework";
+import { TaskQueue }                       from "aurelia-task-queue";
+import { BindingSignaler }                 from "aurelia-templating-resources";
+import environment                         from "../../../../environment";
+import { SIGNAL_CART_UPDATED }             from "../../../../resources/components/product-details-main/product-details-main";
+import { ShopUser }                        from "../../../../services/shop-user";
+import { ShoppingCartView }                from "../../shopping-cart-view";
+import { SIGNAL_CART_INFORMATION_UPDATED } from "../../shopping-cart-view";
 
 @autoinject()
 export class ItemsView
 {
-	value;
-	disabled                     = false;
-	private _SIGNAL_CART_UPDATED = SIGNAL_CART_UPDATED;
-
-	textfield;
-	to;
+	noItems   = false;
+	disabled  = false;
 	transform = false;
-	previousValue;
+	textfield;
+	value;
+	to;
+
+	private _SIGNAL_CART_UPDATED = SIGNAL_CART_UPDATED;
 
 	constructor(
 		private _user: ShopUser,
@@ -39,11 +40,16 @@ export class ItemsView
 		} );
 		const data     = await response.json()
 
+		/* TODO: error handling */
+
 		this._taskqueue.queueTask( async () =>
 		{
 			this._shoppingCart.setHeightAfterRouting()
-
 		} )
+
+
+		if( data.items.length === 0 ) this.noItems = true
+
 		return data.items
 	}
 
@@ -55,14 +61,14 @@ export class ItemsView
 			method  : "put",
 			headers : { "Authorization" : "Bearer " + this._user.accessToken }
 		} );
+
 		if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
 
-		this._taskqueue.queueTask( async () =>
-		{
-			this._shoppingCart.setHeightAfterRouting()
-		} )
+		this._taskqueue.queueTask( async () => void this._shoppingCart.setHeightAfterRouting() )
 
 		this.disabled = false
-		this._signaler.signal( SIGNAL_CART_UPDATED )
+
+		this._signaler.signal( SIGNAL_CART_INFORMATION_UPDATED )
+		this._signaler.signal( this._SIGNAL_CART_UPDATED )
 	}
 }

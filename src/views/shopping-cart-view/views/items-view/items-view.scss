@@ -1,3 +1,4 @@
+@use "@material/theme/color-palette";
 
 .items-view {
     $menu-max-width : 120px;
@@ -10,6 +11,9 @@
 
     .item-card-height {
         height : 155px;
+    }
+    .no-items{
+        color: color-palette.$purple-800;
     }
 }
 
