@@ -5,7 +5,6 @@ import { debug }                from "util";
 import environment              from "../../../environment";
 import { ShopUser }             from "../../../services/shop-user";
 import { ShoppingCartView }     from "../../../views/shopping-cart-view/shopping-cart-view";
-import { SIGNAL_CART_UPDATED }  from "../product-details-main/product-details-main";
 
 @autoinject()
 export class ShopItemAmount
@@ -14,10 +13,10 @@ export class ShopItemAmount
 	@bindable value;
 	@bindable id;
 	@bindable disabled  = false;
-	@bindable callback;
 	@bindable from;
 	@bindable transform = false;
 
+	element: HTMLElement;
 	previousValue;
 	textfield;
 
@@ -41,21 +40,22 @@ export class ShopItemAmount
 
 	onChange()
 	{
-
-		if( this.value === this.to )
+		if( this.value !== this.to )
 		{
-			this.transform = true;
-
-			this._taskqueue.queueMicroTask( () =>
-			{
-				this.value = ""
-
-				this.textfield.focus()
+			const event = new CustomEvent( "change-amount", {
+				detail : { amount : this.value }
 			} )
+
+			return void this.element.dispatchEvent( event )
 		}
-		else
+
+		this.transform = true;
+
+		this._taskqueue.queueMicroTask( () =>
 		{
-			this.callback()
-		}
+			this.value = ""
+
+			this.textfield.focus()
+		} )
 	}
 }

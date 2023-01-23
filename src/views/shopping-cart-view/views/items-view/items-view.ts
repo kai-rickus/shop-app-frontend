@@ -16,6 +16,7 @@ export class ItemsView
 	textfield;
 	value;
 	to;
+	amount;
 
 	private _SIGNAL_CART_UPDATED = SIGNAL_CART_UPDATED;
 
@@ -35,36 +36,53 @@ export class ItemsView
 
 	async getCardItems()
 	{
-		const response = await fetch( `${environment.backendBaseUrl}cart/get`, {
-			headers : { "Authorization" : "Bearer " + this._user.accessToken }
-		} );
-		const data     = await response.json()
-
-		/* TODO: error handling */
-
-		this._taskqueue.queueTask( async () =>
+		try
 		{
-			this._shoppingCart.setHeightAfterRouting()
-		} )
+			const response = await fetch( `${environment.backendBaseUrl}cart/get`, {
+				headers : { "Authorization" : "Bearer " + this._user.accessToken }
+			} );
+			const data     = await response.json()
 
+			this._taskqueue.queueTask( async () =>
+			{
+				this._shoppingCart.setHeightAfterRouting()
+			} )
 
-		if( data.items.length === 0 ) this.noItems = true
+			if( data.items.length === 0 ) this.noItems = true
 
-		return data.items
+			return data.items
+		}
+		catch( error )
+		{
+			/* TODO: error handling */
+		}
 	}
 
 	async setCartItems( id, amount )
 	{
+
 		this.disabled = true
+debugger
+		console.log(amount);
 
-		const response = await fetch( `${environment.backendBaseUrl}cart/set/${id}/${amount}`, {
-			method  : "put",
-			headers : { "Authorization" : "Bearer " + this._user.accessToken }
-		} );
+		try
+		{
+			const response = await fetch( `${environment.backendBaseUrl}cart/set/${id}/${amount}`, {
+				method  : "put",
+				headers : { "Authorization" : "Bearer " + this._user.accessToken }
+			} );
 
-		if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
+			if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
 
-		this._taskqueue.queueTask( async () => void this._shoppingCart.setHeightAfterRouting() )
+			this._taskqueue.queueTask( async () => void this._shoppingCart.setHeightAfterRouting() )
+
+			console.log( response );
+		}
+		catch( error )
+		{
+			/* TODO: error handling */
+			;
+		}
 
 		this.disabled = false
 

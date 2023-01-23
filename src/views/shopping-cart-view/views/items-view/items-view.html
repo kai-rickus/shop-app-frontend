@@ -62,7 +62,7 @@
 													id.bind="item.product.id"
 													value.two-way="item.amount"
 													disabled.bind="disabled"
-													callback.call="setCartItems(item.product.id, item.amount)"
+													change-amount.trigger="setCartItems(item.product.id, $event.detail.amount)"
 													from.bind="0"
 													to.bind="10"
 												>
