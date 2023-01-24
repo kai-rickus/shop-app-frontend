@@ -1,8 +1,9 @@
+import { MdcSnackbarService }   from "@aurelia-mdc-web/snackbar";
 import { autoinject, bindable } from "aurelia-framework";
 import { Router }               from "aurelia-router";
 import { TaskQueue }            from "aurelia-task-queue";
 import { BindingSignaler }      from "aurelia-templating-resources";
-import { Tooltip, Toast }       from "bootstrap";
+import { Tooltip }       from "bootstrap";
 import { debug }                from "util";
 import environment              from "../../../environment";
 import { ShopUser }             from "../../../services/shop-user";
@@ -34,8 +35,11 @@ export class ProductDetailsMain
 	amount          = 1;
 	favorizePending = false;
 
-	addedToCartToast;
-	toast;
+	snackbarSuccessMessage         = "Artikel hinzugefügt!";
+	snackbarSuccessMessageDuration = 10000;
+	snackbarErrorMessage           = "Fehler! Bitte versuche es später erneut.";
+	snackbarErrorMessageDuration   = -1;
+
 	favorized;
 
 	textfield;
@@ -51,6 +55,7 @@ export class ProductDetailsMain
 		private _taskqueue: TaskQueue,
 		private _router: Router,
 		private _user: ShopUser,
+		private snackbar: MdcSnackbarService,
 	)
 	{}
 
@@ -58,14 +63,8 @@ export class ProductDetailsMain
 	{
 		this.initializeFavorite()
 		this.initializeTooltips()
-		this.initializedToast()
 
 		this.previousValue = this.value
-	}
-
-	initializedToast()
-	{
-		this.toast = new Toast( this.addedToCartToast )
 	}
 
 	async initializeFavorite()
@@ -98,16 +97,24 @@ export class ProductDetailsMain
 
 			if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
 
+			this.submitting = false
+
+			await this.snackbar.open( this.snackbarSuccessMessage, 'Okay', {
+				timeout : this.snackbarSuccessMessageDuration,
+				leading : true
+			} );
+
 			this._signaler.signal( SIGNAL_CART_UPDATED )
-			this.toast.show()
 		}
 		catch( error )
 		{
-			/* TODO: Implement User communication */
-			console.log( "Error ", error );
+			await this.snackbar.open( this.snackbarErrorMessage, 'Okay', {
+				timeout : this.snackbarErrorMessageDuration,
+				leading : true
+			} );
 		}
 
-		this.submitting = false
+
 	}
 
 	async setFavorite( favorize )

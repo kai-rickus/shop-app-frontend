@@ -1,7 +1,9 @@
 @use "../../../variables";
 @use "@material/icon-button/mixins";
 @use "@material/theme/color-palette";
+@use "@material/snackbar/mixins" as snackbar-mixins;
 
+@use '@material/snackbar/_index' as snackbar;
 
 .product-details-main {
     .product-details-main__image {
@@ -22,16 +24,26 @@
         @include mixins.ink-color(color-palette.$red-700)
     }
 
-    .product-detail-main-button{
-        background-color: variables.$secondary-color;
-        color: variables.$text-on-secondary;
+    .product-detail-main-button {
+        background-color : variables.$secondary-color;
+        color            : variables.$text-on-secondary;
     }
+
     .mdc-menu {
         z-index : 1000;
     }
 
-    .card-body{
-        padding: 0 !important;
+    .card-body {
+        padding : 0 !important;
+    }
+
+    .disabled {
+        background-color : color-palette.$grey-300;
+        color            : variables.$disabled-grey;
     }
 
 }
+    .mdc-snackbar{
+        @include snackbar.fill-color(color-palette.$deep-purple-50);
+        @include snackbar.label-ink-color(variables.$primary-color);
+    }

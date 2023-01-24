@@ -70,10 +70,10 @@
 										<button
 											mdc-button
 											raised
-											class="product-detail-main-button w-100 h-100"
+											class="product-detail-main-button w-100 h-100
+											${disabled === true ? 'disabled' : '' }"
 											disabled.bind="submitting"
 											click.trigger="addToCart()"
-											id="liveToastBtn"
 										>In den Einkaufswagen!
 											<span
 												class="spinner-border spinner-border-sm"
@@ -136,24 +136,5 @@
 			<!-- Rechte Spalte Ende -->
 		</mdc-layout-grid-inner>
 	</mdc-layout-grid>
-	<div class="toast-container position-fixed toast-position bottom-0">
-		<div ref="addedToCartToast"
-			 class="toast"
-			 role="alert"
-			 aria-live="assertive"
-			 aria-atomic="true">
-			<div class="toast-header">
-				<h6 class="mb-0 me-auto text-on-surface">Vielen Dank!</h6>
-				<button type="button"
-						class="btn-close"
-						data-bs-dismiss="toast"
-						aria-label="Close"></button>
-			</div>
-			<div class="toast-body">
-				<strong class="text-on-surface">
-					Artikel zum Einkaufswagen hinzugefügt.
-				</strong>
-			</div>
-		</div>
 	</div>
 </template>
