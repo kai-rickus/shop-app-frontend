@@ -56,8 +56,6 @@ export class ProductDetailsMain
 
 	attached()
 	{
-		debugger
-		console.log(this.data);
 		this.initializeFavorite()
 		this.initializeTooltips()
 		this.initializedToast()

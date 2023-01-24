@@ -6,129 +6,136 @@
 	<require from="components/shop-icon-button/shop-icon-button"></require>
 	<require from="components/shop-item-amount/shop-item-amount"></require>
 
-	<div class="mdc-layout-grid">
-		<div class="mdc-layout-grid__inner">
+	<mdc-layout-grid>
+		<mdc-layout-grid-inner>
 			<!-- Linke Spalte -->
-			<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+			<mdc-layout-grid-cell span="6">
 				<!-- Title -->
-				<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mb-4">
-					<div class="card frost default-main-shadow">
+				<mdc-layout-grid-cell span="12">
+					<div class="card frost default-main-shadow mb-4">
 						<div class="card-body rounded-1">
-							<div class="mdc-layout-grid__inner">
-								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-									<h5 class="card-title">${data.title}</h5>
-								</div>
+							<div class="mdc-layout-grid">
+								<mdc-layout-grid-inner class="p-0">
+									<mdc-layout-grid-cell span="12">
+										<h5 class="card-title">${data.title}</h5>
+									</mdc-layout-grid-cell>
+								</mdc-layout-grid-inner>
 							</div>
 						</div>
 					</div>
-				</div>
+				</mdc-layout-grid-cell>
 				<!-- Bild -->
-				<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mb-4">
-					<div class="card frost default-main-shadow overflow-hidden border-0">
+				<mdc-layout-grid-cell span="12">
+					<div class="card frost default-main-shadow overflow-hidden border-0 mb-4">
 						<img src.bind="data.image"
 							 alt.bind="data.title"
 							 class="product-details-main__image">
 					</div>
-				</div>
+				</mdc-layout-grid-cell>
 
-			</div>
+			</mdc-layout-grid-cell>
 			<!-- Linke Spalte Ende -->
 
 			<!-- Rechte Spalte -->
-			<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+			<mdc-layout-grid-cell span="6">
 				<!-- Kaufen -->
-				<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mb-4">
-					<div class="card frost default-main-shadow product-details-main__cart-block">
+				<mdc-layout-grid-cell span="12">
+					<div class="card frost default-main-shadow product-details-main__cart-block mb-4">
 						<div class="card-body rounded-1">
-							<div class="mdc-layout-grid__inner">
-								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mb-2 justify-content-end d-flex">
-									<h1 class="card-title">${data.price | currency
-									:
-									'EUR'}</h1>
-								</div>
+							<div class="mdc-layout-grid">
+								<mdc-layout-grid-inner>
+									<mdc-layout-grid-cell span="12" class="mb-2 justify-content-end d-flex">
+										<h1 class="card-title">${data.price | currency
+										:
+										'EUR'}</h1>
+									</mdc-layout-grid-cell>
 
-								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mb-4 d-flex flex-column">
-									<small class="mb-1">
-										Versand durch
-									</small>
-									<img class="shipment-logo" src="src/img/${data.shipment}-logo.jpg">
-								</div>
-								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mb-4 d-flex justify-content-end align-items-center">
-									<div class="h-100 position-relative d-flex justify-content-end align-items-center">
-										<custom-rating
-											rating.bind="data.rating"
-											count.bind="data.ratingsCount"
+									<mdc-layout-grid-cell span="6" class="mb-4 d-flex flex-column">
+										<small class="mb-1">
+											Versand durch
+										</small>
+										<img class="shipment-logo" src="src/img/${data.shipment}-logo.jpg">
+									</mdc-layout-grid-cell>
+									<mdc-layout-grid-cell span="6" class="mb-4 d-flex justify-content-end align-items-center">
+										<div class="h-100 position-relative d-flex justify-content-end align-items-center">
+											<custom-rating
+												rating.bind="data.rating"
+												count.bind="data.ratingsCount"
+											>
+											</custom-rating>
+										</div>
+									</mdc-layout-grid-cell>
+									<mdc-layout-grid-cell span="6" class="d-flex justify-content-end">
+
+										<button
+											mdc-button
+											raised
+											class="product-detail-main-button w-100 h-100"
+											disabled.bind="submitting"
+											click.trigger="addToCart()"
+											id="liveToastBtn"
+										>In den Einkaufswagen!
+											<span
+												class="spinner-border spinner-border-sm"
+												role="status"
+												aria-hidden="true"
+												show.bind="submitting"
+											>
+											</span>
+										</button>
+									</mdc-layout-grid-cell>
+									<mdc-layout-grid-cell span="4">
+										<shop-item-amount
+											id.bind="item.product.id"
+											value.two-way="amount"
+											disabled.bind="submitting"
+											callback.call="console.log"
+											from.bind="from"
+											to.bind="to"
+											transform.bind="transform"
+											view-model.ref="textfield"
 										>
-										</custom-rating>
-									</div>
-								</div>
-								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 d-flex justify-content-end">
+										</shop-item-amount>
 
-									<button
-										mdc-button
-										raised
-										class="product-detail-main-button"
-										disabled.bind="submitting"
-										click.trigger="addToCart()"
-										id="liveToastBtn"
-									>In den Einkaufswagen!
-										<span
-											class="spinner-border spinner-border-sm"
-											role="status"
-											aria-hidden="true"
-											show.bind="submitting"
+									</mdc-layout-grid-cell>
+									<mdc-layout-grid-cell span="2" class="text-center">
+										<shop-icon-button
+											icon="favorite_border"
+											icon-on="favorite"
+											class="bg-transparent position-relative favorize-icon-button"
+											active.bind="favorized"
+											disabled.bind="favorizePending"
+											change.trigger="setFavorite($event.detail.isOn)"
 										>
-										</span>
-									</button>
-								</div>
-								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-									<shop-item-amount
-										id.bind="item.product.id"
-										value.two-way="amount"
-										disabled.bind="submitting"
-										callback.call="console.log"
-										from.bind="from"
-										to.bind="to"
-										transform.bind="transform"
-										view-model.ref="textfield"
-									>
-									</shop-item-amount>
-
-								</div>
-								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 text-center">
-									<shop-icon-button
-										icon="favorite_border"
-										icon-on="favorite"
-										class="bg-transparent position-relative favorize-icon-button"
-										active.bind="favorized"
-										disabled.bind="favorizePending"
-										change.trigger="setFavorite($event.detail.isOn)"
-									>
-									</shop-icon-button>
-								</div>
+										</shop-icon-button>
+									</mdc-layout-grid-cell>
+								</mdc-layout-grid-inner>
 							</div>
 						</div>
 					</div>
-				</div>
+				</mdc-layout-grid-cell>
 				<!-- Beschreibung -->
-				<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mb-4">
-					<div class="card frost default-main-shadow">
+				<mdc-layout-grid-cell span="12">
+					<div class="card frost default-main-shadow mb-4">
 						<div class="card-body rounded-1">
-							<div class="mdc-layout-grid__inner">
-								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-									<h5 class="card-title border-bottom border-1">Produktbeschreibung</h5>
-								</div>
-								<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-									<p class="card-text">${data.description}</p>
-								</div>
+							<div class="mdc-layout-grid">
+
+								<mdc-layout-grid-inner>
+									<mdc-layout-grid-cell span="12">
+										<h5 class="card-title border-bottom border-1">Produktbeschreibung</h5>
+									</mdc-layout-grid-cell>
+									<mdc-layout-grid-cell span="12">
+										<p class="card-text">${data.description}</p>
+									</mdc-layout-grid-cell>
+								</mdc-layout-grid-inner>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
+				</mdc-layout-grid-cell>
+			</mdc-layout-grid-cell>
 			<!-- Rechte Spalte Ende -->
-		</div>
-	</div>
+		</mdc-layout-grid-inner>
+	</mdc-layout-grid>
 	<div class="toast-container position-fixed toast-position bottom-0">
 		<div ref="addedToCartToast"
 			 class="toast"
