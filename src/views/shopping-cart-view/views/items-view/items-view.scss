@@ -5,15 +5,23 @@
 
     .img-size {
         max-height : 177px;
-        width      : auto;
-        display    : flex;
+        aspect-ratio : 16 / 9;
+        //top: 0;
+        //height: 100%;
+        //object-fit: cover;
     }
 
     .item-card-height {
         height : 155px;
+
     }
-    .no-items{
-        color: color-palette.$purple-800;
+
+    .no-items {
+        color : color-palette.$purple-800;
+    }
+
+    mdc-card {
+        max-height : 177px;
     }
 }
 
