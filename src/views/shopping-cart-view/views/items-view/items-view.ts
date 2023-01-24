@@ -60,10 +60,7 @@ export class ItemsView
 
 	async setCartItems( id, amount )
 	{
-
 		this.disabled = true
-debugger
-		console.log(amount);
 
 		try
 		{

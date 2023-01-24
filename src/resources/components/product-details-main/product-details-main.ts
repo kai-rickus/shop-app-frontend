@@ -56,6 +56,8 @@ export class ProductDetailsMain
 
 	attached()
 	{
+		debugger
+		console.log(this.data);
 		this.initializeFavorite()
 		this.initializeTooltips()
 		this.initializedToast()
@@ -100,7 +102,6 @@ export class ProductDetailsMain
 
 			this._signaler.signal( SIGNAL_CART_UPDATED )
 			this.toast.show()
-
 		}
 		catch( error )
 		{
@@ -111,11 +112,11 @@ export class ProductDetailsMain
 		this.submitting = false
 	}
 
-	async setFavorite( id, amount )
+	async setFavorite( favorize )
 	{
 		this.favorizePending = true
 
-		const url      = `${environment.backendBaseUrl}product/setFavorite/${id}/${amount}`
+		const url      = `${environment.backendBaseUrl}product/setFavorite/${this.data.id}/${favorize}`
 		const response = await fetch( url, {
 			method  : "post",
 			headers : { "Authorization" : "Bearer " + this._user.accessToken }
@@ -125,5 +126,4 @@ export class ProductDetailsMain
 
 		this.favorizePending = false
 	}
-
 }

@@ -69,7 +69,7 @@
 										raised
 										class="product-detail-main-button"
 										disabled.bind="submitting"
-										click.trigger="addToCart( item.product.id, $event.detail.value )"
+										click.trigger="addToCart()"
 										id="liveToastBtn"
 									>In den Einkaufswagen!
 										<span
@@ -102,7 +102,7 @@
 										class="bg-transparent position-relative favorize-icon-button"
 										active.bind="favorized"
 										disabled.bind="favorizePending"
-										change.trigger="setFavorite($event)"
+										change.trigger="setFavorite($event.detail.isOn)"
 									>
 									</shop-icon-button>
 								</div>
