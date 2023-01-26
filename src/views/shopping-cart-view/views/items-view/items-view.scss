@@ -1,5 +1,5 @@
 @use "@material/theme/color-palette";
-
+@use "src/variables" as variables;
 .items-view {
     $menu-max-width : 120px;
 
@@ -17,7 +17,7 @@
     }
 
     .no-items {
-        color : color-palette.$purple-800;
+        color : variables.$danger-color;
     }
 
     mdc-card {
