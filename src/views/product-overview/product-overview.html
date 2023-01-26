@@ -2,7 +2,11 @@
 	<require from="components/product-search-results/product-search-results"></require>
 	<require from="./product-overview.css"></require>
 
-	<div class="product-overview container p-0">
+	<div class="product-overview container p-0
+		${!searchString ? 'justify-content-center' : '' }
+		${!searchString ? 'd-flex' : '' }">
 		<product-search-results class="bg-shop" search.bind="searchString"></product-search-results>
 	</div>
 </template>
+
+
