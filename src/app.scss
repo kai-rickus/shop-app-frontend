@@ -58,7 +58,7 @@ $pb-main-content : 5rem;
 .shop-app-container > router-view {
     padding-bottom : $pb-main-content;
     display        : block;
-    //min-height     : calc(100vh - #{shop-footer.$section-height-desktop} - #{navigation-bar.$height-desktop});
+    min-height     : calc(100vh - #{shop-footer.$section-height-desktop} - #{navigation-bar.$height-desktop});
 }
 
 .backdrop {
@@ -116,6 +116,20 @@ $pb-main-content : 5rem;
     }
 }
 
+.shop-text-decoration {
+    text-decoration     : none;
+
+    background-image    : linear-gradient(variables.$primary-color, white);
+    background-repeat   : no-repeat;
+    background-size     : 0% 3px;
+    background-position : left bottom;
+    transition          : background-size 300ms ease;
+
+    &:hover {
+        background-size : 100% 3px;
+    }
+}
+
 .address-radio-button {
     @include radio-mixins.ink-color(variables.$primary-color);
     @include radio-mixins.checked-stroke-color(variables.$primary-color);
@@ -125,11 +139,11 @@ $pb-main-content : 5rem;
         @include ripple-mixins.states(variables.$primary-color);
     }
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance : none;
     margin             : 0;
-
 }
 
 
