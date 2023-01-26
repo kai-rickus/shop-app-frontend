@@ -1,9 +1,11 @@
-<template class="product-search-results">
+<template class="product-search-results d-flex">
 	<require from="components/product-tile/product-tile"></require>
 	<require from="valueConverters/currency-value-converter"></require>
 	<require from="./product-search-results.css"></require>
 
+
 	<product-tile
+		if.bind="products.length"
 		repeat.for="product of products"
 		thumbnail.bind="product.imageSmall"
 		price.bind="product.price | currency:'EUR'"
@@ -11,4 +13,19 @@
 		id.bind="product.id"
 		class="${noShadow === true ? '' : 'default-main-shadow' }"
 	></product-tile>
+
+	<div
+		else
+		class="d-flex justify-content-center"
+	>
+
+		<mdc-card
+		>
+			<div
+				class="card-body product-tile__content"
+			>
+				<h5 class="product-tile__title m-0">Keine Artikel gefunden.</h5>
+			</div>
+		</mdc-card>
+	</div>
 </template>

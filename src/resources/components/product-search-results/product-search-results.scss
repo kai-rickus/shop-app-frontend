@@ -1,9 +1,9 @@
 $product-tile-gap : 20px;
 
 .product-search-results {
-    display         : flex;
-    flex-wrap       : wrap;
-    gap             : $product-tile-gap;
+    display   : flex;
+    flex-wrap : wrap;
+    gap       : $product-tile-gap;
 }
 
 .product-tile__price {

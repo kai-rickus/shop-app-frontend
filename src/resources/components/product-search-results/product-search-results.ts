@@ -4,7 +4,7 @@ import environment  from "../../../environment";
 
 export class ProductSearchResults
 {
-	products;
+	products: [];
 	@bindable search
 	@bindable limit
 	@bindable exclude  = []
@@ -22,13 +22,20 @@ export class ProductSearchResults
 
 	async getProducts( searchString )
 	{
-		const response = await fetch( `${environment.searchBaseUrl}search?query=${searchString}&limit=${this.limit}`, {
-			method  : "POST",
-			body    : JSON.stringify( { exclude : this.exclude } ),
-			headers : { 'Content-Type' : 'application/json' },
-		} );
-		const data     = await response.json()
+		try
+		{
+			const response = await fetch( `${environment.searchBaseUrl}search?query=${searchString}&limit=${this.limit}`, {
+				method  : "POST",
+				body    : JSON.stringify( { exclude : this.exclude } ),
+				headers : { 'Content-Type' : 'application/json' },
+			} );
+			const data     = await response.json()
 
-		return data.result;
+			return data.result;
+		}
+		catch( error )
+		{
+			/* TODO: error handling */
+		}
 	}
 }
