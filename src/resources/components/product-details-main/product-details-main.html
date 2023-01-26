@@ -6,7 +6,7 @@
 	<require from="components/shop-icon-button/shop-icon-button"></require>
 	<require from="components/shop-item-amount/shop-item-amount"></require>
 
-	<mdc-layout-grid>
+	<mdc-layout-grid class="p-0">
 		<mdc-layout-grid-inner>
 			<!-- Linke Spalte -->
 			<mdc-layout-grid-cell span="6">
@@ -71,7 +71,7 @@
 											mdc-button
 											raised
 											class="product-detail-main-button w-100 h-100
-											${disabled === true ? 'disabled' : '' }"
+											${submitting === true ? 'disabled' : '' }"
 											disabled.bind="submitting"
 											click.trigger="addToCart()"
 										>In den Einkaufswagen!
