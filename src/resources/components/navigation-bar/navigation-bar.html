@@ -23,7 +23,6 @@
 				<div class="d-flex justify-content-center search-bar-container">
 					<search-bar found.trigger="search($event)"></search-bar>
 				</div>
-
 				<a route-href="shopping-cart" class="text-on-secondary">
 					<shop-icon-button icon="shopping_cart" outlined.bind="true" class="position-relative shopping-cart-icon">
 						<span slot="outer" class="shopping-cart-badge badge rounded-pill bg-danger"
@@ -33,46 +32,71 @@
 						</span>
 					</shop-icon-button>
 				</a>
+				<div>
 
-				<button
-					mdc-icon-button
-					icon="manage_accounts"
-					mdc-button
-					raised
-					click.trigger="demo.open = !demo.open"
-					class="ms-2"
-				>
-				</button>
-				<mdc-menu
-					view-model.ref="demo"
-					mdcmenu:selected.trigger="onMenuSelect($event.detail)"
-					anchor.bind="demoAnchor"
-					anchor-corner.bind="BOTTOM_LEFT"
-					quick-open.bind="quickOpen"
-					default-focus-state.bind="defaultFocusState"
-					fixed.bind="fixed"
-					stay-open-on-selection.bind="stayOpenOnSelection"
-					anchor-margin.bind="anchorMargin"
-				>
-					<mdc-list
-						wrap-focus.bind="wrapFocus"
-						tabindex="-1"
+					<button
+						mdc-icon-button
+						icon="manage_accounts"
+						mdc-button
+						raised
+						click.trigger="hierarchical.open = !hierarchical.open"
+						class="ms-2"
 					>
-						<template
-							repeat.for="fruit of fruits"
+					</button>
+					<!--				<mdc-menu-->
+					<!--					view-model.ref="demo"-->
+					<!--					mdcmenu:selected.trigger="onMenuSelect($event.detail)"-->
+					<!--					anchor.bind="demoAnchor"-->
+					<!--					anchor-corner.bind="BOTTOM_LEFT"-->
+					<!--					quick-open.bind="quickOpen"-->
+					<!--					default-focus-state.bind="defaultFocusState"-->
+					<!--					fixed.bind="fixed"-->
+					<!--					stay-open-on-selection.bind="stayOpenOnSelection"-->
+					<!--					anchor-margin.bind="anchorMargin"-->
+					<!--				>-->
+					<!--					<mdc-list-->
+					<!--						wrap-focus.bind="wrapFocus"-->
+					<!--						tabindex="-1"-->
+					<!--					>-->
+					<!--						<template-->
+					<!--							repeat.for="fruit of fruits"-->
+					<!--						>-->
+					<!--							<mdc-list-item-->
+					<!--								if.bind="fruit.label"-->
+					<!--								value.bind="fruit.label">-->
+					<!--								${fruit.label}-->
+					<!--							</mdc-list-item>-->
+					<!--							<mdc-list-divider-->
+					<!--								else>-->
+					<!--							</mdc-list-divider>-->
+					<!--						</template>-->
+					<!--					</mdc-list>-->
+
+					<!--				</mdc-menu>-->
+
+					<!-- TODO: Einstellungen und Ausloggen als link einfügen -->
+					<mdc-menu
+						class=" profile-menu"
+						view-model.ref="hierarchical"
+						anchor.bind="hierarchicalAnchor"
+						stay-open-on-selection
+					>
+						<mdc-list
+							wrap-focus.bind="wrapFocus"
+							tabindex="-1"
 						>
 							<mdc-list-item
-								if.bind="fruit.label"
-								value.bind="fruit.label">
-								${fruit.label}
+								mdclistitem:action.trigger="hierarchical.open = false"
+							>
+								Einstellungen
 							</mdc-list-item>
-							<mdc-list-divider
-								else>
-							</mdc-list-divider>
-						</template>
-					</mdc-list>
-
-				</mdc-menu>
+							<mdc-list-item
+								mdclistitem:action.trigger="hierarchical.open = false"
+							>Abmelden
+							</mdc-list-item>
+						</mdc-list>
+					</mdc-menu>
+				</div>
 
 				<!--				<ul class="navbar-nav mb-2 mb-lg-0 ms-3">-->
 				<!--					<li if.bind="_user.refreshToken & signal:'logging-in'" class="nav-item dropdown">-->
