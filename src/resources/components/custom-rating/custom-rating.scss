@@ -4,6 +4,7 @@
     .custom-rating__stars {
         .material-icons {
             color : variables.$primary-color;
+            cursor: default;
         }
     }
 }
