@@ -1,5 +1,9 @@
+@use "src/layout";
+
 .home-view {
+    max-width : layout.$content-width-desktop !important;
+
     .banner {
-        background-color : red;
+        background-color : #909090;
     }
 }

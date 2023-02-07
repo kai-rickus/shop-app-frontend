@@ -1,6 +1,8 @@
 import { RouteConfig, Router, RouterConfiguration } from 'aurelia-router';
 import { autoinject, Container }                    from "aurelia-framework";
+import { TaskQueue }                                from "aurelia-task-queue";
 import environment                                  from "./environment";
+import { ShopDb }                                   from "./services/shop-db";
 import { ShopUser }                                 from "./services/shop-user";
 import { Dexie }                                    from "dexie/dist/dexie";
 
@@ -85,46 +87,46 @@ export class App
 	private static _NO_SCROLL_CLASS = "shop--no-scroll"
 
 	private _router: Router;
-	private _db;
 
-	constructor( private _user: ShopUser, private _container: Container ){}
+	constructor(
+		private _user: ShopUser,
+		private _container: Container,
+		private _db: ShopDb,
+		private _taskQueue: TaskQueue,
+	)
+	{}
 
 	async activate()
 	{
-		this.createDatabaseSchema()
 		await this.handleAutoLogin()
-	}
-
-	createDatabaseSchema()
-	{
-		const db = new Dexie( "ShopAppDatabase" );
-
-		db.version( 1 )
-		  .stores( {
-			  users : "++id, refreshToken"
-		  } );
-
-		this._container.registerInstance( Dexie, db )
-		this._db = db
 	}
 
 	async handleAutoLogin()
 	{
-		const record            = await this._db.users.where( 'refreshToken' ).notEqual( "" ).first()
-		const savedRefreshToken = record ? record.refreshToken : undefined
-
-		if( savedRefreshToken !== undefined )
+		try
 		{
-			const response = await fetch( `${environment.backendBaseUrl}authentication/loginWithToken`, {
-				method  : "post",
-				headers : { "Authorization" : "Bearer " + savedRefreshToken }
+			const record = await this._db
+									 .dexie
+									 .users
+									 .where( 'refreshToken' )
+									 .notEqual( "" )
+									 .first()
+
+			const savedRefreshToken = record?.refreshToken
+
+			if( !savedRefreshToken ) return
+
+			await this._user.loginWithToken( savedRefreshToken )
+
+		}
+		catch( error )
+		{
+			/* TODO: error handling */
+
+			this._taskQueue.queueMicroTask( () =>
+			{
+				this._router.navigateToRoute( "login" )
 			} )
-			const userData = await response.json()
-
-			userData.refreshToken = savedRefreshToken
-
-			this._user.set( userData )
-
 		}
 	}
 

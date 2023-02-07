@@ -24,42 +24,28 @@ export class LoginView
 	unknownErrorOccured   = false
 	forbiddenErrorOccured = false
 	submitting            = false
-	stayLoggedInSwitch;
+	stayLoggedInSwitch: HTMLInputElement;
 	formInput             = {
 		email    : "",
 		password : ""
 	}
 
-	constructor( public router: Router, private _user: ShopUser, private _signaler: BindingSignaler, private _db: Dexie ){}
+	constructor(
+		public router: Router,
+		private _user: ShopUser,
+		private _signaler: BindingSignaler,
+		private _db: Dexie
+	)
+	{}
 
 	async submit()
 	{
 		this.submitting = true
+
 		try
 		{
-			const response = await fetch( `${environment.backendBaseUrl}authentication/login`, {
-				method  : "post",
-				body    : JSON.stringify( this.formInput ),
-				headers : { "Content-Type" : "application/json" }
-			} );
+			await this._user.login( this.formInput, this.stayLoggedInSwitch.checked )
 
-			if( !response.ok )
-			{
-				if( response.status === 403 ) throw new Error( "Forbidden" );
-
-				throw new Error();
-			}
-
-			const data = await response.json()
-
-			if( this.stayLoggedInSwitch.checked === true )
-			{
-				( this._db as ShopDb ).users.add( {
-					refreshToken : data.refreshToken
-				} );
-			}
-
-			this._user.set( data );
 			this._signaler.signal( SIGNAL_LOGGING_IN )
 			this.router.navigateToRoute( "home" )
 		}
@@ -70,7 +56,6 @@ export class LoginView
 		}
 
 		this.submitting = false
-
 	}
 
 	canActivate()

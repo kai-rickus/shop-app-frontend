@@ -4,15 +4,18 @@ import environment              from "../../../environment";
 import { ShopUser }             from "../../../services/shop-user";
 import { BindingSignaler }      from 'aurelia-templating-resources';
 
+
 @autoinject
 export class NavigationBar
 {
 	items     = [];
 	showBadge = false;
 
-	constructor( private _router: Router, private _user: ShopUser )
-	{
-	}
+	constructor(
+		private _router: Router,
+		private _user: ShopUser,
+	)
+	{}
 
 	search( event )
 	{
