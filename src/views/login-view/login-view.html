@@ -53,15 +53,32 @@
 										<label class="form-check-label text-on-surface" for="flexSwitchCheckDefault">Eingeloggt bleiben</label>
 									</div>
 
-									<button type="submit"
-											class="btn btn-primary login-btn mb-3"
-											disabled.bind="submitting">
-										login
-										<span class="spinner-border spinner-border-sm"
-											  role="status"
-											  aria-hidden="true"
-											  show.bind="submitting"></span>
+									<button
+										mdc-button
+										unelevated
+										type="submit"
+										disabled.bind="submitting"
+										class="mb-3"
+									>
+										Login
+										<span
+											class="spinner-border spinner-border-sm ms-2"
+											role="status"
+											aria-hidden="true"
+											show.bind="submitting"
+										>
+										</span>
 									</button>
+
+									<!--<button type="submit"-->
+									<!--		class="btn btn-primary login-btn mb-3"-->
+									<!--		disabled.bind="submitting">-->
+									<!--	login-->
+									<!--	<span class="spinner-border spinner-border-sm"-->
+									<!--		  role="status"-->
+									<!--		  aria-hidden="true"-->
+									<!--		  show.bind="submitting"></span>-->
+									<!--</button>-->
 
 									<a class="link-primary shop-text-decoration text-center w-100 d-block" route-href="route: register">
 										Neu hier? Erstelle ein Konto!
