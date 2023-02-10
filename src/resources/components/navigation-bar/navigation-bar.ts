@@ -4,12 +4,12 @@ import environment              from "../../../environment";
 import { ShopUser }             from "../../../services/shop-user";
 import { BindingSignaler }      from 'aurelia-templating-resources';
 
-
 @autoinject
 export class NavigationBar
 {
-	items     = [];
-	showBadge = false;
+	items        = [];
+	showBadge    = false;
+	userLoggedIn = false;
 
 	constructor(
 		private _router: Router,
@@ -23,6 +23,16 @@ export class NavigationBar
 			"product-overview",
 			{ searchString : event.detail.string }
 		)
+	}
+
+	attached()
+	{
+		if( this._user.refreshToken ) this.userLoggedIn = true
+	}
+
+	routeToLogin()
+	{
+		this._router.navigateToRoute( 'login' )
 	}
 
 	async setItemAmount()

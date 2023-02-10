@@ -91,9 +91,16 @@
 								Einstellungen
 							</mdc-list-item>
 							<mdc-list-item
+								show.bind="userLoggedIn"
 								click.trigger="_user.logout()"
 								mdclistitem:action.trigger="hierarchical.open = false"
 							>Abmelden
+							</mdc-list-item>
+							<mdc-list-item
+								show.bind="!userLoggedIn"
+								click.trigger="routeToLogin()"
+								mdclistitem:action.trigger="hierarchical.open = false"
+							>Anmelden
 							</mdc-list-item>
 						</mdc-list>
 					</mdc-menu>
