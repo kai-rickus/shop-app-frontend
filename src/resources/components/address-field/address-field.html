@@ -12,7 +12,7 @@
 		outlined
 		required.bind="required"
 		placeholder.bind="placeholder"
-		value.bind="inputValue"
+		value.two-way="inputValue"
 		input.trigger="getSuggestions() & throttle:THROTTLE_DURATION"
 		keydown.trigger="onKeyDown($event)"
 		custom-focus.bind="selectionCounter === -1"

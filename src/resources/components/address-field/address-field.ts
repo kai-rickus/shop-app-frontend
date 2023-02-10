@@ -7,6 +7,17 @@ interface SuggestionDataset
 	placeId: string;
 }
 
+interface Suggestion
+{
+	description: string;
+	matched_substrings: { length: number; offset: number }[]
+	place_id: string;
+	reference: string;
+	structured_formatting: any;
+	terms: any[];
+	types: string[];
+}
+
 @autoinject()
 export class AddressField
 {
@@ -25,8 +36,8 @@ export class AddressField
 
 	input;
 	inputValue;
-	suggestions      = [];
-	selectionCounter = -1
+	suggestions: Suggestion[] = [];
+	selectionCounter          = -1
 	element;
 	taskQueue;
 	suggestionsElement: HTMLUListElement;
@@ -99,6 +110,12 @@ export class AddressField
 		const relatedTarget = event.relatedTarget as HTMLElement
 
 		if( relatedTarget?.classList.contains( "address-field__suggestions__item" ) ) return
+
+		const suggestionText = this.suggestions[ 0 ]?.description || ''
+		const placeId        = this.suggestions[ 0 ]?.place_id || ''
+		debugger
+
+		this.dispatchEvent( suggestionText, placeId )
 
 		this.taskQueue.queueMicroTask( () =>
 		{
