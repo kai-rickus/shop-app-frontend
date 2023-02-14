@@ -1,38 +1,76 @@
-<template>
-	<div class="verification-email-view container p-0">
-		<slot>
-			<div class="card frost">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-12">
-							<h1 class="text-center">Vielen Danke für deine Registrierung</h1>
-							<div class="text-center">
-								<span class="text-primary">Wir haben dir eine <b>Email</b> gesendet mit der du dich verifizierst.</span>
-								<br>
-								<span class=" text-primary">Solltest du keine erhalten haben klicke <a href="#!"><b>hier</b></a> oder kontaktiere unseren
-									<a route-href="route: support" class="shop-text-decoration"><b>Kundensupport</b></a></span>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col">
+<!--<template>-->
+<!--	<div class="verification-email-view container p-0">-->
+<!--		<slot>-->
+<!--			<div class="card frost">-->
+<!--				<div class="card-body">-->
+<!--					<div class="row">-->
+<!--						<div class="col-12">-->
+<!--							<h1 class="text-center">Vielen Danke für deine Registrierung</h1>-->
+<!--							<div class="text-center">-->
+<!--								<span class="text-primary">Wir haben dir eine-->
+<!--									<b>Email</b> gesendet mit der du dich verifizierst.</span>-->
+<!--								<br>-->
+<!--								<span class=" text-primary">Solltest du keine erhalten haben klicke-->
+<!--									<a href="#!"><b>hier</b></a> oder kontaktiere unseren-->
+<!--									<a route-href="route: support" class="shop-text-decoration"><b>Kundensupport</b></a></span>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="row">-->
+<!--							<div class="col">-->
+<!--								<div class="d-flex justify-content-center pt-3">-->
+<!--									<a href="home" class="btn btn-primary col-4 shop-text-decoration">-->
+<!--										Zur Startseite-->
+<!--									</a>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							<div class="col">-->
+<!--								<div class="d-flex justify-content-center pt-3">-->
+<!--									<a href="home" class="btn btn-primary col-4">-->
+<!--										Erneut senden-->
+<!--									</a>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</slot>-->
+<!--	</div>-->
+<!--</template>-->
 
-								<div class="d-flex justify-content-center pt-3">
-									<a href="home" class="btn btn-primary col-4 shop-text-decoration">
-										Zur Startseite
-									</a>
-								</div>
-							</div>
-							<div class="col">
-								<div class="d-flex justify-content-center pt-3">
-									<a href="home" class="btn btn-primary col-4">
-										Erneut senden
-									</a>
-								</div>
-							</div>
+<template>
+	<require from="./email-sent-view.css"></require>
+
+	<div class="email-sent-view container p-0">
+		<mdc-card>
+			<mdc-layout-grid>
+				<mdc-layout-grid-inner>
+					<mdc-layout-grid-cell span="12">
+						<div mdc-headline4>Vielen Danke für deine Registrierung</div>
+					</mdc-layout-grid-cell>
+					<mdc-layout-grid-cell span="12">
+						<div mdc-body>
+							Wir haben dir eine
+							<b>Email </b>gesendet mit der du dich verifizieren kannst.
 						</div>
-					</div>
-				</div>
-			</div>
-		</slot>
+					</mdc-layout-grid-cell>
+					<mdc-layout-grid-cell span="12">
+						<div mdc-body1>
+							<span>Solltest du keine erhalten haben klicke
+								<a href="#!" class="shop-text-decoration"><b>hier</b></a> oder kontaktiere unseren
+								<a route-href="route: support" class="shop-text-decoration"><b>Kundensupport</b></a></span>
+						</div>
+					</mdc-layout-grid-cell>
+					<mdc-layout-grid-cell span="12" class="d-flex justify-content-around">
+						<a mdc-button href="#" class="shop-text-decoration">
+							<b>Zur Startseite</b>
+						</a>
+						<a mdc-button class="shop-text-decoration" click.trigger="sendVerificationEmail()">
+							<b>Email erneut senden</b>
+						</a>
+					</mdc-layout-grid-cell>
+				</mdc-layout-grid-inner>
+			</mdc-layout-grid>
+		</mdc-card>
 	</div>
 </template>
