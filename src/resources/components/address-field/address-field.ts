@@ -113,7 +113,6 @@ export class AddressField
 
 		const suggestionText = this.suggestions[ 0 ]?.description || ''
 		const placeId        = this.suggestions[ 0 ]?.place_id || ''
-		debugger
 
 		this.dispatchEvent( suggestionText, placeId )
 
