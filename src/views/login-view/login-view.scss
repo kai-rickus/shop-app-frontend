@@ -5,10 +5,15 @@
 //$form-check-input-border   : 2px solid black;
 //$form-check-input-bg       : transparent;
 $form-switch-checked-color : yellow;
+$login-view-card-width     : 500px;
 
 @import "node_modules/bootstrap/scss/forms/form-check";
 
 .login-view {
+    .login-view-width {
+        width : $login-view-card-width;
+    }
+
     .mdc-button {
         width : 100%;
     }

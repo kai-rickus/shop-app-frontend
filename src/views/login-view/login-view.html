@@ -1,21 +1,14 @@
 <template>
 	<require from="./login-view.css"></require>
 
-	<div class="login-view p-5 ">
-		<div class="container container-lg container-md container-sm">
-			<div class="row">
-
-				<div class="col-md-4"></div>
-
-				<div class="col-md-4">
-
+	<div class="login-view">
+		<mdc-layout-grid class=" p-0">
+			<mdc-layout-grid-inner class="d-flex">
+				<mdc-layout-grid-cell class="login-view-width">
 					<div class="card-body product-tile__content box-shadow-login rounded-1 default-main-shadow">
 						<h5 class="card-title product-tile__title border-bottom border-1 mb-4">Login</h5>
-						<div class="row">
-							<div class="col-md-2"></div>
-
-							<div class="col-md-12">
-
+						<mdc-layout-grid-inner>
+							<mdc-layout-grid-cell span="12">
 								<form submit.trigger="submit()">
 									<div class="form-floating mb-3">
 
@@ -28,7 +21,6 @@
 										>
 										<label for="E-Mail-Adresse">E-Mail-Adresse</label>
 									</div>
-
 									<div class="form-floating mb-3">
 										<input type="password"
 											   id="Passwort"
@@ -39,20 +31,17 @@
 										>
 										<label for="Passwort">Passwort</label>
 									</div>
-
 									<p class="alert-danger border border-danger p-2" show.bind="forbiddenErrorOccured">
 										Email/ Passwort falsch.
 									</p>
 									<p class="alert-danger border border-danger p-2" show.bind="unknownErrorOccured">
 										UPPS! Unerwarteter Fehler. probiere es später erneut.
 									</p>
-
 									<div class="form-check form-switch mb-3">
 										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
 											   ref="stayLoggedInSwitch">
 										<label class="form-check-label text-on-surface" for="flexSwitchCheckDefault">Eingeloggt bleiben</label>
 									</div>
-
 									<button
 										mdc-button
 										unelevated
@@ -69,32 +58,15 @@
 										>
 										</span>
 									</button>
-
-									<!--<button type="submit"-->
-									<!--		class="btn btn-primary login-btn mb-3"-->
-									<!--		disabled.bind="submitting">-->
-									<!--	login-->
-									<!--	<span class="spinner-border spinner-border-sm"-->
-									<!--		  role="status"-->
-									<!--		  aria-hidden="true"-->
-									<!--		  show.bind="submitting"></span>-->
-									<!--</button>-->
-
-									<a class="link-primary shop-text-decoration text-center w-100 d-block" route-href="route: register">
+									<a class="link-primary shop-text-decoration text-center d-block" route-href="route: register">
 										Neu hier? Erstelle ein Konto!
 									</a>
 								</form>
-
-							</div>
-
-						</div>
-
-						<div class="col-md-2"></div>
+							</mdc-layout-grid-cell>
+						</mdc-layout-grid-inner>
 					</div>
-
-				</div>
-				<div class="col-md-4"></div>
-			</div>
-		</div>
+				</mdc-layout-grid-cell>
+			</mdc-layout-grid-inner>
+		</mdc-layout-grid>
 	</div>
 </template>
