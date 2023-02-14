@@ -3,7 +3,7 @@ import { autoinject, bindable } from "aurelia-framework";
 import { Router }               from "aurelia-router";
 import { TaskQueue }            from "aurelia-task-queue";
 import { BindingSignaler }      from "aurelia-templating-resources";
-import { Tooltip }       from "bootstrap";
+import { Tooltip }              from "bootstrap";
 import { debug }                from "util";
 import environment              from "../../../environment";
 import { ShopUser }             from "../../../services/shop-user";
@@ -39,6 +39,8 @@ export class ProductDetailsMain
 	snackbarSuccessMessageDuration = 10000;
 	snackbarErrorMessage           = "Fehler! Bitte versuche es später erneut.";
 	snackbarErrorMessageDuration   = -1;
+	snackbarNoUser                 = "Fehler! Bitte versuche es später erneut.";
+	snackbarNoUserDuration         = -1;
 
 	favorized;
 
@@ -112,8 +114,9 @@ export class ProductDetailsMain
 				timeout : this.snackbarErrorMessageDuration,
 				leading : true
 			} );
-		}
 
+			this.submitting = false;
+		}
 
 	}
 
