@@ -1,9 +1,14 @@
 @use "src/layout";
+@use "src/variables";
 
 .home-view {
     max-width : layout.$content-width-desktop !important;
+    width: 100%;
 
     .banner {
-        background-color : #909090;
+        color : white;
+        background-color: variables.$danger-color;
     }
 }
+
+

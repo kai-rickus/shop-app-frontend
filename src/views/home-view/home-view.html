@@ -6,20 +6,32 @@
 	<require from="./home-view.css"></require>
 
 	<div class="home-view layout">
-
-		<div class="banner">
-			<div mdc-headline4>
-				Dieser Shop dient zu Lehrzwecken. Es erfüllt keine funktionalität, außer zum lernen.
-			</div>
-		</div>
-
-		<product-deals></product-deals>
-		<div class="card frost default-main-shadow overflow-hidden mb-4">
-			<div class="card-body">
-				<h5 class="card-title border-bottom border-1">Nur für dich</h5>
-				<product-search-results></product-search-results>
-			</div>
-		</div>
-		<recent-search-results></recent-search-results>
+		<mdc-layout-grid class="p-0">
+			<mdc-layout-grid-inner>
+				<mdc-layout-grid-cell span="12">
+					<div class="banner">
+						<div mdc-headline4>
+							Dieser Shop dient zu Lehrzwecken.
+							<br>
+							Einkäufe o.Ä. können nicht durchgeführt werden.
+						</div>
+					</div>
+				</mdc-layout-grid-cell>
+				<mdc-layout-grid-cell span="12">
+					<product-deals></product-deals>
+				</mdc-layout-grid-cell>
+				<mdc-layout-grid-cell span="12">
+					<div class="card frost default-main-shadow overflow-hidden mb-4">
+						<div class="card-body">
+							<h5 class="card-title border-bottom border-1">Nur für dich</h5>
+							<product-search-results></product-search-results>
+						</div>
+					</div>
+				</mdc-layout-grid-cell>
+				<mdc-layout-grid-cell span="12">
+					<recent-search-results></recent-search-results>
+				</mdc-layout-grid-cell>
+			</mdc-layout-grid-inner>
+		</mdc-layout-grid>
 	</div>
 </template>
