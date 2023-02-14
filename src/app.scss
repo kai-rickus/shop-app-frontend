@@ -57,8 +57,12 @@ $pb-main-content : 5rem;
 
 .shop-app-container > router-view {
     padding-bottom : $pb-main-content;
-    display        : block;
+    //display        : block;
     min-height     : calc(100vh - #{shop-footer.$section-height-desktop} - #{navigation-bar.$height-desktop});
+    max-width: layout.$content-width-desktop;
+    display: flex;
+    margin: auto;
+    justify-content: center;
 }
 
 .backdrop {
