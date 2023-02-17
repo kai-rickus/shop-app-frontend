@@ -53,7 +53,12 @@ export class RegisterView
 	showEmailUsedErrorText = false;
 	unknownErrorDialog;
 
-	constructor( public router: Router, public user: ShopUser, public taskQueue: TaskQueue ){}
+	constructor(
+		public router: Router,
+		public user: ShopUser,
+		public taskQueue: TaskQueue
+	)
+	{}
 
 	canActivate()
 	{

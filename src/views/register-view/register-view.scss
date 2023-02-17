@@ -36,7 +36,8 @@
     }
 
     .conditions-error-line {
-        padding: 0 textfield-variables.$helper-line-padding;
+        padding : 0 textfield-variables.$helper-line-padding;
+
         &.conditions-error-line--show {
             .mdc-text-field-helper-text {
                 opacity : 1 !important;
