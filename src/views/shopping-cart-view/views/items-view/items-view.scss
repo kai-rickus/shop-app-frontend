@@ -1,20 +1,18 @@
 @use "@material/theme/color-palette";
 @use "src/variables" as variables;
+
 .items-view {
     $menu-max-width : 120px;
 
     .img-size {
-        max-height : 177px;
+        max-height   : 177px;
         aspect-ratio : 16 / 9;
-        //top: 0;
-        //height: 100%;
-        //object-fit: cover;
     }
 
-    .item-card-height {
-        height : 155px;
-
-    }
+    //.item-card-height {
+    //    height : 155px;
+    //
+    //}
 
     .no-items {
         color : variables.$danger-color;
