@@ -60,9 +60,10 @@ export class AddressField
 			}
 		} );
 		this.element.dispatchEvent( event );
-		this.clearSuggestions()
 		this.inputValue = suggestionText
 		this.placeId    = placeId
+		this.clearSuggestions()
+		debugger
 	}
 
 	onKeyDown( event )
@@ -111,22 +112,24 @@ export class AddressField
 
 		if( relatedTarget?.classList.contains( "address-field__suggestions__item" ) ) return
 
-		const suggestionText = this.suggestions[ 0 ]?.description || ''
-		const placeId        = this.suggestions[ 0 ]?.place_id || ''
+		const focused      = document.activeElement;
+		const directParent = focused?.parentElement
+		const grandParent  = focused?.parentElement?.parentElement
 
-		this.dispatchEvent( suggestionText, placeId )
+		if( directParent === this.element || grandParent === this.element ) return
 
-		this.taskQueue.queueMicroTask( () =>
+		if( this.suggestions.length )
 		{
-			const focused      = document.activeElement;
-			const directParent = focused?.parentElement
-			const grandParent  = focused?.parentElement?.parentElement
+			const [ suggestion ] = this.suggestions
+			const suggestionText = suggestion?.description || ''
+			const placeId        = suggestion?.place_id || ''
 
-			if( directParent !== this.element && grandParent !== this.element )
-			{
-				this.clearSuggestions()
-			}
-		} )
+			this.dispatchEvent( suggestionText, placeId )
+
+			return
+		}
+
+		this.taskQueue.queueMicroTask( () => void this.clearSuggestions() )
 	}
 
 	async getSuggestions()
