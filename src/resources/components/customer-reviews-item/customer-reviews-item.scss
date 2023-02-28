@@ -11,4 +11,7 @@
         color       : variables.$disabled-grey;
         font-weight : bold;
     }
+    .mdc-layout-grid__inner{
+        gap: 10px !important;
+    }
 }

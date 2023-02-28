@@ -1,43 +1,82 @@
+<!--<template class="customer-reviews-item">-->
+<!--	<require from="./customer-reviews-item.css"></require>-->
+<!--	<require from=".././custom-rating/custom-rating"></require>-->
+<!--	<require from="valueConverters/local-date-value-converter"></require>-->
+<!--	<div class="card mb-4">-->
+<!--		<div class="card-body">-->
+<!--			<div class="grid">-->
+<!--				<div class="row">-->
+<!--					<div class="col-10">-->
+<!--						<div class="mb-2">-->
+<!--							<img class="customer-reviews-item__avatar"-->
+<!--								 src="${avatar}"-->
+<!--								 alt="Profilbild">-->
+<!--							<strong class="ms-2">${user}</strong>-->
+<!--						</div>-->
+<!--					</div>-->
+
+<!--					<div class="col-2">-->
+<!--						<custom-rating-->
+<!--							rating.bind="rating"-->
+<!--						>-->
+<!--						</custom-rating>-->
+<!--					</div>-->
+
+<!--					<div class="row">-->
+<!--						<div class="col-12">-->
+<!--							<div class="mb-2">-->
+<!--							<span class="customer-reviews-item__date">-->
+<!--								${created | localDate}-->
+<!--							</span>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="row">-->
+<!--						<div class="col-12">-->
+<!--							<slot></slot>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--</template>-->
 <template class="customer-reviews-item">
 	<require from="./customer-reviews-item.css"></require>
 	<require from=".././custom-rating/custom-rating"></require>
 	<require from="valueConverters/local-date-value-converter"></require>
 	<div class="card mb-4">
 		<div class="card-body">
-			<div class="grid">
-				<div class="row">
-					<div class="col-10">
+			<mdc-layout-grid class="p-0">
+				<mdc-layout-grid-inner>
+					<mdc-layout-grid-cell span="10">
 						<div class="mb-2">
 							<img class="customer-reviews-item__avatar"
 								 src="${avatar}"
 								 alt="Profilbild">
 							<strong class="ms-2">${user}</strong>
 						</div>
-					</div>
+					</mdc-layout-grid-cell>
 
-					<div class="col-2">
+					<mdc-layout-grid-cell span="2">
 						<custom-rating
 							rating.bind="rating"
 						>
 						</custom-rating>
-					</div>
+					</mdc-layout-grid-cell>
 
-					<div class="row">
-						<div class="col-12">
+						<mdc-layout-grid-cell span="12">
 							<div class="mb-2">
 							<span class="customer-reviews-item__date">
 								${created | localDate}
 							</span>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-12">
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="12">
 							<slot></slot>
-						</div>
-					</div>
-				</div>
-			</div>
+						</mdc-layout-grid-cell>
+				</mdc-layout-grid-inner>
+			</mdc-layout-grid>
 		</div>
 	</div>
 </template>
