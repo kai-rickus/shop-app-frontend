@@ -10,10 +10,10 @@ $input-background-color   : rgba(variables.$primary-color, 0.7);
 
 .search-bar {
     min-width : 300px;
-    width     : 45vw;
     height    : 36px;
     position  : relative;
     display   : block;
+    width     : 100%;
 
     &.search-bar--has-suggestions {
         .search-bar__form {
@@ -44,7 +44,7 @@ $input-background-color   : rgba(variables.$primary-color, 0.7);
     .search-bar__input {
         width               : 100%;
         border              : none;
-        color               : darken(variables.$text-on-primary, 20%);
+        color               : lighten(variables.$text-on-primary, 20%);
         backdrop-filter     : blur(30px);
         transition          : background-color, color;
         transition-duration : 100ms;
@@ -60,7 +60,7 @@ $input-background-color   : rgba(variables.$primary-color, 0.7);
         }
 
         &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-            color : darken(variables.$text-on-primary, 30%);
+            color : lighten(variables.$text-on-primary, 30%);
         }
     }
 
@@ -72,13 +72,13 @@ $input-background-color   : rgba(variables.$primary-color, 0.7);
         margin-bottom : 0;
 
         .search-bar__suggestions__item {
-            border-radius : 0;
-            border        : none;
-            cursor        : pointer;
-            transition    : none;
-            background-color: $input-background-color;
+            border-radius    : 0;
+            border           : none;
+            cursor           : pointer;
+            transition       : none;
+            background-color : $input-background-color;
 
-            box-sizing    : border-box;
+            box-sizing       : border-box;
 
             &:last-of-type {
                 padding-bottom             : 7px;

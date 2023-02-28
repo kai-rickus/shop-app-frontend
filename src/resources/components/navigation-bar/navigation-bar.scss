@@ -7,6 +7,7 @@ $height-desktop : 98px;
     display   : block;
     max-width : 1320px;
     margin    : auto;
+    width     : 100%;
 
     .search-bar-container { width : 100%; }
 
@@ -21,12 +22,13 @@ $height-desktop : 98px;
         top      : -5px;
         right    : -5px;
     }
-    .profile-menu{
+
+    .profile-menu {
         //position: relative;
         //top: 100px;
         //right: 100px;
-        top: 65px !important;
-        left: 1126px !important;
+        top   : 65px !important;
+        left  : 1126px !important;
         right : 36px !important;
     }
 }
