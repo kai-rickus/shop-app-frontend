@@ -98,14 +98,21 @@ $pb-main-content : 5rem;
     overflow : hidden !important;
 }
 
-.mdc-icon--spinning {
-    $duration                 : 1000ms;
-
-    animation-name            : spin;
-    animation-timing-function : ease-in-out;
-    animation-iteration-count : infinite;
-    animation-duration        : $duration;
+.shop-spinner{
+    position: absolute;
+    right: 16px;
+    top: 19px;
+    color: orange;
 }
+
+//.mdc-icon--spinning {
+//    $duration                 : 1000ms;
+//
+//    animation-name            : spin;
+//    animation-timing-function : ease-in-out;
+//    animation-iteration-count : infinite;
+//    animation-duration        : $duration;
+//}
 
 .mdc-button__ripple {
     border : none !important;
