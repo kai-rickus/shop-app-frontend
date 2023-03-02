@@ -24,6 +24,7 @@ export function configure( aurelia: Aurelia ): void
 		   .plugin( "aurelia-typed-observable-plugin" )
 		   .plugin( 'aurelia-portal-attribute' )
 		   .plugin( '@aurelia-mdc-web/all' )
+		   .plugin( 'aurelia-validation' )
 
 	typedBindablesSetup()
 
