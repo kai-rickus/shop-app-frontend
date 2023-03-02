@@ -12,7 +12,7 @@
 		outlined
 		required.bind="required"
 		placeholder.bind="placeholder"
-		value.two-way="inputValue"
+		value.two-way="inputValue & validate"
 		input.trigger="getSuggestions() & throttle:THROTTLE_DURATION"
 		keydown.trigger="onKeyDown($event)"
 		custom-focus.bind="selectionCounter === -1"
@@ -20,8 +20,13 @@
 		valid.two-way="valid"
 	></mdc-text-field>
 	<mdc-text-field-helper-line>
-		<mdc-text-field-helper-text validation>Darf nicht leer sein</mdc-text-field-helper-text>
 	</mdc-text-field-helper-line>
+	<span
+		class="spinner-border spinner-border-sm ms-2 shop-spinner"
+		role="status"
+		aria-hidden="true"
+		show.bind="_validationPending"
+	></span>
 
 	<ul
 		class="address-field__suggestions"

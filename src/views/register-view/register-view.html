@@ -16,10 +16,10 @@
 							<mdc-text-field
 								label="Vorname"
 								outlined
-								required
 								value.two-way="formInput.firstname"
 								view-model.ref="inputs.firstname"
 								disabled.bind="submitting"
+								required
 							>
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
@@ -32,10 +32,10 @@
 							<mdc-text-field
 								label="Nachname"
 								outlined
-								required
 								value.two-way="formInput.lastname"
 								view-model.ref="inputs.lastname"
 								disabled.bind="submitting"
+								required
 							>
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
@@ -49,12 +49,12 @@
 								label="Email-Adresse"
 								type="email"
 								outlined
-								required
 								value.two-way="formInput.email"
 								view-model.ref="inputs.email"
 								mdc-textfield-pattern.bind="emailRegex"
 								focusout.trigger="showEmailUsedErrorText = inputs.email.input_.validity.patternMismatch"
 								disabled.bind="submitting"
+								required
 							>
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
@@ -80,9 +80,9 @@
 								view-model.ref="inputs.password"
 								label="Passwort"
 								outlined
-								required
 								mdc-textfield-pattern.bind="passwordRegex"
 								disabled.bind="submitting"
+								required
 							>
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
@@ -96,11 +96,11 @@
 								type="password"
 								view-model.ref="inputs.passwordConfirm"
 								label="Passwort wiederholen"
-								required
 								outlined
 								value.two-way="formInput.password"
 								valid.bind="password.value === passwordConfirm.value"
 								disabled.bind="submitting"
+								required
 							>
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
@@ -116,6 +116,7 @@
 							placeholder="Tippe zum Suchen"
 							view-model.ref="inputs.address"
 							disabled.bind="submitting"
+							show-malformed-address-message.bind="malformedAddress"
 						></address-field>
 					</mdc-layout-grid-cell>
 					<mdc-layout-grid-cell span="12">
@@ -166,6 +167,30 @@
 			</form>
 		</mdc-card>
 	</div>
+	<mdc-dialog view-model.ref="incompleteAddressDialog">
+		<mdc-dialog-title>
+			Unvollstädnige Adresse.
+		</mdc-dialog-title>
+		<mdc-dialog-content>
+			Bitte geben Sie eine vollständige Adresse ein.
+			<br>
+			Eine vollständige Adresse beinhaltet:
+			<ul>
+				<li> Straße inkl. Hausnummer</li>
+				<li> Postleitzahl</li>
+				<li> Stadt</li>
+				<li> Land</li>
+			</ul>
+		</mdc-dialog-content>
+		<mdc-dialog-actions>
+			<button
+				mdc-button data-mdc-dialog-action="ok"
+				data-mdc-dialog-button-default
+				data-mdc-dialog-initial-focus
+			>Ok
+			</button>
+		</mdc-dialog-actions>
+	</mdc-dialog>
 	<mdc-dialog view-model.ref="unknownErrorDialog">
 		<mdc-dialog-title>
 			Unbekannter Fehler

@@ -1,6 +1,15 @@
-import environment              from "../../../environment";
-import { autoinject, bindable } from "aurelia-framework";
-import { TaskQueue }            from "aurelia-task-queue";
+import environment   from "../../../environment";
+import {
+	autoinject,
+	bindable
+}                    from "aurelia-framework";
+import { TaskQueue } from "aurelia-task-queue";
+import {
+	ValidationController,
+	ValidationControllerFactory,
+	ValidationRules,
+	Rule
+}                    from "aurelia-validation";
 
 interface SuggestionDataset
 {
@@ -21,13 +30,15 @@ interface Suggestion
 @autoinject()
 export class AddressField
 {
-	static AURELIA_HIDE_CLASS             = "aurelia-hide"
-	static SUGGESTIONS_ELEMENT_BOTTOM_GAP = 10
+	static AURELIA_HIDE_CLASS               = "aurelia-hide"
+	static SUGGESTIONS_ELEMENT_BOTTOM_GAP   = 10
+	static INCOMPLETE_ADDRESS_ERROR_MESSAGE = "Es muss eine vollständige Wohnanschrift eingetragen werden"
 
 	THROTTLE_DURATION = 250;
 
 	@bindable label       = "";
 	@bindable placeholder = "";
+	@bindable showMalformedAddressMessage: boolean;
 	@bindable required    = false;
 	@bindable suggestion: string;
 	@bindable placeId: string;
@@ -39,12 +50,51 @@ export class AddressField
 	suggestions: Suggestion[] = [];
 	selectionCounter          = -1
 	element;
-	taskQueue;
 	suggestionsElement: HTMLUListElement;
 
-	constructor( taskQueue: TaskQueue )
+	private _validationPending = false;
+	private _validationController: ValidationController
+	private _rules: Rule<AddressField, unknown>[][];
+
+	constructor(
+		private _taskQueue: TaskQueue,
+		validationControllerFactory: ValidationControllerFactory,
+	)
 	{
-		this.taskQueue = taskQueue
+		this.configureValidation( validationControllerFactory )
+	}
+
+	configureValidation( validationControllerFactory: ValidationControllerFactory )
+	{
+		this._validationController = validationControllerFactory.createForCurrentScope();
+
+		this._rules = ValidationRules
+			.ensure<AddressField, string>( addressfield => addressfield.inputValue ).required()
+			.satisfies( async inputValue =>
+			{
+				this._validationPending = true
+
+				try
+				{
+					const response = await fetch( `${environment.backendBaseUrl}locations/isComplete/${this.placeId}`, );
+					const data     = await response.json()
+
+					return data.addressIsComplete
+				}
+				catch( error )
+				{
+					/* TODO: error handling */
+				}
+
+				this._validationPending = false
+			} )
+			.withMessage( AddressField.INCOMPLETE_ADDRESS_ERROR_MESSAGE )
+			.rules;
+	}
+
+	attached()
+	{
+		this._validationController.addObject( this, this._rules );
 	}
 
 	clearSuggestions()
@@ -63,7 +113,7 @@ export class AddressField
 		this.inputValue = suggestionText
 		this.placeId    = placeId
 		this.clearSuggestions()
-		debugger
+		this.validateCompleteness()
 	}
 
 	onKeyDown( event )
@@ -129,7 +179,7 @@ export class AddressField
 			return
 		}
 
-		this.taskQueue.queueMicroTask( () => void this.clearSuggestions() )
+		this._taskQueue.queueMicroTask( () => void this.clearSuggestions() )
 	}
 
 	async getSuggestions()
@@ -141,7 +191,7 @@ export class AddressField
 			return
 		}
 
-		this.taskQueue.queueTask( async () =>
+		this._taskQueue.queueTask( async () =>
 		{
 			const response = await fetch( `${environment.backendBaseUrl}locations/suggestions/${this.inputValue}/de`, );
 			const data     = await response.json()
@@ -150,7 +200,7 @@ export class AddressField
 
 			this.suggestions = data.suggestions
 
-			this.taskQueue.queueTask( async () => this.handleTooMuchHeight() )
+			this._taskQueue.queueTask( async () => this.handleTooMuchHeight() )
 
 			this.handleTooMuchHeight()
 		} )
@@ -198,7 +248,10 @@ export class AddressField
 
 		return this.input.valid
 	}
-}
 
-/* TODO: error handling */
+	async validateCompleteness()
+	{
+		const res = await this._validationController.validate();
+	}
+}
 

@@ -23,7 +23,7 @@ interface Inputs
 @autoinject
 export class RegisterView
 {
-	formInput              = {
+	formInput                 = {
 		firstname  : "",
 		lastname   : "",
 		email      : "",
@@ -33,7 +33,7 @@ export class RegisterView
 		newsletter : false
 
 	};
-	inputs: Inputs         = {
+	inputs: Inputs            = {
 		firstname       : null,
 		lastname        : null,
 		email           : null,
@@ -42,16 +42,18 @@ export class RegisterView
 		address         : null,
 		conditions      : null
 	};
-	submitting             = false;
-	conditionsAccepted     = null;
-	passwordRules          = {
+	submitting                = false;
+	conditionsAccepted        = null;
+	passwordRules             = {
 		minlength : 10,
 		maxlength : 50
 	};
-	emailRegex             = ".*"
-	passwordRegex          = `^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{${this.passwordRules.minlength},${this.passwordRules.maxlength}}$`;
-	showEmailUsedErrorText = false;
+	emailRegex                = ".*"
+	passwordRegex             = `^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{${this.passwordRules.minlength},${this.passwordRules.maxlength}}$`;
+	showEmailUsedErrorText    = false;
 	unknownErrorDialog;
+	incompleteAddressDialog;
+	malformedAddress: boolean = false;
 
 	constructor(
 		public router: Router,
@@ -148,12 +150,16 @@ export class RegisterView
 					this.showEmailUsedErrorText = this.inputs.email.input_.validity.patternMismatch
 				} )
 			}
-			else
+			else if( error.message === 'incomplete address data from place id.' )
 			{
-				this.unknownErrorDialog.open()
+				this.malformedAddress = true
+				// this.incompleteAddressDialog.open()
 			}
+			// else if()
+			// {
+			// 	this.unknownErrorDialog.open()
+			// }
 		}
-
 		this.submitting = false
 	}
 }
