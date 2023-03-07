@@ -1,3 +1,4 @@
+import { debug }     from "util";
 import environment   from "../../../environment";
 import {
 	autoinject,
@@ -8,7 +9,8 @@ import {
 	ValidationController,
 	ValidationControllerFactory,
 	ValidationRules,
-	Rule
+	Rule,
+	validateTrigger,
 }                    from "aurelia-validation";
 
 interface SuggestionDataset
@@ -27,6 +29,18 @@ interface Suggestion
 	types: string[];
 }
 
+// interface ValidationStatusMap
+// {
+// 	[ key: string ]: AddressValidationStatus;
+// }
+
+interface ValidationStatus
+{
+	valid: "valid",
+	invalid: "invalid",
+	undeterminated: "undeterminated"
+};
+
 @autoinject()
 export class AddressField
 {
@@ -34,7 +48,12 @@ export class AddressField
 	static SUGGESTIONS_ELEMENT_BOTTOM_GAP   = 10
 	static INCOMPLETE_ADDRESS_ERROR_MESSAGE = "Es muss eine vollständige Wohnanschrift eingetragen werden"
 
-	THROTTLE_DURATION = 250;
+	THROTTLE_DURATION                            = 250;
+	readonly VALIDATION_STATUS: ValidationStatus = {
+		valid          : "valid",
+		invalid        : "invalid",
+		undeterminated : "undeterminated"
+	};
 
 	@bindable label       = "";
 	@bindable placeholder = "";
@@ -44,6 +63,7 @@ export class AddressField
 	@bindable placeId: string;
 	@bindable valid: boolean;
 	@bindable url: string;
+	@bindable disabled: boolean;
 
 	input;
 	inputValue;
@@ -52,7 +72,8 @@ export class AddressField
 	element;
 	suggestionsElement: HTMLUListElement;
 
-	private _validationPending = false;
+	private _addressValidationStatus: ValidationStatus[keyof ValidationStatus] = "undeterminated";
+	private _validationPending                                                 = false;
 	private _validationController: ValidationController
 	private _rules: Rule<AddressField, unknown>[][];
 
@@ -66,12 +87,21 @@ export class AddressField
 
 	configureValidation( validationControllerFactory: ValidationControllerFactory )
 	{
-		this._validationController = validationControllerFactory.createForCurrentScope();
+		this._validationController                 = validationControllerFactory.createForCurrentScope();
+		this._validationController.validateTrigger = validateTrigger.manual;
 
 		this._rules = ValidationRules
-			.ensure<AddressField, string>( addressfield => addressfield.inputValue ).required()
+			.ensure<AddressField, string>( addressfield => addressfield.inputValue )
 			.satisfies( async inputValue =>
 			{
+
+				if( !inputValue )
+				{
+					this._addressValidationStatus = this.required ? "invalid" : "undeterminated"
+
+					return !this.required
+				}
+
 				this._validationPending = true
 
 				try
@@ -79,14 +109,25 @@ export class AddressField
 					const response = await fetch( `${environment.backendBaseUrl}locations/isComplete/${this.placeId}`, );
 					const data     = await response.json()
 
+					this._addressValidationStatus = data.addressIsComplete ? "valid" : "invalid"
+
+					if( !data.addressIsComplete && ( this.inputValue !== data.label || this.placeId !== data.placeId ) )
+					{
+						this.inputValue = data.label
+						this.placeId    = data.placeId
+
+						await this.validateCompleteness()
+					}
+
+					this._validationPending = false
+
 					return data.addressIsComplete
 				}
-				catch( error )
+				finally
 				{
-					/* TODO: error handling */
+					this._validationPending = false
 				}
 
-				this._validationPending = false
 			} )
 			.withMessage( AddressField.INCOMPLETE_ADDRESS_ERROR_MESSAGE )
 			.rules;
@@ -179,6 +220,8 @@ export class AddressField
 			return
 		}
 
+		this.validateCompleteness()
+
 		this._taskQueue.queueMicroTask( () => void this.clearSuggestions() )
 	}
 
@@ -251,7 +294,7 @@ export class AddressField
 
 	async validateCompleteness()
 	{
-		const res = await this._validationController.validate();
+		await this._validationController.validate();
 	}
 }
 

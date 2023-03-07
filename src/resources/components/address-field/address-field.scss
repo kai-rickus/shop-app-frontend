@@ -1,5 +1,6 @@
 @use "../../../variables";
 @use "@material/textfield/variables" as textfield-variables;
+@use "@material/theme/color-palette";
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
 
@@ -13,6 +14,23 @@ $highlighted-border-width : 1px;
 .address-field {
     display  : block;
     position : relative;
+
+    .address-field__icons {
+        position : absolute;
+        right    : 16px;
+        top      : 19px;
+
+        .address-field__icon-valid {
+            color: color-palette.$green-500;
+        }
+
+        .address-field__icon-invalid {
+            color: variables.$danger-color;
+        }
+        .address-field__icon-spinner {
+            color: variables.$primary-color;
+        }
+    }
 
     &.address-field--has-suggestions {
         .mdc-text-field {
@@ -28,7 +46,7 @@ $highlighted-border-width : 1px;
         .address-field__input {
             border-bottom-left-radius  : 0;
             border-bottom-right-radius : 0;
-            width: 400px !important;
+            width                      : 400px !important;
         }
     }
 
