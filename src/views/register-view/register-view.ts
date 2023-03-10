@@ -51,9 +51,7 @@ export class RegisterView
 	emailRegex                = ".*"
 	passwordRegex             = `^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{${this.passwordRules.minlength},${this.passwordRules.maxlength}}$`;
 	showEmailUsedErrorText    = false;
-	unknownErrorDialog;
 	incompleteAddressDialog;
-	malformedAddress: boolean = false;
 
 	constructor(
 		public router: Router,
@@ -152,8 +150,7 @@ export class RegisterView
 			}
 			else if( error.message === 'incomplete address data from place id.' )
 			{
-				this.malformedAddress = true
-				// this.incompleteAddressDialog.open()
+				this.inputs.address.validateCompleteness()
 			}
 			// else if()
 			// {

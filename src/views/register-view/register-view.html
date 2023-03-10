@@ -115,7 +115,6 @@
 							placeholder="Tippe zum Suchen"
 							view-model.ref="inputs.address"
 							disabled.bind="submitting"
-							show-malformed-address-message.bind="malformedAddress"
 						></address-field>
 					</mdc-layout-grid-cell>
 					<mdc-layout-grid-cell span="12">
@@ -160,6 +159,11 @@
 								show.bind="submitting"
 							></span>
 						</button>
+					</mdc-layout-grid-cell>
+					<mdc-layout-grid-cell span="12">
+						<a class="link-primary shop-text-decoration text-center d-block" route-href="route: login">
+							Bereits registriert? Melde dich hier an!
+						</a>
 					</mdc-layout-grid-cell>
 				</mdc-layout-grid-inner>
 			</form>
