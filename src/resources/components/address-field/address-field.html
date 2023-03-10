@@ -1,7 +1,7 @@
 <template class="address-field ${suggestions.length > 0 ? 'address-field--has-suggestions' : ''}"
 		  ref="element"
-		  keydown.trigger="onKeyDown( $event )"
-		  focusout.trigger="onFocusOut($event)"
+		  keydown.trigger="_onKeyDown( $event )"
+		  focusout.trigger="_onFocusOut($event)"
 >
 	<require from="./address-field.css"></require>
 	<require from="attributes/custom-focus"></require>
@@ -13,8 +13,7 @@
 		required.bind="required"
 		placeholder.bind="placeholder"
 		value.two-way="inputValue & validate"
-		input.trigger="getSuggestions() & throttle:THROTTLE_DURATION"
-		keydown.trigger="onKeyDown($event)"
+		input.trigger="_getSuggestions() & throttle:THROTTLE_DURATION"
 		custom-focus.bind="selectionCounter === -1"
 		focus.trigger="selectionCounter = -1"
 		valid.two-way="valid"
@@ -52,14 +51,13 @@
 		<li
 			class="address-field__suggestions__item form-control"
 			repeat.for="suggestion of suggestions"
-			click.trigger="dispatchEvent(suggestion.description, suggestion.place_id)"
+			click.trigger="_selectSuggestion(suggestion.description, suggestion.place_id)"
 			tabindex="1"
 			custom-focus.bind="selectionCounter === $index"
 			value.two-way="formInput.placeId"
 			data-place-id.bind="suggestion.place_id"
 			focus.trigger="selectionCounter = $index"
-		>
-			${suggestion.description}
+		>${suggestion.description}
 		</li>
 	</ul>
 </template>

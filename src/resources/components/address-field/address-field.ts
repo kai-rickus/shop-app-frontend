@@ -1,4 +1,3 @@
-import { debug }     from "util";
 import environment   from "../../../environment";
 import {
 	autoinject,
@@ -57,7 +56,6 @@ export class AddressField
 
 	@bindable label       = "";
 	@bindable placeholder = "";
-	@bindable showMalformedAddressMessage: boolean;
 	@bindable required    = false;
 	@bindable suggestion: string;
 	@bindable placeId: string;
@@ -82,10 +80,15 @@ export class AddressField
 		validationControllerFactory: ValidationControllerFactory,
 	)
 	{
-		this.configureValidation( validationControllerFactory )
+		this._configureValidation( validationControllerFactory )
 	}
 
-	configureValidation( validationControllerFactory: ValidationControllerFactory )
+	private attached()
+	{
+		this._validationController.addObject( this, this._rules );
+	}
+
+	private _configureValidation( validationControllerFactory: ValidationControllerFactory )
 	{
 		this._validationController                 = validationControllerFactory.createForCurrentScope();
 		this._validationController.validateTrigger = validateTrigger.manual;
@@ -94,7 +97,6 @@ export class AddressField
 			.ensure<AddressField, string>( addressfield => addressfield.inputValue )
 			.satisfies( async inputValue =>
 			{
-
 				if( !inputValue )
 				{
 					this._addressValidationStatus = this.required ? "invalid" : "undeterminated"
@@ -103,6 +105,8 @@ export class AddressField
 				}
 
 				this._validationPending = true
+
+				let valid = false
 
 				try
 				{
@@ -115,59 +119,62 @@ export class AddressField
 					{
 						this.inputValue = data.label
 						this.placeId    = data.placeId
-
-						await this.validateCompleteness()
 					}
 
-					this._validationPending = false
-
-					return data.addressIsComplete
+					valid = data.addressIsComplete
 				}
-				finally
+				catch( error )
 				{
-					this._validationPending = false
+					/* TODO: Error handling */
 				}
+
+				this._validationPending = false
+
+				return valid
 
 			} )
 			.withMessage( AddressField.INCOMPLETE_ADDRESS_ERROR_MESSAGE )
 			.rules;
 	}
 
-	attached()
-	{
-		this._validationController.addObject( this, this._rules );
-	}
-
-	clearSuggestions()
+	private _clearSuggestions()
 	{
 		this.suggestions = []
 	}
 
-	dispatchEvent( suggestionText: string, placeId: string )
+	private _dispatchEvent( suggestionText: string, placeId: string )
 	{
 		const event = new CustomEvent( 'found', {
 			detail : {
 				string : suggestionText,
+				placeId,
 			}
 		} );
+
 		this.element.dispatchEvent( event );
-		this.inputValue = suggestionText
-		this.placeId    = placeId
-		this.clearSuggestions()
-		this.validateCompleteness()
 	}
 
-	onKeyDown( event )
+	private async _selectSuggestion( suggestionText: string, placeId: string )
+	{
+		this.inputValue = suggestionText.trim()
+		this.placeId    = placeId.trim()
+
+		await this.validateCompleteness()
+		this._clearSuggestions()
+		this._dispatchEvent( this.inputValue, this.placeId )
+	}
+
+	private _onKeyDown( event )
 	{
 		if( event.code === "Enter" && document.activeElement.classList.contains( "address-field__suggestions__item" ) )
 		{
-			this.dispatchEvent( document.activeElement.textContent, ( ( document.activeElement as HTMLElement ).dataset as unknown as SuggestionDataset ).placeId )
+			this._selectSuggestion( document.activeElement.textContent, ( ( document.activeElement as HTMLElement ).dataset as unknown as SuggestionDataset ).placeId )
 		}
 		else if( event.code === "Escape" )
 		{
 			event.stopPropagation()
 			event.preventDefault()
-			this.clearSuggestions()
+			this._clearSuggestions()
 		}
 		else if( event.code === "ArrowUp" )
 		{
@@ -190,14 +197,14 @@ export class AddressField
 			}
 			else if( this.suggestions.length === 0 && this.inputValue !== "" )
 			{
-				this.getSuggestions()
+				this._getSuggestions()
 			}
 		}
 
 		return true
 	}
 
-	onFocusOut( event: FocusEvent )
+	private _onFocusOut( event: FocusEvent )
 	{
 		const relatedTarget = event.relatedTarget as HTMLElement
 
@@ -215,17 +222,17 @@ export class AddressField
 			const suggestionText = suggestion?.description || ''
 			const placeId        = suggestion?.place_id || ''
 
-			this.dispatchEvent( suggestionText, placeId )
+			this._selectSuggestion( suggestionText, placeId )
 
 			return
 		}
 
 		this.validateCompleteness()
 
-		this._taskQueue.queueMicroTask( () => void this.clearSuggestions() )
+		this._taskQueue.queueMicroTask( () => void this._clearSuggestions() )
 	}
 
-	async getSuggestions()
+	private async _getSuggestions()
 	{
 		if( !this.inputValue )
 		{
@@ -243,13 +250,13 @@ export class AddressField
 
 			this.suggestions = data.suggestions
 
-			this._taskQueue.queueTask( async () => this.handleTooMuchHeight() )
+			this._taskQueue.queueTask( async () => this._handleTooMuchHeight() )
 
-			this.handleTooMuchHeight()
+			this._handleTooMuchHeight()
 		} )
 	}
 
-	setHeight()
+	private _setHeight()
 	{
 		const viewport      = document.documentElement.clientHeight
 		const { height, y } = this.suggestionsElement.getBoundingClientRect()
@@ -263,17 +270,17 @@ export class AddressField
 		}
 	}
 
-	handleTooMuchHeight()
+	private _handleTooMuchHeight()
 	{
 		const { display } = getComputedStyle( this.suggestionsElement )
 
-		if( display !== "none" ) return this.setHeight()
+		if( display !== "none" ) return this._setHeight()
 
 		const observer = new MutationObserver( () =>
 		{
 			if( this.suggestionsElement.classList.contains( AddressField.AURELIA_HIDE_CLASS ) ) return
 
-			this.setHeight()
+			this._setHeight()
 
 			observer.disconnect()
 		} );
@@ -284,7 +291,7 @@ export class AddressField
 		} );
 	}
 
-	validate()
+	public validate()
 	{
 		// @ts-ignore
 		this.input.foundation.styleValidity()
@@ -292,7 +299,7 @@ export class AddressField
 		return this.input.valid
 	}
 
-	async validateCompleteness()
+	public async validateCompleteness()
 	{
 		await this._validationController.validate();
 	}
