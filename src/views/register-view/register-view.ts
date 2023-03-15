@@ -23,7 +23,7 @@ interface Inputs
 @autoinject
 export class RegisterView
 {
-	formInput                 = {
+	formInput              = {
 		firstname  : "",
 		lastname   : "",
 		email      : "",
@@ -33,7 +33,7 @@ export class RegisterView
 		newsletter : false
 
 	};
-	inputs: Inputs            = {
+	inputs: Inputs         = {
 		firstname       : null,
 		lastname        : null,
 		email           : null,
@@ -42,15 +42,15 @@ export class RegisterView
 		address         : null,
 		conditions      : null
 	};
-	submitting                = false;
-	conditionsAccepted        = null;
-	passwordRules             = {
+	submitting             = false;
+	conditionsAccepted     = null;
+	passwordRules          = {
 		minlength : 10,
 		maxlength : 50
 	};
-	emailRegex                = ".*"
-	passwordRegex             = `^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{${this.passwordRules.minlength},${this.passwordRules.maxlength}}$`;
-	showEmailUsedErrorText    = false;
+	emailRegex             = ".*"
+	passwordRegex          = `^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{${this.passwordRules.minlength},${this.passwordRules.maxlength}}$`;
+	showEmailUsedErrorText = false;
 	incompleteAddressDialog;
 
 	constructor(
@@ -86,8 +86,6 @@ export class RegisterView
 		// @ts-ignore
 		if( !this.inputs.passwordConfirm.valid ) this.inputs.passwordConfirm.foundation.styleValidity()
 
-		if( !this.inputs.address.valid ) this.inputs.address.validate()
-
 		this.validateConditions()
 	}
 
@@ -98,7 +96,6 @@ export class RegisterView
 		if( !this.inputs.email.valid ) return false;
 		if( !this.inputs.password.valid ) return false;
 		if( !this.inputs.passwordConfirm.valid ) return false;
-		if( !this.inputs.address.valid ) return false;
 		if( !this.conditionsAccepted ) return false;
 
 		return true;
@@ -115,6 +112,7 @@ export class RegisterView
 
 	async submit()
 	{
+		debugger
 		if( !this.isValid() ) return
 
 		this.submitting = true
@@ -152,11 +150,12 @@ export class RegisterView
 			{
 				this.inputs.address.validateCompleteness()
 			}
-			// else if()
-			// {
-			// 	this.unknownErrorDialog.open()
-			// }
+			else
+			{
+				console.log( 'Fehler:', error.message );
+			}
 		}
+
 		this.submitting = false
 	}
 }
