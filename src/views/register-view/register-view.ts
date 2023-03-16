@@ -42,12 +42,13 @@ export class RegisterView
 		address         : null,
 		conditions      : null
 	};
-	submitting             = false;
-	conditionsAccepted     = null;
 	passwordRules          = {
 		minlength : 10,
 		maxlength : 50
 	};
+
+	submitting             = false;
+	conditionsAccepted     = null;
 	emailRegex             = ".*"
 	passwordRegex          = `^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{${this.passwordRules.minlength},${this.passwordRules.maxlength}}$`;
 	showEmailUsedErrorText = false;
@@ -112,7 +113,6 @@ export class RegisterView
 
 	async submit()
 	{
-		debugger
 		if( !this.isValid() ) return
 
 		this.submitting = true
