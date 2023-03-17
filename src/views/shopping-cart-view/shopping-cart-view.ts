@@ -70,8 +70,15 @@ export class ShoppingCartView
 		private _router: Router,
 		private _signaler: BindingSignaler
 	)
-	{
+	{}
 
+	attached()
+	{
+		if( !this._user.loggedIn )
+		{
+
+			this.disableBuying = true
+		}
 	}
 
 	setHeightAfterRouting()

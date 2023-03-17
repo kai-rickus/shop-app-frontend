@@ -109,7 +109,7 @@
 											mdc-button
 											unelevated
 											class="mdc-button--secondary w-100"
-											disabled.bind="pending || disableBuying"
+											disabled.bind="pending || !_user.loggedIn & signal:_LOGIN_STATE_CHANGED_SIGNAL"
 											data-dummy.bind="determineBuyingPermission() & async & signal:_SIGNAL_CART_INFORMATION_UPDATED"
 											click.trigger="buy()"
 									>
