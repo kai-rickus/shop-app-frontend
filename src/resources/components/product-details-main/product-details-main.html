@@ -105,6 +105,7 @@
 											class="bg-transparent position-relative favorize-icon-button"
 											active.bind="favorized"
 											disabled.bind="favorizePending"
+											if.bind="_user.loggedIn & signal:_LOGIN_STATE_CHANGED_SIGNAL"
 											change.trigger="setFavorite($event.detail.isOn)"
 										>
 										</shop-icon-button>

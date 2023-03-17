@@ -29,18 +29,19 @@ export const SIGNAL_CART_UPDATED = "cart-updated";
 @autoinject()
 export class ProductDetailsMain
 {
+
+	private readonly _LOGIN_STATE_CHANGED_SIGNAL = ShopUser.LOGIN_STATE_CHANGED_SIGNAL
+
 	@bindable data: ProductDataResponse;
 
-	submitting      = false;
-	amount          = 1;
-	favorizePending = false;
+	submitting        = false;
+	amount            = 1;
+	favorizePending   = false;
 
 	snackbarSuccessMessage         = "Artikel hinzugefügt!";
 	snackbarSuccessMessageDuration = 10000;
 	snackbarErrorMessage           = "Fehler! Bitte versuche es später erneut.";
 	snackbarErrorMessageDuration   = -1;
-	snackbarNoUser                 = "Fehler! Bitte versuche es später erneut.";
-	snackbarNoUserDuration         = -1;
 
 	favorized;
 
@@ -89,6 +90,7 @@ export class ProductDetailsMain
 	async addToCart()
 	{
 		this.submitting = true
+		this.favorizePending = true
 
 		try
 		{
@@ -101,7 +103,7 @@ export class ProductDetailsMain
 
 			this.submitting = false
 
-			await this.snackbar.open( this.snackbarSuccessMessage, 'Okay', {
+			this.snackbar.open( this.snackbarSuccessMessage, 'Okay', {
 				timeout : this.snackbarSuccessMessageDuration,
 				leading : true
 			} );
@@ -110,12 +112,14 @@ export class ProductDetailsMain
 		}
 		catch( error )
 		{
-			await this.snackbar.open( this.snackbarErrorMessage, 'Okay', {
+			/* TODO: Nochmal versuchen */
+			this.snackbar.open( this.snackbarErrorMessage, 'Okay', {
 				timeout : this.snackbarErrorMessageDuration,
 				leading : true
 			} );
 
 			this.submitting = false;
+			this.favorizePending = false;
 		}
 
 	}

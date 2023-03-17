@@ -7,9 +7,9 @@ import { BindingSignaler }      from 'aurelia-templating-resources';
 @autoinject
 export class NavigationBar
 {
-	items        = [];
-	showBadge    = false;
-	userLoggedIn = false;
+	private readonly _LOGIN_STATE_CHANGED_SIGNAL = ShopUser.LOGIN_STATE_CHANGED_SIGNAL
+
+	private _itemsCount = 0;
 
 	constructor(
 		private _router: Router,
@@ -25,11 +25,6 @@ export class NavigationBar
 		)
 	}
 
-	attached()
-	{
-		if( this._user.refreshToken ) this.userLoggedIn = true
-	}
-
 	routeToLogin()
 	{
 		this._router.navigateToRoute( 'login' )
@@ -37,8 +32,14 @@ export class NavigationBar
 
 	async setItemAmount()
 	{
+		if( !this._user.loggedIn )
+		{
+			this._itemsCount = 0
 
-		if( !this._user.refreshToken ) return
+			/* TODO: aus indexedDb returnen */
+
+			return 0
+		}
 
 		try
 		{
@@ -48,22 +49,13 @@ export class NavigationBar
 				headers : { "Authorization" : "Bearer " + this._user.accessToken }
 			} );
 			const data     = await response.json()
-			data.items
 
 			for( const item of data.items )
 			{
 				itemAmount = itemAmount + item.amount
 			}
 
-			if( itemAmount > 0 )
-			{
-				this.showBadge = true
-			}
-			else
-			{
-				this.showBadge = false
-			}
-
+			this._itemsCount = itemAmount
 			return itemAmount
 		}
 		catch( error )

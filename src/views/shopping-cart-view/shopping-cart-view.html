@@ -7,7 +7,7 @@
 	<require from="app.css"></require>
 
 	<div class="shopping-cart-view container p-0">
-		<mdc-layout-grid >
+		<mdc-layout-grid>
 			<mdc-layout-grid-inner>
 				<mdc-layout-grid-cell span="8">
 					<div class="card frost default-main-shadow">
@@ -18,7 +18,6 @@
 														   text-position="top"
 														   with-text="erdtkl"
 									>
-
 										<shop-progress-tracker-step title="Artikel"
 																	marker-text="1"
 																	route="items"
@@ -35,6 +34,7 @@
 																	complete.bind="
 																navigation[2].isActive ||
 																navigation[3].isActive"
+																	if.bind="_user.loggedIn & signal:_LOGIN_STATE_CHANGED_SIGNAL"
 																	active.bind="navigation[1].isActive"
 										>Wohin?
 										</shop-progress-tracker-step>
@@ -42,12 +42,14 @@
 																	marker-text="3"
 																	route="payment"
 																	complete.bind="navigation[3].isActive"
+																	if.bind="_user.loggedIn & signal:_LOGIN_STATE_CHANGED_SIGNAL"
 																	active.bind="navigation[2].isActive"
 										>Wie zahlen?
 										</shop-progress-tracker-step>
 										<shop-progress-tracker-step title="Übersicht"
 																	marker-text="4"
 																	route="overview"
+																	if.bind="_user.loggedIn & signal:_LOGIN_STATE_CHANGED_SIGNAL"
 																	active.bind="navigation[3].isActive"
 										>In Ordnung?
 										</shop-progress-tracker-step>
@@ -64,65 +66,65 @@
 						class="card frost default-main-shadow"
 						data-dummy.bind="calculateData() & async & signal:_SIGNAL_CART_UPDATED"
 					>
-							<div class="card-body">
-								<mdc-layout-grid-inner>
-									<mdc-layout-grid-cell span="12">
-										<h5 mdc-headline6 class="text-on-surface">
-											Schnell-Checkout
-										</h5>
-										<h6 mdc-subtitle2 class="mb-3 sub-title">
-											Sofort und einfach alle Artikel kaufen.
-										</h6>
-									</mdc-layout-grid-cell>
-									<mdc-layout-grid-cell span="7">
-										<span mdc-body1>Artikel-Kosten:</span>
-										<br>
-										<span mdc-body1>Verpackung und Versand:</span>
-									</mdc-layout-grid-cell>
-									<mdc-layout-grid-cell span="5">
-										<div class="text-end">
-											<span mdc-body1>${_data.itemsTotal | currency
-											:
-											'EUR'}</span>
-											<br>
-											<span mdc-body1>${_data.packaging | currency
-											:
-											'EUR'}</span>
-										</div>
-									</mdc-layout-grid-cell>
-									<mdc-layout-grid-cell span="7">
-										<h3 mdc-headline5>Gesantpreis</h3>
-										<small mdc-subtitle2>Mwst. inklusive</small>
-									</mdc-layout-grid-cell>
-									<mdc-layout-grid-cell span="5" class="text-end text-secondary-dark pe-0">
-										<span mdc-headline5>${_data.total | currency
+						<div class="card-body">
+							<mdc-layout-grid-inner>
+								<mdc-layout-grid-cell span="12">
+									<h5 mdc-headline6 class="text-on-surface">
+										Schnell-Checkout
+									</h5>
+									<h6 mdc-subtitle2 class="mb-3 sub-title">
+										Sofort und einfach alle Artikel kaufen.
+									</h6>
+								</mdc-layout-grid-cell>
+								<mdc-layout-grid-cell span="7">
+									<span mdc-body1>Artikel-Kosten:</span>
+									<br>
+									<span mdc-body1>Verpackung und Versand:</span>
+								</mdc-layout-grid-cell>
+								<mdc-layout-grid-cell span="5">
+									<div class="text-end">
+										<span mdc-body1>${_data.itemsTotal | currency
 										:
 										'EUR'}</span>
-									</mdc-layout-grid-cell>
-									<mdc-layout-grid-cell span="12">
-									</mdc-layout-grid-cell>
+										<br>
+										<span mdc-body1>${_data.packaging | currency
+										:
+										'EUR'}</span>
+									</div>
+								</mdc-layout-grid-cell>
+								<mdc-layout-grid-cell span="7">
+									<h3 mdc-headline5>Gesantpreis</h3>
+									<small mdc-subtitle2>Mwst. inklusive</small>
+								</mdc-layout-grid-cell>
+								<mdc-layout-grid-cell span="5" class="text-end text-secondary-dark pe-0">
+									<span mdc-headline5>${_data.total | currency
+									:
+									'EUR'}</span>
+								</mdc-layout-grid-cell>
+								<mdc-layout-grid-cell span="12">
+								</mdc-layout-grid-cell>
 
-									<mdc-layout-grid-cell span="12">
-										<button type="submit"
-												mdc-button
-												unelevated
-												class="mdc-button--secondary w-100"
-												disabled.bind="pending || disableBuying"
-												data-dummy.bind="determineBuyingPermission() & async & signal:_SIGNAL_CART_INFORMATION_UPDATED"
-												click.trigger="buy()"
-										>
-											<span mdc-button-label>Sofort kaufen</span>
-											<mdc-icon show.bind="!pending">shopping_bag</mdc-icon>
-											<span
-												class="spinner-border spinner-border-sm ms-2"
-												role="status"
-												aria-hidden="true"
-												show.bind="pending"
-											></span>
-										</button>
-									</mdc-layout-grid-cell>
-								</mdc-layout-grid-inner>
-							</div>
+								<mdc-layout-grid-cell span="12">
+									<button type="submit"
+											mdc-button
+											unelevated
+											class="mdc-button--secondary w-100"
+											disabled.bind="pending || disableBuying"
+											data-dummy.bind="determineBuyingPermission() & async & signal:_SIGNAL_CART_INFORMATION_UPDATED"
+											click.trigger="buy()"
+									>
+										<span mdc-button-label>Sofort kaufen</span>
+										<mdc-icon show.bind="!pending">shopping_bag</mdc-icon>
+										<span
+											class="spinner-border spinner-border-sm ms-2"
+											role="status"
+											aria-hidden="true"
+											show.bind="pending"
+										></span>
+									</button>
+								</mdc-layout-grid-cell>
+							</mdc-layout-grid-inner>
+						</div>
 					</div>
 				</mdc-layout-grid>
 			</mdc-layout-grid-inner>

@@ -26,14 +26,13 @@
 				<a route-href="shopping-cart" class="text-on-secondary ms-2">
 					<shop-icon-button icon="shopping_cart" outlined.bind="true" class="position-relative shopping-cart-icon">
 						<span slot="outer" class="shopping-cart-badge badge rounded-pill bg-danger"
-							  textcontent.bind="setItemAmount() & async & signal:'cart-updated'"
-							  show.bind="showBadge"
+							  textcontent.bind="setItemAmount() & async & signal:'cart-updated':_LOGIN_STATE_CHANGED_SIGNAL"
+							  show.bind="_itemsCount > 0 & signal:_LOGIN_STATE_CHANGED_SIGNAL"
 						>
 						</span>
 					</shop-icon-button>
 				</a>
 				<div>
-
 					<button
 						mdc-icon-button
 						icon="manage_accounts"
@@ -43,38 +42,6 @@
 						class="ms-2"
 					>
 					</button>
-					<!--				<mdc-menu-->
-					<!--					view-model.ref="demo"-->
-					<!--					mdcmenu:selected.trigger="onMenuSelect($event.detail)"-->
-					<!--					anchor.bind="demoAnchor"-->
-					<!--					anchor-corner.bind="BOTTOM_LEFT"-->
-					<!--					quick-open.bind="quickOpen"-->
-					<!--					default-focus-state.bind="defaultFocusState"-->
-					<!--					fixed.bind="fixed"-->
-					<!--					stay-open-on-selection.bind="stayOpenOnSelection"-->
-					<!--					anchor-margin.bind="anchorMargin"-->
-					<!--				>-->
-					<!--					<mdc-list-->
-					<!--						wrap-focus.bind="wrapFocus"-->
-					<!--						tabindex="-1"-->
-					<!--					>-->
-					<!--						<template-->
-					<!--							repeat.for="fruit of fruits"-->
-					<!--						>-->
-					<!--							<mdc-list-item-->
-					<!--								if.bind="fruit.label"-->
-					<!--								value.bind="fruit.label">-->
-					<!--								${fruit.label}-->
-					<!--							</mdc-list-item>-->
-					<!--							<mdc-list-divider-->
-					<!--								else>-->
-					<!--							</mdc-list-divider>-->
-					<!--						</template>-->
-					<!--					</mdc-list>-->
-
-					<!--				</mdc-menu>-->
-
-					<!-- TODO: Einstellungen und Ausloggen als link einfügen -->
 					<mdc-menu
 						class=" profile-menu"
 						view-model.ref="hierarchical"
@@ -91,13 +58,13 @@
 								Einstellungen
 							</mdc-list-item>
 							<mdc-list-item
-								show.bind="userLoggedIn"
+								show.bind="_user.loggedIn & signal:_LOGIN_STATE_CHANGED_SIGNAL"
 								click.trigger="_user.logout()"
 								mdclistitem:action.trigger="hierarchical.open = false"
 							>Abmelden
 							</mdc-list-item>
 							<mdc-list-item
-								show.bind="!userLoggedIn"
+								show.bind="!_user.loggedIn & signal:_LOGIN_STATE_CHANGED_SIGNAL"
 								click.trigger="routeToLogin()"
 								mdclistitem:action.trigger="hierarchical.open = false"
 							>Anmelden
@@ -105,48 +72,6 @@
 						</mdc-list>
 					</mdc-menu>
 				</div>
-
-				<!--				<ul class="navbar-nav mb-2 mb-lg-0 ms-3">-->
-				<!--					<li if.bind="_user.refreshToken & signal:'logging-in'" class="nav-item dropdown">-->
-				<!--						<a class="nav-link pe-0"-->
-				<!--						   href="#"-->
-				<!--						   id="navbarDropdown"-->
-				<!--						   role="button"-->
-				<!--						   data-bs-toggle="dropdown"-->
-				<!--						   aria-expanded="false"-->
-				<!--						>-->
-				<!--							<img class="rounded-circle" src.bind="_user.avatar" alt="Profilbild ${_user.firstName} ${_user.lastName}">-->
-				<!--						</a>-->
-				<!--						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-				<!--							<li>-->
-				<!--								<a class="dropdown-item d-flex align-middle" href="">-->
-				<!--									<span>Mein konto</span>-->
-				<!--									<span class="material-icons-outlined text-primary end-0">account_circle</span>-->
-				<!--								</a>-->
-				<!--							</li>-->
-				<!--							<li>-->
-				<!--								<a class="dropdown-item d-flex align-middle" href="#">-->
-				<!--									<span>Einstellungen</span>-->
-				<!--									<span class="material-icons-outlined text-primary end-0">settings</span>-->
-				<!--								</a>-->
-				<!--							</li>-->
-				<!--							<li>-->
-				<!--								<hr class="dropdown-divider">-->
-				<!--							</li>-->
-				<!--							<li>-->
-				<!--								<a class="dropdown-item d-flex align-middle" href="#">-->
-				<!--									<span>Ausloggen</span>-->
-				<!--									<span class="material-icons-outlined text-primary end-0">logout</span>-->
-				<!--								</a>-->
-				<!--							</li>-->
-				<!--						</ul>-->
-				<!--					</li>-->
-				<!--					<li else class="nav-item">-->
-				<!--						<a route-href="login">-->
-				<!--							<span class="material-icons-outlined text-on-primary">face_unlock</span>-->
-				<!--						</a>-->
-				<!--					</li>-->
-				<!--				</ul>-->
 			</div>
 		</div>
 	</nav>

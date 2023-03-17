@@ -1,5 +1,6 @@
 import { autoinject, singleton } from "aurelia-framework";
 import { Router }                from "aurelia-router";
+import { BindingSignaler }       from "aurelia-templating-resources";
 import { Dexie, Table }          from "dexie/dist/dexie";
 import environment               from "../environment";
 import { ShopDb }                from "./shop-db";
@@ -24,6 +25,14 @@ interface LoginData
 @autoinject()
 export class ShopUser
 {
+	static readonly LOGIN_STATE_CHANGED_SIGNAL = "login-state-changed"
+
+	private _loggedIn = false;
+	get loggedIn(): boolean
+	{
+		return this._loggedIn;
+	}
+
 	private _accessToken
 	get accessToken()
 	{
@@ -63,6 +72,7 @@ export class ShopUser
 	constructor(
 		private _router: Router,
 		private _db: ShopDb,
+		private _signaler: BindingSignaler,
 	)
 	{}
 
@@ -84,20 +94,6 @@ export class ShopUser
 		this._lastName     = null
 		this._email        = null
 		this._avatar       = null
-	}
-
-	async logout()
-	{
-		const response = await fetch( `${environment.backendBaseUrl}authentication/logout`, {
-			method  : "Delete",
-			headers : { "Authorization" : "Bearer " + this.refreshToken }
-		} );
-
-		if( !response.ok ) throw new Error( `Server returned status ${response.status}` );
-
-		await this._db.dexie.users.clear()
-
-		this._clear()
 	}
 
 	async login( data: LoginData, remember: boolean = false )
@@ -125,6 +121,30 @@ export class ShopUser
 				refreshToken : json.refreshToken
 			} );
 		}
+
+		this._loggedIn = true;
+
+		this._signaler.signal( ShopUser.LOGIN_STATE_CHANGED_SIGNAL )
+	}
+
+	async logout()
+	{
+		const response = await fetch( `${environment.backendBaseUrl}authentication/logout`, {
+			method  : "Delete",
+			headers : { "Authorization" : "Bearer " + this.refreshToken }
+		} );
+
+		if( !response.ok ) throw new Error( `Server returned status ${response.status}` );
+
+		await this._db.dexie.users.clear()
+
+		this._clear()
+
+		this._loggedIn = false;
+
+		this._signaler.signal( ShopUser.LOGIN_STATE_CHANGED_SIGNAL )
+
+		debugger
 	}
 
 	async loginWithToken( savedRefreshToken: string )
@@ -146,5 +166,9 @@ export class ShopUser
 		json.refreshToken = savedRefreshToken
 
 		this._set( json )
+
+		this._loggedIn = true;
+
+		this._signaler.signal( ShopUser.LOGIN_STATE_CHANGED_SIGNAL )
 	}
 }
