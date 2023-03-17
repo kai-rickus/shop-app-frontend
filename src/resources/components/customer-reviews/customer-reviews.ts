@@ -28,7 +28,7 @@ export class CustomerReviews
 			if( response.status === 404 )
 			{
 				this.allReviewsFetched = true
-				this.loading = false
+				this.loading           = false
 
 				return
 			}
