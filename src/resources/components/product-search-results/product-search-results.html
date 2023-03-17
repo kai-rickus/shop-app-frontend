@@ -3,7 +3,6 @@
 	<require from="valueConverters/currency-value-converter"></require>
 	<require from="./product-search-results.css"></require>
 
-
 	<product-tile
 		if.bind="products.length"
 		repeat.for="product of products"
@@ -16,9 +15,8 @@
 
 	<div
 		else
-		class="d-flex justify-content-center"
+		class="d-flex justify-content-center no-result"
 	>
-
 		<mdc-card
 		>
 			<div
