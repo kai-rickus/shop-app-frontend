@@ -1,16 +1,17 @@
-import environment   from "../../../environment";
+import { MdcSnackbarService } from "@aurelia-mdc-web/snackbar";
+import environment            from "../../../environment";
 import {
 	autoinject,
 	bindable
-}                    from "aurelia-framework";
-import { TaskQueue } from "aurelia-task-queue";
+}                             from "aurelia-framework";
+import { TaskQueue }          from "aurelia-task-queue";
 import {
 	ValidationController,
 	ValidationControllerFactory,
 	ValidationRules,
 	Rule,
 	validateTrigger,
-}                    from "aurelia-validation";
+}                             from "aurelia-validation";
 
 interface SuggestionDataset
 {
@@ -43,12 +44,13 @@ interface ValidationStatus
 @autoinject()
 export class AddressField
 {
-	static AURELIA_HIDE_CLASS               = "aurelia-hide"
-	static SUGGESTIONS_ELEMENT_BOTTOM_GAP   = 10
-	static INCOMPLETE_ADDRESS_ERROR_MESSAGE = "Es muss eine vollständige Wohnanschrift eingetragen werden"
+	public static readonly AURELIA_HIDE_CLASS                            = "aurelia-hide"
+	public static readonly SUGGESTIONS_ELEMENT_BOTTOM_GAP                = 10
+	public static readonly INCOMPLETE_ADDRESS_ERROR_MESSAGE              = "Es muss eine vollständige Wohnanschrift eingetragen werden"
+	public static readonly ERROR_WHILE_LOADING_SUGGESTIONS_ERROR_MESSAGE = "Vorschläge konnten nicht geladen werden"
 
-	THROTTLE_DURATION                            = 250;
-	readonly VALIDATION_STATUS: ValidationStatus = {
+	public readonly THROTTLE_DURATION                   = 250;
+	public readonly VALIDATION_STATUS: ValidationStatus = {
 		valid          : "valid",
 		invalid        : "invalid",
 		undeterminated : "undeterminated"
@@ -77,6 +79,7 @@ export class AddressField
 
 	constructor(
 		private _taskQueue: TaskQueue,
+		private snackbar: MdcSnackbarService,
 		validationControllerFactory: ValidationControllerFactory,
 	)
 	{
@@ -123,10 +126,8 @@ export class AddressField
 
 					valid = data.addressIsComplete
 				}
-				catch( error )
-				{
-					/* TODO: Error handling */
-				}
+				catch
+				{}
 
 				this._validationPending = false
 
@@ -243,16 +244,33 @@ export class AddressField
 
 		this._taskQueue.queueTask( async () =>
 		{
-			const response = await fetch( `${environment.backendBaseUrl}locations/suggestions/${this.inputValue}/de`, );
-			const data     = await response.json()
+			try
+			{
+				throw new Error()
 
-			/* TODO: error handling */
+				const response = await fetch( `${environment.backendBaseUrl}locations/suggestions/${this.inputValue}/de` );
+				const data     = await response.json()
 
-			this.suggestions = data.suggestions
+				this.suggestions = data.suggestions
 
-			this._taskQueue.queueTask( async () => this._handleTooMuchHeight() )
+				this._taskQueue.queueTask( async () => this._handleTooMuchHeight() )
 
-			this._handleTooMuchHeight()
+				this._handleTooMuchHeight()
+			}
+			catch( error )
+			{
+				if( this.suggestions[ 0 ]?.description === AddressField.ERROR_WHILE_LOADING_SUGGESTIONS_ERROR_MESSAGE ) return
+
+				this.suggestions.push( {
+					description           : AddressField.ERROR_WHILE_LOADING_SUGGESTIONS_ERROR_MESSAGE,
+					matched_substrings    : [],
+					place_id              : "",
+					reference             : "",
+					structured_formatting : "",
+					terms                 : [],
+					types                 : [],
+				} )
+			}
 		} )
 	}
 
