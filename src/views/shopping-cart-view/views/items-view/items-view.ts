@@ -29,11 +29,6 @@ export class ItemsView
 	{
 	}
 
-	attached()
-	{
-		this._shoppingCart.setHeightAfterRouting()
-	}
-
 	async getCardItems()
 	{
 		try
