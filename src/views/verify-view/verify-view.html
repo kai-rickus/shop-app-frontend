@@ -1,15 +1,101 @@
 <template>
+	<require from="./verify-view.css"></require>
+
 	<div class="verify-view">
 		<template if.bind="verificationSuccess === null">
-			Waiting...
+			<mdc-card>
+				<mdc-layout-grid>
+					<mdc-layout-grid-inner>
+						<mdc-layout-grid-cell span="12">
+							<div mdc-headline1 class="text-on-surface">Einen Moment</div>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="12">
+							<div mdc-headline3>Der Verifizierungsstatus ist noch nicht abgeschlossen.</div>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell></mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="12">
+							<div mdc-body1>
+								Dieser Vorgang kann mehrere Minuten dauern. Bitte habe etwas Geduld.
+								<br>
+								Sollte der Vorgang mehr als 5 Minuten dauern, kontaktiere unseren
+								<a href="https://de.wikipedia.org/wiki/Support_(Dienstleistung)" class="shop-text-decoration">
+									<b>Kundensupport</b></a>
+								oder lasse dir eine neue Email zusenden.
+							</div>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="12" class="justify-content-around d-flex">
+							<a mdc-button route-href="route: home" class="shop-text-decoration">
+								<b>Zur Startseite</b>
+							</a>
+							<a mdc-button class="shop-text-decoration" click.trigger="resendEmail()()">
+								<b>Email erneut senden</b>
+							</a>
+						</mdc-layout-grid-cell>
+					</mdc-layout-grid-inner>
+				</mdc-layout-grid>
+			</mdc-card>
 		</template>
 
 		<template if.bind="verificationSuccess === true">
-			Verifizierung erfolgreich!
+			<mdc-card>
+				<mdc-layout-grid>
+					<mdc-layout-grid-inner>
+						<mdc-layout-grid-cell span="12">
+							<div mdc-headline1 class="text-on-surface">Geschafft!</div>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="12">
+							<div mdc-headline3>Du bist verifiziert</div>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell></mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="12">
+							<div mdc-body1>
+								Schließe jetzt deinen ertsen Einkauf ab oder stöber erstmal durch unseren tollen Angebote.
+							</div>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="12" class="justify-content-around d-flex">
+							<a mdc-button route-href="route: home" class="shop-text-decoration">
+								<b>Zur Startseite</b>
+							</a>
+							<a mdc-button route-href="route: shopping-cart" class="shop-text-decoration">
+								<b>Zum Einkaufswagen</b>
+							</a>
+						</mdc-layout-grid-cell>
+					</mdc-layout-grid-inner>
+				</mdc-layout-grid>
+			</mdc-card>
 		</template>
+
 		<template if.bind="verificationSuccess === false">
-			Verifizierung gescheitert
-			<button click.trigger="resendEmail()">Email nochmal verschicken</button>
+			<mdc-card>
+				<mdc-layout-grid>
+					<mdc-layout-grid-inner>
+						<mdc-layout-grid-cell span="12">
+							<div mdc-headline1 class="text-on-surface">Hoppla!</div>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="12">
+							<div mdc-headline3> Der Verifizierungsvogang ist fehlgeschlagen</div>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell></mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="12">
+							<div mdc-body1>
+								Probiere es nochmal aus oder kontaktiere unseren
+								<a href="https://de.wikipedia.org/wiki/Support_(Dienstleistung)" class="shop-text-decoration">
+									<b>Kundensupport</b></a>
+								falls du Hilfe benötigen solltest.
+							</div>
+						</mdc-layout-grid-cell>
+						<mdc-layout-grid-cell span="12" class="justify-content-around d-flex">
+							<a mdc-button route-href="route: home" class="shop-text-decoration">
+								<b>Zur Startseite</b>
+							</a>
+							<a mdc-button class="shop-text-decoration" click.trigger="resendEmail()()">
+								<b>Email erneut senden</b>
+							</a>
+						</mdc-layout-grid-cell>
+					</mdc-layout-grid-inner>
+				</mdc-layout-grid>
+			</mdc-card>
 		</template>
 	</div>
 </template>
+
