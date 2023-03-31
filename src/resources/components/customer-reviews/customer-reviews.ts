@@ -42,7 +42,7 @@ export class CustomerReviews
 		}
 		catch( error )
 		{
-			/* TODO: error handling */
+			/* TODO: error handling-: Wie handlen? */
 		}
 		this.loading = false
 
