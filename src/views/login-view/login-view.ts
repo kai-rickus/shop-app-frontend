@@ -2,10 +2,10 @@ import { Router, Redirect } from "aurelia-router";
 import { Dexie, Table }     from "dexie/dist/dexie";
 import { debug }            from "util";
 import environment          from "../../environment";
+import jwt_decode           from "jwt-decode";
 import { autoinject }       from "aurelia-framework";
 import { BindingSignaler }  from 'aurelia-templating-resources';
 import { ShopUser }         from "../../services/shop-user";
-import jwt_decode           from "jwt-decode";
 
 interface ShopDb extends Dexie
 {
@@ -34,7 +34,7 @@ export class LoginView
 		public router: Router,
 		private _user: ShopUser,
 		private _signaler: BindingSignaler,
-		private _db: Dexie
+		private _db: Dexie,
 	)
 	{}
 
