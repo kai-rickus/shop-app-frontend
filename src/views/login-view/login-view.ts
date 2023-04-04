@@ -1,11 +1,13 @@
-import { Router, Redirect } from "aurelia-router";
-import { Dexie, Table }     from "dexie/dist/dexie";
-import { debug }            from "util";
-import environment          from "../../environment";
-import jwt_decode           from "jwt-decode";
-import { autoinject }       from "aurelia-framework";
-import { BindingSignaler }  from 'aurelia-templating-resources';
-import { ShopUser }         from "../../services/shop-user";
+import { Router, Redirect }   from "aurelia-router";
+import { Dexie, Table }       from "dexie/dist/dexie";
+import { debug }              from "util";
+import environment            from "../../environment";
+import jwt_decode             from "jwt-decode";
+import { autoinject }         from "aurelia-framework";
+import { BindingSignaler }    from 'aurelia-templating-resources';
+import { ShopUser }           from "../../services/shop-user";
+import { MDCSwitch }          from '@material/switch';
+import { MdcSnackbarService } from "@aurelia-mdc-web/snackbar";
 
 interface ShopDb extends Dexie
 {
@@ -21,10 +23,11 @@ const SIGNAL_LOGGING_IN = "logging-in";
 @autoinject
 export class LoginView
 {
+	stayLoggedInSwitch: MDCSwitch;
 	unknownErrorOccured   = false
 	forbiddenErrorOccured = false
 	submitting            = false
-	stayLoggedInSwitch: HTMLInputElement;
+	WrongEmailOrPassword  = false
 	formInput             = {
 		email    : "",
 		password : ""
@@ -35,6 +38,7 @@ export class LoginView
 		private _user: ShopUser,
 		private _signaler: BindingSignaler,
 		private _db: Dexie,
+		private _snackbar: MdcSnackbarService,
 	)
 	{}
 
@@ -44,15 +48,17 @@ export class LoginView
 
 		try
 		{
-			await this._user.login( this.formInput, this.stayLoggedInSwitch.checked )
+			await this._user.login( this.formInput, this.stayLoggedInSwitch.selected )
 
 			this._signaler.signal( SIGNAL_LOGGING_IN )
 			this.router.navigateToRoute( "home" )
 		}
 		catch( error )
 		{
-			this.forbiddenErrorOccured = error.message === "Forbidden"
-			this.unknownErrorOccured   = error.message !== "Forbidden"
+			if( error.message === "Forbidden" )
+			{
+				this._snackbar.open( "Email oder Passwort inkorrekt", 'Okay', {} );
+			}
 		}
 
 		this.submitting = false

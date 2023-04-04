@@ -24,7 +24,6 @@
 							</mdc-text-field>
 							<mdc-text-field-helper-line>
 								<mdc-text-field-helper-text
-									show.bind="!showEmailUsedErrorText"
 									validation
 								>
 									Muss eine valide Email-Adresse sein
@@ -35,11 +34,11 @@
 					<mdc-layout-grid-cell span="12">
 						<div class="au-text-field">
 							<mdc-text-field
-								type="password"
-								view-model.ref="inputs.password"
 								label="Passwort"
+								type="password"
 								outlined
-								mdc-textfield-pattern.bind="passwordRegex"
+								value.two-way="formInput.password"
+								view-model.ref="inputs.password"
 								disabled.bind="submitting"
 								required
 							>
@@ -55,6 +54,7 @@
 							class="mdc-switch me-3"
 							selected.bind="selected"
 							ref="stayLoggedInSwitch"
+							disabled.bind="submitting"
 						>
 						</button>
 						<label>Eingeloggt bleiben</label>
@@ -80,6 +80,7 @@
 						<a
 							class="link-primary shop-text-decoration text-center d-block"
 							route-href="route: register"
+							disabled.bind="submitting"
 						>
 							Neu hier? Erstelle dir jetzt ein kostenloses Konto!
 						</a>
