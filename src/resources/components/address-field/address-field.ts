@@ -246,8 +246,6 @@ export class AddressField
 		{
 			try
 			{
-				throw new Error()
-
 				const response = await fetch( `${environment.backendBaseUrl}locations/suggestions/${this.inputValue}/de` );
 				const data     = await response.json()
 

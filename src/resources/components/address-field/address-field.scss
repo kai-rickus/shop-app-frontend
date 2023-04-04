@@ -32,6 +32,11 @@ $highlighted-border-width : 1px;
         }
     }
 
+    .mdc-text-field__input{
+        max-width : 400px;
+        text-overflow:ellipsis;
+    }
+
     &.address-field--has-suggestions {
         .mdc-text-field {
             .mdc-notched-outline__leading {
