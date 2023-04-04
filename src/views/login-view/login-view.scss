@@ -3,6 +3,9 @@
 @use "@material/theme/variables" as theme-mixins;
 @use "src/variables";
 @use "src/layout";
+@use "@material/icon-button/mixins";
+@use "@material/theme/color-palette";
+@use "@material/snackbar/mixins" as snackbar-mixins;
 
 $form-switch-checked-color : yellow;
 $login-view-card-width     : 500px;
@@ -20,7 +23,6 @@ $login-view-card-width     : 500px;
     .mdc-text-field {
         width : 100%;
     }
-
 }
 
 .box-shadow-login {
@@ -42,6 +44,11 @@ $login-view-card-width     : 500px;
     .mdc-text-field-helper-text {
         color : theme-mixins.$error;
     }
+}
+
+.mdc-snackbar__surface {
+    @include snackbar-mixins.label-ink-color(variables.$danger-color);
+    background-color: variables.$highlighted;
 }
 
 .box-shadow-login {

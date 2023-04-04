@@ -24,10 +24,8 @@ const SIGNAL_LOGGING_IN = "logging-in";
 export class LoginView
 {
 	stayLoggedInSwitch: MDCSwitch;
-	unknownErrorOccured   = false
-	forbiddenErrorOccured = false
 	submitting            = false
-	WrongEmailOrPassword  = false
+	snackbarMessage = "Email und/ oder Passwort inkorrekt"
 	formInput             = {
 		email    : "",
 		password : ""
@@ -57,7 +55,7 @@ export class LoginView
 		{
 			if( error.message === "Forbidden" )
 			{
-				this._snackbar.open( "Email oder Passwort inkorrekt", 'Okay', {} );
+				this._snackbar.open( this.snackbarMessage, 'Okay',{closeOnEscape:true});
 			}
 		}
 
