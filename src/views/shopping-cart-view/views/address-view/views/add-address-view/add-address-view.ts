@@ -42,8 +42,13 @@ export class AddAddressView
 
 	static SIGNAL_ADDRESSES_UPDATED = "addresses-updated"
 
-	constructor( private _user: ShopUser, private snackbar: MdcSnackbarService, private _router: Router, public signaler: BindingSignaler ){}
-
+	constructor(
+		private _user: ShopUser,
+		private snackbar: MdcSnackbarService,
+		private _router: Router,
+		public signaler: BindingSignaler,
+	)
+	{}
 
 	validate()
 	{
