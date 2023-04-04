@@ -60,7 +60,7 @@ export class NavigationBar
 		}
 		catch( error )
 		{
-			console.error( error );
+			/* TODO: error handling */
 		}
 	}
 }

@@ -112,7 +112,7 @@ export class ShoppingCartView
 		}
 		catch( error )
 		{
-			/* TODO: error handling */
+			/* TODO: error handling-: Wie handlen? */
 		}
 	}
 
@@ -137,7 +137,7 @@ export class ShoppingCartView
 		}
 		catch( error )
 		{
-			/* TODO: error handling */
+			/* TODO: error handling-: Wie handlen? */
 		}
 
 		this.pending = false
