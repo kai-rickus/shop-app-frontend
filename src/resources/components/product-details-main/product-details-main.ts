@@ -118,7 +118,7 @@ export class ProductDetailsMain
 				leading : true
 			} );
 
-			this.submitting = false;
+			this.submitting      = false;
 			this.favorizePending = false;
 		}
 
@@ -128,13 +128,20 @@ export class ProductDetailsMain
 	{
 		this.favorizePending = true
 
-		const url      = `${environment.backendBaseUrl}product/setFavorite/${this.data.id}/${favorize}`
-		const response = await fetch( url, {
-			method  : "post",
-			headers : { "Authorization" : "Bearer " + this._user.accessToken }
-		} );
+		try
+		{
+			const url      = `${environment.backendBaseUrl}product/setFavorite/${this.data.id}/${favorize}`
+			const response = await fetch( url, {
+				method  : "post",
+				headers : { "Authorization" : "Bearer " + this._user.accessToken }
+			} );
 
-		if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
+			if( !response.ok ) throw new Error( `Server returned status ${response.status}` )
+		}
+		catch( error )
+		{
+			/* TODO: error handling */
+		}
 
 		this.favorizePending = false
 	}
