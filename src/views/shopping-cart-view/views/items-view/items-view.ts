@@ -43,6 +43,7 @@ export class ItemsView
 				this._shoppingCart.setHeightAfterRouting()
 			} )
 
+			if( !data ) this.noItems = true
 			if( data.items.length === 0 ) this.noItems = true
 
 			return data.items
