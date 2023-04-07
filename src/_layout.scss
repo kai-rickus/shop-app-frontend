@@ -10,6 +10,14 @@ body {
     }
 }
 
+html, body {
+    //Pitaya components fix
+    overflow : unset !important;
+    padding  : unset !important;
+    margin   : unset !important;
+    //Pitaya components fix END
+}
+
 .dafault-main-column {
     max-width : $content-width-desktop;
     margin    : 0 auto;

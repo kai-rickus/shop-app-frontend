@@ -25,6 +25,7 @@ export function configure( aurelia: Aurelia ): void
 		   .plugin( 'aurelia-portal-attribute' )
 		   .plugin( '@aurelia-mdc-web/all' )
 		   .plugin( 'aurelia-validation' )
+		   .plugin( "@pitaya-components/progress-tracker" )
 
 	typedBindablesSetup()
 
