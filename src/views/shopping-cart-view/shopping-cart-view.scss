@@ -7,7 +7,7 @@
     router-view {
         transition : height 125ms;
         overflow   : hidden;
-        display: block;
+        display    : block;
         //transition : height layout.$view-transition-animation-duration;
     }
 
@@ -27,4 +27,15 @@
         @include button.filled-accessible(variables.$secondary-color);
     }
 
+    .pi-progress-tracker {
+
+        .progress-marker::before {
+                box-sizing : unset !important;
+
+        }
+
+        &.progress-tracker.pi-progress-tracker--color-base-primary .progress-step.is-active .progress-marker:before {
+            background-color : #ffffff;
+        }
+    }
 }
