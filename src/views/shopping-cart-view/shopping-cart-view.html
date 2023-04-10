@@ -28,7 +28,9 @@
 										</pi-progress-tracker__step>
 										<pi-progress-tracker__step
 											active.bind="navigation[1].isActive"
-											label="2">
+											label="2"
+											if.bind="_user.loggedIn & signal:_LOGIN_STATE_CHANGED_SIGNAL"
+										>
 											<pi-progress-tracker__step__text>
 												Lieferort
 											</pi-progress-tracker__step__text>
@@ -36,7 +38,9 @@
 										</pi-progress-tracker__step>
 										<pi-progress-tracker__step
 											active.bind="navigation[2].isActive"
-											label="3">
+											label="3"
+											if.bind="_user.loggedIn & signal:_LOGIN_STATE_CHANGED_SIGNAL"
+										>
 											<pi-progress-tracker__step__text>
 												Zahlart
 											</pi-progress-tracker__step__text>
@@ -44,7 +48,9 @@
 										</pi-progress-tracker__step>
 										<pi-progress-tracker__step
 											active.bind="navigation[3].isActive"
-											label="4">
+											label="4"
+											if.bind="_user.loggedIn & signal:_LOGIN_STATE_CHANGED_SIGNAL"
+										>
 											<pi-progress-tracker__step__text>
 												Übersicht
 											</pi-progress-tracker__step__text>
