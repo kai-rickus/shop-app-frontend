@@ -114,7 +114,6 @@ export class AddAddressView
 		{
 			await this.snackbar.open( this.snackbarErrorMessage, 'Okay', {
 				timeout : this.snackbarErrorMessageDuration,
-				leading : true
 			} );
 		}
 
@@ -122,7 +121,6 @@ export class AddAddressView
 
 		await this.snackbar.open( this.snackbarSuccessMessage, 'Okay', {
 			timeout : this.snackbarSuccessMessageDuration,
-			leading : true
 		} );
 	}
 
