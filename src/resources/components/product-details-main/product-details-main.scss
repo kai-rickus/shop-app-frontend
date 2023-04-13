@@ -41,9 +41,9 @@
         background-color : color-palette.$grey-300;
         color            : variables.$disabled-grey;
     }
-
 }
-    .mdc-snackbar{
-        @include snackbar.fill-color(color-palette.$deep-purple-50);
-        @include snackbar.label-ink-color(variables.$primary-color);
-    }
+
+.mdc-snackbar {
+    @include snackbar.fill-color(color-palette.$deep-purple-50);
+    @include snackbar.label-ink-color(variables.$primary-color);
+}

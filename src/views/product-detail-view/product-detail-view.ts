@@ -23,6 +23,7 @@ interface ViewParams
 
 export class ProductDetailView
 {
+
 	id;
 	dataTags;
 
@@ -36,7 +37,6 @@ export class ProductDetailView
 	bind()
 	{
 		this.getData( this.id )
-
 	}
 
 	async getData( id )

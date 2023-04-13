@@ -44,7 +44,6 @@ export class ProductDetailsMain
 	snackbarErrorMessageDuration   = -1;
 
 	favorized;
-
 	textfield;
 	transform = false;
 	previousValue;
@@ -105,7 +104,6 @@ export class ProductDetailsMain
 
 			this.snackbar.open( this.snackbarSuccessMessage, 'Okay', {
 				timeout : this.snackbarSuccessMessageDuration,
-				leading : true
 			} );
 
 			this._signaler.signal( SIGNAL_CART_UPDATED )
@@ -115,7 +113,6 @@ export class ProductDetailsMain
 			/* TODO: Nochmal versuchen */
 			this.snackbar.open( this.snackbarErrorMessage, 'Okay', {
 				timeout : this.snackbarErrorMessageDuration,
-				leading : true
 			} );
 
 			this.submitting      = false;

@@ -1,41 +1,51 @@
 <template>
 	<require from="components/product-details-main/product-details-main"></require>
+	<require from="./product-detail-view.css"></require>
 	<require from="components/product-search-results/product-search-results"></require>
 	<require from="components/customer-reviews/customer-reviews"></require>
 	<require from="components/customer-reviews-item/customer-reviews-item"></require>
 
 	<div class="product-detail-view dafault-main-column">
 		<mdc-layout-grid class="p-0">
-				<mdc-layout-grid-inner>
-					<mdc-layout-grid-cell span="12">
-						<product-details-main data.bind="data"
-											  if.bind="dataTags !== undefined"
-						></product-details-main>
-					</mdc-layout-grid-cell>
+			<mdc-layout-grid-inner>
+				<mdc-layout-grid-cell span="12">
+					<product-details-main data.bind="data"
+										  if.bind="dataTags !== undefined"
 
-					<mdc-layout-grid-cell span="12">
-						<div class="card frost default-main-shadow overflow-hidden mb-4">
-							<div class="card-body">
-								<h5 class="card-title text-on-surface border-bottom border-1">Ähnliche Artikel</h5>
-								<product-search-results limit.bind="4"
-														search.bind="dataTags"
-														if.bind="dataTags !== undefined"
-														exclude.bind="[uuid]"
-														no-shadow.bind="true"
-								></product-search-results>
-							</div>
-						</div>
-					</mdc-layout-grid-cell>
+					></product-details-main>
+				</mdc-layout-grid-cell>
 
-					<mdc-layout-grid-cell span="12">
-						<div class="card frost default-main-shadow overflow-hidden">
-							<div class="card-body">
-								<h5 class="card-title border-bottom border-1">Bewertungen</h5>
-								<customer-reviews id.bind="id"></customer-reviews>
-							</div>
+				<mdc-layout-grid-cell span="12">
+					<div class="card frost default-main-shadow overflow-hidden mb-4">
+						<div if.bind="data.active !== false" class="loading-shell similar-items-shell d-flex justify-content-center align-items-center">
+							<span
+								class="spinner-border text-center"
+								role="status"
+								aria-hidden="true"
+							></span>
 						</div>
-					</mdc-layout-grid-cell>
-				</mdc-layout-grid-inner>
+						<div class="card-body " else>
+							<h5 class="card-title text-on-surface border-bottom border-1">Ähnliche Artikel</h5>
+							<product-search-results
+								limit.bind="4"
+								search.bind="dataTags"
+								exclude.bind="[uuid]"
+								no-shadow.bind="true"
+							></product-search-results>
+						</div>
+					</div>
+				</mdc-layout-grid-cell>
+
+				<mdc-layout-grid-cell span="12">
+					<div class="card frost default-main-shadow overflow-hidden">
+						<span if.bind="data.active !== false" class="loading-shell reviews-shell">REVIEWS</span>
+						<div else class="card-body">
+							<h5 class="card-title border-bottom border-1">Bewertungen</h5>
+							<customer-reviews id.bind="id"></customer-reviews>
+						</div>
+					</div>
+				</mdc-layout-grid-cell>
+			</mdc-layout-grid-inner>
 		</mdc-layout-grid>
 	</div>
 </template>
