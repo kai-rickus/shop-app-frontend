@@ -23,7 +23,7 @@
 					span="12"
 				>
 					<span
-						show.bind="noItems"
+						show.bind="!noItems"
 						mdc-body2
 						class="no-items"
 					>Keine Artikel im Warenkorb.</span>
@@ -98,7 +98,7 @@
 						   unelevated
 						   route-href="route: address"
 						   class="mdc-button--secondary"
-						   show.bind="!noItems"
+						   show.bind="noItems"
 						>
 							<span mdc-button-label>Weiter</span>
 							<mdc-icon>local_shipping</mdc-icon>
