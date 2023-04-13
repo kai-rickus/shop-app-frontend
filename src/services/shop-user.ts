@@ -1,3 +1,4 @@
+import { MdcSnackbarService }    from "@aurelia-mdc-web/snackbar";
 import { autoinject, singleton } from "aurelia-framework";
 import { Router }                from "aurelia-router";
 import { BindingSignaler }       from "aurelia-templating-resources";
@@ -26,6 +27,8 @@ interface LoginData
 export class ShopUser
 {
 	static readonly LOGIN_STATE_CHANGED_SIGNAL = "login-state-changed"
+
+	snackbarSuccessMessage = "Erfolgreich abgemeldet";
 
 	private _loggedIn = false;
 	get loggedIn(): boolean
@@ -73,6 +76,7 @@ export class ShopUser
 		private _router: Router,
 		private _db: ShopDb,
 		private _signaler: BindingSignaler,
+		private _snackbar: MdcSnackbarService,
 	)
 	{}
 
@@ -140,11 +144,11 @@ export class ShopUser
 
 		this._clear()
 
+		this._snackbar.open( this.snackbarSuccessMessage, 'Okay' )
+
 		this._loggedIn = false;
 
 		this._signaler.signal( ShopUser.LOGIN_STATE_CHANGED_SIGNAL )
-
-		debugger
 	}
 
 	async loginWithToken( savedRefreshToken: string )
