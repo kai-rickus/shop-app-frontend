@@ -17,6 +17,8 @@
 @use "@material/layout-grid/mdc-layout-grid";
 @use "@aurelia-mdc-web/layout-grid";
 
+@use "@material/tooltip/styles" as tooltip-style;
+
 @use '@material/button/mdc-button';
 
 @use '@material/circular-progress/mdc-circular-progress';
@@ -61,13 +63,13 @@ $pb-main-content : 5rem;
 .shop-app-container {}
 
 .shop-app-container > router-view {
-    padding-bottom : $pb-main-content;
+    padding-bottom  : $pb-main-content;
     //display        : block;
-    min-height     : calc(100vh - #{shop-footer.$section-height-desktop} - #{navigation-bar.$height-desktop});
-    max-width: layout.$content-width-desktop;
-    display: flex;
-    margin: auto;
-    justify-content: center;
+    min-height      : calc(100vh - #{shop-footer.$section-height-desktop} - #{navigation-bar.$height-desktop});
+    max-width       : layout.$content-width-desktop;
+    display         : flex;
+    margin          : auto;
+    justify-content : center;
 }
 
 .backdrop {
@@ -146,6 +148,47 @@ $pb-main-content : 5rem;
 
     .mdc-radio__ripple {
         @include ripple-mixins.states(variables.$primary-color);
+    }
+}
+
+.loading-shell {
+    background-color : variables.$shell-grey;
+
+    animation        : shell-loading 1250ms ease 0s infinite normal forwards;
+    @keyframes shell-loading {
+        0% {
+            opacity : 1;
+        }
+
+        50% {
+            opacity : 0.5;
+        }
+
+        100% {
+            opacity : 1;
+        }
+
+    }
+
+    &.item-title-shell {
+        height : 80px;
+    }
+
+    &.item-img-shell {
+        height       : 648px;
+        aspect-ratio : 16 / 9;
+    }
+
+    &.item-interaction-shell {
+        height : 313px;
+    }
+
+    &.item-description-shell {
+        height : 202px;
+    }
+
+    &.reviews-shell {
+        height : 343px;
     }
 }
 
