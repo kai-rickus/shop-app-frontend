@@ -1,13 +1,28 @@
 @use "src/layout";
 @use "src/variables";
+@use "@material/icon-button/mixins" as icon-mixins;
 
 .home-view {
     max-width : layout.$content-width-desktop !important;
-    width: 100%;
+    width     : 100%;
 
     .banner {
-        color : white;
-        background-color: variables.$danger-color;
+        position         : absolute;
+        top              : 0px;
+        left             : 0;
+        height           : 110px;
+        width            : 100%;
+        z-index          : 2500;
+        background-color : variables.$primary-color;
+        color            : white;
+
+        display          : flex;
+        justify-content  : center;
+        align-items      : center;
+
+        .size {
+            @include icon-mixins.ink-color(variables.$secondary-color)
+        }
     }
 }
 

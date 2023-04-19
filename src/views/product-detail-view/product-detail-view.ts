@@ -41,9 +41,11 @@ export class ProductDetailView
 
 	async getData( id )
 	{
-		const response = await fetch( `${environment.backendBaseUrl}product/single/${id}` );
-		const data     = await response.json()
-		this.data      = data;
-		this.dataTags  = this.data.tags.join( " " )
+		this.data.active = false
+
+		// const response = await fetch( `${environment.backendBaseUrl}product/single/${id}` );
+		// const data     = await response.json()
+		// this.data      = data;
+		// this.dataTags  = this.data.tags.join( " " )
 	}
 }

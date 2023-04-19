@@ -9,12 +9,20 @@
 		<mdc-layout-grid class="p-0">
 			<mdc-layout-grid-inner>
 				<mdc-layout-grid-cell span="12">
-					<div class="banner">
-						<div mdc-headline4>
-							Dieser Shop dient zu Lehrzwecken.
-							<br>
-							Er ist nicht volständig und es können keine Einkäufe getätigt werden.
-						</div>
+					<div
+						if.bind="showBanner"
+						class="banner"
+						mdc-elevation="24"
+					>
+						<h1>
+							Dieser Shop dient nur zu Lernzwecken. Er ist nicht fertiggestellt.
+						</h1>
+						<button
+							click.trigger="dismissBanner()"
+							mdc-icon-button
+							class="position-absolute end-0 top-0 size"
+							icon="cancel"
+						></button>
 					</div>
 				</mdc-layout-grid-cell>
 				<mdc-layout-grid-cell span="12">
