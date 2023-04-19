@@ -12,22 +12,31 @@
 			<mdc-layout-grid-cell span="6">
 				<mdc-layout-grid-cell span="12">
 					<div class="card frost default-main-shadow mb-4">
-						<span if.bind="data.active !== false" class="loading-shell item-title-shell">TITEL</span>
-						<div else class="card-body rounded-1">
+						<div class="card-body rounded-1">
 							<div class="mdc-layout-grid">
 								<mdc-layout-grid-inner class="p-0">
 									<mdc-layout-grid-cell span="12">
-										<h5 class="card-title">${data.title}</h5>
+										<h5
+											class="${data.title ? '' : 'loading-shell'} m-0"
+											mdc-headline5
+										>
+											${data.title ? data.title : "&nbsp;"}
+										</h5>
 									</mdc-layout-grid-cell>
 								</mdc-layout-grid-inner>
 								</divelse>
 							</div>
 						</div>
+					</div>
 				</mdc-layout-grid-cell>
 				<!-- Bild -->
 				<mdc-layout-grid-cell span="12">
 					<div class="card frost default-main-shadow overflow-hidden border-0 mb-4">
-						<span if.bind="data.active !== false" class="loading-shell item-img-shell">IMG</span>
+						<div
+							if.bind="data.active !== true"
+							class="loading-shell item-img-shell"
+						>
+						</div>
 						<img
 							src.bind="data.image"
 							alt.bind="data.title"
@@ -41,8 +50,7 @@
 			<mdc-layout-grid-cell span="6">
 				<mdc-layout-grid-cell span="12">
 					<div class="card frost default-main-shadow product-details-main__cart-block mb-4">
-						<span if.bind="data.active !== false" class="loading-shell item-interaction-shell">INTERACTION</span>
-						<div else class="card-body rounded-1">
+						<div class="card-body rounded-1">
 							<div class="mdc-layout-grid">
 								<mdc-layout-grid-inner>
 									<mdc-layout-grid-cell
@@ -50,19 +58,30 @@
 										class="mb-2
 										justify-content-end d-flex"
 									>
-										<h1 class="card-title">${data.price | currency
-										:
-										'EUR'}</h1>
+										<h2
+											if.bind="data.active !== true"
+											mdc-headline2
+											class="loading-shell"
+										>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+										<h2
+											else
+											mdc-headline2
+										>
+											${data.price | currency:'EUR'}
+										</h2>
 									</mdc-layout-grid-cell>
 									<mdc-layout-grid-cell span="6" class="mb-4 d-flex flex-column">
 										<small class="mb-1">
 											Versand durch
 										</small>
-										<img class="shipment-logo" src="src/img/${data.shipment}-logo.jpg">
+										<div if.bind="data.active !== true" class="loading-shell dummy-image-height shipment-logo"></div>
+										<img else class="shipment-logo" src="src/img/${data.shipment}-logo.jpg">
 									</mdc-layout-grid-cell>
 									<mdc-layout-grid-cell span="6" class="mb-4 d-flex justify-content-end align-items-center">
 										<div class="h-100 position-relative d-flex justify-content-end align-items-center">
+											<div if.bind="data.active !== true" class="loading-shell item-rating-shell" style="width: 124px; height: 24px;"></div>
 											<custom-rating
+												else
 												rating.bind="data.rating"
 												count.bind="data.ratingsCount"
 											>
@@ -76,7 +95,7 @@
 											raised
 											class="product-detail-main-button w-100 h-100
 											${submitting === true ? 'disabled' : '' }"
-											disabled.bind="submitting"
+											disabled.bind="submitting || data.active !== true"
 											click.trigger="addToCart()"
 										>In den Einkaufswagen!
 											<span
@@ -88,7 +107,12 @@
 											</span>
 										</button>
 									</mdc-layout-grid-cell>
-									<mdc-layout-grid-cell span="4">
+									<mdc-layout-grid-cell
+										span="4"
+										if.bind="data.active !== true"
+										class="loading-shell item-interaction-shell"
+									></mdc-layout-grid-cell>
+									<mdc-layout-grid-cell else span="4">
 										<shop-item-amount
 											id.bind="item.product.id"
 											value.two-way="amount"
@@ -108,7 +132,7 @@
 											icon-on="favorite"
 											class="bg-transparent position-relative favorize-icon-button"
 											active.bind="favorized"
-											disabled.bind="favorizePending"
+											disabled.bind="favorizePending || data.active !== true"
 											if.bind="_user.loggedIn & signal:_LOGIN_STATE_CHANGED_SIGNAL"
 											change.trigger="setFavorite($event.detail.isOn)"
 										>
@@ -122,11 +146,10 @@
 				</mdc-layout-grid-cell>
 				<mdc-layout-grid-cell span="12">
 					<div class="card frost default-main-shadow mb-4">
-						<span if.bind="data.active !== false" class="loading-shell item-description-shell">DESCRIPTION</span>
-						<div else class="card-body rounded-1">
+						<div class="card-body rounded-1">
 							<div class="mdc-layout-grid">
-
-								<mdc-layout-grid-inner>
+								<mdc-layout-grid-inner if.bind="data.active !== true" class="loading-shell item-description-shell"></mdc-layout-grid-inner>
+								<mdc-layout-grid-inner else>
 									<mdc-layout-grid-cell span="12">
 										<h5 class="card-title border-bottom border-1">Produktbeschreibung</h5>
 									</mdc-layout-grid-cell>

@@ -21,6 +21,8 @@
 
 @use '@material/button/mdc-button';
 
+@use '@material/elevation/mdc-elevation';
+
 @use '@material/circular-progress/mdc-circular-progress';
 
 @use '@material/dialog/mdc-dialog';
@@ -105,15 +107,6 @@ $pb-main-content : 5rem;
     overflow : hidden !important;
 }
 
-//.mdc-icon--spinning {
-//    $duration                 : 1000ms;
-//
-//    animation-name            : spin;
-//    animation-timing-function : ease-in-out;
-//    animation-iteration-count : infinite;
-//    animation-duration        : $duration;
-//}
-
 .mdc-button__ripple {
     border : none !important;
 }
@@ -153,6 +146,7 @@ $pb-main-content : 5rem;
 
 .loading-shell {
     background-color : variables.$shell-grey;
+    border-radius    : 4px;
 
     animation        : shell-loading 1250ms ease 0s infinite normal forwards;
     @keyframes shell-loading {
@@ -179,12 +173,13 @@ $pb-main-content : 5rem;
         aspect-ratio : 16 / 9;
     }
 
-    &.item-interaction-shell {
-        height : 313px;
-    }
-
     &.item-description-shell {
         height : 202px;
+    }
+
+    &.item-rating-shell {
+        height : 24px;
+        width  : 120px;
     }
 
     &.reviews-shell {

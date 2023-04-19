@@ -37,9 +37,13 @@
         padding : 0 !important;
     }
 
-    .disabled {
+    .mdc-button:disabled {
         background-color : color-palette.$grey-300;
         color            : variables.$disabled-grey;
+    }
+
+    .dummy-image-height{
+        height: 47.75px;
     }
 }
 
