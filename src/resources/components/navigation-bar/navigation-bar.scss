@@ -11,7 +11,6 @@ $height-desktop : 98px;
 
     .search-bar-container { width : 100%; }
 
-    .logo-small { height : 36px; }
 
     .shopping-cart-icon {
         background-color : variables.$secondary-color !important;
@@ -24,9 +23,6 @@ $height-desktop : 98px;
     }
 
     .profile-menu {
-        //position: relative;
-        //top: 100px;
-        //right: 100px;
         top   : 65px !important;
         left  : 1126px !important;
         right : 36px !important;
