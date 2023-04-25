@@ -2,6 +2,8 @@
 @use "theme";
 @use "layout";
 
+@use "@material/icon-button/mixins" as icon-mixins;
+
 @use "resources/components/shop-footer/shop-footer";
 @use "resources/components/navigation-bar/navigation-bar";
 @use '@material/ripple/mdc-ripple';
@@ -100,6 +102,11 @@ $pb-main-content : 5rem;
     border-radius : 4px;
 }
 
+.logo-small {
+    height        : 36px;
+    border-radius : 4px;
+}
+
 .shop-ripple {
     //@include ripple.surface;
     //@include ripple.radius-bounded;
@@ -117,6 +124,25 @@ $pb-main-content : 5rem;
     }
     to {
         transform : rotate(360deg);
+    }
+}
+
+.banner {
+    position         : absolute;
+    top              : 0px;
+    left             : 0;
+    height           : 110px;
+    width            : 100%;
+    z-index          : 2500;
+    background-color : variables.$primary-color;
+    color            : white;
+
+    display          : flex;
+    justify-content  : center;
+    align-items      : center;
+
+    .size {
+        @include icon-mixins.ink-color(variables.$secondary-color)
     }
 }
 

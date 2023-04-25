@@ -6,6 +6,21 @@
 	<div class="shop-app-container">
 		<div class="backdrop"></div>
 		<navigation-bar></navigation-bar>
+		<div
+			if.bind="_showBanner"
+			class="banner"
+			mdc-elevation="24"
+		>
+			<h1>
+				Dieser Shop dient nur zu Lernzwecken.
+			</h1>
+			<button
+				click.trigger="dismissBanner()"
+				mdc-icon-button
+				class="position-absolute end-0 top-0 size"
+				icon="cancel"
+			></button>
+		</div>
 		<router-view swap-order="before"></router-view>
 		<shop-footer></shop-footer>
 	</div>

@@ -88,6 +88,8 @@ export class App
 
 	private _router: Router;
 
+	private _showBanner = true
+
 	constructor(
 		private _user: ShopUser,
 		private _container: Container,
@@ -150,5 +152,10 @@ export class App
 		if( enable ) return classList.remove( App._NO_SCROLL_CLASS )
 
 		classList.add( App._NO_SCROLL_CLASS )
+	}
+
+	dismissBanner()
+	{
+		this._showBanner = false
 	}
 }
