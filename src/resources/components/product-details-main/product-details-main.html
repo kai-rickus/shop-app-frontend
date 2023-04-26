@@ -17,7 +17,7 @@
 								<mdc-layout-grid-inner class="p-0">
 									<mdc-layout-grid-cell span="12">
 										<h5
-											class="${data.title ? '' : 'loading-shell'} m-0"
+											class="${data.title ? '' : 'loading-shell h-100'} m-0"
 											mdc-headline5
 										>
 											${data.title ? data.title : "&nbsp;"}
@@ -33,14 +33,17 @@
 				<mdc-layout-grid-cell span="12">
 					<div class="card frost default-main-shadow overflow-hidden border-0 mb-4">
 						<div
-							if.bind="data.active !== true"
-							class="loading-shell item-img-shell"
+							class="${data.image ? '' : 'justify-content-center d-flex item-img-dummy'} m-0"
+							if.bind="!data.image"
 						>
+							<mdc-circular-progress
+								size="80"
+								stroke-width="7"
+							></mdc-circular-progress>
 						</div>
 						<img
-							src.bind="data.image"
-							alt.bind="data.title"
 							else
+							src.bind="data.image"
 							class="product-details-main__image">
 					</div>
 				</mdc-layout-grid-cell>
@@ -59,7 +62,7 @@
 										justify-content-end d-flex"
 									>
 										<h2
-											if.bind="data.active !== true"
+											if.bind="!data.price"
 											mdc-headline2
 											class="loading-shell"
 										>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
@@ -67,19 +70,29 @@
 											else
 											mdc-headline2
 										>
-											${data.price | currency:'EUR'}
+											${data.price | currency
+										:
+										'EUR'}
 										</h2>
 									</mdc-layout-grid-cell>
 									<mdc-layout-grid-cell span="6" class="mb-4 d-flex flex-column">
 										<small class="mb-1">
 											Versand durch
 										</small>
-										<div if.bind="data.active !== true" class="loading-shell dummy-image-height shipment-logo"></div>
-										<img else class="shipment-logo" src="src/img/${data.shipment}-logo.jpg">
+										<img if.bind="data.shipment" class="shipment-logo" src="src/img/${data.shipment}-logo.jpg">
+										<div
+											else
+											class="loading-shell dummy-shipping-logo-height shipment-logo"
+										>&nbsp;
+										</div>
 									</mdc-layout-grid-cell>
 									<mdc-layout-grid-cell span="6" class="mb-4 d-flex justify-content-end align-items-center">
 										<div class="h-100 position-relative d-flex justify-content-end align-items-center">
-											<div if.bind="data.active !== true" class="loading-shell item-rating-shell" style="width: 124px; height: 24px;"></div>
+											<custom-rating
+												if.bind="!data.rating"
+												rating.bind="0"
+											>
+											</custom-rating>
 											<custom-rating
 												else
 												rating.bind="data.rating"
@@ -109,7 +122,7 @@
 									</mdc-layout-grid-cell>
 									<mdc-layout-grid-cell
 										span="4"
-										if.bind="data.active !== true"
+										if.bind="!data"
 										class="loading-shell item-interaction-shell"
 									></mdc-layout-grid-cell>
 									<mdc-layout-grid-cell else span="4">
@@ -148,13 +161,15 @@
 					<div class="card frost default-main-shadow mb-4">
 						<div class="card-body rounded-1">
 							<div class="mdc-layout-grid">
-								<mdc-layout-grid-inner if.bind="data.active !== true" class="loading-shell item-description-shell"></mdc-layout-grid-inner>
-								<mdc-layout-grid-inner else>
+								<mdc-layout-grid-inner>
 									<mdc-layout-grid-cell span="12">
 										<h5 class="card-title border-bottom border-1">Produktbeschreibung</h5>
 									</mdc-layout-grid-cell>
 									<mdc-layout-grid-cell span="12">
-										<p class="card-text">${data.description}</p>
+										<p class="${data.description ? '' : 'loading-shell'}">${data.description ? data.description : "&nbsp;"}</p>
+										<p class="${data.description ? '' : 'loading-shell'}">${data.description ? '' : "&nbsp;"}</p>
+										<p class="${data.description ? '' : 'loading-shell'}">${data.description ? '' : "&nbsp;"}</p>
+										<p class="${data.description ? '' : 'loading-shell'}">${data.description ? '' : "&nbsp;"}</p>
 									</mdc-layout-grid-cell>
 								</mdc-layout-grid-inner>
 							</div>

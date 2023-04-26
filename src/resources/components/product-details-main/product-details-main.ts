@@ -34,9 +34,9 @@ export class ProductDetailsMain
 
 	@bindable data: ProductDataResponse;
 
-	submitting        = false;
-	amount            = 1;
-	favorizePending   = false;
+	submitting      = false;
+	amount          = 1;
+	favorizePending = false;
 
 	snackbarSuccessMessage         = "Artikel hinzugefügt!";
 	snackbarSuccessMessageDuration = 10000;
@@ -61,9 +61,15 @@ export class ProductDetailsMain
 	)
 	{}
 
+	public dataChanged( value: ProductDataResponse )
+	{
+		if( value === undefined ) return
+
+		this.initializeFavorite()
+	}
+
 	attached()
 	{
-		this.initializeFavorite()
 		this.initializeTooltips()
 
 		this.previousValue = this.value
@@ -88,7 +94,7 @@ export class ProductDetailsMain
 
 	async addToCart()
 	{
-		this.submitting = true
+		this.submitting      = true
 		this.favorizePending = true
 
 		try

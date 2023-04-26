@@ -6,6 +6,10 @@
 @use '@material/snackbar/_index' as snackbar;
 
 .product-details-main {
+    mdc-circular-progress {
+        top : calc(50% - 40px)
+    }
+
     .product-details-main__image {
         width : 100%;
     }
@@ -42,8 +46,17 @@
         color            : variables.$disabled-grey;
     }
 
-    .dummy-image-height{
-        height: 47.75px;
+    .dummy-shipping-logo-height {
+        height : 47.75px;
+    }
+
+    .item-img-dummy {
+        height : 648px;
+        aspect-ratio: 16/9;
+    }
+
+    .disabled-color{
+        color: variables.$disabled-grey !important;
     }
 }
 
