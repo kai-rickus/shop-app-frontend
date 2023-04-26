@@ -187,29 +187,6 @@ $pb-main-content : 5rem;
         100% {
             opacity : 1;
         }
-
-    }
-
-    &.item-title-shell {
-        height : 80px;
-    }
-
-    &.item-img-shell {
-        height       : 648px;
-        aspect-ratio : 16 / 9;
-    }
-
-    &.item-description-shell {
-        height : 202px;
-    }
-
-    &.item-rating-shell {
-        height : 24px;
-        width  : 120px;
-    }
-
-    &.reviews-shell {
-        height : 343px;
     }
 }
 
