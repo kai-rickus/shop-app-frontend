@@ -25,7 +25,7 @@
 				</div>
 				<a route-href="shopping-cart" class="text-on-secondary ms-2">
 					<shop-icon-button icon="shopping_cart" outlined.bind="true" class="position-relative shopping-cart-icon">
-						<span slot="outer" class="shopping-cart-badge badge rounded-pill bg-danger"
+						<span slot="outer" class="shopping-cart__badge badge rounded-pill bg-danger"
 							  textcontent.bind="setItemAmount() & async & signal:'cart-updated':_LOGIN_STATE_CHANGED_SIGNAL"
 							  show.bind="_itemsCount > 0 & signal:_LOGIN_STATE_CHANGED_SIGNAL"
 						>
@@ -39,11 +39,11 @@
 						mdc-button
 						raised
 						click.trigger="hierarchical.open = !hierarchical.open"
-						class="ms-2"
+						class="ms-2 shopping_cart"
 					>
 					</button>
 					<mdc-menu
-						class=" profile-menu"
+						class="profile-menu"
 						view-model.ref="hierarchical"
 						anchor.bind="hierarchicalAnchor"
 						stay-open-on-selection
