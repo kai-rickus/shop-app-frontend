@@ -2,16 +2,39 @@
 	<require from="./product-tile.css"></require>
 
 	<a class="text-decoration-none text-body" route-href="route: product-detail; params.bind: { id : id }">
-
 		<div class="ratio ratio-16x9 overflow-hidden card-img-top">
-			<img src.bind="thumbnail" alt="...">
+			<div
+				if.bind="!thumbnail"
+				class="justify-content-center d-flex item-img-dummy m-0 loading-shell"
+			>
+			</div>
+			<img
+				else
+				src.bind="thumbnail"
+				alt="..."
+			>
 		</div>
 
 		<div class="card-body product-tile__content">
-			<h5 class="card-title product-tile__title">${title}</h5>
+			<h5
+				class="${title ? '' : 'loading-shell'} card-title product-tile__title"
+			>
+				${title ? title : '&nbsp;'}
+			</h5>
 			<br>
-			<div class="product-tile__bottom-content justify-content-end">
-				<span class="product-tile__price ">${price}</span>
+			<div
+				class="product-tile__bottom-content justify-content-end"
+			>
+				<span
+					if.bind="!price"
+					class="loading-shell"
+				>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<span
+					else
+					class=" ${price ? '' : 'loading-shell'} product-tile__price "
+				>
+					${price ? price : '&nbsp;'}
+				</span>
 			</div>
 		</div>
 	</a>
