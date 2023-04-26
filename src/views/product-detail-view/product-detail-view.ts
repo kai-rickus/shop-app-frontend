@@ -1,5 +1,6 @@
-import { bindable } from "aurelia-framework";
-import environment  from "../../environment";
+import { bindable }             from "aurelia-framework";
+import environment              from "../../environment";
+import { ProductSearchResults } from "../../resources/components/product-search-results/product-search-results";
 
 interface ProductDataResponse
 {
@@ -41,11 +42,11 @@ export class ProductDetailView
 
 	async getData( id )
 	{
-		this.data.active = false
+		// this.data.active = false
 
-		// const response = await fetch( `${environment.backendBaseUrl}product/single/${id}` );
-		// const data     = await response.json()
-		// this.data      = data;
-		// this.dataTags  = this.data.tags.join( " " )
+		const response = await fetch( `${environment.backendBaseUrl}product/single/${id}` );
+		const data     = await response.json()
+		this.data      = data;
+		this.dataTags  = this.data.tags.join( " " )
 	}
 }

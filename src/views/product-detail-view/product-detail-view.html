@@ -18,12 +18,7 @@
 					<div class="card frost default-main-shadow overflow-hidden mb-4">
 						<div class="card-body">
 							<h5 class="card-title text-on-surface border-bottom border-1">Ähnliche Artikel</h5>
-							<div
-								if.bind="data.active !== true"
-								class="loading-shell reviews-shell"
-							></div>
 							<product-search-results
-								else
 								limit.bind="4"
 								search.bind="dataTags"
 								exclude.bind="[uuid]"
@@ -32,13 +27,11 @@
 						</div>
 					</div>
 				</mdc-layout-grid-cell>
-
 				<mdc-layout-grid-cell span="12">
 					<div class="card frost default-main-shadow overflow-hidden">
 						<div class="card-body">
 							<h5 class="card-title border-bottom border-1">Bewertungen</h5>
-							<div if.bind="data.active !== true" class="loading-shell reviews-shell"></div>
-							<customer-reviews else id.bind="id"></customer-reviews>
+							<customer-reviews id.bind="id"></customer-reviews>
 						</div>
 					</div>
 				</mdc-layout-grid-cell>

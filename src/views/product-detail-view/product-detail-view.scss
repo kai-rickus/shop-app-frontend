@@ -1,19 +1,4 @@
 @use "src/variables";
 
 .product-detail-view {
-    .loading-shell {
-        &.similar-items-shell {
-            height : 146px;
-
-            .spinner-border {
-                height    : 100px;
-                width     : 100px;
-                font-size : 40px;
-            }
-        }
-
-        &.reviews-shell{
-            height: 24px;
-        }
-    }
 }
