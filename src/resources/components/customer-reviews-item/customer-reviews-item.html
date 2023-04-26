@@ -7,31 +7,55 @@
 			<mdc-layout-grid class="p-0">
 				<mdc-layout-grid-inner>
 					<mdc-layout-grid-cell span="10">
-						<div class="mb-2">
-							<img class="customer-reviews-item__avatar"
-								 src="${avatar}"
-								 alt="Profilbild">
-							<strong class="ms-2">${user}</strong>
+						<div class="mb-2 d-flex">
+							<div
+								if.bind="!avatar"
+								class="loading-shell customer-reviews-item__avatar__shell"
+							>
+								&nbsp;
+							</div>
+							<img
+								else
+								class="customer-reviews-item__avatar"
+								src="${avatar}"
+							>
+							<strong
+								class="${user ? '' : 'loading-shell'} ms-2"
+							>
+								${user ? user : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}
+							</strong>
 						</div>
 					</mdc-layout-grid-cell>
-
 					<mdc-layout-grid-cell span="2">
 						<custom-rating
+							if.bind="!rating"
+							rating.bind="0"
+						>
+						</custom-rating>
+						<custom-rating
+							else
 							rating.bind="rating"
 						>
 						</custom-rating>
 					</mdc-layout-grid-cell>
 
-						<mdc-layout-grid-cell span="12">
-							<div class="mb-2">
-							<span class="customer-reviews-item__date">
-								${created | localDate}
+					<mdc-layout-grid-cell span="12">
+						<div class="mb-2">
+							<span class=" ${created ? '' : 'loading-shell'} customer-reviews-item__date">
+								<span
+									if.bind="!created"
+								>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</span>
+								<span else>
+									${created | localDate}
+								</span>
 							</span>
-							</div>
-						</mdc-layout-grid-cell>
-						<mdc-layout-grid-cell span="12">
-							<slot></slot>
-						</mdc-layout-grid-cell>
+						</div>
+					</mdc-layout-grid-cell>
+					<mdc-layout-grid-cell span="12">
+						<slot></slot>
+					</mdc-layout-grid-cell>
 				</mdc-layout-grid-inner>
 			</mdc-layout-grid>
 		</div>

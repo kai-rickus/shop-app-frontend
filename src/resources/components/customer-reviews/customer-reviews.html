@@ -1,6 +1,20 @@
 <template class="customer-reviews">
 
-		<require from="components/customer-reviews-item/customer-reviews-item"></require>
+	<require from="components/customer-reviews-item/customer-reviews-item"></require>
+
+	<template if.bind="_firstTimeLoading">
+		<customer-reviews-item>
+			<span class="loading-shell">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</span>
+		</customer-reviews-item>
+	</template>
+	<template else>
 		<customer-reviews-item
 			repeat.for="review of reviews"
 			rating.bind="review.rating"
@@ -8,9 +22,10 @@
 			avatar.bind="review.avatar"
 			created.bind="review.created"
 		>
-			${review.text}
+			<span>
+				${review.text}
+			</span>
 		</customer-reviews-item>
-
 		<button
 			mdc-button
 			type="button"
@@ -27,12 +42,14 @@
 				stroke-width="2"
 			></mdc-circular-progress>
 		</button>
-		<span
-			class="text-center d-inline-block w-100"
-			else
-		>
-			Keine ${reviews.length === 0 ? '' : 'weiteren ' }Bewertungen gefunden.
-		</span>
+		<template if.bind="allReviewsFetched">
+			<span
+				class="text-center d-inline-block w-100"
+			>
+				Keine ${reviews.length === 0 ? '' : 'weiteren ' }Bewertungen gefunden.
+			</span>
+		</template>
+	</template>
 </template>
 
 

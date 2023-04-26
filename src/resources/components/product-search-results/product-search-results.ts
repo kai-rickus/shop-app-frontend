@@ -4,20 +4,26 @@ import environment  from "../../../environment";
 
 export class ProductSearchResults
 {
-	products: [];
-	@bindable search
-	@bindable limit
-	@bindable exclude  = []
-	@bindable noShadow = false
+	@bindable search: string
+	@bindable limit: number
+	@bindable exclude: string[] = []
+	@bindable noShadow          = false
 
-	attached()
+	public products: [];
+	private _nothingFound = false;
+
+	public searchChanged( value: string )
 	{
+		if( value === undefined ) return
+
 		this.loadResults( this.search );
 	}
 
 	async loadResults( searchString )
 	{
-		this.products = await this.getProducts( searchString );
+		this.products      = await this.getProducts( searchString );
+		this._nothingFound = this.products.length === 0;
+
 	}
 
 	async getProducts( searchString )

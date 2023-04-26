@@ -4,14 +4,20 @@ import environment  from "../../../environment";
 export class CustomerReviews
 {
 	@bindable id;
-	loading;
-	reviews           = [];
-	offset            = 0
-	allReviewsFetched = false
+
+	private _noReviews = false;
+	private _firstTimeLoading = false
+	loading            = false;
+	reviews            = [];
+	offset             = 0
+	allReviewsFetched  = false
 
 	async attached()
 	{
+		this._firstTimeLoading = true
 		await this.loadReviewsPackage()
+		this._firstTimeLoading = false
+
 	}
 
 	async loadReviewsPackage()
@@ -33,6 +39,8 @@ export class CustomerReviews
 				return
 			}
 
+			this._noReviews = data.reviews.length === 0
+
 			for( const element of data.reviews )
 			{
 				this.reviews.push( element )
@@ -44,6 +52,7 @@ export class CustomerReviews
 		{
 			/* TODO: error handling-: Wie handlen? */
 		}
+
 		this.loading = false
 
 	}

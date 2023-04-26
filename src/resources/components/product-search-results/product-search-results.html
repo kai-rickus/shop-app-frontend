@@ -3,15 +3,24 @@
 	<require from="valueConverters/currency-value-converter"></require>
 	<require from="./product-search-results.css"></require>
 
-	<product-tile
-		if.bind="products.length"
-		repeat.for="product of products"
-		thumbnail.bind="product.imageSmall"
-		price.bind="product.price | currency:'EUR'"
-		title.bind="product.title"
-		id.bind="product.id"
-		class="${noShadow === true ? '' : 'default-main-shadow' }"
-	></product-tile>
+	<template if.bind="!_nothingFound">
+		<template if.bind="!products.length">
+			<product-tile
+				repeat.for="i of 3"
+				class="${noShadow === true ? '' : 'default-main-shadow' }"
+			>
+			</product-tile>
+		</template>
+		<product-tile
+			else
+			repeat.for="product of products"
+			thumbnail.bind="product.imageSmall"
+			price.bind="product.price | currency:'EUR'"
+			title.bind="product.title"
+			id.bind="product.id"
+			class="${noShadow === true ? '' : 'default-main-shadow' }"
+		></product-tile>
+	</template>
 
 	<div
 		else
